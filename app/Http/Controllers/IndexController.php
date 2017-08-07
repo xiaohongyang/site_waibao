@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Jobs\ProcessPodcast;
 use App\Models\Article;
+use App\Models\ArticleSpiderModel;
 use App\User;
 use Carbon\Carbon;
+use Faker\Provider\Image;
 use Illuminate\Support\Facades\Cache;
 
  
@@ -15,19 +17,46 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Validator;
+use GuzzleHttp;
+
 //class IndexController extends BaseController
 class IndexController extends Controller
 {
     
-	public function index(){
+	public function index(Request $request){
+
+	    $http = new GuzzleHttp\Client();
+
+        $accessToken = 'K1hgw2ZMxsDHMGyoBbQVKtdVydFA8zilCaRphzTmArpjEw47HCGd6tkGy0E2';
+
+//        $response = $http->request('GET',  env('APP_URL') .'/api/user', [
+//            'Accept' => 'application/json',
+//            'Authorization' => 'Bearer '.$accessToken,
+//        ]);
+
+        try {
+        	/*$url = env('APP_URL') .'/home';
+        	$api_token = $accessToken;
+        	$guzzle = new GuzzleHttp\Client();
+        	$response = $guzzle->request('get', $url, ['api_token' => $api_token]);	*/
+        } catch (Exception $e) {
+        	
+        	print_r($e->getMessage());
+        }
+        
 
 
-		Log::info("test");
-		Log::error("error",['name'=>"jack"]);
+
+//        echo json_decode( (string)$response->getBody(), true );
+//exit;
+		//Log::info("test");
+		//Log::error("error",['name'=>"jack"]);
 
 		//abort(403, 'Unauthorized action.');
 //		$job = new ProcessPodcast(User::find(2));
@@ -53,10 +82,19 @@ class IndexController extends Controller
 //
 //		exit;
 
-		\App::setLocale('zh');
+		//\App::setLocale('zh');
+        //echo 33;exit;
+        //$model01 = ArticleSpiderModel::getSingle("http://6846041.blog.51cto.com/6836041/1439443");
+        //$content01 = $model01->getContents();
+        //$model = ArticleSpiderModel::getSingle("http://laravel.54/home");
+        //$body = $model->getContents();
+//        $rs2 = $model->statusCode;
+//        echo $rs2;
+//        echo $body;
+//        echo iconv('gbk', 'utf-8',  $content01);
 		return view('index');
 
-		$articles = Article::all()->where('id', '>', 0)->take(3);
+		/*$articles = Article::all()->where('id', '>', 0)->take(3);
 
 		$articles->reject(function($model) {
 			print_r($model);
@@ -83,7 +121,7 @@ class IndexController extends Controller
 		foreach( Article::where('id', '>', 0)->cursor() as  $article) {
 			print_r($article);
 			echo "<hr/>";
-		}
+		}*/
 	}
 
 	public function route(Request $request){
@@ -139,6 +177,7 @@ class IndexController extends Controller
 
     public function test(){
 
+        echo 33;exit;
 		if(App::environment('local')) {
 			echo 'is local';
 		} else if(App::environment('develop')){
@@ -183,6 +222,44 @@ class IndexController extends Controller
         }
         exit;
 
+    }
+
+
+    public function uploadimage() {
+        return view('index.uploadimage');
+    }
+
+    public function douploadimage(Request $request) {
+
+        //获取上传文件和文件信息
+
+        $directoryHeadPic = env('HEAD_PIC_FILE_PATH');
+        $articleThumbFilePath = env('ARTICLE_THUMB_FILE_PATH');
+        //图片保存路径
+        $directoryArray = [$directoryHeadPic, $articleThumbFilePath];
+        $directory = implode(',', $directoryArray);
+
+        $rules = ['thumb' => 'required|max:101','directory' => 'required|in:' . $directory];
+        $validate = \Validator::make($request->all(), $rules);
+        $file = Input::file('thumb');
+
+        $result = ['result' => false, 'errors' => []];
+        //验证文件信息
+        if (!is_null($file) && !$validate->fails()) {
+
+            //保存文件
+            $extension = $file->getClientOriginalExtension();
+            $filePath = public_path() . DIRECTORY_SEPARATOR . $request->get('directory') . DIRECTORY_SEPARATOR;
+            $fileName = date('YmdHis',time());
+            $fileName .= '.' . $extension;
+            $file->move($filePath, $fileName);
+            $result['result'] = true;
+            $result['file'] = $request->get('directory'). DIRECTORY_SEPARATOR . $fileName;
+        } else {
+
+            $result['errors'] = $validate->errors();
+        }
+        return $result;
     }
 
 }

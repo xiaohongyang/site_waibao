@@ -11,6 +11,7 @@ window.$ = window.jQuery = require('jquery');
 
 require('bootstrap-sass');
 
+
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean
@@ -18,6 +19,18 @@ require('bootstrap-sass');
  */
 
 window.Vue = require('vue');
+import Ueditor from './components/Ueditor.vue'
+Vue.use(Ueditor)
+import Auth2Plugin from './my-plugin/Auth2Plugin'
+Vue.use(Auth2Plugin)
+import ConfigPlugin from './my-plugin/ConfigPlugin'
+Vue.use(ConfigPlugin)
+
+Vue.component('Ueditor', require("./components/Ueditor.vue"))
+
+Vue.component('xhy-hello', require("./components/articles/center-article-create.vue"))
+Vue.component('center-article-create', require("./components/articles/center-article-create.vue"))
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -60,12 +73,12 @@ window.Echo.private('chat-room.'+ id)
 
 
 
-var echo = window.Echo = new Echo({
-    broadcaster: 'socket.io',
-    host : window.location.hostname + ":6001"
-    //cluster: 'eu',
-    //encrypted: true
-});
+// var echo = window.Echo = new Echo({
+//     broadcaster: 'socket.io',
+//     host : window.location.hostname + ":6001"
+//     //cluster: 'eu',
+//     //encrypted: true
+// });
 
 //listen sisten redis publish event by laravel-echo-server
 // echo.channel("chat-room")
@@ -73,7 +86,7 @@ var echo = window.Echo = new Echo({
 //         console.log(e)
 //     })
 
-    echo.private("chat-room")
-    .listen("ChatMessageWasReceived", function(e) {
-        console.log(e)
-    })
+// echo.private("chat-room")
+// .listen("ChatMessageWasReceived", function(e) {
+//     console.log(e)
+// })

@@ -14,5 +14,20 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
+
     return $request->user();
 });
+
+//$middleWare = ['middleware' => []];
+$groupConfig = ['middleware' => ['auth:api']];
+
+
+Route::group( $groupConfig, function(){
+
+    Route::resource('articles', 'Api\ArticleController');
+    Route::resource('article-types', 'Api\ArticleTypeController');
+    Route::post('upload_image', 'Api\ImageController@upload')->name('upload_image');
+});
+
+
+

@@ -1,12 +1,7 @@
 {
-	"authHost": "laravel.54.com",
+	"authHost": "laravel.54.com:5000",
 	"authEndpoint": "/broadcasting/auth",
-	"clients": [
-		{
-			"appId": "a3c0cc52d99f8dee",
-			"key": "7c2a572a8d8cda11efd23da8e95460a0"
-		}
-	],
+	"clients": [],
 	"database": "redis",
 	"databaseConfig": {
 		"redis": {},

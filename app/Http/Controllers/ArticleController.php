@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-
 class ArticleController extends Controller
 {
     //
@@ -24,7 +23,7 @@ class ArticleController extends Controller
 
     public function index(Request $request){
 
-        $articleList = $this->article->getList();
+        /*$articleList = $this->article->getList();
 
         if (\Gate::allows('list', Article::class)) {
 
@@ -34,7 +33,8 @@ class ArticleController extends Controller
             ])->with('name', 'JackXiao');
         } else {
             return view('403');
-        }
+        }*/
+        return view ('article.index');
 
     }
 
@@ -52,9 +52,6 @@ class ArticleController extends Controller
 
         exit;
 
-        $articleModel = new Article();
-        $rs = $articleModel->store($request);
-        var_dump($rs);
     }
 
     public function firstOrCreate(Request $request){
@@ -124,7 +121,7 @@ class ArticleController extends Controller
 
         $validate->validate();
 
-        $this->article->store($request);
+        $this->article->create($request);
         $request->session()->flash('msg', '添加成功');
         return back();
     }

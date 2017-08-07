@@ -3,11 +3,9 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Session\TokenMismatchException;
 
 class Handler extends ExceptionHandler
 {
@@ -35,7 +33,6 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-
         parent::report($exception);
     }
 
@@ -48,18 +45,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-
-        if($exception instanceof AuthorizationException){
-
-            return response()->view('403', [], 500);
-        } else if(!method_exists($exception, 'getStatusCode')){
-            return response()->view('403');
-        } if ($exception->getStatusCode() == 403) {
-
-            return response()->view('403');
-        } else if ($exception instanceof NotFoundHttpException)
+		if ($exception instanceof NotFoundHttpException)
         {
             return response()->view('404', [], 404);
+        } else if($exception instanceof TokenMismatchException) {
+		    return redirect('/login');
         }
 
         return parent::render($request, $exception);
