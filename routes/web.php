@@ -201,7 +201,7 @@ Route::get('md5', function (\Illuminate\Http\Request $request){
 #region 文章管理
 
     Route::group(['middleware' => 'auth'], function () {
-        Route::get('/user/article/list', 'UserCenter\ArticleController@list')->name('user-article-list');
+        Route::get('/user/article/list', 'UserCenter\ArticleController@list2')->name('user-article-list');
         Route::get('/user/article/create', 'UserCenter\ArticleController@create')->name('user-article-create');
         Route::get('/user/article/create2', 'UserCenter\ArticleController@create2')->name('user-article-create');
         Route::post('/user/article/create', 'UserCenter\ArticleController@create')->name('user-article-create');
@@ -274,6 +274,8 @@ Route::get('queue_test', function(\Illuminate\Http\Request $request){
 
 #region 后台管理
     Route::group([], function(){
+
+       Route::get('/admin', 'Admin\LoginController@index')->name('admin.index');
        Route::get('/admin/login', 'Admin\LoginController@showLoginForm')->name('admin.login');
        Route::post('/admin/login', 'Admin\LoginController@login');
        Route::get('/admin/logout', 'Admin\LoginController@logout');

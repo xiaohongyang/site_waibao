@@ -23,6 +23,9 @@ class LoginController extends Controller
         $this->middleware('auth.checkIsAdmin', ['except' => ['logout']]);
     }
 
+    public function index(){
+
+    }
     public function username()
     {
         return 'email';

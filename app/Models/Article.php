@@ -49,7 +49,7 @@ class Article extends BaseModel
 
     public $timestamps = true;
 
-    public $fillable = ['title', 'author', 'user_id', 'thumb', 'from_host', 'type_id'];
+    public $fillable = ['title', 'author', 'user_id', 'thumb', 'from_host', 'type_id', 'detail'];
 
     protected $attributes = [
         'thumb' => ''
@@ -69,7 +69,7 @@ class Article extends BaseModel
 
             $this->fill($data);
             $result = $this->save();
-            if ($result) {
+            /*if ($result) {
 
                 $articleDetail = new ArticleDetail();
                 //保存detail关联表
@@ -79,6 +79,7 @@ class Article extends BaseModel
                     $articleDetail->contents = $contents;
                     $this->detail() ->save($articleDetail);
                 }
+
                 //保存标签
 
                 if (key_exists('tags', $data) && strlen($data['tags']) ) {
@@ -92,7 +93,7 @@ class Article extends BaseModel
                         $relation->create($this, $tag);
                     }
                 }
-            }
+            }*/
         } else {
             $this->message = $validator->messages()->getMessageBag();
         }
@@ -250,9 +251,9 @@ class Article extends BaseModel
         return $this->belongsTo(User::class, 'author', 'id');
     }
 
-    public function detail(){
+    /*public function detail(){
         return $this->hasOne(ArticleDetail::class, 'article_id');
-    }
+    }*/
 
     public function tags(){
         return $this->hasMany(ArticleTagRelationsModel::class, 'article_id');

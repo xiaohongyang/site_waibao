@@ -14,7 +14,7 @@ class ArticleForm extends Form
         $model = $this->model;
         $contents = null;
          if (!is_null($model) && is_object($model)) {
-            $contents = $model->detail->contents;
+            $contents = $model->detail;
         }
 
         $tagsValue = [];
@@ -30,7 +30,7 @@ class ArticleForm extends Form
         $this->add('title', 'text', ['rules' => 'required|min:5']);
         $this->add('tags', 'text', ['rules' => 'max:255', 'value'=> implode(',', $tagsValue) ]);
         $this->add('thumb', 'ajax_upload_image_field', ['rules' => 'required']);
-        $this->add('contents', 'editor_field', ['rules' => 'required | min:10 ','value' => is_null($contents) ? '' : $contents]);
+        $this->add('detail', 'editor_field', ['rules' => 'required | min:10 ','value' => is_null($contents) ? '' : $contents]);
         $this->add('submit', 'submit', ['value' => 'submit']);
     }
 }

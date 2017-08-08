@@ -17,7 +17,7 @@ class ArticleController extends BaseUserController
     /**
      * 文章列表
      */
-    public function list(\Request $request){
+    public function list2(Request $request){
 
         $model = new ArticleSearchModel();
         $articleList = $model->getList($request);
@@ -30,41 +30,31 @@ class ArticleController extends BaseUserController
      */
     public function create(FormBuilder $formBuild, Request $request){
 
-
-
-
         $article = new Article();
         if ($request->method() == 'POST') {
 
-            $form = $formBuild->create(ArticleForm::class);
-            if(!$form->isValid()) {
-                return redirect()->back()->withErrors($form->getErrors())->withInput();
+            $data = $request->all();
+            if($data['id']){
+                $article = Article::where('id', $data['id'])->first();
             }
+            $data['user_id'] = \Auth::user()->getAttribute('id');
+            $data['author'] = \Auth::user()->getAttribute('id');
+            $data['type_id'] = 1;
+            $data['detail'] = $data['contents'];
 
-            $rs = $article->create($request);
+            $rs = $article->create($data);
             if ($rs) {
                 return redirect()->route('user-article-list');
             } else {
                 return back();
             }
         } else {
-
             $article = $request->get('id') ? Article::find($request->get('id')) : null;
             $form = $formBuild->create(ArticleForm::class, [
                 'method' => 'post',
                 'url' => route('user-article-create'),
                 'model' => $article
             ]);
-
-            $user = \Auth::user();
-
-            $cate = Gate::forUser($user)->allows('update-article', $article);
-            //dump($cate);
-            //dump(Gate::forUser($user));
-
-
-            $rs = $user->can('update', $article);
-            //dump($rs);
         }
         //return self::getXhyView();
         return self::getXhyView(['article' => $article, 'form' => $form]);
