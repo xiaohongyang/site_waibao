@@ -10,23 +10,27 @@ class ArticleTypeModel extends BaseModel
     //
     protected $table = 'article_type';
 
-    public $fillable = ['name', 'uid', 'pid'];
+    public $fillable = ['name', 'uid', 'pid', 'content'];
 
 
-    public function create($data) {
+    public function createParams($name, $uid, $pid=0, $content='') {
 
-        $result = false;
+        $data = [
+            'name' => $name,
+            'uid' => $uid,
+            'pid' => $pid,
+            'content' => $content
+        ];
+
         $validator = \Validator::make($data, [
             'name' => ['required'],
             'uid' => ['required'],
             'pid' => ['required']
         ]);
-        if ($validator->failed()) {
-            $this->message = $validator->messages()->getMessageBag();
-        } else {
-            $this->fill($data);
-            $result = $this->save();
-        }
+
+        $this->setCreateValidator($validator);
+        $result = $this->create($data);
+
         return $result;
     }
 

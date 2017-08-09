@@ -18,11 +18,11 @@ Toast.install = function (Vue, options) {
     }
     Vue.prototype.$freshToken = function(){
 
-        axios.get('/passwordToken')
+        axios.get('/getToken')
             .then(function(json){
                 console.log(json)
-                if(json.data.access_token)
-                    window.localStorage.setItem('token', json.data.access_token)
+                if(json.data.token)
+                    window.localStorage.setItem('token', json.data.token)
             })
     }
 }

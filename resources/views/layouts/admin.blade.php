@@ -21,7 +21,7 @@
         ]) !!};
     </script>
 
-
+    @include('UEditor::head')
 </head>
 <body>
     <div id="app">

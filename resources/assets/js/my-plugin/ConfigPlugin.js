@@ -1,5 +1,5 @@
 var ConfigPlugin = {};
-const host = "http://laravel.54.com:5000"
+const host = "http://web.local"
 ConfigPlugin.install = function (Vue, options) {
     Vue.prototype.$config = {
         directory : {

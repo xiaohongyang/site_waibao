@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //$middleWare = ['middleware' => []];
 $groupConfig = [
-    //'middleware' => ['auth:api']
+    'middleware' => ['auth:api']
 ];
 
 

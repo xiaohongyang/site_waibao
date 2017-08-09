@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Service\ArticleTypeService;
 use App\Models\ArticleTypeModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ArticleTypeController extends Controller
+class ArticleTypeController extends BaseApiController
 {
     /**
      * Display a listing of the resource.
@@ -41,25 +42,15 @@ class ArticleTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->get('name');
+        $pid = $request->get('pid', 0);
+        $content = $request->get('content', '');
+        $articleTypeService = new ArticleTypeService();
+        $result = $articleTypeService->create($name, \Auth::guard('api')->id(), $pid, $content);
 
-        $result = [
-            'status' => 0,
-            'message' => [],
-            'id' => 0
-        ];
-
-        $model = new ArticleTypeModel();
-        $data = $request->all();
-        $uid = \Auth::guard('api')->id();
-        $data['uid'] = $uid;
-        $rs = $model->create($data);
-        if($rs){
-            $result['status'] = 1;
-            $request['id'] = $model->id;
-        }
-
-        return $result;
+        $message = $result ?  $articleTypeService->getModel() : ( $articleTypeService->getMessage() ? : 'failed' );
+        $this->setJsonResult($result ? 1 : 0, $message);
+        return $this->getJsonResult();
     }
 
     /**

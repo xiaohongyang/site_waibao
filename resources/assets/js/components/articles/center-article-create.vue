@@ -19,7 +19,6 @@
             <span class="error"> </span>
         </div>
 
-        <Ueditor v-bind:value="contents" @on-contents-change="onContentsChange"></Ueditor>
 
         <div>
             <span>

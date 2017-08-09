@@ -88,6 +88,8 @@ Route::get('passwordToken', function(\Illuminate\Http\Request $request){
         'data' => []
     ];
 
+
+
     $email = $request->get('email');
     $password = $request->get('password');
 
@@ -163,7 +165,7 @@ Route::get('getToken', function(\Illuminate\Http\Request $request){
     $key = $request->get('key');
     if($key == md5(env('APP_KEY'))) {
         $user = \App\User::where('id', env('TEST_USER_ID'))->first();
-        $token = $user->createToken("http://laravel.54.com:5000")->accessToken;
+        $token = $user->createToken("http://web.local")->accessToken;
         $data = [
             'status' => 200,
             'token' => $token
@@ -275,7 +277,7 @@ Route::get('queue_test', function(\Illuminate\Http\Request $request){
 #region 后台管理
     Route::group([], function(){
 
-       Route::get('/admin', 'Admin\LoginController@index')->name('admin.index');
+       Route::get('/admin', 'Admin\DashboardController@index')->name('admin.index');
        Route::get('/admin/login', 'Admin\LoginController@showLoginForm')->name('admin.login');
        Route::post('/admin/login', 'Admin\LoginController@login');
        Route::get('/admin/logout', 'Admin\LoginController@logout');
@@ -283,6 +285,7 @@ Route::get('queue_test', function(\Illuminate\Http\Request $request){
        Route::get('/admin/dashboard', 'Admin\DashboardController@index');
        Route::get('/admin/test', 'Admin\LoginController@test');
        Route::get('/admin/dash', 'Admin\DashboardController@index')->name('admin.home');
+       Route::get('/admin/articleType', 'Admin\ArticleTypeController@index')->name('admin.home');
 
     });
 #region
