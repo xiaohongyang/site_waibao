@@ -60,7 +60,6 @@ class Article extends BaseModel
         $result = false;
         $validator = \Validator::make($data, [
             'title' => ['required'],
-            'author' => ['required'],
             'user_id' => ['required'],
             'type_id' => ['required']
         ]);

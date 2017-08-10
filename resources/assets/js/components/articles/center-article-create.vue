@@ -19,6 +19,7 @@
             <span class="error"> </span>
         </div>
 
+        <Ueditor v-model="contents"></Ueditor>
 
         <div>
             <span>
@@ -33,13 +34,14 @@
 
 
     export default {
+        props : ['title', 'contents'],
         data : function(){
             return {
                 token : '',
-                title : '',
+                title : this.title,
                 thumb : '',
                 tag : '',
-                contents : '32132',
+                contents : this.contents,
                 ue : {}
             }
         },
@@ -83,6 +85,7 @@
                     contents : this.contents
                 }
 
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
                 axios.post(this.$config.url.api.article_store, data)
                     .then(function(json) {
                         console.log(json)
