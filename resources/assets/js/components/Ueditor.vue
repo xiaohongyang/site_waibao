@@ -21,13 +21,15 @@
             });
             this.ue.addListener("selectionchange", function(){
                 t.myValue = t.ue.getContent()
-
             })
         },
         watch : {
             myValue : function(newValue, oldValue) {
                 console.log('newVallue:' + newValue)
-                this.$emit('on-contents-change', newValue)
+                //调用父类方法更新父类数据
+                this.$emit('changed', newValue)
+                parent.value = newValue;
+                console.log(parent.value)
             }
         }
     }

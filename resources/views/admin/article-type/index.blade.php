@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <xhy-hello title="32321title" contents="vvxxvvvvvvvvvvvv"></xhy-hello>
+    <xhy-hello title="32321title" contents-value="vvxxvvvvvvvvvvvv"></xhy-hello>
 
 @endsection
 

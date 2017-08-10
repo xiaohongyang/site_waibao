@@ -13,13 +13,13 @@
             </span>
             <span class="error"> </span>
         </div>
-        <div>
+        <!--<div>
             <span> tag </span>
             <span> <input type="text" name="tag" v-model="tag" >  </span>
             <span class="error"> </span>
-        </div>
+        </div>-->
 
-        <Ueditor v-model="contents"></Ueditor>
+        <Ueditor :value="contents" v-on:changed="onContentsChange"></Ueditor>
 
         <div>
             <span>
@@ -32,31 +32,28 @@
 
 <script>
 
-
     export default {
-        props : ['title', 'contents'],
+        props : ['title', 'contentsValue'],
         data : function(){
             return {
                 token : '',
-                title : this.title,
                 thumb : '',
                 tag : '',
-                contents : this.contents,
-                ue : {}
+                ue : {},
+                contents : this.contentsValue
             }
         },
         mounted : function(){
 
         },
+
         computed : {
             thumbSrc : function(){
                 return this.thumb ? this.$config.host.img_host + '/' + this.thumb : '';
             }
         },
         watch : {
-            contents : function(newValue, oldValue) {
-                console.log("contents:" + newValue)
-            }
+
         },
         methods : {
             //上传图片
