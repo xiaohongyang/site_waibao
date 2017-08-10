@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\UserCEnter;
 
 use App\Forms\ArticleForm;
-use App\Models\Article;
+use App\Models\ArticleModel;
 use App\Models\ArticleSearchModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -30,12 +30,12 @@ class ArticleController extends BaseUserController
      */
     public function create(FormBuilder $formBuild, Request $request){
 
-        $article = new Article();
+        $article = new ArticleModel();
         if ($request->method() == 'POST') {
 
             $data = $request->all();
             if($data['id']){
-                $article = Article::where('id', $data['id'])->first();
+                $article = ArticleModel::where('id', $data['id'])->first();
             }
             $data['user_id'] = \Auth::user()->getAttribute('id');
             $data['author'] = \Auth::user()->getAttribute('id');
@@ -49,7 +49,7 @@ class ArticleController extends BaseUserController
                 return back();
             }
         } else {
-            $article = $request->get('id') ? Article::find($request->get('id')) : null;
+            $article = $request->get('id') ? ArticleModel::find($request->get('id')) : null;
             $form = $formBuild->create(ArticleForm::class, [
                 'method' => 'post',
                 'url' => route('user-article-create'),
@@ -70,7 +70,7 @@ class ArticleController extends BaseUserController
     public function edit(\Request $request){
 
         $articleId = $request::get('id');
-        $article = Article::find($articleId);
+        $article = ArticleModel::find($articleId);
 
         return self::getXhyView(['article' => $article]);
     }
@@ -84,7 +84,7 @@ class ArticleController extends BaseUserController
         $validator = new \Validator();
         if ($validator::make($data, ['id'=>'required'])->passes() ){
 
-            $article = new Article();
+            $article = new ArticleModel();
             $rs = $article->doDelete($data['id']);
             if ($rs) {
 

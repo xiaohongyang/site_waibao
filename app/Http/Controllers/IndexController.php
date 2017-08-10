@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ProcessPodcast;
-use App\Models\Article;
+use App\Models\ArticleModel;
 use App\Models\ArticleSpiderModel;
 use App\User;
 use Carbon\Carbon;

@@ -1,21 +1,32 @@
 <template>
-    <div id="center-article-create">
+    <div id="center-article-type-create">
         <div>
-            <span> title </span>
+            <span> 类别标题 </span>
             <span> <input type="text" id="title" v-model="title"   name="title"> </span>
             <span class="error"> </span>
         </div>
         <div>
-            <span> pic </span>
+            <span> 缩略图 </span>
             <span>
                 <input type="file" id="thumb"  v-on:change="uploadFile()" />
                 <img :src="thumbSrc"   style="width: 80px; height: auto"  />
             </span>
             <span class="error"> </span>
         </div>
+        <!--<div>
+            <span> tag </span>
+            <span> <input type="text" name="tag" v-model="tag" >  </span>
+            <span class="error"> </span>
+        </div>-->
 
+        <div>
+            <span> 详情 </span>
+            <span>
+                <Ueditor :value="contents" v-on:changed="onContentsChange"></Ueditor>
+            </span>
+            <span class="error"> </span>
+        </div>
 
-        <Ueditor :value="contents" v-on:changed="onContentsChange"></Ueditor>
 
         <div>
             <span>
@@ -29,14 +40,15 @@
 <script>
 
     export default {
-        props : ['title', 'contentsValue'],
+        props : ['titleValue', 'contentsValue'],
         data : function(){
             return {
                 token : '',
                 thumb : '',
                 tag : '',
                 ue : {},
-                contents : this.contentsValue
+                contents : this.contentsValue,
+                title : this.titleValue
             }
         },
         mounted : function(){
@@ -80,7 +92,7 @@
                 }
 
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
-                axios.post(this.$config.url.api.article_store, data)
+                axios.post(this.$config.url.api.article_type_store, data)
                     .then(function(json) {
                         console.log(json)
                     })

@@ -11,7 +11,7 @@
 |
 */
 
-use App\Models\Article;
+use App\Models\ArticleModel;
 use Illuminate\Support\Facades\Broadcast;
 
 Broadcast::channel('App.User.{id}', function ($user, $id) {

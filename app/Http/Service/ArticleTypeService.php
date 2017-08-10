@@ -30,4 +30,12 @@ class ArticleTypeService extends BaseService
         return $result;
     }
 
+    public function getTree($pid){
+
+        $query = $this->model->get();
+
+        $result = $query->where('id', '>', 0);
+        return $result;
+
+    }
 }

@@ -6,7 +6,7 @@ use App\User;
 use App\AppModelArticle;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Article;
+use App\Models\ArticleModel;
 
 class ArticlePolicy
 {
@@ -27,7 +27,7 @@ class ArticlePolicy
      * @param  \App\AppModelArticle  $appModelArticle
      * @return mixed
      */
-    public function view(User $user, Article $appModelArticle)
+    public function view(User $user, ArticleModel $appModelArticle)
     {
         //
 
@@ -56,7 +56,7 @@ class ArticlePolicy
      * @param  \App\AppModelArticle  $appModelArticle
      * @return mixed
      */
-    public function update(User $user, Article $article)
+    public function update(User $user, ArticleModel $article)
     {
         //
 

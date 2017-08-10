@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Events\ArticleDestroyed;
-use App\Models\Article;
+use App\Models\ArticleModel;
 use App\Models\ArticleTagsModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,7 +22,7 @@ class ArticleController extends Controller
         //
 
         $result = ['status' => 0, 'message'=>''];
-        $model = new Article();
+        $model = new ArticleModel();
 
 
         try {
@@ -82,7 +82,7 @@ class ArticleController extends Controller
                 $data['detail'] = $request->get('contents');
                 $data['tags'] = $request->get('tags');
 
-                $article = new Article();
+                $article = new ArticleModel();
                 $rs = $article->create($data);
                 $result['id'] = $rs;
                 $result['status'] = $rs ? 1 : 0;
@@ -112,7 +112,7 @@ class ArticleController extends Controller
 
 
         $result = ['status' => 0, 'message'=>'文章不存在'];
-        $article = Article::with('detail', 'tags')->findOrFail($id);
+        $article = ArticleModel::with('detail', 'tags')->findOrFail($id);
 
         switch($type){
             case 1:
@@ -159,7 +159,7 @@ class ArticleController extends Controller
             'message' => ''
         ];
         $type = $request->get('type');
-        $model = Article::find($id);
+        $model = ArticleModel::find($id);
 
         if($model && $model->user_id == \Auth::guard('api')->id()) {
 
@@ -204,7 +204,7 @@ class ArticleController extends Controller
         ];
         try {
 
-            $article = Article::find($id);
+            $article = ArticleModel::find($id);
 
             $data = [];
             $data['title'] = $request->get('title');
@@ -250,7 +250,7 @@ class ArticleController extends Controller
         }else {
 
             try {
-                $article = Article::find($id);
+                $article = ArticleModel::find($id);
                 if ($article) {
                     $rs = $article->delete();
                     if ($rs) {

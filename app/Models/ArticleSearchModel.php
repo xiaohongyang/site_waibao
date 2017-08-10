@@ -15,7 +15,7 @@ class ArticleSearchModel extends Model
 
     public function getList(Request $request) {
 
-        $query = Article::where('created_at', '<>', null);
+        $query = ArticleModel::where('created_at', '<>', null);
         $query->orderBy('updated_at', 'desc');
         return $query->Paginate(15);;
     }

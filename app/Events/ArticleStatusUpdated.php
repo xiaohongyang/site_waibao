@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Article;
+use App\Models\ArticleModel;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\Broadcaster;
 use Illuminate\Queue\SerializesModels;
@@ -22,7 +22,7 @@ class ArticleStatusUpdated implements Broadcaster
      *
      * @return void
      */
-    public function __construct(Article $article)
+    public function __construct(ArticleModel $article)
     {
         //
         $this->update = $article;

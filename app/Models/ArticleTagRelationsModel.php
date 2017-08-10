@@ -18,10 +18,10 @@ class ArticleTagRelationsModel extends Model
     }
 
     public function article() {
-        return $this->belongsTo(Article::class, 'article_id');
+        return $this->belongsTo(ArticleModel::class, 'article_id');
     }
 
-    public function create(Article $article, ArticleTagsModel $tag) {
+    public function create(ArticleModel $article, ArticleTagsModel $tag) {
         $tagRelationModel = new Static();
         $tagRelationModel->article_id = $article->id;
         $tagRelationModel->tag_id = $tag->id;

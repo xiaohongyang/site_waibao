@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\Article;
+use App\Models\ArticleModel;
 use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -37,7 +37,7 @@ class ProcessPodcast implements ShouldQueue
     public function handle()
     {
         //
-        $article = new Article();
+        $article = new ArticleModel();
         $article->fill([
             'title' => 'Test Job',
             'author' => 'tester',

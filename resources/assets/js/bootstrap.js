@@ -30,6 +30,7 @@ Vue.use(ConfigPlugin)
 
 Vue.component('Ueditor', require("./components/Ueditor.vue"))
 Vue.component('xhy-hello', require("./components/articles/center-article-create.vue"))
+Vue.component('article-type-create', require("./components/articles/center-article-type-create.vue"))
 Vue.component('center-article-create', require("./components/articles/center-article-create.vue"))
 
 

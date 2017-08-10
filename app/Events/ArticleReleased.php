@@ -7,7 +7,7 @@
  */
 
 namespace App\Events;
-use App\Models\Article;
+use App\Models\ArticleModel;
 use Illuminate\Queue\SerializesModels;
 
 class ArticleReleased
@@ -16,7 +16,7 @@ class ArticleReleased
 
     public $article;
 
-    public function __construct(Article $article)
+    public function __construct(ArticleModel $article)
     {
         $this->article = $article;
         printf("文章发布Event<br/>");

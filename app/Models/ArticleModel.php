@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Event;
 use App\Events\ArticleReleased;
 use League\Flysystem\Exception;
 
-class Article extends BaseModel
+class ArticleModel extends BaseModel
 {
 
     protected $table = 'articles';
@@ -33,7 +33,7 @@ class Article extends BaseModel
 //        static::addGlobalScope(new AuthorScope);
 //        static::addGlobalScope(new DeletedScope());
 
-        Article::observe(ArticleObserver::class);
+        ArticleModel::observe(ArticleObserver::class);
 
 //        static::addGlobalScope('author', function (Builder $builder){
 //            $builder->where('author', '=', '肖红阳');
@@ -159,17 +159,17 @@ class Article extends BaseModel
 
 
     public function doFirstOrCreate(Request $request) {
-        $article = Article::firstOrCreate(['title'=> $request->title, 'author'=>$request->author]);
+        $article = ArticleModel::firstOrCreate(['title'=> $request->title, 'author'=>$request->author]);
         return $article;
     }
 
     public function doFirstOrNew(Request $request) {
-        $article = Article::firstOrNew(['title'=> $request->title, 'author'=>$request->author]);
+        $article = ArticleModel::firstOrNew(['title'=> $request->title, 'author'=>$request->author]);
         return $article;
     }
 
     public function doUpdateOrCreate(Request $request){
-        $article = Article::updateOrCreate( ['title'=>$request->title], ['title'=>$request->title, 'author'=>$request->author] );
+        $article = ArticleModel::updateOrCreate( ['title'=>$request->title], ['title'=>$request->title, 'author'=>$request->author] );
         return $article;
     }
 
@@ -178,7 +178,7 @@ class Article extends BaseModel
         if (!is_int($id) || !$id)
             return false;
 
-        $article = Article::find($id);
+        $article = ArticleModel::find($id);
         $result = false;
         if ($article->delete()) {
 
@@ -195,12 +195,12 @@ class Article extends BaseModel
 
     public function doDestroy(Request $request){
 
-        $rs = Article::destroy([$request->id]);
+        $rs = ArticleModel::destroy([$request->id]);
         return $rs;
     }
 
     public function getOnlyTrashed() {
-        $rs = Article::onlyTrashed()
+        $rs = ArticleModel::onlyTrashed()
             ->where('id', '>', 0)
             ->get();
 

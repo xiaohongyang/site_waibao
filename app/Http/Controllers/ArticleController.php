@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ArticleReleased;
-use App\Models\Article;
+use App\Models\ArticleModel;
 use Illuminate\Http\Request;
 use App\Scopes\AuthorScope;
 use App\Scopes\DeletedScope;
@@ -17,7 +17,7 @@ class ArticleController extends Controller
 
     private $article;
 
-    public function __construct(Article $article){
+    public function __construct(ArticleModel $article){
         $this->article = $article;
     }
 
@@ -41,7 +41,7 @@ class ArticleController extends Controller
     public function create(Request $request){
         //print_r($request);
 
-        $rs = Article::create(['title'=>'test', 'author'=>'xhy']);
+        $rs = ArticleModel::create(['title'=>'test', 'author'=>'xhy']);
 
         event(new ArticleReleased($rs));
         exit;
@@ -55,31 +55,31 @@ class ArticleController extends Controller
     }
 
     public function firstOrCreate(Request $request){
-        $articleModel = new Article();
+        $articleModel = new ArticleModel();
         $rs = $articleModel->doFirstOrCreate($request);
         var_dump($rs);
 	}
     public function firstOrNew(Request $request){
-        $articleModel = new Article();
+        $articleModel = new ArticleModel();
         $rs = $articleModel->doFirstOrNew($request);
         var_dump($rs);
 	}
 
 
     public function updateOrCreate(Request $request){
-        $articalModel = new Article();
+        $articalModel = new ArticleModel();
         $rs = $articalModel->doUpdateOrCreate($request);
         var_dump($rs);
     }
 
     public function delete(Request $request){
-        $articleModel = new Article();
+        $articleModel = new ArticleModel();
         $rs = $articleModel->doDelete($request);
         var_dump($rs);
     }
 
     public function destroy(Request $request){
-        $articleModel = new Article();
+        $articleModel = new ArticleModel();
         $rs = $articleModel->doDestroy($request);
         var_dump($rs);
     }

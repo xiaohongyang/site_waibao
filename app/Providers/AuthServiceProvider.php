@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Article;
+use App\Models\ArticleModel;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
@@ -20,7 +20,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
        'App\Model' => 'App\Policies\ModelPolicy',
-        Article::class => ArticlePolicy::class,
+        ArticleModel::class => ArticlePolicy::class,
         User::class => UserPolicy::class
     ];
 

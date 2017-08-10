@@ -11,7 +11,8 @@ ConfigPlugin.install = function (Vue, options) {
         },
         url : {
             api : {
-                article_store : host + '/api/articles'
+                article_store : host + '/api/articles' ,
+                article_type_store : host + '/api/article-types' ,
             }
         }
     };

@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Article;
+use App\Models\ArticleModel;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -21,7 +21,7 @@ class ArticleDestroyed
      *
      * @return void
      */
-    public function __construct(Article $article)
+    public function __construct(ArticleModel $article)
     {
         //
         $this->article = $article;

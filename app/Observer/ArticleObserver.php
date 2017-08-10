@@ -7,17 +7,17 @@
  */
 
 namespace App\Observer;
-use App\Models\Article;
+use App\Models\ArticleModel;
 
 class ArticleObserver
 {
 
-    public function created(Article $article) {
+    public function created(ArticleModel $article) {
 //        $article->author = 'observer';
 //        $article->save();
     }
 
-    public function deleted(Article $article){
+    public function deleted(ArticleModel $article){
 
     }
 

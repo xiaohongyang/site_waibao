@@ -224,7 +224,7 @@ Route::get('md5', function (\Illuminate\Http\Request $request){
 
 Route::get('/create', function(\Illuminate\Http\Request $request){
 
-    $article = new \App\Models\Article();
+    $article = new \App\Models\ArticleModel();
 
     $typeName = $request->get('type_name');
     $typeItem = \App\Models\ArticleTypeModel::where(['name' => $typeName])->first();
@@ -242,7 +242,7 @@ Route::get('/create', function(\Illuminate\Http\Request $request){
 
 Route::post('/create', function(\Illuminate\Http\Request $request){
 
-    $article = new \App\Models\Article();
+    $article = new \App\Models\ArticleModel();
 
     if($request->has('title')){
 //        $request->merge(['title' => strip_tags($request->get('title'))]);
@@ -285,7 +285,10 @@ Route::get('queue_test', function(\Illuminate\Http\Request $request){
        Route::get('/admin/dashboard', 'Admin\DashboardController@index');
        Route::get('/admin/test', 'Admin\LoginController@test');
        Route::get('/admin/dash', 'Admin\DashboardController@index')->name('admin.home');
+
+       //文章
        Route::get('/admin/articleType', 'Admin\ArticleTypeController@index')->name('admin.home');
+       Route::get('/admin/article', 'Admin\ArticleController@index')->name('admin.article');
 
     });
 #region

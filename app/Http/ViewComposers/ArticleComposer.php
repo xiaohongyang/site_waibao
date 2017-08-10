@@ -7,7 +7,7 @@
  */
 
 namespace App\Http\ViewComposers;
-use App\Models\Article;
+use App\Models\ArticleModel;
 use Illuminate\View\View;
 
 class ArticleComposer
@@ -15,7 +15,7 @@ class ArticleComposer
 
     protected $article;
 
-    public function __construct(Article $article)
+    public function __construct(ArticleModel $article)
     {
         $this->article = $article;
     }

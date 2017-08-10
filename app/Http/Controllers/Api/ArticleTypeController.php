@@ -14,11 +14,28 @@ class ArticleTypeController extends BaseApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        return ArticleTypeModel::all();
+
+        $result = [];
+
+        $articleTypeService = new ArticleTypeService();
+        $case = $request->get('case');
+
+        switch($case) {
+            case 'tree' :
+                $pid = $request->get('pid', 0);
+                $result = $articleTypeService->getTree($pid);
+                break;
+
+            default :
+                $result = ArticleTypeModel::all();
+                break;
+        }
+
+        return $result;
     }
+
 
     /**
      * Show the form for creating a new resource.
