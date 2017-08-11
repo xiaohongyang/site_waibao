@@ -101,6 +101,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'pid' => [
+            'is_parent_id_equals_self_id' => '父id不能为自己',
+            'is_parent_id_belong_to_child' => '父id不能为下级类别'
+        ]
     ],
 
     /*
@@ -114,6 +118,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'pid' => '上级id',
+        'name' => '名称'
+    ],
 
 ];

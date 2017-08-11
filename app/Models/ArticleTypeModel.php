@@ -47,11 +47,7 @@ class ArticleTypeModel extends BaseModel
         ];
         $rules = [
             'id' => [
-                'required',
-                Rule::exists('article_type')
-                    ->where(function($query){
-                        $query->where('id', 1);
-                    })
+                'required'
             ]
         ];
 
@@ -66,7 +62,7 @@ class ArticleTypeModel extends BaseModel
         if(!is_null($pid)){
             $data['pid'] = $pid;
             $rules['pid'] = [
-                'required'
+                'required',
             ];
         }
         if (!is_null($content)) {
@@ -78,15 +74,16 @@ class ArticleTypeModel extends BaseModel
             $rules['sort'] = ['required'];
         }
 
-        $validator = \Validator::make($data, $rules);
-
         if(!is_null($pid)) {
-
-            $validator->sometimes('pid', 'required', function ($input) {
-                return true;
-            });
-
+            //父id不能为自己
+            $rules['pid'][] = 'isParentIdEqualsSelfId:1111,2222' ;
+            //父id不能为下级类别
+            $rules['pid'][] = 'isParentIdBelongToChild:1111,2222' ;
         }
+
+        $message = ['pid' => '上级id不能为自己'];
+        $validator = \Validator::make($data, $rules, $message);
+
 
         $this->setCreateValidator($validator);
         $result = $this->create($data);

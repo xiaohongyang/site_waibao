@@ -7,6 +7,8 @@
  */
 
 namespace App\Providers;
+use App\Http\Helpers\TreeHelper;
+use App\Http\Service\ArticleTypeService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,9 +28,25 @@ class ValidatorServiceProvider extends ServiceProvider
             return $attribute . "长度必须小于3个字符";
         });
 
-        \Validator::extend('articleTypePidIsSelf', function($attribute, $value, $articleTypeModel, $validator){
-            echo 33;exit;
-            return $articleTypeModel->id == $value;
+        /**
+         * 父id不能为自己
+         */
+        \Validator::extend('isParentIdEqualsSelfId', function($attribute, $value, $articleTypeModel, $validator){
+
+            $data = $validator->getData();
+            return $value != $data['id'];
+        });
+
+        /**
+         * isParentIdBelongToChild
+         */
+        \Validator::extend('isParentIdBelongToChild', function($attribute, $value, $articleTypeModel, $validator){
+            $data = $validator->getData();
+
+            $typeService = new ArticleTypeService();
+            $tree = $typeService->getTree($data['id']);
+            $a = TreeHelper::getInstance()->isChildExist($value, $tree, 'id');
+            return !$a;
         });
     }
 

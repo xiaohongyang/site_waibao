@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Helpers\TreeHelper;
 use App\Http\Service\ArticleTypeService;
 use App\Models\ArticleTypeModel;
 use Illuminate\Http\Request;
@@ -23,6 +24,12 @@ class ArticleTypeController extends BaseApiController
         $case = $request->get('case');
 
         switch($case) {
+            case 'test' :
+                $tree = $articleTypeService->getTree(0);
+                $rs = TreeHelper::getInstance()->isChildExist(3,$tree, 'id');
+                p($rs);
+
+                break;
             case 'tree' :
                 $pid = $request->get('pid', 0);
                 $result = $articleTypeService->getTree($pid);

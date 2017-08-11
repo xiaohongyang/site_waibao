@@ -58,10 +58,13 @@ class ArticleTypeService extends BaseService
         $result = $query->where('id', '>', 0);
 
         $result = $result->toArray();
+
         //$tree = $this->generateTree($result, 'pid', $pid);
         $tree = TreeHelper::getInstance()->generateTree($result, 'pid', $pid);
 
         return $tree;
     }
+
+
 
 }

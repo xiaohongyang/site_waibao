@@ -27,6 +27,51 @@ class TreeHelper
 
 
     /**
+     * 树中是否存在指定结点
+     * @param $id
+     * @param $tree
+     * @param $columnName
+     * @return bool
+     */
+    public function isChildExist($id, $tree, $columnName='id'){
+
+        $result = false;
+        $array = $this->conveTreeToArray($tree, $columnName);
+        if(is_array($array) && count($array)) {
+            foreach ($array as $item) {
+                if($item[$columnName] == $id) {
+                    $result = true;
+                }
+            }
+        }
+
+        return $result;
+    }
+
+
+    protected function conveTreeToArray($tree, $idColumnName, $childrenColumnName='children'){
+
+        static $arr = []  ;
+
+        if(is_array($tree) && count($tree)  && !key_exists($childrenColumnName, $tree) ) {
+
+            foreach ($tree as $item) {
+                if(key_exists($childrenColumnName, $item) && count($item[$childrenColumnName])) {
+                    $this->conveTreeToArray($item[$childrenColumnName], $idColumnName, $childrenColumnName);
+                    $item[$childrenColumnName] = [];
+                    $arr[] = $item;
+                } else {
+                    $arr[] = $item;
+                }
+            }
+        } else {
+            $arr[] = $tree;
+        }
+        return $arr;
+    }
+
+
+    /**
      * 生成树数据
      * @param $data
      * @param string $parentColumnName
