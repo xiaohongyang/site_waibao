@@ -25,6 +25,11 @@ class ValidatorServiceProvider extends ServiceProvider
         \Validator::replacer('customerStrLess3', function($message, $attribute, $rule, $parameter) {
             return $attribute . "长度必须小于3个字符";
         });
+
+        \Validator::extend('articleTypePidIsSelf', function($attribute, $value, $articleTypeModel, $validator){
+            echo 33;exit;
+            return $articleTypeModel->id == $value;
+        });
     }
 
     public function register(){

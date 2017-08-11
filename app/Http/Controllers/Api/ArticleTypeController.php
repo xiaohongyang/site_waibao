@@ -63,6 +63,7 @@ class ArticleTypeController extends BaseApiController
         $pid = $request->get('pid', 0);
         $content = $request->get('content', '');
         $articleTypeService = new ArticleTypeService();
+
         $result = $articleTypeService->create($name, \Auth::guard('api')->id(), $pid, $content);
 
         $message = $result ?  $articleTypeService->getModel() : ( $articleTypeService->getMessage() ? : 'failed' );
@@ -99,23 +100,10 @@ class ArticleTypeController extends BaseApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( $id)
     {
         //
-        $result = [
-            'status' => 0,
-            'data' => [],
-            'message' => ''
-        ];
-        $model = ArticleTypeModel::find($id);
-        if($model && $model->uid == \Auth::guard('api')->id()) {
-            $result['status'] = 1;
-            $result['data'] = $model;
-        } else if($model){
-            $result['message'] = "您没有权限";
-        }
-
-        return $result;
+        echo $id;
     }
 
     /**
@@ -127,21 +115,19 @@ class ArticleTypeController extends BaseApiController
      */
     public function update(Request $request, $id)
     {
-        //
-        $result = [
-            'status' => 0,
-            'message' => ''
-        ];
-        $data = $request->input();
 
-        $model = ArticleTypeModel::find($id);
-        if($model && $model->uid == \Auth::guard('api')->id()) {
-            $rs = $model->edit($data);
-            if($rs){
-                $result['status'] = 1;
-            }
-        }
-        return $result;
+        $name = $request->get('name');
+        $pid = $request->get('pid');
+        $content = $request->get('content');
+        $sort = $request->get('sort');
+        $articleTypeService = new ArticleTypeService();
+
+        $result = $articleTypeService->edit($id, $name, \Auth::guard('api')->id(), $pid, $content, $sort);
+
+        $message = $result ?  'ok' : ( $articleTypeService->getMessage() ? : 'failed' );
+        $resultData = $result ?  $articleTypeService->getModel() : [];
+        $this->setJsonResult($result ? 1 : 0, $message, $resultData);
+        return $this->getJsonResult();
     }
 
     /**

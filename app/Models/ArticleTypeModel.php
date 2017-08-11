@@ -4,22 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ArticleTypeModel extends BaseModel
 {
     //
     protected $table = 'article_type';
 
-    public $fillable = ['name', 'uid', 'pid', 'content'];
+    public $fillable = ['name', 'uid', 'pid', 'content', 'sort'];
 
 
-    public function createParams($name, $uid, $pid=0, $content='') {
+    public function createParams($name, $uid, $pid=null, $content=null, $sort=null) {
+
+        $pid = is_null($pid) ? 0 : $pid;
+        $sort = is_null($sort) ? 0 : $sort;
+        $content = is_null($content) ? 0 : $content;
 
         $data = [
             'name' => $name,
             'uid' => $uid,
             'pid' => $pid,
-            'content' => $content
+            'content' => $content,
+            'sort' => $sort
         ];
 
         $validator = \Validator::make($data, [
@@ -34,20 +40,57 @@ class ArticleTypeModel extends BaseModel
         return $result;
     }
 
-    public function edit($data){
-        $rs = false;
-        if(key_exists('name', $data) && !strlen($data['name'])){
+    public function edit($id, $name=null, $uid=null, $pid=null, $content=null, $sort=null){
 
-            $this->message = '类别名称不能为空';
-        } else {
-            if(key_exists('name', $data) && strlen($data['name'])){
-                $rs = $this->update(['name' => $data['name']]);
-            }
-            if(key_exists('pid', $data) && is_int($data['pid'])){
-                $rs = $this->update(['pid' => $data['pid']]);
-            }
+        $data = [
+            'id' => $id
+        ];
+        $rules = [
+            'id' => [
+                'required',
+                Rule::exists('article_type')
+                    ->where(function($query){
+                        $query->where('id', 1);
+                    })
+            ]
+        ];
+
+        if(!is_null($name)){
+            $data['name'] = $name;
+            $rules['name'] = ['required'];
         }
-        return $rs;
+        if(!is_null($name)){
+            $data['uid'] = $uid;
+            $rules['uid'] = ['required'];
+        }
+        if(!is_null($pid)){
+            $data['pid'] = $pid;
+            $rules['pid'] = [
+                'required'
+            ];
+        }
+        if (!is_null($content)) {
+            $data['content'] = $content;
+            $rules['content'] = ['required'];
+        }
+        if (!is_null($sort)) {
+            $data['sort'] = $sort;
+            $rules['sort'] = ['required'];
+        }
+
+        $validator = \Validator::make($data, $rules);
+
+        if(!is_null($pid)) {
+
+            $validator->sometimes('pid', 'required', function ($input) {
+                return true;
+            });
+
+        }
+
+        $this->setCreateValidator($validator);
+        $result = $this->create($data);
+        return $result;
     }
 
 }
