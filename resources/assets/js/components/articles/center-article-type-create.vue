@@ -1,5 +1,5 @@
 <template>
-    <div id="center-article-type-create">
+    <div id="center-article-type-create" class="hide">
         <div>
             <span> 类别标题 </span>
             <span> <input type="text" id="title" v-model="title"   name="title"> </span>

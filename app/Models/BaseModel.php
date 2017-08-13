@@ -8,83 +8,76 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 
-class BaseModel extends Model
-{
+class BaseModel extends Model {
 
-    public $message ;
-
-    public $createValidator=null;
-    public $editValidator=null;
+	public $message;
 
 
-    public function create($data){
+	public $createValidator = null;
+	public $editValidator = null;
 
-        $result = false;
-        $validator = $this->getCreateValidator();
-        if ($validator->fails()) {
-            $this->message = $validator->messages()->getMessageBag();
-        } else {
-            $this->fill($data);
-            $result = $this->save() ? true : false;
-        }
+	public function create($data) {
 
-        return $result;
-    }
+		$result = false;
+		$validator = $this->getCreateValidator();
+		if ($validator->fails()) {
+			$this->message = $validator->messages()->getMessageBag();
+		} else {
+			$this->fill($data);
+			$result = $this->save() ? true : false;
+		}
 
-    public function edit($data){
+		return $result;
+	}
 
-        $result = false;
-        $validator = $this->getCreateValidator();
-        if ($validator->fails()) {
-            $this->message = $validator->messages()->getMessageBag();
-        } else {
-            $this->fill($data);
-            $result = $this->save() ? true : false;
-        }
+	/*public function edit($data){
 
-        return $result;
-    }
+		        $result = false;
+		        $validator = $this->getCreateValidator();
+		        if ($validator->fails()) {
+		            $this->message = $validator->messages()->getMessageBag();
+		        } else {
+		            $this->fill($data);
+		            $result = $this->save() ? true : false;
+		        }
 
-    public static function getByID($id, $column = 'id') {
-        return static::where($column, $id)->first();
-    }
+		        return $result;
+	*/
 
+	public static function getByID($id, $column = 'id') {
+		return static::where($column, $id)->first();
+	}
 
-    #region getter and setter
-    /**
-     * @return null
-     */
-    public function getEditValidator()
-    {
-        return $this->editValidator;
-    }
+	#region getter and setter
+	/**
+	 * @return null
+	 */
+	public function getEditValidator() {
+		return $this->editValidator;
+	}
 
-    /**
-     * @param null $editValidator
-     */
-    public function setEditValidator($editValidator)
-    {
-        $this->editValidator = $editValidator;
-    }
+	/**
+	 * @param null $editValidator
+	 */
+	public function setEditValidator($editValidator) {
+		$this->editValidator = $editValidator;
+	}
 
-    /**
-     * @return null
-     */
-    public function getCreateValidator()
-    {
-        return $this->createValidator;
-    }
+	/**
+	 * @return null
+	 */
+	public function getCreateValidator() {
+		return $this->createValidator;
+	}
 
-    /**
-     * @param null $createValidator
-     */
-    public function setCreateValidator($createValidator)
-    {
-        $this->createValidator = $createValidator;
-    }
+	/**
+	 * @param null $createValidator
+	 */
+	public function setCreateValidator($createValidator) {
+		$this->createValidator = $createValidator;
+	}
 
-    #endregion
+	#endregion
 }

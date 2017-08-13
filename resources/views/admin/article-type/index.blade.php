@@ -2,7 +2,8 @@
 
 @section('content')
 
-    <article-type-create> </article-type-create>
+
+    <type-tree-manager> </type-tree-manager>
 
 @endsection
 

@@ -49,22 +49,30 @@ class TreeHelper
     }
 
 
-    protected function conveTreeToArray($tree, $idColumnName, $childrenColumnName='children'){
+    public function conveTreeToArray($tree, $idColumnName, $childrenColumnName='children', $level=1){
 
         static $arr = []  ;
+
 
         if(is_array($tree) && count($tree)  && !key_exists($childrenColumnName, $tree) ) {
 
             foreach ($tree as $item) {
                 if(key_exists($childrenColumnName, $item) && count($item[$childrenColumnName])) {
-                    $this->conveTreeToArray($item[$childrenColumnName], $idColumnName, $childrenColumnName);
-                    $item[$childrenColumnName] = [];
-                    $arr[] = $item;
+
+                    $tmp = $item;
+                    $tmp[$childrenColumnName] = [];
+                    $tmp['level'] = $level;
+                    $arr[] = $tmp;
+                    $nextFunLevelParam = $level+1;
+                    $this->conveTreeToArray($item[$childrenColumnName], $idColumnName, $childrenColumnName, $nextFunLevelParam);
+
                 } else {
+                    $item['level'] = $level;
                     $arr[] = $item;
                 }
             }
         } else {
+            $tree['level'] = $level;
             $arr[] = $tree;
         }
         return $arr;

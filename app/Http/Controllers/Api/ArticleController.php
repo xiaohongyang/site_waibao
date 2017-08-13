@@ -2,268 +2,153 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Events\ArticleDestroyed;
-use App\Models\ArticleModel;
-use App\Models\ArticleTagsModel;
+use App\Http\Service\ArticleService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Event;
 
+class ArticleController extends BaseApiController {
 
-class ArticleController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-        //
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index(Request $request) {
 
-        $result = ['status' => 0, 'message'=>''];
-        $model = new ArticleModel();
+		$this->setJsonResult(0);
 
+		$articleService = new ArticleService();
+		$case = $request->get('case');
 
-        try {
-            $data = $model->getList($request);
-            $result = [
-                'status' => 1,
-                'data' => $data
-            ];
-        } catch (Exception $e) {
-        }
-        return $result;
-    }
+		switch ($case) {
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-        return [
-            'title',
-            'thumb',
-            'author',
-            'user_id',
-            'from_host',
-            'type_id',
-            'contents',
-            'tags'
-        ];
-    }
+		case 'page':
+			$page = $request->get('page');
+			$amount = $request->get('amount', 1000000);
+			$search = $request->get('search');
+			$type_id = $request->get('type_id');
+			$type_id = $type_id == 0 ? null : $type_id;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+			$orderColumn = $request->get('orderColumn', 'updated_at');
+			$orderMethod = $request->get('orderMethod', 'desc');
+			$params = [
+				'relation' => 'articletype',
 
-        $result = [
-            'status' => 0,
-            'message' => [],
-            'id' => 0
-        ];
-        try {
-                $data = [];
-                $data['title'] = $request->get('title');
-                $data['thumb'] = $request->get('thumb','');
-                $data['author'] = $request->get('author','');
-                $data['user_id'] = \Auth::guard('api')->id() ;
-                $data['from_host'] = $request->get('from_host', '');
-                $data['type_id'] = $request->get('type_id', 1);
-                $data['contents'] = $request->get('contents');
-                $data['detail'] = $request->get('contents');
-                $data['tags'] = $request->get('tags');
+			];
+			if (!is_null($type_id)) {
+				$params['type_id'] = $type_id;
+			}
+			$result = $articleService->getPageList($page, $amount, $search, $orderColumn, $orderMethod, $params);
+			$this->setJsonResult(1, null, $result);
+			break;
 
-                $article = new ArticleModel();
-                $rs = $article->create($data);
-                $result['id'] = $rs;
-                $result['status'] = $rs ? 1 : 0;
+		default:
+			break;
+		}
 
-                if(!$rs)
-                    $result['message'] = $article->message;
-        } catch (ValidationException $e) {
-            $result['message'] = '';
-            \Log::info($e->getMessage(). $e->getFile() . $e->getLine());
-        } catch (Exception $e) {
-            \Log::info($e->getMessage(). $e->getFile() . $e->getLine());
-        }
-        return $result;
-    }
+		return $this->getJsonResult();
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, $id)
-    {
-        //
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create() {
+		//
+		return [
+			'name',
+			'pid',
+		];
+	}
 
-        $type = $request->get('type');
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request) {
+		$title = $request->get('title');
+		$typeId = $request->get('typeId');
+		$content = $request->get('content', '');
+		$thumb = $request->get('thumb', '');
+		$articleService = new ArticleService();
 
+		$result = $articleService->create($title, $thumb, $typeId, $content);
 
-        $result = ['status' => 0, 'message'=>'文章不存在'];
-        $article = ArticleModel::with('detail', 'tags')->findOrFail($id);
+		$message = $result ? $articleService->getModel() : ($articleService->getMessage() ?: 'failed');
+		$this->setJsonResult($result ? 1 : 0, $message);
+		return $this->getJsonResult();
+	}
 
-        switch($type){
-            case 1:
-//                if($article->detail) {
-//
-////                    $contents = $article->detail->contents;
-////                    unset($article->detail);
-////                    $article->contents = $contents;
-//                } else {
-//                    $article->contents = "";
-//                }
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($id) {
+		//
+		$service = new ArticleService();
+		$obj = $service->getById($id);
+		if ($obj) {
+			$this->setJsonResult(1, "查找数据成功", $obj);
+		} else {
+			$this->setJsonResult(0, $service->getMessage());
+		}
 
-                if($article->tags){
+		return $this->getJsonResult();
+	}
 
-                    foreach ($article->tags as &$tag){
-                        $tag->name = ArticleTagsModel::find($tag->tag_id)->name;
-                    }
-                }
-                break;
-            default:
-                break;
-        }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit($id) {
+		//
+		echo $id;
+	}
 
-        if( $article ) {
-            $result['status'] = 1;
-            $result['data'] = $article;
-            $result['message'] = '获取信息成功!';
-        }
-        return $result;
-    }
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, $id) {
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, $id)
-    {
-        //
-        $result = [
-            'status' => 0,
-            'data' => [],
-            'message' => ''
-        ];
-        $type = $request->get('type');
-        $model = ArticleModel::find($id);
+		$title = $request->get('title');
+		$typeId = $request->get('typeId');
+		$content = $request->get('content');
+		$thumb = $request->get('thumb');
+		$articleService = new ArticleService();
 
-        if($model && $model->user_id == \Auth::guard('api')->id()) {
+		$result = $articleService->edit($id, $title, $thumb, $typeId, $content);
 
-            switch ($type) {
-                case 1:
-                    if ($model->detail) {
-                        $contents = $model->detail->contents;
-                        unset($model->detail);
-                        $model->contents = $contents;
-                    }
-                    if ($model->tags) {
-                        foreach ($model->tags as &$tags) {
-                            $tags->name = ArticleTagsModel::find($tags->tag_id);
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-            $result['status'] = 1;
-            $result['data'] = $model;
-        } else if($model){
-            $result['message'] = "您没有权限";
-        }
+		$message = $result ? '更新成功' : ($articleService->getMessage() ?: '更新失败');
+		$resultData = $result ? $articleService->getModel() : [];
+		$this->setJsonResult($result ? 1 : 0, $message, $resultData);
+		return $this->getJsonResult();
+	}
 
-        return $result;
-    }
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy($id) {
+		//
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $result = [
-            'status' => 0,
-            'message' => [],
-            'id' => 0
-        ];
-        try {
+		$articleService = new ArticleService();
 
-            $article = ArticleModel::find($id);
+		$result = $articleService->remove($id);
+		$message = $result ? '删除成功' : ($articleService->getMessage() ?: '数据不存在或者已被删除');
+		$this->setJsonResult($result ? 1 : 0, $message);
 
-            $data = [];
-            $data['title'] = $request->get('title');
-            $data['thumb'] = $request->get('thumb','');
-            $data['author'] = $request->get('author');
-            $data['user_id'] = \Auth::guard('api')->id() ;
-            $data['from_host'] = $request->get('from_host', '');
-            $data['type_id'] = $request->get('type_id', $article->type_id);
-
-            $rs = $article->edit($data);
-            $result['id'] = $rs;
-            $result['status'] = $rs ? 1 : 0;
-
-            if(!$rs)
-                $result['message'] = $article->message;
-        } catch (ValidationException $e) {
-            $result['message'] = '';
-            \Log::info($e->getMessage(). $e->getFile() . $e->getLine());
-        } catch (Exception $e) {
-            \Log::info($e->getMessage(). $e->getFile() . $e->getLine());
-        }
-        return $result;
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-        $result = [
-            'status' => 0, 'message' => '删除失败!'
-        ];
-        if(!is_null($id)) {
-            $id = intval($id);
-        }
-        if(!is_int($id) || $id <= 0) {
-
-            $this->message = 'id参数错误,必须为大于0的整数';
-        }else {
-
-            try {
-                $article = ArticleModel::find($id);
-                if ($article) {
-                    $rs = $article->delete();
-                    if ($rs) {
-                        $result['status'] = 1;
-                        $result['message'] = '删除成功';
-                        event(new ArticleDestroyed($article));
-                    }
-                }
-            } catch (Exception $e) {
-                \Log::info('delete faied :' , $e);
-            }
-        }
-
-        return $result;
-    }
+		return $this->getJsonResult();
+	}
 }

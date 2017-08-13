@@ -2,7 +2,17 @@
 
 @section('content')
 
-    <xhy-hello title="32321title" contents-value="vvxxvvvvvvvvvvvv"></xhy-hello>
+    <?php
+$breadcrumb = [
+	[
+		'text' => '文章管理',
+		'active' => true,
+		'link' => '',
+	],
+];
+?>
+
+	<article-index></article-index>
 
 @endsection
 

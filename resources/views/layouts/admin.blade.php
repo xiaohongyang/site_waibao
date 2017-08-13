@@ -99,17 +99,32 @@
                     <nav>
                         <ul>
                             <li class="list-style-none">
-                                <a href="#"  class="p-right-10 border-right-1px display-inline-block"> 文章管理 </a>
+                                <a href="{{route('admin.articleType')}}"  class="p-right-10 border-right-1px display-inline-block"> 类别管理 </a>
                             </li>
 
                             <li>
-                                <a href="#"> 文章管理 </a>
+                                <a href="{{route('admin.article')}}"> 文章管理 </a>
                             </li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-sm-9" id="layout-app">
-                    @yield('content')
+                    <div class="bs-example" data-example-id="simple-breadcrumbs">
+
+                        <ol class="breadcrumb">
+                            <li><a href="/admin">后台首页</a></li>
+
+                            @if (isset($breadcrumb) && is_array($breadcrumb) && count($breadcrumb))
+                                @foreach($breadcrumb as $bread)
+                                    <li><a href="{{$bread['link']}}" class="<?=$bread['active'] ? 'active' : ''?>">{{$bread['text']}}</a></li>
+                                @endforeach
+                            @endif
+                        </ol>
+                    </div>
+                    <div class="container">
+
+                        @yield('content')
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,6 +133,7 @@
 
     <script src="{{ mix('js/app.js') }}"></script>
 
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
     <script src="{{ mix('js/site.js') }}"></script>
     <!--include socket.io.js-->

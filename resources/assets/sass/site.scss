@@ -23,3 +23,97 @@ img.ajax_upload_img {
 .p-right-10{
   padding-right:  10px;
 }
+.margin-top-10{
+	margin-top: 10;
+}
+.margin-column{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.margin-row{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+//面包屑
+.breadcrumb a.active{
+    color: #777;
+}
+ 
+ 
+
+/*dataTable  start  */
+.page-numeric {
+  background: none!important;
+}
+/*dataTime*/
+.page-data-times {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.page-data-times .page-times-style {
+  background: #fe7023;
+  cursor: pointer;
+  padding: 10px 10px;
+  border: 1px solid #fe7023;
+  width: 100%; 
+  color: #fff;
+  border-radius: 5px!important;
+}
+.mar-le15 {
+  margin-left: 15px!important;
+}
+.mar-le10 {
+  margin-left: 10px!important;
+}
+.calendar-time {
+  display: none;
+}
+.page-hidden {
+  visibility: hidden;
+}
+.page-mar {
+  margin-top: 19px;
+}
+.icon-data {
+  display: inline-block;
+  width: 14px;
+  margin-right: 3px;
+}
+
+
+//新增样式xhy
+.dataTables_length{
+  display: inline-block;
+  float:right;
+}
+.dataTables_filter{
+  display: inline-block;
+  float: left;
+}
+.paging_simple_numbers {
+    a {
+      margin-left:5px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+}
+.type_filter {
+  margin-right: 20px;
+}
+
+/*dataTable  end  */
+
+
+
+
+
+
+//xhy控件
+.SelectContainer {
+  padding-top: 5px;
+  padding-bottom: 5px; 
+}

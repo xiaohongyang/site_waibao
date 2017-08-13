@@ -30,15 +30,19 @@ Vue.use(ConfigPlugin)
 
 Vue.component('Ueditor', require("./components/Ueditor.vue"))
 Vue.component('xhy-hello', require("./components/articles/center-article-create.vue"))
-Vue.component('article-type-create', require("./components/articles/center-article-type-create.vue"))
+Vue.component('article-type-create', require("./components/article-type/create.vue"))
 Vue.component('center-article-create', require("./components/articles/center-article-create.vue"))
-
+Vue.component('show-list', require("./components/show-list.vue"))
+Vue.component('type-tree', require("./components/type-tree.vue"))
+Vue.component('type-tree-select', require("./components/type-tree-select.vue"))
+Vue.component('type-tree-manager', require("./components/article-type/type-tree-manager.vue"))
+Vue.component('article-index', require("./components/articles/article-index.vue"))
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
+ */ 
 
 window.axios = require('axios');
 

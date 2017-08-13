@@ -8,63 +8,69 @@
 
 namespace App\Http\Service;
 
-
 use App\Http\Helpers\TreeHelper;
-use App\Models\ArticleTagsModel;
 use App\Models\ArticleTypeModel;
 
-class ArticleTypeService extends BaseService
-{
+class ArticleTypeService extends BaseService {
 
-    public function getMessage(){
-        return $this->model->message ? : $this->message;
-    }
+	public function getMessage() {
 
-    public function __construct(){
+		return $this->model->getCreateValidator() && $this->model->getCreateValidator()->getMessageBag() ?
+                $this->model->getCreateValidator()->getMessageBag() :
+                ($this->model->message ?: $this->message);
+	}
 
-        $this->model = new ArticleTypeModel() ;
-    }
+	public function __construct() {
 
+		$this->model = new ArticleTypeModel();
+	}
 
-    public function create($name, $uid, $pid=null, $content=null, $sort=null){
+	public function create($name, $uid, $pid = null, $content = null, $thumb = null, $sort = null) {
 
-        $result = $this->model->createParams($name, $uid, $pid, $content, $sort);
-        return $result;
-    }
+		$result = $this->model->createParams($name, $uid, $pid, $content, $thumb, $sort);
+		return $result;
+	}
 
-    public function edit($id, $name, $uid, $pid=null, $content=null, $sort=null){
+	/**
+	 * 编辑
+	 */
+	public function edit($id, $name, $uid, $pid = null, $content = null, $thumb = null, $sort = null) {
 
-        $this->model = ArticleTypeModel::find($id);
-        if(!is_null($this->model)) {
-            $result = $this->model->edit($id, $name, $uid, $pid, $content, $sort);
-            return $result;
+		$this->model = ArticleTypeModel::find($id);
+		if (!is_null($this->model)) {
+			$result = $this->model->edit($id, $name, $uid, $pid, $content, $thumb, $sort);
+			return $result;
 
-        } else {
-            $this->model = new ArticleTypeModel();
-            $this->message = '该类别数据不存在';
-            return false;
-        }
-    }
+		} else {
+			$this->model = new ArticleTypeModel();
+			$this->message = '该类别数据不存在';
+			return false;
+		}
+	}
 
-    /**
-     * 获取类别树
-     * @param $pid  根类别id
-     * @return array
-     */
-    public function getTree($pid, $orderColumn='sort', $orderMethod='asc'){
+	public function remove($id) {
+		$result = $this->model->remove($id);
+		return $result;
+	}
 
-        $query = $this->model->orderBy($orderColumn, $orderMethod)->get();
+	/**
+	 * 获取类别树
+	 * @param $pid  根类别id
+	 * @return array
+	 */
+	public function getTree($pid, $orderColumn = 'sort', $orderMethod = 'asc') {
 
-        $result = $query->where('id', '>', 0);
+		$query = $this->model->orderBy($orderColumn, $orderMethod)->get();
 
-        $result = $result->toArray();
+		$result = $query->where('id', '>', 0);
 
-        //$tree = $this->generateTree($result, 'pid', $pid);
-        $tree = TreeHelper::getInstance()->generateTree($result, 'pid', $pid);
+		$result = $result->toArray();
 
-        return $tree;
-    }
+		//$tree = $this->generateTree($result, 'pid', $pid);
+		$tree = TreeHelper::getInstance()->generateTree($result, 'pid', $pid);
 
+		return $tree;
+	}
 
 
 }

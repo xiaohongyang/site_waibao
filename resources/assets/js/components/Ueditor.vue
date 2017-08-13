@@ -30,6 +30,10 @@
                 this.$emit('changed', newValue)
                 parent.value = newValue;
                 console.log(parent.value)
+            },
+            value : function(newValue) {
+                this.myValue = newValue
+                this.ue.setContent(newValue)
             }
         }
     }

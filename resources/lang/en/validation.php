@@ -103,7 +103,10 @@ return [
         ],
         'pid' => [
             'is_parent_id_equals_self_id' => '父id不能为自己',
-            'is_parent_id_belong_to_child' => '父id不能为下级类别'
+            'is_parent_id_belong_to_child' => '父id不能为下级类别',
+        ],
+        'id' => [
+            'is_has_child' => '该类别下有子类别存在,请先删除子类别'
         ]
     ],
 
