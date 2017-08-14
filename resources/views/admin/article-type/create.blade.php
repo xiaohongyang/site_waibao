@@ -2,6 +2,11 @@
 
 @section('content')
 
+<?php
+	$breadName = key_exists('id', $_GET) && $_GET['id']? $_GET['id'] ? '添加' : '编辑'
+	$idProp = key_exists('id', $_GET) && $_GET['id']? $_GET['id'] :0?>  
+?>
+
     <?php
 
 $breadcrumb = [
@@ -11,13 +16,13 @@ $breadcrumb = [
 		'active' => false,
 	], [
 		'link' => '',
-		'text' => '新建333',
+		'text' => $breadName,
 		'active' => true,
 	],
 ];
 
 ?>
-    <article-type-create id-prop=<?= key_exists('id', $_GET) && $_GET['id']? $_GET['id'] :0?> id=3333 :id=44444></article-type-create>
+    <article-type-create id-prop=<?=$idProp?>  ></article-type-create>
 
 @endsection
 
