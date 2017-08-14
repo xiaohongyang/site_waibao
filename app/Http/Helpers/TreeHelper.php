@@ -41,6 +41,7 @@ class TreeHelper
             foreach ($array as $item) {
                 if($item[$columnName] == $id) {
                     $result = true;
+                    break;
                 }
             }
         }

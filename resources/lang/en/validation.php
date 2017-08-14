@@ -107,6 +107,9 @@ return [
         ],
         'id' => [
             'is_has_child' => '该类别下有子类别存在,请先删除子类别'
+        ],
+        'type_id' => [
+            'remove_type_check_article_is_exist' => '请先删除该类别中的文章'
         ]
     ],
 

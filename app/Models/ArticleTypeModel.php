@@ -100,7 +100,13 @@ class ArticleTypeModel extends BaseModel {
 			return is_null($obj);
 		});
 		$rule = [
-			'id' => ['required', 'numeric', 'exists:article_type', 'isHasChild'],
+			'id' => [
+			    'required', 
+			    'numeric', 
+			    'exists:article_type', 
+			    'isHasChild',
+			    'removeTypeCheckArticleIsExist'
+		    ],
 		];
 
 		$validator = \Validator::make(['id' => $id], $rule);

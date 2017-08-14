@@ -11,6 +11,7 @@ use App\Http\Helpers\TreeHelper;
 use App\Http\Service\ArticleTypeService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use App\Models\ArticleModel;
 
 class ValidatorServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,7 @@ class ValidatorServiceProvider extends ServiceProvider
         });
 
         /**
+         * 父id不能为自己的子类id
          * isParentIdBelongToChild
          */
         \Validator::extend('isParentIdBelongToChild', function($attribute, $value, $articleTypeModel, $validator){
@@ -47,6 +49,12 @@ class ValidatorServiceProvider extends ServiceProvider
             $tree = $typeService->getTree($data['id']);
             $a = TreeHelper::getInstance()->isChildExist($value, $tree, 'id');
             return !$a;
+        });
+
+        \Validator::extend('removeTypeCheckArticleIsExist', function($attribute, $value, $params, $validator){
+
+            return ArticleModel::where('type_id', $value)->first() == null;
+
         });
     }
 
