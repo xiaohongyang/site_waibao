@@ -71,7 +71,6 @@ class ArticleModel extends BaseModel {
 			$rules['content'] = ['required'];
 		}
 
-//		$message = ['pid' => '上级id不能为自己'];
 		$validator = \Validator::make($data, $rules);
 
 		$this->setCreateValidator($validator);
