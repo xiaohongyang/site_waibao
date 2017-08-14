@@ -40,7 +40,6 @@
 @endsection
 
 @section('scripts')
-    {{--{{  Html::script(mix('js/article/article.js')) }}--}}
 
 
     <script type="text/javascript">

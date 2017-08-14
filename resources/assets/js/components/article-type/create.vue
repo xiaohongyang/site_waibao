@@ -8,7 +8,7 @@
         <div>
             <span> 上级类别 </span>
 
-                <type-tree-select   :selected="parentId" v-on:click="setParentId" v-on:changed="updateParentId"></type-tree-select>
+                <type-tree-select   :selected="parentId" root-name-prop="无" v-on:click="setParentId" v-on:changed="updateParentId"></type-tree-select>
 
             <span class="error"> </span> 
         </div>
@@ -20,7 +20,7 @@
             </span>
             <span class="error"> </span>
         </div>
-        <!--<div>
+        <!--<div> 
             <span> tag </span>
             <span> <input type="text" name="tag" v-model="tag" >  </span>
             <span class="error"> </span>
@@ -31,6 +31,12 @@
             <span>
                 <Ueditor :value="contents" v-on:changed="onContentsChange"></Ueditor>
             </span>
+            <span class="error"> </span>
+        </div>
+
+        <div> 
+            <span> 排序  </span>
+            <span> <input type="text" name="sort" v-model="sort" >  </span>
             <span class="error"> </span>
         </div>
 
@@ -62,7 +68,8 @@
                 title : this.titleValue,
                 typeListData : [],
                 parentId : 1,
-                id : this.idProp
+                id : this.idProp,
+                sort : 0
                 
             }
         },
@@ -113,6 +120,7 @@
                                 t.parentId = data.pid
                                 t.thumb = data.thumb
                                 t.contents = data.content
+                                t.sort = data.sort
                             }
                         })
                 }
@@ -123,7 +131,8 @@
                     name : this.title,
                     pid : this.parentId,
                     thumb : this.thumb,
-                    content : this.contents
+                    content : this.contents,
+                    sort : this.sort
                 }
 
                 if(this.id==0) {
@@ -133,8 +142,11 @@
                         .then(function(json) {
                             if(json.data.status == 1) {
                                 t.$alert("新建成功");
+                                window.location.href=window.location.href
                             } else { 
-                                t.$alert("新建失败")
+                                var message = t.$msgBag2String( json.data.message )
+
+                                t.$alert(message)
                             }
                         })
                 } else {

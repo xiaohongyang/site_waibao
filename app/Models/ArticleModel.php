@@ -15,23 +15,23 @@ class ArticleModel extends BaseModel {
 		'title', 'thumb', 'type_id', 'content', 'author', 'user_id', 'from_host',
 	];
 
-	public function createParams($title, $thumb = null, $typeId = null, $content = null) {
+	public function createParams($title, $thumb = null, $type_id = null, $content = null) {
 
 		$title = is_null($title) ? 0 : $title;
 		$thumb = is_null($thumb) ? 0 : $thumb;
-		$typeId = is_null($typeId) ? 0 : $typeId;
+		$type_id = is_null($type_id) ? 0 : $type_id;
 		$content = is_null($content) ? 0 : $content;
 
 		$data = [
 			'title' => $title,
-			'typeId' => $typeId,
+			'type_id' => $type_id,
 			'content' => $content,
 			'thumb' => $thumb,
 		];
 
 		$validator = \Validator::make($data, [
 			'title' => ['required'],
-			'typeId' => ['required'],
+			'type_id' => ['required'],
 //			'thumb' => ['required'],
 			'content' => ['required'],
 		]);
@@ -42,7 +42,7 @@ class ArticleModel extends BaseModel {
 		return $result;
 	}
 
-	public function edit($id, $title = null, $thumb = null, $typeId = null, $content = null) {
+	public function edit($id, $title = null, $thumb = null, $type_id = null, $content = null) {
 
 		$data = [
 			'id' => $id,
@@ -60,8 +60,8 @@ class ArticleModel extends BaseModel {
 			$data['title'] = $title;
 			$rules['title'] = ['required'];
 		}
-		if (!is_null($typeId)) {
-			$data['type_id'] = $typeId;
+		if (!is_null($type_id)) {
+			$data['type_id'] = $type_id;
 			$rules['type_id'] = [
 				'required',
 			];

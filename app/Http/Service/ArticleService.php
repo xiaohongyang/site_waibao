@@ -8,9 +8,7 @@
 
 namespace App\Http\Service;
 
-use App\Http\Helpers\TreeHelper;
 use App\Models\ArticleModel;
-use App\Models\ArticleTypeModel;
 
 class ArticleService extends BaseService {
 
@@ -19,7 +17,7 @@ class ArticleService extends BaseService {
 		$this->model = new ArticleModel();
 	}
 
-	public function create($title, $thumb=null, $typeId=null, $content=null) {
+	public function create($title, $thumb = null, $typeId = null, $content = null) {
 
 		$result = $this->model->createParams($title, $thumb, $typeId, $content);
 		return $result;
@@ -28,11 +26,11 @@ class ArticleService extends BaseService {
 	/**
 	 * 编辑
 	 */
-	public function edit($id, $title, $thumb=null, $typeId=null, $content=null) {
+	public function edit($id, $title, $thumb = null, $typeId = null, $content = null) {
 
 		$this->model = $this->model::find($id);
 		if (!is_null($this->model)) {
-			$result = $this->model->edit($id,$title, $thumb, $typeId, $content);
+			$result = $this->model->edit($id, $title, $thumb, $typeId, $content);
 			return $result;
 
 		} else {
@@ -46,7 +44,5 @@ class ArticleService extends BaseService {
 		$result = $this->model->remove($id);
 		return $result;
 	}
-
-
 
 }

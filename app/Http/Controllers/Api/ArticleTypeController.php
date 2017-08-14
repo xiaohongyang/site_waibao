@@ -29,6 +29,7 @@ class ArticleTypeController extends BaseApiController {
 			break;
 
 		case 'tree-list-row':
+			$id = $request->get('id', 0);
 			$tree = $articleTypeService->getTree(0);
 			$rs = TreeHelper::getInstance()->conveTreeToArray($tree, 'id');
 			$this->setJsonResult(1, null, $rs);
@@ -80,9 +81,10 @@ class ArticleTypeController extends BaseApiController {
 		$pid = $request->get('pid', 0);
 		$content = $request->get('content', '');
 		$thumb = $request->get('thumb', '');
+		$sort = $request->get('sort');
 		$articleTypeService = new ArticleTypeService();
 
-		$result = $articleTypeService->create($name, \Auth::guard('api')->id(), $pid, $content, $thumb);
+		$result = $articleTypeService->create($name, \Auth::guard('api')->id(), $pid, $content, $thumb, $sort);
 
 		$message = $result ? $articleTypeService->getModel() : ($articleTypeService->getMessage() ?: 'failed');
 		$this->setJsonResult($result ? 1 : 0, $message);

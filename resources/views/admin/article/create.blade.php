@@ -3,8 +3,8 @@
 @section('content')
 
 <?php
-	$breadName = key_exists('id', $_GET) && $_GET['id']? $_GET['id'] ? '添加' : '编辑'
-	$idProp = key_exists('id', $_GET) && $_GET['id']? $_GET['id'] :0?>  
+	$breadName = key_exists('id', $_GET) && $_GET['id'] ? '编辑':'添加' ;
+	$idProp = key_exists('id', $_GET) && $_GET['id']? $_GET['id'] :0;
 ?>
 
     <?php
@@ -17,7 +17,7 @@ $breadcrumb = [
 	], [
 		'link' => '',
 		'text' => $breadName,
-		'active' => true,
+		'active' => true
 	],
 ];
 

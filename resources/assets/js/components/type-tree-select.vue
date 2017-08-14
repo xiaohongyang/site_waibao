@@ -1,15 +1,15 @@
 <template>
         <select class="SelectContainer" @change="onSelectedDrug($event)">
 
-            <option value=0 >不限</option>
+            <option value=0 >{{root_name}}</option>
             <template v-for="item in treeData" class="eachLi" >
             	   
 
                  <option v-bind:value="item.id"   v-if="select == item['id']" selected   >
-                     {{"----".repeat(item['level']-1)}}{{item['name']}} 
+                     {{"----".repeat(item['level'])}}{{item['name']}} 
                  </option>
                  <option v-bind:value="item.id"    v-else>
-                     {{"----".repeat(item['level']-1)}}{{item['name']}} 
+                     {{"----".repeat(item['level'])}}{{item['name']}} 
                  </option>
 
             </template>
@@ -33,7 +33,10 @@
             
             selected : {
                 default : 1
-            }
+            },
+            rootNameProp : {
+                default : '不限'
+            } 
         },
         data : function(){
             return {
@@ -41,6 +44,7 @@
                 treeData:{
                     default: []
                 } ,
+                root_name : this.rootNameProp
             }
 
         },

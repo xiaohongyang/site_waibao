@@ -16,8 +16,8 @@ class ArticleTypeService extends BaseService {
 	public function getMessage() {
 
 		return $this->model->getCreateValidator() && $this->model->getCreateValidator()->getMessageBag() ?
-                $this->model->getCreateValidator()->getMessageBag() :
-                ($this->model->message ?: $this->message);
+		$this->model->getCreateValidator()->getMessageBag() :
+		($this->model->message ?: $this->message);
 	}
 
 	public function __construct() {
@@ -58,7 +58,7 @@ class ArticleTypeService extends BaseService {
 	 * @param $pid  根类别id
 	 * @return array
 	 */
-	public function getTree($pid, $orderColumn = 'sort', $orderMethod = 'asc') {
+	public function getTree($pid, $orderColumn = 'sort', $orderMethod = 'desc') {
 
 		$query = $this->model->orderBy($orderColumn, $orderMethod)->get();
 
@@ -71,6 +71,5 @@ class ArticleTypeService extends BaseService {
 
 		return $tree;
 	}
-
 
 }

@@ -4,10 +4,10 @@
 
       	<div class="row">
       		<h3 class="list-inline">类别管理:</h3>
-			<button class="btn btn-danger btn-sm " style="margin-left: 40px;" v-on:click="$goto($config.url.web.article_type_create)">
+			<a class="btn btn-danger btn-sm " style="margin-left: 40px;" href="$goto($config.url.web.article_type_create)">
 				<span class="glyphicon glyphicon-plus"></span>
 				新建
-			</button>
+			</a>
 	      	<type-tree  ></type-tree>
       	</div>
 
