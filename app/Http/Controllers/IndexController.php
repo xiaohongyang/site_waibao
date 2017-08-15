@@ -15,6 +15,7 @@ class IndexController extends BaseController {
 
 	public function index(Request $request) {
 
+	    return view('front.index');
 	}
 
 	public function route(Request $request) {

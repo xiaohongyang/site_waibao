@@ -176,6 +176,7 @@ Route::get('getToken', function (\Illuminate\Http\Request $request) {
 #endregion
 
 Route::get('/', 'IndexController@index');
+Route::post('/', 'IndexController@index');
 Route::get('index', 'IndexController@index');
 #region UserCenter
 

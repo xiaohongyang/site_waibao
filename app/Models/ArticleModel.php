@@ -12,21 +12,25 @@ class ArticleModel extends BaseModel {
 	protected $table = 'articles';
 
 	public $fillable = [
-		'title', 'thumb', 'type_id', 'content', 'author', 'user_id', 'from_host',
+		'title', 'thumb', 'type_id', 'content', 'author', 'user_id', 'from_host', 'file', 'is_index',
 	];
 
-	public function createParams($title, $thumb = null, $type_id = null, $content = null) {
+	public function createParams($title, $thumb = null, $type_id = null, $content = null, $file, $is_index) {
 
 		$title = is_null($title) ? 0 : $title;
 		$thumb = is_null($thumb) ? 0 : $thumb;
 		$type_id = is_null($type_id) ? 0 : $type_id;
 		$content = is_null($content) ? 0 : $content;
+		$file = is_null($file) ? '' : $file;
+		$is_index = is_null($is_index) ? 0 : $is_index;
 
 		$data = [
 			'title' => $title,
 			'type_id' => $type_id,
 			'content' => $content,
 			'thumb' => $thumb,
+			'file' => $file,
+			'is_index' => $is_index,
 		];
 
 		$validator = \Validator::make($data, [
@@ -42,11 +46,17 @@ class ArticleModel extends BaseModel {
 		return $result;
 	}
 
-	public function edit($id, $title = null, $thumb = null, $type_id = null, $content = null) {
+	public function edit($id, $title = null, $thumb = null, $type_id = null, $content = null, $file=null, $is_index=null) {
 
 		$data = [
 			'id' => $id,
 		];
+		if(!is_null($file)){
+		    $data['file'] = $file;
+        }
+        if(!is_null($is_index)){
+		    $data['is_index'] = $is_index;
+        }
 		$rules = [
 			'id' => [
 				'required',

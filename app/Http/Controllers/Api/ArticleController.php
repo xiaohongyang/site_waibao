@@ -69,9 +69,11 @@ class ArticleController extends BaseApiController {
 		$typeId = $request->get('type_id');
 		$content = $request->get('content', '');
 		$thumb = $request->get('thumb', '');
+		$file = $request->get('file');
+		$is_index = $request->get('is_index');
 		$articleService = new ArticleService();
 
-		$result = $articleService->create($title, $thumb, $typeId, $content);
+		$result = $articleService->create($title, $thumb, $typeId, $content, $file, $is_index);
 
 		$message = $result ? $articleService->getModel() : ($articleService->getMessage() ?: 'failed');
 		$this->setJsonResult($result ? 1 : 0, $message);
@@ -121,9 +123,11 @@ class ArticleController extends BaseApiController {
 		$typeId = $request->get('type_id');
 		$content = $request->get('content');
 		$thumb = $request->get('thumb');
+        $file = $request->get('file');
+        $is_index = $request->get('is_index');
 		$articleService = new ArticleService();
 
-		$result = $articleService->edit($id, $title, $thumb, $typeId, $content);
+		$result = $articleService->edit($id, $title, $thumb, $typeId, $content, $file, $is_index);
 
 		$message = $result ? '更新成功' : ($articleService->getMessage() ?: '更新失败');
 		$resultData = $result ? $articleService->getModel() : [];
