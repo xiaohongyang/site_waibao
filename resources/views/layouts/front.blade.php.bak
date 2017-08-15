@@ -459,7 +459,51 @@
     };
 </script>
 <div class="gupiao">
-    <div class="gupiao_center"></div>
+    <div class="gupiao_center">
+        {{--<a id="video_img" href="javascript:;" onclick="WinTip()"><img src="/tpl/hcPicture/201607102310494818.jpg" width="287px" height="147px"/></a>--}}
+        <div>{{--<a href="#"> <i></i>股票代码：300012<span>    <script type="text/javascript">
+                             var elements=hq_str_sz300012.split(",");
+                             var kp = elements[2];
+                             var dq = elements[3];
+                             var lv = 0;
+                             lv1 = ((parseFloat(dq)-parseFloat(kp))/parseFloat(kp))*100;
+                             lv2 = parseFloat(dq)-parseFloat(kp);
+                             var re0=parseFloat(elements[3]).toFixed(2);
+                             var re1=lv1.toFixed(2);
+                             var re2=lv2.toFixed(2);;
+                             if(lv2>=0)
+                             {
+                                 document.writeln(re0);
+                             }
+                             else
+                             {
+                                 document.writeln(re0);
+                             }
+                        </script> </span>
+
+
+                <script type="text/javascript">
+                    var elements=hq_str_sz300012.split(",");
+                    var kp = elements[2];
+                    var dq = elements[3];
+                    var lv = 0;
+                    lv1 = ((parseFloat(dq)-parseFloat(kp))/parseFloat(kp))*100;
+                    lv2 = parseFloat(dq)-parseFloat(kp);
+                    var re0=parseFloat(elements[3]).toFixed(2);
+                    var re1=lv1.toFixed(2);
+                    var re2=lv2.toFixed(2);;
+                    if(lv2>=0)
+                    {
+                        document.writeln("<span class='red'> " +re1 + "% </span><em></em>");
+                    }
+                    else
+                    {
+                        document.writeln( "<span class='green'>"+re1 + "% </span><em class='cur'></em>");
+                    }
+                </script>
+            </a>--}}
+        </div>
+    </div>
 </div>
 <!--右侧内容区 begin-->
 <!-------------->
@@ -951,7 +995,7 @@
     });
 </script>
 <script type="text/javascript">
-    var thePlayer;  //保存当前播放器以便操作     
+    var thePlayer;  //保存当前播放器以便操作
     $(function(){
         var url ="";
         url+='/upload/media/fronts/2016/20160711/201607111704319165.mp4' ;

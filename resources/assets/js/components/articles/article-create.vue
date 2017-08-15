@@ -7,7 +7,6 @@
             <span class="error"> </span>
         </div>
         <div>
-        type_id:{{type_id}}
             <span> 文章类别 </span>
 
                 <type-tree-select   :selected="type_id"   v-on:changed="updateTypeId"></type-tree-select>
@@ -30,6 +29,15 @@
                 <Ueditor :value="contents" v-on:changed="onContentsChange"></Ueditor>
             </span>
             <span class="error"> </span>
+        </div>
+
+        <div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" v-if="is_index==1" checked="checked" @click="updateIsIndex()">
+                    <input type="checkbox" v-else @click="updateIsIndex()" > 推荐到首页
+                </label>
+            </div>
         </div>
 
 
@@ -60,8 +68,8 @@
                 title : this.titleValue,
                 typeListData : [],
                 type_id : 1,
-                id : this.idProp
-                
+                id : this.idProp,
+                is_index : 0,
             }
         },
         mounted : function(){
@@ -77,6 +85,11 @@
 
         },
         methods : {
+
+            updateIsIndex : function(){
+
+                this.is_index = this.is_index==0 ? 1 : 0;
+            },
             //上传图片
             uploadFile : function(){
 
@@ -112,6 +125,7 @@
                                 t.type_id = data.type_id
                                 t.thumb = data.thumb
                                 t.contents = data.content
+                                t.is_index = data.is_index
                             }
                         })
                 }
@@ -122,7 +136,8 @@
                     title : this.title,
                     type_id : this.type_id,
                     thumb : this.thumb,
-                    content : this.contents
+                    content : this.contents,
+                    is_index : this.is_index,
                 }
 
                 if(this.id==0) {
