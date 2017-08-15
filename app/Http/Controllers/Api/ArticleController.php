@@ -118,7 +118,7 @@ class ArticleController extends BaseApiController {
 	public function update(Request $request, $id) {
 
 		$title = $request->get('title');
-		$typeId = $request->get('typeId');
+		$typeId = $request->get('type_id');
 		$content = $request->get('content');
 		$thumb = $request->get('thumb');
 		$articleService = new ArticleService();

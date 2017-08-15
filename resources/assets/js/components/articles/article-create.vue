@@ -7,6 +7,7 @@
             <span class="error"> </span>
         </div>
         <div>
+        type_id:{{type_id}}
             <span> 文章类别 </span>
 
                 <type-tree-select   :selected="type_id"   v-on:changed="updateTypeId"></type-tree-select>
@@ -108,7 +109,7 @@
                             if(json.status==200 && json.data.status==1) {
                                 var data = json.data.data
                                 t.title = data.title
-                                t.type_id = data.pid
+                                t.type_id = data.type_id
                                 t.thumb = data.thumb
                                 t.contents = data.content
                             }
