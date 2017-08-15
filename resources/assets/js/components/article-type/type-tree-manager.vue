@@ -19,11 +19,16 @@
 
     export default {
         t : this,
-        props : [],
+        props : {
+            rootIdProp : {
+                default : 0
+			}
+		},
         data : function(){
             return {
                 //data : [],
                 data:[
+					rootId : this.rootIdProp
 	            ]
             }
         },

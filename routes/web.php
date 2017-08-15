@@ -284,5 +284,10 @@ Route::group([], function () {
 	Route::get('/admin/article', 'Admin\ArticleController@index')->name('admin.article');
 	Route::get('/admin/article/create', 'Admin\ArticleController@create')->name('admin.article.create');
 
+
+    Route::get('/admin/articleTypeTarget', 'Admin\ArticleTypeController@indexTarget')->name('admin.articleTypeTarget');
+
+
+
 });
 #region

@@ -21,4 +21,8 @@ class ArticleTypeController extends Controller
     public function create(){
         return view('admin.article-type.create');
     }
+
+    public function indexTarget(){
+        return view('admin.article-type.index-target');
+    }
 }
