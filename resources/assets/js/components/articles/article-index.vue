@@ -5,7 +5,7 @@
 
             <div class="margin-column">
 
-                <button type=button class="btn btn-danger">
+                <button type=button class="btn btn-danger" @click="$goto($config.url.web.article_create)">
                     <span class="glyphicon glyphicon-plus"></span>新建
                 </button>
 
@@ -105,8 +105,14 @@
             },
            
             //刷新数据
-            getListData : function(){
+            getListData : function(isFresh){
 
+
+                if(typeof isFresh != 'undefined') {
+                    $('#datatable').html('')
+                    this.datatable_obj.destroy()
+                }
+                
 
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
 
@@ -117,9 +123,6 @@
                 axios.get( url, data )
                     .then(function(json){
 
-                        console.log('1111')
-                        console.log(json)
-                        console.log('1111')
 
                         if(json.status==200 && json.data.status==1) {
   
@@ -160,11 +163,12 @@
                                         orderable: false, title: '操作', className: 'page-numeric', render: function (data, type, row) {
 
                                             var editUrl = t.$config.url.web.article_create
-                                            var editStr = '<a class="btn btn-sm btn-default" href="' + editUrl + '?id='+ row[0] +'" title="编辑"><span class="glyphicon glyphicon-pencil"></span></a>';
+                                            var editStr = '<a class="btn btn-sm btn-default" href="' + editUrl + '?id='+ row['id'] + '" title="编辑"><span class="glyphicon glyphicon-pencil"></span></a>';
  
                                             editStr = editStr +
-                                                '<a class="btn btn-sm btn-default" data-id="'+ row['id'] +'" title="删除"><span class="glyphicon glyphicon-remove"></span></a> ';
+                                                '<button class="btn btn-sm btn-default"  onclick="$.fn.remove(' + row['id'] + ')" title="删除"><span class="glyphicon glyphicon-remove"></span></button> ';
  
+                                            editStr += "<example></example>"
                                             return editStr ;
                                         }
                                     }
@@ -204,10 +208,8 @@
                 
             },
             setTypeId :function(newValue) {
-                this.type_id=newValue
-                $('#datatable').html('')
-                this.datatable_obj.destroy()
-                this.getListData()
+                this.type_id=newValue 
+                this.getListData(true)
             },
             submit : function(){
                 var data = {
@@ -223,6 +225,21 @@
                         console.log(json)
                     })
             },
+            remove : function(id) {
+                if(typeof id == 'undefined')
+                    return false;
+                var t = this
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
+                axios.delete(this.$config.url.api.article_store + '/' + id)
+                    .then(function(json) {
+                        var message = t.$msgBag2String(json.data.message)
+                        t.$alert(message)
+
+                        if(json.data.status == 1) {
+                            t.getListData(true)
+                        }
+                    })
+            },
             onContentsChange : function(val) {
                 this.contents = val
                 console.log(val)
@@ -236,8 +253,17 @@
             //this.$freshToken()
         },
         created : function(){
+
             console.log('3344----------')
             this.getListData();
+
+
+            var t = this
+            $.fn.remove = function(id){ 
+                t.remove(id) 
+            }
+            
+
         }
     }
 

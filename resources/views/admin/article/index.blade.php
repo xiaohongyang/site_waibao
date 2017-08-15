@@ -18,5 +18,4 @@ $breadcrumb = [
 
 
 @section('scripts')
-    {{ Html::script(mix('js/article/article.js')) }}
 @endsection

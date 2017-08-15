@@ -27,6 +27,12 @@
             <span class="error"> </span>
         </div>
 
+        <div>
+            <span> 排序 </span>
+            <span> <input type="text" name="sort" v-model="sort" >  </span>
+            <span class="error"> </span>
+        </div>
+
 
         <div>
             <span>
@@ -48,7 +54,8 @@
                 tag : '',
                 ue : {},
                 contents : this.contentsValue,
-                title : this.titleValue
+                title : this.titleValue,
+                sort : 0
             }
         },
         mounted : function(){
@@ -88,7 +95,8 @@
                     name : this.title,
                     pid : 0,
                     thumb : this.thumb,
-                    content : this.contents
+                    content : this.contents,
+                    sort : this.sort
                 }
 
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()

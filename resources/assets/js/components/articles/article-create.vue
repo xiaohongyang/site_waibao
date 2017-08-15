@@ -1,6 +1,5 @@
 <template>
     <div id="article-create"  >
-        'title', 'thumb', 'type_id', 'content', 'author', 'user_id', 'from_host',
 
         <div>
             <span> 文章标题 </span>
@@ -100,7 +99,7 @@
 
                 var t = this
                 var id = this.id
-                var url = $config.url.api.article_store
+                var url = this.$config.url.api.article_store
                 if(id > 0) {
                     axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
                     axios.get( url + '/' + id )
@@ -108,7 +107,7 @@
 
                             if(json.status==200 && json.data.status==1) {
                                 var data = json.data.data
-                                t.title = data.name
+                                t.title = data.title
                                 t.type_id = data.pid
                                 t.thumb = data.thumb
                                 t.contents = data.content
@@ -140,7 +139,7 @@
                     var t = this
 
                     axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
-                    axios.put(this.$config.url.api.article_type_store + '/' + this.id, data)
+                    axios.put(this.$config.url.api.article_store + '/' + this.id, data)
                         .then(function(json) {
                             if(json.data.status == 1) {
                                 t.$alert("更新成功");

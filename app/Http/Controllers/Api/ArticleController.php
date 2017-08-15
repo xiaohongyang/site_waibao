@@ -55,10 +55,7 @@ class ArticleController extends BaseApiController {
 	 */
 	public function create() {
 		//
-		return [
-			'name',
-			'pid',
-		];
+		return $this->getJsonResult();
 	}
 
 	/**
@@ -69,7 +66,7 @@ class ArticleController extends BaseApiController {
 	 */
 	public function store(Request $request) {
 		$title = $request->get('title');
-		$typeId = $request->get('typeId');
+		$typeId = $request->get('type_id');
 		$content = $request->get('content', '');
 		$thumb = $request->get('thumb', '');
 		$articleService = new ArticleService();
