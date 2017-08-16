@@ -47,7 +47,17 @@ class ArticleTypeController extends BaseApiController {
 			$result = $articleTypeService->getTree($pid);
 			$this->setJsonResult(1, null, $result);
 			break;
-
+        case 'show_type_list' :
+            //显示类型 1:文章 2:图片 3:文件下载 4:单页 5:留言'
+            $data = [
+                ['id' =>1, 'name'=>'文章'],
+                ['id' =>2, 'name'=>'图片'],
+                ['id' =>3, 'name'=>'文件下载'],
+                ['id' =>4, 'name'=>'单页'],
+                ['id' =>5, 'name'=>'留言']
+            ];
+            $this->setJsonResult(1,'ok',$data);
+            break;
 		default:
 			$result = ArticleTypeModel::all();
 			$this->setJsonResult(1, null, $result);
@@ -82,9 +92,10 @@ class ArticleTypeController extends BaseApiController {
 		$content = $request->get('content', '');
 		$thumb = $request->get('thumb', '');
 		$sort = $request->get('sort');
+		$show_type = $request->get('show_type');
 		$articleTypeService = new ArticleTypeService();
 
-		$result = $articleTypeService->create($name, \Auth::guard('api')->id(), $pid, $content, $thumb, $sort);
+		$result = $articleTypeService->create($name, \Auth::guard('api')->id(), $pid, $content, $thumb, $sort, $show_type);
 
 		$message = $result ? $articleTypeService->getModel() : ($articleTypeService->getMessage() ?: 'failed');
 		$this->setJsonResult($result ? 1 : 0, $message);
@@ -138,9 +149,10 @@ class ArticleTypeController extends BaseApiController {
 		$content = $request->get('content');
 		$thumb = $request->get('thumb');
 		$sort = $request->get('sort');
+        $show_type = $request->get('show_type');
 		$articleTypeService = new ArticleTypeService();
 
-		$result = $articleTypeService->edit($id, $name, \Auth::guard('api')->id(), $pid, $content, $thumb, $sort);
+		$result = $articleTypeService->edit($id, $name, \Auth::guard('api')->id(), $pid, $content, $thumb, $sort, $show_type);
 
 		$message = $result ? 'ok' : ($articleTypeService->getMessage() ?: 'failed');
 		$resultData = $result ? $articleTypeService->getModel() : [];

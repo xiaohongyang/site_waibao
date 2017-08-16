@@ -12,7 +12,7 @@
 
             <span class="error"> </span> 
         </div>
-        <div>
+        <div>bo
             <span> 缩略图 </span>
             <span>
                 <input type="file" id="thumb"  v-on:change="uploadFile()" />
@@ -34,6 +34,13 @@
             <span class="error"> </span>
         </div>
 
+        <div>
+            <span>显示类别 </span>
+
+            <show-type-select   :selected="show_type"   v-on:changed="updateShowType"></show-type-select>
+
+            <span class="error"> </span>
+        </div>
         <div> 
             <span> 排序  </span>
             <span> <input type="text" name="sort" v-model="sort" >  </span>
@@ -69,7 +76,8 @@
                 typeListData : [],
                 parentId : 1,
                 id : this.idProp,
-                sort : 0
+                sort : 0,
+                show_type : 1
                 
             }
         },
@@ -121,6 +129,7 @@
                                 t.thumb = data.thumb
                                 t.contents = data.content
                                 t.sort = data.sort
+                                t.show_type = data.show_type
                             }
                         })
                 }
@@ -132,7 +141,8 @@
                     pid : this.parentId,
                     thumb : this.thumb,
                     content : this.contents,
-                    sort : this.sort
+                    sort : this.sort,
+                    show_type : this.show_type
                 }
 
                 if(this.id==0) {
@@ -176,6 +186,9 @@
             updateParentId : function(val) {
                 this.parentId = val
                 console.log(val)
+            },
+            updateShowType : function(val) {
+                this.show_type = val
             },
             setParentId : function(val) {
                 alert(val)

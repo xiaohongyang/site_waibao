@@ -1,0 +1,9 @@
+.hide{display: none;}
+
+.nav-w .nav .sub_nav_child{
+    height: 170px !important;
+}
+
+.select .selected .select-input{
+    height: 32px;
+}

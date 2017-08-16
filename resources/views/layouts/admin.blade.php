@@ -60,7 +60,7 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
 
-                            <li><a href="{{ route('home') }}">用户中心</a></li>
+                            {{--<li><a href="{{ route('home') }}">用户中心</a></li>--}}
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::guard('admin')->user()->name }}

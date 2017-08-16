@@ -192,6 +192,9 @@ Route::get('md5', function (\Illuminate\Http\Request $request) {
 #region 前端文章展示
 Route::get('articles', 'ArticleController@index');
 Route::get('article/{id}', 'ArticleController@item');
+
+Route::get('list/{type_id}', 'ArticleController@list')->name('article_list');
+Route::get('detail/{id}', 'ArticleController@detail')->name('article_detail');
 #endregion
 
 #region 文章管理

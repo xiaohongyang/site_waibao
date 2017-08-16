@@ -8,25 +8,34 @@ class ArticleTypeModel extends BaseModel {
 
 	use SoftDeletes;
 
+	//展示类别  1:文章 2:图片 3:文件下载 4:单页 5:留言'
+	const SHOW_TYPE_ARTICLE = 1; //文章类别
+    const SHOW_TYPE_IMAGE = 2;  //图片类别
+    const SHOW_TYPE_UPLOAD = 3;  //文件下载
+    const SHOW_TYPE_SINGLE_PAGE = 4;  //单页
+    const SHOW_TYPE_GUEST_BOOK = 5; //留言簿
 	//
 	protected $table = 'article_type';
 
-	public $fillable = ['name', 'uid', 'pid', 'content', 'thumb', 'sort'];
+	public $fillable = ['name', 'uid', 'pid', 'content', 'thumb', 'sort', 'show_type'];
 
-	public function createParams($name, $uid, $pid = null, $content = null, $thumb = null, $sort = null) {
+	public function createParams($name, $uid, $pid = null, $content = null, $thumb = null, $sort = null, $show_type = null) {
 
 		$pid = is_null($pid) ? 0 : $pid;
 		$sort = is_null($sort) ? 0 : $sort;
 		$content = is_null($content) ? 0 : $content;
 		$thumb = is_null($thumb) ? 0 : $thumb;
+        $show_type = is_null($show_type) ? 1 : $show_type;
 
-		$data = [
+
+        $data = [
 			'name' => $name,
 			'uid' => $uid,
 			'pid' => $pid,
 			'content' => $content,
 			'thumb' => $thumb,
 			'sort' => $sort,
+			'show_type' => $show_type,
 		];
 
 		$validator = \Validator::make($data, [
@@ -41,7 +50,7 @@ class ArticleTypeModel extends BaseModel {
 		return $result;
 	}
 
-	public function edit($id, $name = null, $uid = null, $pid = null, $content = null, $thumb, $sort = null) {
+	public function edit($id, $name = null, $uid = null, $pid = null, $content = null, $thumb, $sort = null, $show_type = null) {
 
 		$data = [
 			'id' => $id,
@@ -77,6 +86,9 @@ class ArticleTypeModel extends BaseModel {
 			$data['sort'] = $sort;
 			$rules['sort'] = ['required'];
 		}
+        if (!is_null($show_type)) {
+            $data['show_type'] = $show_type;
+        }
 
 		if (!is_null($pid)) {
 			//父id不能为自己

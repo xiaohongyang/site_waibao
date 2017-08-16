@@ -32,6 +32,9 @@ Vue.component('Ueditor', require("./components/Ueditor.vue"))
 Vue.component('article-type-create', require("./components/article-type/create.vue"))
 Vue.component('show-list', require("./components/show-list.vue"))
 Vue.component('type-tree', require("./components/type-tree.vue"))
+Vue.component('show-type-select', require("./components/show-type-select.vue"))
+
+
 Vue.component('type-tree-select', require("./components/type-tree-select.vue"))
 Vue.component('type-tree-manager', require("./components/article-type/type-tree-manager.vue"))
 

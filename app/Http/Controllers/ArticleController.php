@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Events\ArticleReleased;
+use App\Http\Service\ArticleService;
+use App\Http\Service\ArticleTypeService;
 use App\Models\ArticleModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Models\ArticleTypeModel;
+
 
 class ArticleController extends Controller {
 	//
@@ -18,105 +22,105 @@ class ArticleController extends Controller {
 		$this->article = $article;
 	}
 
-	public function index(Request $request) {
+	public function list(Request $request, $id) {
+	    if(is_null($id)) {
+	        abort(404, '类别参数错误');
+	        return ;
+        }
 
-		/*$articleLi
-			st = $this->article->getList();
+        $typeService = new ArticleTypeService();
+        $type = $typeService->getById($id);
+        if(is_null($type)) {
+            abort(404, '类别不存在');
+            return;
+        }
+        switch ($type->show_type) {
+            case ArticleTypeModel::SHOW_TYPE_ARTICLE:
+                return $this->renderArticles($id);
+                break;
+            case ArticleTypeModel::SHOW_TYPE_IMAGE:
+                return $this->renderImages($id);
+                break;
+            case ArticleTypeModel::SHOW_TYPE_SINGLE_PAGE:
+                return $this->renderSinglePage($id);
+                break;
 
-						        if (\Gate::allows('list', Article::class)) {
+            case ArticleTypeModel::SHOW_TYPE_UPLOAD:
+                return $this->renderUploadFile($id);
+                break;
 
-						            $articleList = $this->article->getList();
-						            return view('article.index', [
-						                'articleList' => $articleList
-						            ])->with('name', 'JackXiao');
-						        } else {
-						            return view('403');
-		*/
-		echo 33;exit;
+            case ArticleTypeModel::SHOW_TYPE_GUEST_BOOK:
+                return $this->renderGuestBook($id);
+                break;
+        }
+    }
 
-	}
-	public function create(Request $request) {
-		//print_r($request);
+    protected function renderArticles($id) {
 
-		$rs = ArticleModel::create(['title' => 'test', 'author' => 'xhy']);
+	    $articleService = new ArticleService();
+	    $query = $articleService->getPrevPageListQuery();
+	    $query->where('type_id',$id);
+	    $articleService->setPrevPageListQuery($query);
+	    $pageData = $articleService->getPageList(1,9999,null,'updated_at','desc');
+	    return view('article.list', ['id' => $id, 'listData' => $pageData]);
+    }
 
-		event(new ArticleReleased($rs));
-		exit;
-		var_dump($rs->author);
-//        $rs->fill(['author'=> 'xjp','aa','title'=>'testvvv']);
-		//        $rs->save();
-		var_dump($rs->author);
+    //单页
+    protected function renderSinglePage($id) {
 
-		exit;
+	    $articleService = new ArticleService();
+	    $query = $articleService->getPrevPageListQuery();
+	    $query->where('type_id',$id);
+	    $articleService->setPrevPageListQuery($query);
+	    $pageData = $articleService->getPageList(1,9999,null,'updated_at','desc');
+	    return view('article.list', ['id' => $id, 'listData' => $pageData]);
+    }
 
-	}
 
-	public function firstOrCreate(Request $request) {
-		$articleModel = new ArticleModel();
-		$rs = $articleModel->doFirstOrCreate($request);
-		var_dump($rs);
-	}
-	public function firstOrNew(Request $request) {
-		$articleModel = new ArticleModel();
-		$rs = $articleModel->doFirstOrNew($request);
-		var_dump($rs);
-	}
+    //图片列表
+    protected function renderImages($id) {
 
-	public function updateOrCreate(Request $request) {
-		$articalModel = new ArticleModel();
-		$rs = $articalModel->doUpdateOrCreate($request);
-		var_dump($rs);
-	}
+	    $articleService = new ArticleService();
+	    $query = $articleService->getPrevPageListQuery();
+	    $query->where('type_id',$id);
+	    $articleService->setPrevPageListQuery($query);
+	    $pageData = $articleService->getPageList(1,9999,null,'updated_at','desc');
+	    return view('article.list', ['id' => $id, 'listData' => $pageData]);
+    }
 
-	public function delete(Request $request) {
-		$articleModel = new ArticleModel();
-		$rs = $articleModel->doDelete($request);
-		var_dump($rs);
-	}
+    //文件下载
+    protected function renderUploadFile($id) {
 
-	public function destroy(Request $request) {
-		$articleModel = new ArticleModel();
-		$rs = $articleModel->doDestroy($request);
-		var_dump($rs);
-	}
+	    $articleService = new ArticleService();
+	    $query = $articleService->getPrevPageListQuery();
+	    $query->where('type_id',$id);
+	    $articleService->setPrevPageListQuery($query);
+	    $pageData = $articleService->getPageList(1,9999,null,'updated_at','desc');
+	    return view('article.list', ['id' => $id, 'listData' => $pageData]);
+    }
 
-	public function batchDelete() {
+    //留言本
+    protected function renderGuestBook($id) {
 
-	}
+        $articleService = new ArticleService();
+        $query = $articleService->getPrevPageListQuery();
+        $query->where('type_id',$id);
+        $articleService->setPrevPageListQuery($query);
+        $pageData = $articleService->getPageList(1,9999,null,'updated_at','desc');
+        return view('article.list', ['id' => $id, 'listData' => $pageData]);
+    }
 
-	public function store(Request $request) {
-		info($request);
-		//sometimes 只有在该字段在数据中存在才做验证
-		//        $this->validate($request, [
-		//            'title' => ['sometimes', 'required' ],
-		//            'author' => 'required | email'
-		//        ],[
-		//            'title.required' => '标题不能为空',
-		//            'title.exists' => '标题不存在'
-		//        ],['author'=>'作者']);
 
-		$validate = \Validator::make($request->all(), [
-			'title' => ['required'],
-			'author' => 'required',
-		]);
 
-		$validate->sometimes('author', 'required', function ($input) {
-			return $input->title == '334455';
-		});
+    public function detail($id){
 
-		//当author的值为'jack'的时候，title必须为'xiao01'或者'xiao02'
-		$validate->sometimes('title', Rule::in(['xiao01', 'xiao02']), function ($input) {
+	    if(is_null($id) || !is_numeric($id)) {
+	        abort(404, 'id参数错误');
+        }
+	    $articleService = new ArticleService();
+	    $model = $articleService->getById($id);
 
-			return $input->author == 'jack';
-		});
-
-		$validate->addRules(['title' => 'CustomerStrLess3']);
-
-		$validate->validate();
-
-		$this->article->create($request);
-		$request->session()->flash('msg', '添加成功');
-		return back();
-	}
+	    return view('article.detail', ['id' => $id, 'model' => $model]);
+    }
 
 }

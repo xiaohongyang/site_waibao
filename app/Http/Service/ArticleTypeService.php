@@ -25,20 +25,20 @@ class ArticleTypeService extends BaseService {
 		$this->model = new ArticleTypeModel();
 	}
 
-	public function create($name, $uid, $pid = null, $content = null, $thumb = null, $sort = null) {
+	public function create($name, $uid, $pid = null, $content = null, $thumb = null, $sort = null, $show_type = null) {
 
-		$result = $this->model->createParams($name, $uid, $pid, $content, $thumb, $sort);
+		$result = $this->model->createParams($name, $uid, $pid, $content, $thumb, $sort, $show_type);
 		return $result;
 	}
 
 	/**
 	 * 编辑
 	 */
-	public function edit($id, $name, $uid, $pid = null, $content = null, $thumb = null, $sort = null) {
+	public function edit($id, $name, $uid, $pid = null, $content = null, $thumb = null, $sort = null, $show_type = null) {
 
 		$this->model = ArticleTypeModel::find($id);
 		if (!is_null($this->model)) {
-			$result = $this->model->edit($id, $name, $uid, $pid, $content, $thumb, $sort);
+			$result = $this->model->edit($id, $name, $uid, $pid, $content, $thumb, $sort, $show_type);
 			return $result;
 
 		} else {

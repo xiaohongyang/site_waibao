@@ -13,6 +13,34 @@ Abstract Class BaseService {
 	protected $message;
 	protected $model;
 
+    protected $orderColumn = 'id';
+    protected $orderMethod = 'desc';
+
+	protected $prevPageListQuery=null;
+
+    /**
+     * @return mixed
+     */
+    public function getPrevPageListQuery()
+    {
+        if(is_null($this->prevPageListQuery)) {
+
+            $model = $this->model;
+            $this->orderColumn = is_null($this->orderColumn) ? 'id' : $this->orderColumn;
+            $this->orderMethod = is_null($this->orderMethod) ? 'desc' : $this->orderMethod;
+            $this->prevPageListQuery = $model->orderBy($this->orderColumn, $this->orderMethod);
+        }
+        return $this->prevPageListQuery;
+    }
+
+    /**
+     * @param mixed $prevPageListQuery
+     */
+    public function setPrevPageListQuery($prevPageListQuery)
+    {
+        $this->prevPageListQuery = $prevPageListQuery;
+    }
+
 	protected function setMessage($message) {
 		$this->message = $message;
 	}
@@ -43,6 +71,7 @@ Abstract Class BaseService {
 		return $result;
 	}
 
+
 	public function getPageList($page = null, $amount = null, $search = null, $orderColumn = null, $orderMethod = null, $params = null) {
 
 		$page = !is_null($page) ? $page : 1;
@@ -51,10 +80,12 @@ Abstract Class BaseService {
 		$orderColumn = !is_null($orderColumn) ? $orderColumn : 'id';
 		$orderMethod = !is_null($orderMethod) ? $orderMethod : 'desc';
 
-		$model = $this->model;
+        $this->orderColumn = $orderColumn;
+        $this->orderMethod = $orderMethod;
+
 		$skip = ($page - 1) * $amount;
 
-		$query = $model->orderBy($orderColumn, $orderMethod);
+		$query = $this->getPrevPageListQuery();
 
 		if (!is_null($params)) {
 			if (is_array($params)) {
