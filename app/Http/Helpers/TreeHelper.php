@@ -9,6 +9,8 @@
 namespace App\Http\Helpers;
 
 
+use App\Http\Service\ArticleTypeService;
+
 class TreeHelper
 {
 
@@ -54,8 +56,9 @@ class TreeHelper
     }
 
 
-    public function conveTreeToArray($tree, $idColumnName, $childrenColumnName='children', $level=1){
+    public function conveTreeToArray($tree, $idColumnName, $childrenColumnName=null, $level=1){
 
+        $childrenColumnName = is_null($childrenColumnName) ? 'children' : $childrenColumnName;
         if(is_array($tree) && count($tree)  && !key_exists($childrenColumnName, $tree) ) {
 
             foreach ($tree as $item) {
@@ -88,7 +91,10 @@ class TreeHelper
      * @param int $id
      * @return array
      */
-    public function generateTree($data, $parentColumnName='pid', $id=0) {
+    public function generateTree($data, $parentColumnName=null, $id=0) {
+
+        $parentColumnName = is_null($parentColumnName) ? 'pid' : $parentColumnName;
+
 
         $typeTree = [];
         //获取当前id的数据
@@ -158,6 +164,56 @@ class TreeHelper
             return [];
         }
         return $children;
+    }
+
+
+    //获取指定类别的最顶级父类id
+    public function getRootId($childId, $globalTypeList) {
+
+        $rootId = $childId;
+        if(is_null($childId) || is_null($globalTypeList)) {
+            return null;
+        }
+        $firstLevelTypes = [];
+        foreach ($globalTypeList as $type) {
+            if($type['pid'] == 0) {
+                $firstLevelTypes[] = $type['id'];
+            }
+        }
+
+        foreach ($firstLevelTypes as $typeId) {
+
+            $currentTypeTree = TreeHelper::generateTree($globalTypeList, null, $typeId);
+            if(count($currentTypeTree)) {
+                $currentTypeTree = $this->conveTreeToArray($currentTypeTree, null);
+                foreach ($currentTypeTree as $item) {
+                    if($item['id'] == $childId){
+
+                        $rootId = $typeId;
+                        break 2;
+                    }
+                }
+            }
+        }
+        return $rootId;
+    }
+
+
+    public function getPath($childId, $globalTypeList) {
+
+        $rootId = $this->getRootId($childId, $globalTypeList);
+        $type = $this->getTypeByID($globalTypeList, $childId);
+        $path = [$type];
+        while (true) {
+            if($type['id'] == $rootId || $type['pid']==0)
+                break;
+
+            $type = $this->getTypeByID($globalTypeList, $type['pid']);
+            $path[] = $type;
+        }
+
+        $path = array_reverse($path);
+        return $path;
     }
 
 }

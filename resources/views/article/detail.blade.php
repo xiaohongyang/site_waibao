@@ -45,17 +45,12 @@ $types = getTypeList($rootId, 'id');
         <!--左侧导航 end-->
         <!--右侧内容区 begin-->
         <div class="main-l recourceApply newsDetailWord newsDetail_ding" name="top">
-            <div class="main-nav">
-                当前位置：
-                <a href="index.do">首页</a>  &gt;&gt;
-                <a href="newsCompanyInit.do?move_type=1&amp;news_type=7">新闻资讯</a> &gt;&gt;
-                <a href="newsCompanyInit.do?move_type=1&amp;news_type=7">公司新闻</a> &gt;&gt;
-                <a href="#" class="curr">详情</a>
-            </div>
+            @component('component.breadcrumbs', ['type_id'=>$model->type_id, 'id'=>$model->id])
+            @endcomponent
             <div id="doctitle">
                 <div class="newLeft">
-                    <h3 class="newLeft-title">2017-07-31 15:28:44</h3>
-                    <h3 class="newLeft-title">华测检测成为CCC认证玩具指定实验室</h3>
+                    <h3 class="newLeft-title">{{$model->updated_at}}</h3>
+                    <h3 class="newLeft-title">{{$model->title}}</h3>
 
                     <p></p>
                     <?php

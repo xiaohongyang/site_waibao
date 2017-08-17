@@ -13,12 +13,13 @@ use Illuminate\Validation\Rule;
 use App\Models\ArticleTypeModel;
 
 
-class ArticleController extends Controller {
+class ArticleController extends BaseController {
 	//
 
 	private $article;
 
 	public function __construct(ArticleModel $article) {
+	    parent::__construct();
 		$this->article = $article;
 	}
 
@@ -122,5 +123,8 @@ class ArticleController extends Controller {
 
 	    return view('article.detail', ['id' => $id, 'model' => $model]);
     }
+
+
+
 
 }

@@ -14,9 +14,7 @@ foreach ($typeArr as $typeName) {
     }
 }
 
-echo $rootId;
 $types = getTypeList($rootId, 'id');
-print_r($types);
 
 ?>
 @section('content')
@@ -43,12 +41,8 @@ print_r($types);
         <!--左侧导航 end-->
         <!--右侧内容区 begin-->
         <div class="main-l">
-            <div class="main-nav">
-                当前位置：
-                <a href="index.do">首页</a>  &gt;&gt;
-                <a href="newsCompanyInit.do?move_type=1&amp;news_type=7">新闻资讯</a> &gt;&gt;
-                <a href="#" class="curr">公司新闻</a>
-            </div>
+            @component('component.breadcrumbs', ['type_id'=>$id])
+            @endcomponent
 
             <div class="newsWord news-company">
                 <p class="title">公司新闻</p>

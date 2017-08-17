@@ -72,4 +72,12 @@ class ArticleTypeService extends BaseService {
 		return $tree;
 	}
 
+    public function shareGlobalTypes($orderColumn='sort', $orderMethod='desc') {
+
+        $query = $this->model->orderBy($orderColumn, $orderMethod)->get();
+        $result = $query->where('id', '>', 0);
+        $result = $result->toArray();
+
+        \View::share('globalTypeList', $result);
+    }
 }
