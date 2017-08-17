@@ -95,7 +95,7 @@ $types = getTypeList($rootId, 'id');
 
 
                     <!--这是翻页的开始-->
-                        <div class="shzi hide">
+                        {{--<div class="shzi  ">
 
                             <a href="javascript:;" class="past">&nbsp;</a>
                             <span>
@@ -162,7 +162,7 @@ $types = getTypeList($rootId, 'id');
                             &nbsp;&nbsp;&nbsp;
                             <a href="javascript:;" id="pageSubmit" style="width: 50px;">确定</a>
                             </span>
-                        </div>
+                        </div>--}}
 
                 </div>
 
