@@ -22,6 +22,7 @@ class BaseController extends Controller
 
         $service = new ArticleTypeService();
         $service->shareGlobalTypes();
+        $service->shareGlobalTypesTree();
     }
 
 

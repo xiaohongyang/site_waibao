@@ -4,7 +4,7 @@
 
       	<div class="row">
       		<h3 class="list-inline">类别管理:</h3>
-			<a class="btn btn-danger btn-sm " style="margin-left: 40px;" href="$goto($config.url.web.article_type_create)">
+			<a class="btn btn-danger btn-sm " style="margin-left: 40px;" v-bind:href="createlink" >
 				<span class="glyphicon glyphicon-plus"></span>
 				新建
 			</a>
@@ -23,13 +23,15 @@
         data : function(){
             return {
                 //data : [],
-                data:[
-	            ]
+                data: {
+                    createlink: ''
+                }
             }
         },
         mounted : function(){
             this.columnsHeader = [
-            ]
+            ];
+
         },
 
         computed : {
@@ -50,6 +52,7 @@
         },
         created : function(){
             console.log('3344----------')
+			this.createlink = this.$config.url.web.article_type_create
         }
     }
 

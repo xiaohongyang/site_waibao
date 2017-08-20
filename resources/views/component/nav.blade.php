@@ -2,7 +2,7 @@
     <!--导航 begin-->
     <ul class="nav cl">
         <li class="  nav_title_two_three">
-            <a href="#" class="nav_title_a">网站首页</a>
+            <a href="/" class="nav_title_a">网站首页</a>
             <!--
             <div class="sub_nav_child ">
                 <div class="sub_float">
@@ -115,13 +115,13 @@
         </li>
 
         <?php
-            $typeArr = ['关于我们', '服务指南','新闻资讯','检测能力','网上业务','联系我们'];
-            foreach ($typeArr as $typeName) {
-        ?>
+$typeArr = ['关于我们', '服务指南', '新闻资讯', '检测能力', '网上业务', '联系我们'];
+foreach ($typeArr as $typeName) {
+	?>
         <?php
-                $types = getTypeList($typeName, 'name');
-                $navTitleClass = $typeName=='检测能力' ? '' : 'nav_title' ;
-        ?>
+$types = getTypeList($typeName, 'name');
+	$navTitleClass = $typeName == '检测能力' ? '' : 'nav_title';
+	?>
                 @if(count($types))
                     <li class="{{$navTitleClass}} nav_title_two">
                         <a href="#" class="nav_title_a"> {{$types[0]['name']}} </a>
@@ -151,8 +151,8 @@
                     </li>
                 @endif
         <?php
-            }
-        ?>
+}
+?>
 
     </ul>
     <!--导航 end-->

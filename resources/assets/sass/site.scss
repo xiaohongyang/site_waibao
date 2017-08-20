@@ -108,12 +108,85 @@ img.ajax_upload_img {
 /*dataTable  end  */
 
 
+.f-left{
+  float:left;
+}
+.f-right{
+  float: right;
+}
 
-
+//xhy布局
+@mixin p-margin{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+@mixin f-left{
+  float:left;
+}
+@mixin f-right{
+  float: right;
+}
+.xhy-nav{
+  border-top: 1px solid red;
+  ul:first-child{
+    margin-left:0;
+  }
+  ul{
+    margin-left: 20px;
+    a{
+      padding-top: 7px;
+      padding-bottom: 7px;
+    }
+    ul{
+      display: none;
+    }
+    li.active{
+      a{
+        background-color: #eeeeee;
+      }
+      ul{
+        display: block;
+        li{
+          a{
+            background: none;
+          }
+        }
+      }
+    }
+  }
+}
 
 
 //xhy控件
 .SelectContainer {
   padding-top: 5px;
   padding-bottom: 5px; 
+}
+
+//breadcrumbs
+
+.active{
+  .active{
+    a{
+      color: #bf5329;
+    }
+  }
+}
+
+.create-vue-wrap{
+
+  >div{
+
+    @include p-margin
+
+    span:first-child{
+      min-width: 50px;
+      display: inline-block;
+    }
+
+    @at-root  textarea{
+      width:500px;
+      height: 50px;
+    }
+  }
 }

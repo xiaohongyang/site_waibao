@@ -170,7 +170,13 @@ Route::get('getToken', function (\Illuminate\Http\Request $request) {
 			'status' => 200,
 			'token' => $token,
 		];
-	}
+	} else if (!Auth::guard('admin')->guest()) {
+        $token = Auth::guard('admin')->getUser()->createToken(env('APP_URL'))->accessToken;
+        $data = [
+            'status' => 200,
+            'token' => $token
+        ];
+    }
 	return $data;
 });
 #endregion
@@ -287,6 +293,10 @@ Route::group([], function () {
 	Route::get('/admin/article-type-create', 'Admin\ArticleTypeController@create')->name('admin.articleTypeCreate');
 	Route::get('/admin/article', 'Admin\ArticleController@index')->name('admin.article');
 	Route::get('/admin/article/create', 'Admin\ArticleController@create')->name('admin.article.create');
+
+	//配置
+    Route::get('/admin/config/create','Admin\ConfigController@create')->name('admin.config.create');
+    Route::get('/admin/config/edit','Admin\ConfigController@edit')->name('admin.config.edit');
 
 });
 #region

@@ -1,20 +1,23 @@
 @extends('layouts.front')
 <?php
-$typeArr = ['关于我们', '服务指南','新闻资讯','检测能力','网上业务','联系我们'];
+$typeArr = ['关于我们', '服务指南', '新闻资讯', '检测能力', '网上业务', '联系我们'];
 $rootId = $id;
 foreach ($typeArr as $typeName) {
 
-    $types = getTypeList($typeName, 'name');
-    if(count($types)) {
-        foreach ($types as $item) {
-            if($item['id'] == $id)
-                $rootId =  $types[0]['id'];
+	$types = getTypeList($typeName, 'name');
+	if (count($types)) {
+		foreach ($types as $item) {
+			if ($item['id'] == $id) {
+				$rootId = $types[0]['id'];
+			}
 
-        }
-    }
+		}
+	}
 }
 
 $types = getTypeList($rootId, 'id');
+$rootType = getTypeItem($rootId, 'id', $globalTypeList);
+$currentType = getTypeItem($id, 'id', $globalTypeList);
 
 ?>
 @section('content')
@@ -22,12 +25,12 @@ $types = getTypeList($rootId, 'id');
     <div class="main cl">
         <!--左侧导航 begin-->
         <div class="sub-nav pl">
-            <h2>新闻资讯<p>News</p></h2>
+            <h2>{{$rootType['name']}}</h2>
             <ul>
                 @if(count($types))
                     @foreach($types as $type)
                         @if($type['level']==2)
-                        <li class="<?=$type['id']==$id ? 'cur' :  ''?>">
+                        <li class="<?=$type['id'] == $id ? 'cur' : ''?>">
                            <a href="{{route('article_list',['type_id'=>$type['id']])}}">{{$type['name']}}</a><i class="icon i-sub-arrow"></i>
                         </li>
                         @endif
@@ -45,7 +48,7 @@ $types = getTypeList($rootId, 'id');
             @endcomponent
 
             <div class="newsWord news-company">
-                <p class="title">公司新闻</p>
+                <p class="title">{{$currentType['name']}}</p>
                 <!--搜索部分开始-->
                 <div class="researchSearch pl">
                     <!--文本框 begin-->
@@ -93,13 +96,12 @@ $types = getTypeList($rootId, 'id');
                     @endif
 
 
-
                     <!--这是翻页的开始-->
-                        {{--<div class="shzi  ">
+                        <div class="shzi   hide">
 
-                            <a href="javascript:;" class="past">&nbsp;</a>
+                            <a href="javascript:;" class="past to-prev">&nbsp;</a>
                             <span>
-                           <a href="javascript:initList(1)" data="1" class="cur-page">1</a>
+                            <a href="javascript:initList(1)" data="1" class="cur-page">1</a>
                             <a href="javascript:initList(2)">2</a>
                             <a href="javascript:initList(3)">3</a>
                             <a href="javascript:initList(4)">4</a>
@@ -151,20 +153,21 @@ $types = getTypeList($rootId, 'id');
                             </span>
 
 
-                            <a href="javascript:initList(2)" class="next">&nbsp;</a>
+                            <a href="javascript:initList(2)" class="next tp-next">&nbsp;</a>
                             &nbsp;&nbsp;&nbsp;
-                            <span>
-                            共49页
+                            共<span class="total_number">49</span>页
                             &nbsp;&nbsp;&nbsp;
                             到第
                             <input type="text" id="page" name="page" style="width: 30px;border: 1px solid #e4e4e4;">
                             页
                             &nbsp;&nbsp;&nbsp;
                             <a href="javascript:;" id="pageSubmit" style="width: 50px;">确定</a>
-                            </span>
-                        </div>--}}
+
+                        </div>
 
                 </div>
+
+                <div class="shzi   " id='xhyPage'> </div>
 
             </div>
 
@@ -172,7 +175,7 @@ $types = getTypeList($rootId, 'id');
         <!--右侧内容区 end-->
     </div>
 
-
+    <input type="hidden" name="type_id" value="{{$id}}" />
 @endsection
 
 

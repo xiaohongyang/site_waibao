@@ -37,7 +37,6 @@ class ArticleModel extends BaseModel {
 			'title' => ['required'],
 			'type_id' => ['required'],
 //			'thumb' => ['required'],
-			'content' => ['required'],
 		]);
 
 		$this->setCreateValidator($validator);
@@ -46,17 +45,17 @@ class ArticleModel extends BaseModel {
 		return $result;
 	}
 
-	public function edit($id, $title = null, $thumb = null, $type_id = null, $content = null, $file=null, $is_index=null) {
+	public function edit($id, $title = null, $thumb = null, $type_id = null, $content = null, $file = null, $is_index = null) {
 
 		$data = [
 			'id' => $id,
 		];
-		if(!is_null($file)){
-		    $data['file'] = $file;
-        }
-        if(!is_null($is_index)){
-		    $data['is_index'] = $is_index;
-        }
+		if (!is_null($file)) {
+			$data['file'] = $file;
+		}
+		if (!is_null($is_index)) {
+			$data['is_index'] = $is_index;
+		}
 		$rules = [
 			'id' => [
 				'required',

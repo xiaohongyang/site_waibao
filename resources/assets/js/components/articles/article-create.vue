@@ -1,5 +1,5 @@
 <template>
-    <div id="article-create"  >
+    <div id="article-create"  class="create-vue-wrap">
 
         <div>
             <span> 文章标题 </span>

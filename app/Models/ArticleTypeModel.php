@@ -107,6 +107,7 @@ class ArticleTypeModel extends BaseModel {
 
 	public function remove($id) {
 
+	    //1.有子类存在不能删除
 		\Validator::extend('isHasChild', function ($attribute, $value, $parameters, $validator) {
 		    $obj = \App\Models\ArticleTypeModel::where('pid', $value)->first();
 			return is_null($obj);
@@ -117,6 +118,7 @@ class ArticleTypeModel extends BaseModel {
 			    'numeric', 
 			    'exists:article_type', 
 			    'isHasChild',
+                //2. 有文章存在不能删除
 			    'removeTypeCheckArticleIsExist'
 		    ],
 		];

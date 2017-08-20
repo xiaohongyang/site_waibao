@@ -14,7 +14,6 @@ class BaseModel extends Model {
 
 	public $message;
 
-
 	public $createValidator = null;
 	public $editValidator = null;
 

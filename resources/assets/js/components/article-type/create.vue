@@ -1,5 +1,5 @@
 <template>
-    <div id="center-article-type-create"  >
+    <div id="center-article-type-create" class="create-vue-wrap" >
         <div>
             <span> 类别标题 </span>
             <span> <input type="text" id="title" v-model="title"   name="title"> </span>
@@ -12,7 +12,7 @@
 
             <span class="error"> </span> 
         </div>
-        <div>bo
+        <div>
             <span> 缩略图 </span>
             <span>
                 <input type="file" id="thumb"  v-on:change="uploadFile()" />

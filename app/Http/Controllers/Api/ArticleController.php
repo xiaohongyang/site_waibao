@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 
 class ArticleController extends BaseApiController {
 
+
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index(Request $request) {
-
 		$this->setJsonResult(0);
 
 		$articleService = new ArticleService();
@@ -38,6 +38,15 @@ class ArticleController extends BaseApiController {
 				$params['type_id'] = $type_id;
 			}
 			$result = $articleService->getPageList($page, $amount, $search, $orderColumn, $orderMethod, $params);
+			$result = $result->toArray();
+			if(is_array($result) && count($result)) {
+			    foreach ($result as $k=>$value) {
+			        $result[$k]['description'] = strip_tags($value['content']);
+			        $result[$k]['thumb'] = '/' . $result[$k]['thumb'];
+                }
+            }
+			$totalRows = $articleService->getTotalRows();
+			$this->setTotalRows($totalRows);
 			$this->setJsonResult(1, null, $result);
 			break;
 
@@ -123,8 +132,8 @@ class ArticleController extends BaseApiController {
 		$typeId = $request->get('type_id');
 		$content = $request->get('content');
 		$thumb = $request->get('thumb');
-        $file = $request->get('file');
-        $is_index = $request->get('is_index');
+		$file = $request->get('file');
+		$is_index = $request->get('is_index');
 		$articleService = new ArticleService();
 
 		$result = $articleService->edit($id, $title, $thumb, $typeId, $content, $file, $is_index);

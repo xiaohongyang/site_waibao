@@ -57,7 +57,7 @@ $(function(){
             this.nextBtn = null
             this.rangeBtn = null
             this.url = '',
-            this.dataWrapId = '#dataInfo'
+            this.dataWrapId = '#dataInfo > .tupian > ul'
             this.pageWrapId = '#xhyPage'
 
             var config = {
@@ -199,22 +199,7 @@ $(function(){
             this.updatePageHtml()
 
             //内容
-            var contentTemplate = '<div class="newsFloat"> \
-                                        <div id="div_hidden"> \
-                                            <a href="[url]" target="blank"> \
-                                                <img class="news_img" src="[thumb]" width="150px" height="92px"> \
-                                            </a> \
-                                        </div> \
-                                    <div class="go_left"> \
-                                        <a href="[url]" target="blank" \
-                                           title="[title]">[title]</a> \
-                                        <p class="time">[updated_at]</p> \
-                                        <p title="[content]"> \
-                                            [content] \
-                                        </p> \
-                                    </div> \
-                                </div>'
-
+            var contentTemplate = '<li> <div class="img1"> <div class="img2"> <a href="[thumb]" target="_blank"><img style="width:140px !important; height: 113px !important;" class="small_img"src="[thumb]"data-src="[thumb]"></a> </div> </div> <span class="hon_word">[title]</span> </li>'
             if(this.renderData.length > 0) {
                 for(var i=0; i<this.renderData.length; i++) {
                     var renderItem = this.renderData[i]

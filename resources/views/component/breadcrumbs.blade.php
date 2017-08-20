@@ -1,6 +1,6 @@
 <?php
-    use \App\Http\Helpers\TreeHelper;
-    $tree = TreeHelper::getInstance()->getPath($type_id, $globalTypeList);
+use \App\Http\Helpers\TreeHelper;
+$tree = TreeHelper::getInstance()->getPath($type_id, $globalTypeList);
 ?>
 @if(!isset($id))
 

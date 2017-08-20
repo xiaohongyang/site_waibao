@@ -11,25 +11,24 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
 
-    return $request->user();
+	return $request->user();
 });
 
 //$middleWare = ['middleware' => []];
 $groupConfig = [
-    'middleware' => ['auth:api']
+	'middleware' => ['auth:api'],
 ];
 
+Route::resource('articles', 'Api\ArticleController', ['only' => ['index']]);
+Route::group($groupConfig, function () {
 
-Route::group( $groupConfig, function(){
+	Route::resource('articles', 'Api\ArticleController', ['except' => ['index']]);
+	Route::resource('article-types', 'Api\ArticleTypeController');
+	Route::post('upload_image', 'Api\ImageController@upload')->name('upload_image');
 
-    Route::resource('articles', 'Api\ArticleController');
-    Route::resource('article-types', 'Api\ArticleTypeController');
-    Route::post('upload_image', 'Api\ImageController@upload')->name('upload_image');
+	Route::resource('config', 'Api\ConfigController');
 });
-
-
-

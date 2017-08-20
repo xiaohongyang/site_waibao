@@ -96,17 +96,8 @@
 
             <div class="row">
                 <div class="col-sm-3">
-                    <nav>
-                        <ul>
-                            <li class="list-style-none">
-                                <a href="{{route('admin.articleType')}}"  class="p-right-10 border-right-1px display-inline-block"> 类别管理 </a>
-                            </li>
-
-                            <li>
-                                <a href="{{route('admin.article')}}"> 文章管理 </a>
-                            </li>
-                        </ul>
-                    </nav>
+                    @component('component.admin_nav')
+                    @endcomponent
                 </div>
                 <div class="col-sm-9" id="layout-app">
                     <div class="bs-example" data-example-id="simple-breadcrumbs">

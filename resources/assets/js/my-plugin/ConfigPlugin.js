@@ -14,7 +14,8 @@ ConfigPlugin.install = function (Vue, options) {
             api : {
                 article_store : host + '/api/articles',
                 article_type_store : host + '/api/article-types' ,
-                 
+                config : host + '/api/config' ,
+
             },
             web : {
                 article_type_create : webHost + '/admin/article-type-create',

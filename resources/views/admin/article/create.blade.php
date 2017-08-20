@@ -11,7 +11,7 @@
 
 $breadcrumb = [
 	[
-		'link' => route('admin.articleType'),
+		'link' => route('admin.article'),
 		'text' => '文章管理',
 		'active' => false,
 	], [

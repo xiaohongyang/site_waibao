@@ -159,7 +159,7 @@ $(function(){
             wrapper.append(this.nextBtn)
 
             //总页数内容
-            var showTotalPageTemplate = '&nbsp;&nbsp;&nbsp;<span style="margin-left:30px;"></span> \
+            var showTotalPageTemplate = '&nbsp;&nbsp;&nbsp; \
                             共<span class="total_number">[totalPage]</span>页 \
                             &nbsp;&nbsp;&nbsp; \
                             到第 \

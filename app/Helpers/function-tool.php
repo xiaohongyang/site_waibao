@@ -6,43 +6,56 @@
  * Time: 9:58
  */
 
-use \App\Http\Service\ArticleTypeService;
 use App\Http\Helpers\TreeHelper;
+use \App\Http\Service\ArticleTypeService;
 
-function p ($array) {
-    dump($array, 1, '<pre>', 0);
+function p($array) {
+	dump($array, 1, '<pre>', 0);
 }
 
+function getTypeList($idOrName = 0, $type = 'id') {
 
-function getTypeList($idOrName = 0, $type='id'){
+	$id = 0;
+	$service = new ArticleTypeService();
+	if ($type != 'id') {
+		$type = $service->getModel()->where('name', $idOrName)->first();
+		if (!is_null($type)) {
+			$id = $type->id;
+		}
+	} else {
 
-    $id = 0;
-    $service = new ArticleTypeService();
-    if($type != 'id'){
-        $type = $service->getModel()->where('name', $idOrName)->first();
-        if(!is_null($type)) {
-            $id= $type->id;
+		$id = $idOrName;
+	}
+
+	$tree = $service->getTree($id);
+	$list = TreeHelper::getInstance()->conveTreeToArray($tree, 'id', 'children');
+
+	return $list;
+}
+
+function getTypeItem($idOrName = 0, $type = 'id',  $typeList=null) {
+
+    $result = null;
+
+	if(!is_null($typeList) && is_array($typeList) && count($typeList)) {
+
+	    foreach ($typeList as $row) {
+            if($type=='id' && $row['id']==$idOrName) {
+                $result = $row;
+                break;
+            } else if($row['name'] == $idOrName) {
+                $result = $row;
+                break;
+            }
         }
-    } else {
-
-        $id = $idOrName;
     }
 
-    $tree = $service->getTree($id);
-    $list = TreeHelper::getInstance()->conveTreeToArray($tree,'id','children');
-
-    return $list;
+    return $result;
 }
 
-function getTypeItem($idOrName = 0, $type='id') {
-
-
-    $service = new ArticleTypeService();
-    if($type != 'id'){
-        $type = $service->getModel()->where('name', $idOrName)->first();
-    } else {
-        $type = $service->getModel()->where('id', $idOrName)->first();
+function getShowContent($content, $type = 'Ueditor') {
+    if($type == 'Ueditor') {
+        $content = "<pre>{$content}</pre>";
     }
-
-    return $type;
+    return $content;
 }
