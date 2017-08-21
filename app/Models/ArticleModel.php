@@ -12,10 +12,10 @@ class ArticleModel extends BaseModel {
 	protected $table = 'articles';
 
 	public $fillable = [
-		'title', 'thumb', 'type_id', 'content', 'author', 'user_id', 'from_host', 'file', 'is_index',
+		'title', 'thumb', 'type_id', 'content', 'author', 'user_id', 'from_host', 'file', 'is_index', 'attach_file',
 	];
 
-	public function createParams($title, $thumb = null, $type_id = null, $content = null, $file, $is_index) {
+	public function createParams($title, $thumb = null, $type_id = null, $content = null, $file, $is_index, $attach_file) {
 
 		$title = is_null($title) ? 0 : $title;
 		$thumb = is_null($thumb) ? 0 : $thumb;
@@ -23,6 +23,7 @@ class ArticleModel extends BaseModel {
 		$content = is_null($content) ? 0 : $content;
 		$file = is_null($file) ? '' : $file;
 		$is_index = is_null($is_index) ? 0 : $is_index;
+		$attach_file = is_null($attach_file) ? '' : $attach_file;
 
 		$data = [
 			'title' => $title,
@@ -31,6 +32,7 @@ class ArticleModel extends BaseModel {
 			'thumb' => $thumb,
 			'file' => $file,
 			'is_index' => $is_index,
+			'attach_file' => $attach_file,
 		];
 
 		$validator = \Validator::make($data, [
@@ -45,7 +47,7 @@ class ArticleModel extends BaseModel {
 		return $result;
 	}
 
-	public function edit($id, $title = null, $thumb = null, $type_id = null, $content = null, $file = null, $is_index = null) {
+	public function edit($id, $title = null, $thumb = null, $type_id = null, $content = null, $file = null, $is_index = null, $attach_file = null) {
 
 		$data = [
 			'id' => $id,
@@ -78,6 +80,10 @@ class ArticleModel extends BaseModel {
 		if (!is_null($content)) {
 			$data['content'] = $content;
 			$rules['content'] = ['required'];
+		}
+		if (!is_null($attach_file)) {
+			$data['attach_file'] = $attach_file;
+			$rules['attach_file'] = ['required'];
 		}
 
 		$validator = \Validator::make($data, $rules);

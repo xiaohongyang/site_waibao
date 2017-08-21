@@ -2,23 +2,38 @@
     <div id="article-create"  class="create-vue-wrap">
 
         <div>
-            <span> 文章标题 </span>
+            <span> 文章标题： </span>
             <span> <input type="text" id="title" v-model="title"   name="title"> </span>
             <span class="error"> </span>
         </div>
         <div>
-            <span> 文章类别 </span>
+            <span> 文章类别： </span>
 
                 <type-tree-select   :selected="type_id"   v-on:changed="updateTypeId"></type-tree-select>
 
             <span class="error"> </span> 
         </div>
         <div>
-            <span> 缩略图 </span>
+            <span> 缩略图： </span>
             <span>
-                <input type="file" id="thumb"  v-on:change="uploadFile()" />
+                <a href="javascript:void(0);" class='btn btn-sm btn-primary' onclick="$(this).next('input[type=file]').trigger('click')">上传</a> 
+                <input type="file" class="hide" id="thumb"  v-on:change="uploadFile()" />
                 <img :src="thumbSrc"   style="width: 80px; height: auto"  />
             </span>
+            <span class="error"> </span>
+        </div>
+
+        <div>
+            <span> 附件： </span>
+            <span>
+
+                <a v-if="attach_file" href="javascript:void(0);" class='btn btn-sm btn-primary' onclick="$(this).next('input[type=file]').trigger('click')">重新上传</a> 
+                <a v-if="!attach_file" href="javascript:void(0);" class='btn btn-sm btn-primary' onclick="$(this).next('input[type=file]').trigger('click')">上传</a> 
+
+                <input type="file" class="hide" id="attach_file"  v-on:change="uploadAttachFile()" />
+
+                <a v-bind:href="attach_file" v-if="attach_file">下载查看</a>
+            </span>  
             <span class="error"> </span>
         </div>
         
@@ -38,7 +53,7 @@
                     <input type="checkbox" v-else @click="updateIsIndex()" > 推荐到首页
                 </label>
             </div>
-        </div>
+        </div> 
 
 
         <div>
@@ -62,6 +77,7 @@
             return {
                 token : '',
                 thumb : '',
+                attach_file : '',
                 tag : '',
                 ue : {},
                 contents : this.contentsValue,
@@ -109,6 +125,24 @@
                         }
                     })
             },
+            uploadAttachFile : function(){
+
+                var t = this
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
+                var data = new FormData();
+                var attach_file = document.getElementById('attach_file').files[0]
+
+                data.append('attach_file', attach_file);
+                data.append('directory', this.$config.directory.attach_file_directory);
+                var url = this.$config.url.api.upload_attach
+                axios.post(url, data )
+                    .then(function(json){
+                        console.log(json)
+                        if(json && json.data.file) {
+                            t.attach_file = json.data.file
+                        }
+                    })
+            },
             getEditArticle :function () {
 
                 var t = this
@@ -126,6 +160,7 @@
                                 t.thumb = data.thumb
                                 t.contents = data.content
                                 t.is_index = data.is_index
+                                t.attach_file = data.attach_file
                             }
                         })
                 }
@@ -138,6 +173,7 @@
                     thumb : this.thumb,
                     content : this.contents,
                     is_index : this.is_index,
+                    attach_file : this.attach_file,
                 }
 
                 if(this.id==0) {
@@ -169,7 +205,7 @@
 
                 
             },
-            //上传图片
+            //详情
             
             onContentsChange : function(val) {
                 this.contents = val

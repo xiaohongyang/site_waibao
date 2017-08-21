@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class ArticleController extends BaseApiController {
 
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -39,12 +38,12 @@ class ArticleController extends BaseApiController {
 			}
 			$result = $articleService->getPageList($page, $amount, $search, $orderColumn, $orderMethod, $params);
 			$result = $result->toArray();
-			if(is_array($result) && count($result)) {
-			    foreach ($result as $k=>$value) {
-			        $result[$k]['description'] = strip_tags($value['content']);
-			        $result[$k]['thumb'] = '/' . $result[$k]['thumb'];
-                }
-            }
+			if (is_array($result) && count($result)) {
+				foreach ($result as $k => $value) {
+					$result[$k]['description'] = strip_tags($value['content']);
+					$result[$k]['thumb'] = '/' . $result[$k]['thumb'];
+				}
+			}
 			$totalRows = $articleService->getTotalRows();
 			$this->setTotalRows($totalRows);
 			$this->setJsonResult(1, null, $result);
@@ -80,9 +79,10 @@ class ArticleController extends BaseApiController {
 		$thumb = $request->get('thumb', '');
 		$file = $request->get('file');
 		$is_index = $request->get('is_index');
+		$attach_file = $request->get('attach_file');
 		$articleService = new ArticleService();
 
-		$result = $articleService->create($title, $thumb, $typeId, $content, $file, $is_index);
+		$result = $articleService->create($title, $thumb, $typeId, $content, $file, $is_index, $attach_file);
 
 		$message = $result ? $articleService->getModel() : ($articleService->getMessage() ?: 'failed');
 		$this->setJsonResult($result ? 1 : 0, $message);
@@ -134,9 +134,10 @@ class ArticleController extends BaseApiController {
 		$thumb = $request->get('thumb');
 		$file = $request->get('file');
 		$is_index = $request->get('is_index');
+		$attach_file = $request->get('attach_file');
 		$articleService = new ArticleService();
 
-		$result = $articleService->edit($id, $title, $thumb, $typeId, $content, $file, $is_index);
+		$result = $articleService->edit($id, $title, $thumb, $typeId, $content, $file, $is_index, $attach_file);
 
 		$message = $result ? '更新成功' : ($articleService->getMessage() ?: '更新失败');
 		$resultData = $result ? $articleService->getModel() : [];

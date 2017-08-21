@@ -4,7 +4,8 @@ const webHost = "http://web.local"
 ConfigPlugin.install = function (Vue, options) {
     Vue.prototype.$config = {
         directory : {
-            article_directory : 'uploads/article_thumb'
+            article_directory : 'uploads/article_thumb',
+            attach_file_directory : 'uploads/attach',
         },
         host : {
             img_host : host,
@@ -15,6 +16,9 @@ ConfigPlugin.install = function (Vue, options) {
                 article_store : host + '/api/articles',
                 article_type_store : host + '/api/article-types' ,
                 config : host + '/api/config' ,
+
+                upload_image : host + '/api/upload_image' ,
+                upload_attach : host + '/api/upload_file' ,
 
             },
             web : {

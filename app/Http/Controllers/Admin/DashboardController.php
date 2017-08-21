@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DashboardController extends Controller
-{
-    //
+class DashboardController extends Controller {
+	//
 
-    public function __construct()
-    {
-        $this->middleware('auth.admin');
-    }
+	public function __construct() {
+		$this->middleware('auth.admin');
+	}
 
-    public function index(){
-        return view('admin.dashboard.index');
-    }
+	public function index() {
+		return redirect()->action('Admin\ArticleTypeController@index');
+	}
 }
