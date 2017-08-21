@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>CTI 华测检测认证集团</title>
     <link rel="stylesheet" href="/tpl/css/huace_last.css"/>
-    <link rel="stylesheet" href="/tpl/css/common_xhy.css"/>
+    <!-- <link rel="stylesheet" href="/tpl/css/common_xhy.css"/> -->
+    <link rel="stylesheet" href="/ext/css/common_xhy.css"/>
     <script type="text/javascript" src="/tpl/js/jquery.min.js"></script>
     <script type="text/javascript" src="/tpl/jwplayer/jwplayer.js"></script>
     <script src="/tpl/js/jquery.hcjc.js"></script>
@@ -202,6 +203,9 @@
 </div>
 <!--侧边栏 end-->
 <script type="text/javascript" src="/tpl/script/jquery.mousewheel.min.js"></script>
+
+<!--xhy_commonjs-->
+<script type="text/javascript" src="/ext/js/common_xhy.js"></script>
 <style>
     .footerid{ position:relative; height:132px; overflow:hidden}
     .footermain{ position:absolute;top:0px; left:0px;

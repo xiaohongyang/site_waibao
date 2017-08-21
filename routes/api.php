@@ -24,11 +24,16 @@ $groupConfig = [
 ];
 
 Route::resource('articles', 'Api\ArticleController', ['only' => ['index']]);
+Route::resource('guestbook', 'Api\GuestBookController', ['only' => ['index','store']]);
+
+
 Route::group($groupConfig, function () {
 
 	Route::resource('articles', 'Api\ArticleController', ['except' => ['index']]);
+	Route::resource('guestbook', 'Api\GuestBookController', ['except' => ['index','store']]);
 	Route::resource('article-types', 'Api\ArticleTypeController');
 	Route::post('upload_image', 'Api\ImageController@upload')->name('upload_image');
+	
 
 	Route::resource('config', 'Api\ConfigController');
 });
