@@ -10,10 +10,11 @@ class ArticleTypeModel extends BaseModel {
 
 	//展示类别  1:文章 2:图片 3:文件下载 4:单页 5:留言'
 	const SHOW_TYPE_ARTICLE = 1; //文章类别
-    const SHOW_TYPE_IMAGE = 2;  //图片类别
-    const SHOW_TYPE_UPLOAD = 3;  //文件下载
-    const SHOW_TYPE_SINGLE_PAGE = 4;  //单页
-    const SHOW_TYPE_GUEST_BOOK = 5; //留言簿
+	const SHOW_TYPE_NO_THUMB_ARTICLE = 6; //文章类别
+	const SHOW_TYPE_IMAGE = 2; //图片类别
+	const SHOW_TYPE_UPLOAD = 3; //文件下载
+	const SHOW_TYPE_SINGLE_PAGE = 4; //单页
+	const SHOW_TYPE_GUEST_BOOK = 5; //留言簿
 	//
 	protected $table = 'article_type';
 
@@ -25,10 +26,9 @@ class ArticleTypeModel extends BaseModel {
 		$sort = is_null($sort) ? 0 : $sort;
 		$content = is_null($content) ? 0 : $content;
 		$thumb = is_null($thumb) ? 0 : $thumb;
-        $show_type = is_null($show_type) ? 1 : $show_type;
+		$show_type = is_null($show_type) ? 1 : $show_type;
 
-
-        $data = [
+		$data = [
 			'name' => $name,
 			'uid' => $uid,
 			'pid' => $pid,
@@ -86,9 +86,9 @@ class ArticleTypeModel extends BaseModel {
 			$data['sort'] = $sort;
 			$rules['sort'] = ['required'];
 		}
-        if (!is_null($show_type)) {
-            $data['show_type'] = $show_type;
-        }
+		if (!is_null($show_type)) {
+			$data['show_type'] = $show_type;
+		}
 
 		if (!is_null($pid)) {
 			//父id不能为自己
@@ -107,30 +107,30 @@ class ArticleTypeModel extends BaseModel {
 
 	public function remove($id) {
 
-	    //1.有子类存在不能删除
+		//1.有子类存在不能删除
 		\Validator::extend('isHasChild', function ($attribute, $value, $parameters, $validator) {
-		    $obj = \App\Models\ArticleTypeModel::where('pid', $value)->first();
+			$obj = \App\Models\ArticleTypeModel::where('pid', $value)->first();
 			return is_null($obj);
 		});
 		$rule = [
 			'id' => [
-			    'required', 
-			    'numeric', 
-			    'exists:article_type', 
-			    'isHasChild',
-                //2. 有文章存在不能删除
-			    'removeTypeCheckArticleIsExist'
-		    ],
+				'required',
+				'numeric',
+				'exists:article_type',
+				'isHasChild',
+				//2. 有文章存在不能删除
+				'removeTypeCheckArticleIsExist',
+			],
 		];
 
 		$validator = \Validator::make(['id' => $id], $rule);
 
-		if($validator->fails()){
-		    $this->setCreateValidator($validator);
-		    return false;
-        } else {
-		    return $this->destroy($id);
-        }
+		if ($validator->fails()) {
+			$this->setCreateValidator($validator);
+			return false;
+		} else {
+			return $this->destroy($id);
+		}
 	}
 
 }

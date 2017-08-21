@@ -34,6 +34,9 @@ class ArticleController extends BaseController {
 		case ArticleTypeModel::SHOW_TYPE_ARTICLE:
 			return $this->renderArticles($id);
 			break;
+		case ArticleTypeModel::SHOW_TYPE_NO_THUMB_ARTICLE:
+			return $this->renderNoThumbArticles($id);
+			break;
 		case ArticleTypeModel::SHOW_TYPE_IMAGE:
 			return $this->renderImages($id);
 			break;
@@ -59,6 +62,16 @@ class ArticleController extends BaseController {
 		$articleService->setPrevPageListQuery($query);
 		$pageData = $articleService->getPageList(1, 9999, null, 'updated_at', 'desc');
 		return view('article.list', ['id' => $id, 'listData' => $pageData]);
+	}
+
+	protected function renderNoThumbArticles($id) {
+
+		$articleService = new ArticleService();
+		$query = $articleService->getPrevPageListQuery();
+		$query->where('type_id', $id);
+		$articleService->setPrevPageListQuery($query);
+		$pageData = $articleService->getPageList(1, 9999, null, 'updated_at', 'desc');
+		return view('article.no-thumb-list', ['id' => $id, 'listData' => $pageData]);
 	}
 
 	//单页

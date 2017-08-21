@@ -11,3 +11,21 @@
 .ana{
 	color: #fff;
 }
+
+
+
+
+
+
+/*header*/
+.i-banner .Ibtn{
+	width: 200px !important;
+}
+
+
+
+
+/**/
+.main-l table td, .main-l table th{
+	padding: 5px;
+}
