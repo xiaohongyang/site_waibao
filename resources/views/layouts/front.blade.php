@@ -1,5 +1,4 @@
-<html><!DOCTYPE html>
-<html>
+<!DOCTYPE html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -197,7 +196,7 @@
     <div class="gupiao_center"></div>
 </div>
 <!--右侧内容区 begin-->
-<!-------------->
+
 @yield('content')
 
 </div>
@@ -205,7 +204,7 @@
 <script type="text/javascript" src="/tpl/script/jquery.mousewheel.min.js"></script>
 
 <!--xhy_commonjs-->
-<script type="text/javascript" src="/ext/js/common_xhy.js"></script>
+
 <style>
     .footerid{ position:relative; height:132px; overflow:hidden}
     .footermain{ position:absolute;top:0px; left:0px;
@@ -521,7 +520,10 @@
     });
 </script>
 
+
 @yield('scripts')
+@component('component.common_xhy_js')    
+@endcomponent
 </body>
 </html>
 

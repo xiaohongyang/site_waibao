@@ -45,7 +45,7 @@ class ArticleController extends BaseController {
 			break;
 
 		case ArticleTypeModel::SHOW_TYPE_UPLOAD:
-			return $this->renderUploadFile($id);
+			return $this->renderDownFile($id);
 			break;
 
 		case ArticleTypeModel::SHOW_TYPE_GUEST_BOOK:
@@ -96,14 +96,14 @@ class ArticleController extends BaseController {
 	}
 
 	//文件下载
-	protected function renderUploadFile($id) {
+	protected function renderDownFile($id) {
 
 		$articleService = new ArticleService();
 		$query = $articleService->getPrevPageListQuery();
 		$query->where('type_id', $id);
 		$articleService->setPrevPageListQuery($query);
 		$pageData = $articleService->getPageList(1, 9999, null, 'updated_at', 'desc');
-		return view('article.list', ['id' => $id, 'listData' => $pageData]);
+		return view('article.down-file', ['id' => $id, 'listData' => $pageData]);
 	}
 
 	//留言本

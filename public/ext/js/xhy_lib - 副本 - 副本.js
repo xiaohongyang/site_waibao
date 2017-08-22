@@ -1,19 +1,83 @@
 
+
+console.log(333)
 //x_say插件
 !(function(){
 
     $(function(){
-        /*var obj = $.x_say_m({
-            cont : "dd", btnOption : { yesLabel:'退出'}, time : 2000,
-            contStyle : {
-                padding : '80px 60px 40px 60px'
-            }
-        });*/
-        /*$(document).scroll(function(){
-            (obj.border).pos();
-            (obj.cont).pos();
-        })*/
+
+        // var src = 'http://d.ifengimg.com/w1000_h380/p2.ifengimg.com/a/2017_34/fc95728b13869dd.jpg'
+
+
+        // var obj = $.x_slide_pic({
+        //     cont : " <img  class='showImage' style='display:inline-block' src='" + src + "' style='width:490px; height:190px;' />", 
+        //     btnOption : { yesLabel:'退出'}, 
+        //     time : 2111000,
+        //     contStyle : {
+        //         padding : '5px 5px 5px 5px'
+        //     }
+        // });
+        // $(document).scroll(function(){
+        //     (obj.border).pos();
+        //     (obj.cont).pos();
+        // })
     })
+
+    //图片浏览器
+    $.x_slide_pic = function(option) {
+        var opt = {
+            size : ['auto', 'auto'],
+            btn : []
+        };
+        opt = $.extend(opt, option);
+        obj = $.x_say(opt)
+        obj.border.css({
+            'top' : 0,
+            'left' : 0,
+            'width' : '100%',
+            'height' : $(window).outerHeight()
+        })
+        obj.cont.closeBtn.hide();
+        $('body').on('click','.x_say_border, .x_say_cont',function(){
+            var listener = $(this).closest('.showImage');
+            if(listener.length < 1) {
+                if($(this).closest('.x_say_cont').length < 1)
+                    obj.wrapper._del()
+            }
+        })
+
+
+        function autoResize(imageId, xhySayObj){
+            //自动以屏幕为基准缩放图片大小
+            var showWrapWidth = $(window).outerWidth() * 0.8
+            var showWrapHeight = $(window).outerHeight() * 0.8
+            var imageSrc = xhySayObj.cont.find(imageId).attr('src')
+            var img = new Image();
+            img.src = imageSrc
+            img.onload = function(){
+
+                var resultWidth
+                var resultHeight
+                var imageWidth = img.width
+                var imageHeight = img.height
+                if(imageWidth / imageHeight > showWrapWidth / showWrapHeight){
+                    resultWidth = showWrapWidth
+                    resultHeight = 'auto'
+                } else {
+                    resultWidth = 'auto'
+                    resultHeight = showWrapWidth
+                }
+
+                xhySayObj.cont.find(imageId).css({width: resultWidth, height : resultHeight})
+                xhySayObj.cont.pos()
+                xhySayObj.wrapper.pos()
+            } 
+        }
+        autoResize('.showImage', obj);
+        
+
+        return obj;
+    }
 
     $.x_alert = function(option){
         var opt = {
@@ -79,7 +143,7 @@
                 yesLabel : '确定',
                 noClass : 'btn-primary',
                 noLabel : '取消',
-                marginTop : '90px'
+                marginTop : '30px'
             }
         };
 
@@ -130,7 +194,7 @@
             if(opt.bg == true)
                 wrapper.append(bg);
 
-            $('body').append(wrapper);
+            $('body').prepend(wrapper);
         }
         var setStyle = function(){
             //样式设置
@@ -142,7 +206,8 @@
                 height : (opt.size[1] + opt.borderStyle.size) + 'px',
                 background : opt.borderStyle.bgColor,
                 opacity : opt.borderStyle.opacity,
-                'z-index' : opt.zIndex
+                'z-index' : opt.zIndex,
+                position : 'absolute'
             });
             cont.css({
                 width : opt.size[0],
@@ -150,7 +215,8 @@
                 background : opt.contStyle.bgColor,
                 'z-index' : opt.zIndex,
                 padding : opt.contStyle.padding,
-                'text-align' : opt.contStyle.textAlign
+                'text-align' : opt.contStyle.textAlign,
+                position : 'absolute'
             });
             opt.btnOption.yesClass && yes.addClass(opt.btnOption.yesClass);
             opt.btnOption.noClass && yes.addClass(opt.btnOption.noClass);
@@ -228,89 +294,7 @@
 
 })(jQuery)
 
-
-//say插件
-!(function(){
-    $.say = function(option){
-        var opt    = $.extend({
-                title : 0, // 是否有标题，有标题就会出现按钮
-                bg : 0, // 遮罩
-                cont: '弹出层',
-                border : 1, // 是否显示边框
-                timeout : 2, // 自动关闭时间 默认2s
-                style : '', 	// 可以定义为白色
-                callback : function(){}, // 关闭窗口时的回调
-                btn : ['yes', 'no'], // 按钮组
-                yes : function(){}, // 点击确定时的回调
-                no : function(){}, // 点击取消时的回调
-                typesize: 0, // 0小图标 1 大图标
-                size: {width:0, height:0}, //弹窗大小，默认为自动适应
-                type : '' // success, error, ask, not, bulb, info, news
-            }, option);
-        border  = $('<div class="ldf_say_border '+ opt.style +'"></div>');
-        type    = opt.type && opt.typesize ? 'big_'+ opt.type : opt.type;
-        width   = opt.size.width ? 'width:'+ opt.size.width +';' : '';
-        height  = opt.size.height ? 'height:'+ opt.size.height +';' : '';
-        cont    = $('<div class="ldf_say_cont" style="'+ width+height +'"><span class="'+ type +'"></span><span class="sayText">'+ opt.cont +'</span></div>');
-        bg      = $('<div class="ldf_bg"></div>');
-        titleBg = opt.type ? 't_'+opt.type : 'def';
-        title   = $('<div class="ldf_say_title '+ titleBg +'">'+ opt.title +'</div>');
-        btnCss  = opt.size.height ? 'style="width:100%;position: absolute; bottom:5px; left:0;"' : '';
-        btnArea = $('<div class="ldf_say_btnArea" '+ btnCss +'></div>'); // 如果自定义高度，那么按钮就变为绝对定位
-        yes     = $('<a class="ldf_say_btn btn yes '+ titleBg +'" href="javascript:;">确定</a>');
-        no      = $('<a class="ldf_say_btn btn no" href="javascript:;">取消</a>');
-        close		= $('<b class="ldf_say_close">×</b>');
-        timer   = null, _ldf = {};
-        (opt.btn.length ==2 && btnArea.append(yes, no)) || (opt.btn[0] == 'yes' && btnArea.append(yes)) || (opt.btn[0] == 'no' && btnArea.append(no)); // 显示按钮个数
-        if(opt.btn.length==0)
-            btnArea.hide();
-        opt.bg && $('body').append(bg) && bg.css({height:$(document).height()}); //添加背景
-        opt.title && cont.addClass('thinPad').prepend(title.append(close)).append(btnArea);//添加标题和按钮
-        opt.border && $('body').append(border.show()); //将DOM添加到body
-        $('body').append(cont.show()); //将DOM添加到body
-        cont.pos(); //让内容居中显示
-        var cw = cont.outerWidth(), cl = cont.position().left,
-            ch = cont.outerHeight(), ct = cont.position().top,
-            total = $('.ldf_say_cont').length-1; //当前弹出层个数
-        cont.css({ top: ct+40*total}); //内容位置随个数调整
-        opt.border && border.css({width:cw+20, height:ch+20, left:cl-11, top: ct-11+(40*total)}); //内容边框随着内容位置调整
-        _ldf._del = function() { //删除DOM
-            cont.animate({
-                top:$(document).scrollTop(),
-                opacity:0
-            },function(){
-                $(this).remove();
-            });
-            opt.border && border.animate({
-                top:$(document).scrollTop(),
-                opacity:0
-            },function(){
-                $(this).remove();
-            });
-            // cont.add(border).remove();
-            opt.bg && bg.remove();
-            opt.callback(); //回调函数
-        }
-        if(opt.timeout) {
-            timer = setTimeout(_ldf._del, opt.timeout*1000);
-        }
-        $('body').keyup(function(e) { // 按下esc取消
-            if(e.keyCode == 27) _ldf._del();
-        });
-        close.on('click', function(){ // 关闭
-            _ldf._del();
-        });
-        yes.on('click', function(){
-            opt.yes(_ldf, yes);
-            // _ldf.del();
-        });
-        no.on('click', function(){
-            opt.no(_ldf, no);
-            _ldf._del();
-        });
-        return this;
-    };
-})(jQuery);
+ 
 /**
  * 元素居中
  * @return {[type]} [description]
@@ -903,16 +887,16 @@ function MultiRegionPicker(opt) {
 MultiRegionPicker.prototype = {
     constructor : MultiRegionPicker,
     init : function(opt) {
-        this.picker 	= opt.picker;
-        this.displayer 	= opt.displayer;
+        this.picker     = opt.picker;
+        this.displayer  = opt.displayer;
         this.regionName = opt.regionName;
         this.btn        = opt.btn;
 
-        this.$picker 	= $(this.picker);
+        this.$picker    = $(this.picker);
         this.$displayer = $(this.displayer);
-        this.$btn 		= $(this.btn);
+        this.$btn       = $(this.btn);
 
-        var that 		= this;
+        var that        = this;
 
         this.$picker.click(function(e){that.clickController(e);return false;});
         this.$btn.   click(function(){
@@ -931,7 +915,7 @@ MultiRegionPicker.prototype = {
 
         var target  = e.target,$target = $(target),_this   = this;
 
-        if (target.className.indexOf('unfile') !== -1) { 		// 弹出框事件
+        if (target.className.indexOf('unfile') !== -1) {        // 弹出框事件
             $target.closest('ul').find('ul:visible').addClass('dn').end().find('.light').removeClass('light');
             $target.siblings('ul').children('.line').width($target.parent().width()-4);
 
@@ -942,7 +926,7 @@ MultiRegionPicker.prototype = {
             $target.parent().children('.dn').removeClass('dn').end().addClass('light');
             return false;
         }
-        if (target.className.indexOf('root') !== -1) { 			// 全国单击事件
+        if (target.className.indexOf('root') !== -1) {          // 全国单击事件
             if (target.className.indexOf('checked') == -1) {
                 this.$picker.find('.uncheck').addClass('checked');
                 this.$displayer.html('').append('<span class="r1"><input type="hidden" name="'+this.regionName+'[]" value="r1">全国</span>');
@@ -953,7 +937,7 @@ MultiRegionPicker.prototype = {
             return false;
         }
 
-        if (target.className.indexOf('area_name') !== -1) { 	// 大区单击事件
+        if (target.className.indexOf('area_name') !== -1) {     // 大区单击事件
             this._commonAction(target, '.area');
             this.rootUpdate(this.$picker);
             return false;
@@ -964,7 +948,7 @@ MultiRegionPicker.prototype = {
             return false;
         }
 
-        if (target.className.indexOf('city_name') !== -1) { 	// 城市单击事件
+        if (target.className.indexOf('city_name') !== -1) {     // 城市单击事件
             $target.parent().siblings().find('ul.country:visible').addClass('dn').end().removeClass('light');
             this._commonAction(target, '.city_item');
             this.provinceUpdate($target.closest('.province'));
@@ -997,11 +981,11 @@ MultiRegionPicker.prototype = {
     provinceUpdate : function($root) {
 
         var checkedNum = 0;
-        $root.find('.city_item .checkedNum').each(function(){	// 省下区/县 计数
+        $root.find('.city_item .checkedNum').each(function(){   // 省下区/县 计数
             var n = this.innerHTML.match(/(\d+)/);
             checkedNum += n ? parseInt(n[1]) : 0;
         });
-        $root.find('.city_name').each(function(){				// 省下市 计数
+        $root.find('.city_name').each(function(){               // 省下市 计数
             $(this).hasClass('checked') && (checkedNum++);
         });
         checkedNum = !!checkedNum ? '('+checkedNum+')' : '';
@@ -1015,7 +999,7 @@ MultiRegionPicker.prototype = {
     cityUpdate : function($root) {
 
         var checkedNum = 0;
-        $root.find('.country_name').each(function(){			// 市下区/县 计数
+        $root.find('.country_name').each(function(){            // 市下区/县 计数
             $(this).hasClass('checked') && (++checkedNum);
         });
         checkedNum = !!checkedNum ? '('+checkedNum+')' : '';
@@ -1030,7 +1014,7 @@ MultiRegionPicker.prototype = {
         var _this = this;
         if (target.className.indexOf('checked') == -1) {
             $target.closest(haystack).find('.uncheck').addClass('checked')
-                .end().find('.checkedNum').html('');	//清除checkedNum,因为都选中了呀
+                .end().find('.checkedNum').html('');    //清除checkedNum,因为都选中了呀
             // reset
             $target.closest(haystack).find('.checked').each(function() {
                 _this.$displayer.find('.' + this.id).remove();
@@ -1077,4 +1061,3 @@ MultiRegionPicker.prototype = {
     }
 
 };
-
