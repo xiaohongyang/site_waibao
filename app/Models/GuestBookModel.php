@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GuestBookModel extends BaseModel
 {
+
+    const TYPE_GUESTBOOK = 1;
+    const TYPE_SURVEY = 2;
+
+    public static function getTypes(){
+        return [
+            1 => '留言本',
+            2 => '调查表'
+        ];
+    }
+
     //
     use SoftDeletes;
     protected $table = 'guest_book';
@@ -20,8 +31,19 @@ class GuestBookModel extends BaseModel
     	'column010'
     ];
 
+    private $type_id;
+    public function setTypeId($typeId){
+        $typeId = is_null($typeId) ? self::TYPE_GUESTBOOK;
+        $this->type_id = $typeId;
+    }
+    public function getTypeId(){
+        return $this->type_id;
+    }
+
 
     public function createParams($column01, $column02, $column03, $column04, $column05, $column10){
+
+        $typeId = is_null($this->getTypeId()) ? self::TYPE_GUESTBOOK : $this->getTypeId();
 
          
         $data = [
@@ -31,6 +53,7 @@ class GuestBookModel extends BaseModel
             'column04' => $column04,
             'column05' => $column05,
             'column10' => $column10,
+            'type_id' => $typeId
         ];
 
         $rule = [
@@ -56,12 +79,15 @@ class GuestBookModel extends BaseModel
             ],
         ];
 
+        $type_id = $this->getTypeId();
+
         if(!is_null($column01)) {$data['column01'] = $column01; }
         if(!is_null($column02)) {$data['column02'] = $column02; }
         if(!is_null($column03)) {$data['column03'] = $column03; }
         if(!is_null($column04)) {$data['column04'] = $column04; }
         if(!is_null($column05)) {$data['column05'] = $column05; }
         if(!is_null($column10)) {$data['column10'] = $column10; }
+        if(!is_null($type_id)) {$data['type_id'] = $type_id; }
 
         $validator = \Validator::make($data, $rules);
 
