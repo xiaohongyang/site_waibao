@@ -124,6 +124,7 @@ $(function(){
                         'content' : data.data[i]['description'].substr(0, 70),
                         'thumb' : data.data[i]['thumb'],
                         'updated_at' : data.data[i]['updated_at'],
+                        'attach_file' : '/' + data.data[i]['attach_file'],
                     })
                 }
             }
@@ -199,18 +200,13 @@ $(function(){
             this.updatePageHtml()
 
             //内容
-            var contentTemplate = '<div class="newsFloat"> \
-                                        <div id="div_hidden"> \
-                                        </div> \
-                                    <div class="go_left"> \
-                                        <a href="[url]" target="blank" \
-                                           title="[title]">[title]</a> \
-                                        <a href="[attach_file]" class="down-file" target="blank" \
-                                           title="[attach_file]">下载</a> \
-                                    </div> \
-                                </div>'
+            var contentTemplate = '<div class="download"><span><i></i> [title]</span><a target="_blank" \
+            href="[attach_file]">点击下载</a></div>'
 
             if(this.renderData.length > 0) {
+
+                console.log('renderData .....................')
+                console.log(this.renderData)
                 for(var i=0; i<this.renderData.length; i++) {
                     var renderItem = this.renderData[i]
                     var url = '/detail/' + renderItem['id']

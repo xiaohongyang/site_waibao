@@ -80,17 +80,7 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
                     @if(count($listData))
                         @foreach($listData as $row)
                         <div class="newsFloat">
-                            <div id="div_hidden"><a href="{{route('article_detail', ['id'=>$row['id']])}}" target="blank"><img
-                                            class="news_img" src="/{{$row['thumb']}}" width="150px"
-                                            height="92px"></a></div>
-                            <div class="go_left">
-                                <a href="{{route('article_detail', ['id'=>$row['id']])}}" target="blank"
-                                   title="华测检测成为CCC认证玩具指定实验室">{{$row['title']}}</a>
-                                <p class="time">{{$row['updated_at']}}}</p>
-                                <p title="{{$row['content']}}">
-                                    {{mb_substr(strip_tags($row['content']), 0, 70)}}...
-                                </p>
-                            </div>
+
                         </div>
                         @endforeach
                     @endif
@@ -181,5 +171,5 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
 
 @section('scripts')
     <script type="text/javascript" src="/ext/js/down-file.js"> </script>
-    
+
 @endsection

@@ -199,7 +199,7 @@ $(function(){
             this.updatePageHtml()
 
             //内容
-            var contentTemplate = '<li> <div class="img1"> <div class="img2"> <a href="[thumb]" target="_blank"><img style="width:140px !important; height: 113px !important;" class="small_img"src="[thumb]"data-src="[thumb]"></a> </div> </div> <span class="hon_word">[title]</span> </li>'
+            var contentTemplate = '<li> <div class="img1"> <div class="img2"> <a href="javascript:void(0);" onclick="slidePic(\'[thumb]\')" target="_blank"><img style="width:140px !important; height: 113px !important;" class="small_img"src="[thumb]"data-src="[thumb]"></a> </div> </div> <span class="hon_word">[title]</span> </li>'
             if(this.renderData.length > 0) {
                 for(var i=0; i<this.renderData.length; i++) {
                     var renderItem = this.renderData[i]

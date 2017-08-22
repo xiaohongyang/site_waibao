@@ -468,7 +468,7 @@
     });
 </script>
 <script type="text/javascript">
-    var thePlayer;  //保存当前播放器以便操作     
+    var thePlayer;  //保存当前播放器以便操作
     $(function(){
         var url ="";
         url+='/upload/media/fronts/2016/20160711/201607111704319165.mp4' ;
@@ -522,7 +522,7 @@
 
 
 @yield('scripts')
-@component('component.common_xhy_js')    
+@component('component.common_xhy_js')
 @endcomponent
 </body>
 </html>

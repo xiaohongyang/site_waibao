@@ -1,27 +1,43 @@
 <script type="text/javascript" >
-    
 
+
+var slidePic = function(picSrc,opacity) {
+
+    var config = {
+        cont : " <img  class='showImage' style='display:inline-block' src='" + picSrc + "'   />",
+        btnOption : { yesLabel:'退出'},
+        time : 60000000,
+        contStyle : {
+            padding : '5px 5px 5px 5px'
+        }
+    }
+    if(typeof opacity != 'undefined')
+        config.borderStyle = {opacity : opacity}
+    var obj = $.x_slide_pic(config);
+}
 
 //x_say插件
 !(function(){
 
     $(function(){
 
-        var src = 'http://d.ifengimg.com/w1000_h380/p2.ifengimg.com/a/2017_34/fc95728b13869dd.jpg'
-
 
         // var obj = $.x_slide_pic({
-        //     cont : " <img  class='showImage' style='display:inline-block' src='" + src + "' style='width:490px; height:190px;' />", 
-        //     btnOption : { yesLabel:'退出'}, 
+        //     cont : " <img  class='showImage' style='display:inline-block' src='" + src + "' style='width:490px; height:190px;' />",
+        //     btnOption : { yesLabel:'退出'},
         //     time : 2111000,
         //     contStyle : {
         //         padding : '5px 5px 5px 5px'
         //     }
         // });
-        
+
+        // var obj;
+
         $(document).scroll(function(){
-            (obj.border).pos();
-            (obj.cont).pos();
+            if (typeof obj != 'undefined' && obj.hasOwnProperty('border')) {
+                (obj.border).pos();
+                (obj.cont).pos();
+            }
         })
     })
 
@@ -29,6 +45,7 @@
     $.x_slide_pic = function(option) {
         var opt = {
             size : ['auto', 'auto'],
+            borderStyle : {opacity : 0.7},
             btn : []
         };
         opt = $.extend(opt, option);
@@ -37,7 +54,7 @@
             'top' : 0,
             'left' : 0,
             'width' : '100%',
-            'height' : $(window).outerHeight()
+            'height' : $(document).outerHeight()
         })
         obj.cont.closeBtn.hide();
         $('body').on('click','.x_say_border, .x_say_cont',function(){
@@ -62,21 +79,23 @@
                 var resultHeight
                 var imageWidth = img.width
                 var imageHeight = img.height
-                if(imageWidth / imageHeight > showWrapWidth / showWrapHeight){
+
+                if(imageWidth > imageHeight){
                     resultWidth = showWrapWidth
                     resultHeight = 'auto'
                 } else {
                     resultWidth = 'auto'
-                    resultHeight = showWrapWidth
+                    resultHeight = showWrapHeight
                 }
+
 
                 xhySayObj.cont.find(imageId).css({width: resultWidth, height : resultHeight})
                 xhySayObj.cont.pos()
                 xhySayObj.wrapper.pos()
-            } 
+            }
         }
         autoResize('.showImage', obj);
-        
+
 
         return obj;
     }
@@ -296,7 +315,7 @@
 
 })(jQuery)
 
- 
+
 /**
  * 元素居中
  * @return {[type]} [description]

@@ -159,7 +159,12 @@ $(function(){
 			$nav = 	$('.main_by1'), 
 			$showElement = $nav.find('.show_ul'),
 			$aList = $nav.find('.choose1').children('a'); 
+
 		    $aList.on('mouseover',function(){
+
+		    	if($(this).closest('.choose1').find('a').length<=1)
+		    		return;
+
 				$aList.eq(index).removeClass('cur');
 				$showElement.eq(index).hide();
 				index =  $aList.index($(this));

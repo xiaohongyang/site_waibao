@@ -3,14 +3,51 @@
 .nav-w .nav .sub_nav_child{
     height: 170px !important;
 }
-
-.select .selected .select-input{
-    height: 32px;
-}
-
+ 
 .ana{
-  color: #fff;
+  background: #fff;
+  color: #ABCF4D;
 }
+.ana:hover{
+  background: #eee;
+}
+
+
+/*首页*/
+.index_tree li{
+  width: 165px !important;
+}
+
+
+/*留言本*/
+table.bordered, table.bordered td, table.bordered th{
+  border: 1px solid #ccc !important;  
+}
+
+table.bordered input[type="button" i], table.bordered input[type="submit" i], table.bordered input[type="reset" i], table.bordered input[type="file" i]::-webkit-file-upload-button, button {
+    padding: 1px 6px;
+}
+user agent stylesheet
+table.bordered input[type="button" i], table.bordered input[type="submit" i], table.bordered input[type="reset" i], table.bordered input[type="file" i]::-webkit-file-upload-button, button {
+    align-items: flex-start;
+    text-align: center;
+    cursor: default;
+    color: buttontext;
+    background-color: buttonface;
+    box-sizing: border-box;
+    padding: 2px 6px 3px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+}
+user agent stylesheet
+table.bordered input[type="button" i], table.bordered input[type="submit" i], table.bordered input[type="reset" i] {
+    -webkit-appearance: push-button;
+    user-select: none;
+    white-space: pre;
+}
+
 
 
 

@@ -551,11 +551,11 @@ span.cur{display:inline-block;}
 .recourceApply .so_app_left .reso_app_sea{background:url(../image/button.png) no-repeat;height:54px;position:relative;}
 .recourceApply .so_app_left .anniuTwo{position:absolute;top:10px;left:15px;}
 .recourceApply .so_app_left .se_three{position:absolute;top:10px;left:290px;}
-.recourceApply .so_app_left .download{height:50px;line-height:50px;border-bottom:1px #f1f1f1 solid;font-size:14px;color:#666666;}
-.recourceApply .so_app_left .download span{float:left; width:440px;overflow:hidden;height:50px;}
-.recourceApply .so_app_left .download a{color:#abcf4d;float:right;margin-right:10px;}
-.recourceApply .so_app_left .download a:hover{color:#749915;}
-.recourceApply .so_app_left .download i{background:url(../image/have.png) no-repeat;width:10px;height:9px;display:inline-block;margin-right:20px;margin-left:10px;}
+.download{height:50px;line-height:50px;border-bottom:1px #f1f1f1 solid;font-size:14px;color:#666666;}
+.download span{float:left; width:440px;overflow:hidden;height:50px;}
+.download a{color:#abcf4d;float:right;margin-right:10px;}
+.download a:hover{color:#749915;}
+.download i{background:url(../image/have.png) no-repeat;width:10px;height:9px;display:inline-block;margin-right:20px;margin-left:10px;}
 .recourceApply .so_app_left .shuzi{clear:both;margin-top:48px;text-align:right;}
 .recourceApply .so_app_left .anniu{background:none;top:-3px;left:260px;}
 .recourceApply .so_app_left .anInput.free-input input{background-color:white;padding-left:12px;}

@@ -54,6 +54,9 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+
+                        <li><a href="/">网站前台</a></li>
+
                         <!-- Authentication Links -->
                         @if (Auth::guard('admin')->guest())
                             <li><a href="{{ route('login') }}">Login</a></li>

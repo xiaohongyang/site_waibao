@@ -114,7 +114,7 @@ class ArticleController extends BaseController {
 		$query->where('type_id', $id);
 		$articleService->setPrevPageListQuery($query);
 		$pageData = $articleService->getPageList(1, 9999, null, 'updated_at', 'desc');
-		return view('article.list', ['id' => $id, 'listData' => $pageData]);
+		return view('article.guest-book', ['id' => $id, 'listData' => $pageData]);
 	}
 
 	public function detail($id) {

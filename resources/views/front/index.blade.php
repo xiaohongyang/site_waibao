@@ -1,6 +1,6 @@
 @extends('layouts.front')
 <?php
-        $a = "abc";
+$a = "abc";
 ?>
 
 
@@ -193,7 +193,62 @@
 
 
         </div>
-        <div class="float main_three">
+
+
+        <div class="float index_tree no_marginLeft float1" id="show_ul" style="width:235px; margin-left: 20px">
+            <div class="choose choose1"><a id="service_list" href="javascript:;" class="cur border_radius_left">按行业</a> </div>
+            <div class="show_ul cur cl">
+                <div class="show_ul_wrap cl">
+                    <li><i></i><a href="#" title="电子电气">
+                            电子电气</a></li>
+
+                    <li><i></i><a href="#" title="船舶">
+                            船舶</a></li>
+
+                    <li><i></i><a href="#" title="计量校准及尺寸">
+                            计量校准及尺寸</a></li>
+
+                    <li><i></i><a href="#" title="食品药品农产品及保化">
+                            食品药品农产品及保化</a></li>
+
+                    <li><i></i><a href="#" title="轻工及玩具">
+                            轻工及玩具</a></li>
+
+                    <li><i></i><a href="#" title="汽车材料及零部件">
+                            汽车材料及零部件</a></li>
+
+                    <li><i></i><a href="#" title="纺织品、鞋类及皮革">
+                            纺织品、鞋类及皮革</a></li>
+
+                    <li><i></i><a href="#" title="建材与工程">
+                            建材与工程</a></li>
+
+                    <li><i></i><a href="#" title="金属材料及零部件">
+                            金属材料及零部件</a></li>
+
+                    <li><i></i><a href="#" title="新能源风电">
+                            新能源风电</a></li>
+
+                    <li><i></i><a href="#" title="半导体及相关领域">
+                            半导体及相关领域</a></li>
+
+                    <li><i></i><a href="#" title="奢侈品">
+                            奢侈品</a></li>
+
+                    <li><i></i><a href="#" title="电子商务">
+                            电子商务</a></li>
+
+                    <li><i></i><a href="#" title="生物医学">
+                            生物医学</a></li>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="float main_three hide">
 
 
             <!--登录框-->
