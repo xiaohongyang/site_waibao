@@ -33,7 +33,7 @@ class GuestBookModel extends BaseModel
 
     private $type_id;
     public function setTypeId($typeId){
-        $typeId = is_null($typeId) ? self::TYPE_GUESTBOOK;
+        $typeId = is_null($typeId) ? self::TYPE_GUESTBOOK : $typeId;
         $this->type_id = $typeId;
     }
     public function getTypeId(){
