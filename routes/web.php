@@ -171,12 +171,12 @@ Route::get('getToken', function (\Illuminate\Http\Request $request) {
 			'token' => $token,
 		];
 	} else if (!Auth::guard('admin')->guest()) {
-        $token = Auth::guard('admin')->getUser()->createToken(env('APP_URL'))->accessToken;
-        $data = [
-            'status' => 200,
-            'token' => $token
-        ];
-    }
+		$token = Auth::guard('admin')->getUser()->createToken(env('APP_URL'))->accessToken;
+		$data = [
+			'status' => 200,
+			'token' => $token,
+		];
+	}
 	return $data;
 });
 #endregion
@@ -295,8 +295,11 @@ Route::group([], function () {
 	Route::get('/admin/article/create', 'Admin\ArticleController@create')->name('admin.article.create');
 
 	//配置
-    Route::get('/admin/config/create','Admin\ConfigController@create')->name('admin.config.create');
-    Route::get('/admin/config/edit','Admin\ConfigController@edit')->name('admin.config.edit');
+	Route::get('/admin/config/create', 'Admin\ConfigController@create')->name('admin.config.create');
+	Route::get('/admin/config/edit', 'Admin\ConfigController@edit')->name('admin.config.edit');
+
+	//留言s
+	Route::get('/admin/guestbook/index', 'Admin\GuestbookController@index')->name('admin.guestbook.index');
 
 });
 #region

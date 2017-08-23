@@ -1,71 +1,77 @@
 <?php
-    $articleTypeActive = '';
+$articleTypeActive = '';
 
-    $routeName = Route::currentRouteName();
-    $routeValue = route($routeName);
+$routeName = Route::currentRouteName();
+$routeValue = route($routeName);
 
-    if(in_array($routeName, [
-        'admin.articleType',
-        'admin.articleTypeCreate',
-    ])) {
-        $articleTypeActive = 'active';
-    }
+if (in_array($routeName, [
+	'admin.articleType',
+	'admin.articleTypeCreate',
+])) {
+	$articleTypeActive = 'active';
+}
 
-    function setActiveNavClass($navArr, $routeValue, $className = 'active'){
-        foreach ($navArr as $key_01 => $lavel_01) {
-            $link_01 = key_exists('link', $lavel_01) ? $lavel_01['link'] : '';
-            $navArr[$key_01]['activeClass'] = '';
-            if($link_01 == $routeValue) {
-                $navArr[$key_01]['activeClass'] = $className;
-                break;
-            }
-            if(key_exists('children', $lavel_01) && count($lavel_01['children'])) {
-                foreach ($lavel_01['children'] as $key_02 => $lavel_02) {
-                    $link_02 = key_exists('link', $lavel_02) ? $lavel_02['link'] : '';
-                    if($link_02 == $routeValue){
-                        $navArr[$key_01]['activeClass'] = $className;
-                        $navArr[$key_01]['children'][$key_02]['activeClass'] = $className;
-                        break 2;
-                    }
-                }
-            }
-        }
-        return $navArr;
-    }
+function setActiveNavClass($navArr, $routeValue, $className = 'active') {
+	foreach ($navArr as $key_01 => $lavel_01) {
+		$link_01 = key_exists('link', $lavel_01) ? $lavel_01['link'] : '';
+		$navArr[$key_01]['activeClass'] = '';
+		if ($link_01 == $routeValue) {
+			$navArr[$key_01]['activeClass'] = $className;
+			break;
+		}
+		if (key_exists('children', $lavel_01) && count($lavel_01['children'])) {
+			foreach ($lavel_01['children'] as $key_02 => $lavel_02) {
+				$link_02 = key_exists('link', $lavel_02) ? $lavel_02['link'] : '';
+				if ($link_02 == $routeValue) {
+					$navArr[$key_01]['activeClass'] = $className;
+					$navArr[$key_01]['children'][$key_02]['activeClass'] = $className;
+					break 2;
+				}
+			}
+		}
+	}
+	return $navArr;
+}
 
+$navArr = [
+	[
+		'name' => '网站配置',
+		'link' => route('admin.config.edit'),
+	],
+	[
+		'name' => '类别管理',
+		'children' => [
+			[
+				'name' => '类别列表',
+				'link' => route('admin.articleType'),
+			], [
+				'name' => '类别创建',
+				'link' => route('admin.articleTypeCreate'),
+			],
+		],
+	], [
+		'name' => '文章管理',
+		'children' => [
+			[
+				'name' => '文章列表',
+				'link' => route('admin.article'),
+			], [
+				'name' => '文章创建',
+				'link' => route('admin.article.create'),
+			],
+		],
+	], [
+		'name' => '留言管理',
+		'children' => [
+			[
+				'name' => '留言列表',
+				'link' => route('admin.guestbook.index'),
+			],
+		],
+	],
+];
 
-    $navArr= [
-        [
-            'name' => '网站配置',
-            'link' => route('admin.config.edit')
-        ],
-        [
-            'name' => '类别管理',
-            'children' => [
-                [
-                    'name' => '类别列表',
-                    'link' => route('admin.articleType'),
-                ],[
-                    'name' => '类别创建',
-                    'link' => route('admin.articleTypeCreate'),
-                ],
-            ]
-        ],[
-            'name' => '文章管理',
-            'children' => [
-                [
-                    'name' => '文章列表',
-                    'link' => route('admin.article'),
-                ],[
-                    'name' => '文章创建',
-                    'link' => route('admin.article.create'),
-                ],
-            ]
-        ],
-    ];
-
-
-    $navArr = setActiveNavClass($navArr, $routeValue);
+$navArr = setActiveNavClass($navArr, $routeValue);
 ?>
 
 <nav class="xhy-nav bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">

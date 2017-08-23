@@ -43,6 +43,8 @@ Vue.component('article-create', require("./components/articles/article-create.vu
 Vue.component('config-create', require("./components/config/config-create.vue"))
 Vue.component('config-edit', require("./components/config/config-edit.vue"))
 
+Vue.component('guestbook-index', require("./components/guestbook/guestbook-index.vue"))
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

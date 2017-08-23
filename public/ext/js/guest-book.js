@@ -21,11 +21,17 @@ $(function(){
         var url = '/api/guestbook'
         $.ajax({
             url : url,
-            type : 'PUT',
+            data : data,
+            type : 'POST',
             dataType : 'json',
             success : function(json) {
 
-                console.log(json)
+                if(json.status == 1) {
+                    $.fn.xhyAlert.show('留言成功')
+                } else {
+                    $.fn.xhyAlert.show('留言失败')
+
+                }
             }
         })
     }

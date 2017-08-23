@@ -20,6 +20,8 @@ ConfigPlugin.install = function (Vue, options) {
                 upload_image : host + '/api/upload_image' ,
                 upload_attach : host + '/api/upload_file' ,
 
+                guestbook : host + '/api/guestbook',
+
             },
             web : {
                 article_type_create : webHost + '/admin/article-type-create',

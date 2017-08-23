@@ -4,27 +4,46 @@
         <div class="row">
 
             <div class="margin-column">
-
-                <button type=button class="btn btn-danger" @click="$goto($config.url.web.article_create)">
-                    <span class="glyphicon glyphicon-plus"></span>新建
-                </button>
+ 
 
                 <button type=button class="btn btn-danger hide">
                     删除
                 </button>
             </div>
-
-             
-            <div id="datatable_filter" class="dataTables_filter type_filter"  > 
-                <label>选择类别:</label>
-                <type-tree-select   :selected="type_id"    v-on:changed="setTypeId"></type-tree-select>
-            </div>
+ 
 
 
             <table class="table table-bordered" id='datatable'> 
             </table>
         </div>
 
+        <div class="row hide">
+            <nav aria-label="Page navigation">
+              <ul class="pagination">
+
+                <li>
+                  <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li><a href="#"><</a></li>
+
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+
+                <li><a href="#">></a></li>
+                <li>
+                  <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+        </div>
+        
 
     </div>
 </template>
@@ -38,14 +57,14 @@
         data : function(){
             return {
                 data : [],
-                columns : ['id', 'title','type','created_at', 'updated_at'],
-                showColumns : ['id', 'title','type','created_at', 'updated_at'],
+                columns : ['id', 'columne01','column02','column03','column04','column05','column10','created_at', 'updated_at'],
+                showColumns : ['id', 'columne01','column02','column03','column04','column05','column10','created_at', 'updated_at'],
                 tag : '',
                 ue : {}, 
                 columnsHeader : [], 
                 contents : this.contentsValue,
                 title : this.titleValue,
-                type_id : 0,
+                type_id : 1,
                 datatable_obj : [],
             }
         },
@@ -56,7 +75,6 @@
                 '标题',
                 '类别 ',
                 '创建日期',
-                '更新日期',
             ]
         },
 
@@ -91,7 +109,7 @@
 
                 var data = new FormData();
                 var t = this
-                var url = t.$config.url.api.article_store
+                var url = t.$config.url.api.guestbook
                 url = url + '?case=page&type_id=' + t.type_id
                 axios.get( url, data )
                     .then(function(json){
@@ -101,7 +119,7 @@
   
                             t.data = json.data.data
                             var dataSet = [];
-                            var showColumns = ['id', 'title','type','created_at', 'updated_at']
+                            var showColumns = ['id', 'columne01','column02','column03','column04','column05','column10','created_at', 'updated_at']
                             if(t.data.length > 0) {
                                 
                                 /*
@@ -129,14 +147,17 @@
                                 data: dataSet,
                                 columns: [
                                     { data : 'id', "title" : "标题"},
-                                    { data : 'title', "title" : "标题"},
+                                    { data : 'column01', "title" : "主题"},
+                                    { data : 'column02', "title" : "公司名称"},
+                                    { data : 'column03', "title" : "姓名"},
+                                    { data : 'column04', "title" : "电话"},
+                                    { data : 'column05', "title" : "电邮"},
+                                    { data : 'column10', "title" : "内容"},
                                     { data : 'created_at', "title" : "添加日期"},
-                                    { data : 'updated_at', "title" : "更新日期"},
                                     {
                                         orderable: false, title: '操作', className: 'page-numeric', render: function (data, type, row) {
 
-                                            var editUrl = t.$config.url.web.article_create
-                                            var editStr = '<a class="btn btn-sm btn-default" href="' + editUrl + '?id='+ row['id'] + '" title="编辑"><span class="glyphicon glyphicon-pencil"></span></a>';
+                                            var editStr = '';
  
                                             editStr = editStr +
                                                 '<button class="btn btn-sm btn-default"  onclick="$.fn.remove(' + row['id'] + ')" title="删除"><span class="glyphicon glyphicon-remove"></span></button> ';
@@ -184,26 +205,12 @@
                 this.type_id=newValue 
                 this.getListData(true)
             },
-            submit : function(){
-                var data = {
-                    name : this.title,
-                    pid : 0,
-                    thumb : this.thumb,
-                    content : this.contents
-                }
-
-                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
-                axios.post(this.$config.url.api.article_type_store, data)
-                    .then(function(json) {
-                        console.log(json)
-                    })
-            },
             remove : function(id) {
                 if(typeof id == 'undefined')
                     return false;
                 var t = this
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
-                axios.delete(this.$config.url.api.article_store + '/' + id)
+                axios.delete(this.$config.url.api.guestbook + '/' + id)
                     .then(function(json) {
                         var message = t.$msgBag2String(json.data.message)
                         t.$alert(message)

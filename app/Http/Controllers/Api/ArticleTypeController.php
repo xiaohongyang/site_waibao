@@ -56,6 +56,7 @@ class ArticleTypeController extends BaseApiController {
 				['id' => 3, 'name' => '文件下载'],
 				['id' => 4, 'name' => '单页'],
 				['id' => 5, 'name' => '留言'],
+				['id' => 7, 'name' => '调查表'],
 			];
 			$this->setJsonResult(1, 'ok', $data);
 			break;

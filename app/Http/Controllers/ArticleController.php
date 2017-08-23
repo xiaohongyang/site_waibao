@@ -51,6 +51,10 @@ class ArticleController extends BaseController {
 		case ArticleTypeModel::SHOW_TYPE_GUEST_BOOK:
 			return $this->renderGuestBook($id);
 			break;
+
+		case ArticleTypeModel::SHOW_TYPE_SURVEY:
+			return $this->renderSurvey($id);
+			break;
 		}
 	}
 
@@ -115,6 +119,17 @@ class ArticleController extends BaseController {
 		$articleService->setPrevPageListQuery($query);
 		$pageData = $articleService->getPageList(1, 9999, null, 'updated_at', 'desc');
 		return view('article.guest-book', ['id' => $id, 'listData' => $pageData]);
+	}
+
+	//调查表
+	protected function renderSurvey($id) {
+
+		$articleService = new ArticleService();
+		$query = $articleService->getPrevPageListQuery();
+		$query->where('type_id', $id);
+		$articleService->setPrevPageListQuery($query);
+		$pageData = $articleService->getPageList(1, 9999, null, 'updated_at', 'desc');
+		return view('article.survey', ['id' => $id, 'listData' => $pageData]);
 	}
 
 	public function detail($id) {

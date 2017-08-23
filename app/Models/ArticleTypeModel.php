@@ -10,11 +10,12 @@ class ArticleTypeModel extends BaseModel {
 
 	//展示类别  1:文章 2:图片 3:文件下载 4:单页 5:留言'
 	const SHOW_TYPE_ARTICLE = 1; //文章类别
-	const SHOW_TYPE_NO_THUMB_ARTICLE = 6; //文章类别
+	const SHOW_TYPE_NO_THUMB_ARTICLE = 6; //无图片文章
 	const SHOW_TYPE_IMAGE = 2; //图片类别
 	const SHOW_TYPE_UPLOAD = 3; //文件下载
 	const SHOW_TYPE_SINGLE_PAGE = 4; //单页
 	const SHOW_TYPE_GUEST_BOOK = 5; //留言簿
+	const SHOW_TYPE_SURVEY = 7; //调查
 	//
 	protected $table = 'article_type';
 

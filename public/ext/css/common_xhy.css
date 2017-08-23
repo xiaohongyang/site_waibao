@@ -21,6 +21,7 @@
 
 /*留言本*/
 table.bordered, table.bordered td, table.bordered th{
+  padding: 5px;
   border: 1px solid #ccc !important;  
 }
 

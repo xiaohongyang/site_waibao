@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Helpers\TreeHelper;
 use App\Http\Service\GuestBookService;
 use App\Models\ArticleTypeModel;
-use App\Models\ConfigModel;
 use Illuminate\Http\Request;
 
 class GuestBookController extends BaseApiController {
@@ -23,11 +21,12 @@ class GuestBookController extends BaseApiController {
 
 		switch ($case) {
 
-
 		case 'page':
 			$page = $request->get('page');
 			$amount = $request->get('amount');
-			$result = $service->getPageList($page, $amount);
+			$type_id = $request->get('type_id');
+			//$amount = null, $search = null, $orderColumn = null, $orderMethod = null, $params = null
+			$result = $service->getPageList($page, $amount, null, null, null, ['type_id' => $type_id]);
 			$this->setJsonResult(1, null, $result);
 			break;
 
@@ -119,17 +118,14 @@ class GuestBookController extends BaseApiController {
 	 */
 	public function update(Request $request, $id) {
 
-	    $this->setJsonResult(0,'保存失败');
+		$this->setJsonResult(0, '保存失败');
 
-
-	    $column01 = $request->get('column01');
+		$column01 = $request->get('column01');
 		$column02 = $request->get('column02');
 		$column03 = $request->get('column03');
 		$column04 = $request->get('column04');
 		$column05 = $request->get('column05');
 		$column10 = $request->get('column10');
-
-		 
 
 		$service = new GuestBookService();
 		$result = $service->edit($id, $column01, $column02, $column03, $column04, $column05, $column10);

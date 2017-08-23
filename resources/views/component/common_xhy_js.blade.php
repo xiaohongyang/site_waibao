@@ -1,5 +1,11 @@
 <script type="text/javascript" >
 
+$.fn.xhyAlert = {
+    show : function(msg) {
+        alert(msg)
+    }
+}
+
 
 var slidePic = function(picSrc,opacity) {
 
