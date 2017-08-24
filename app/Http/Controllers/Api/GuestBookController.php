@@ -63,13 +63,17 @@ class GuestBookController extends BaseApiController {
 		$column03 = $request->get('column03');
 		$column04 = $request->get('column04');
 		$column05 = $request->get('column05');
+		$column06 = $request->get('column06');
+		$column07 = $request->get('column07');
+		$column08 = $request->get('column08');
+		$column09 = $request->get('column09');
 		$column10 = $request->get('column10');
 
 		$type_id = $request->get('type_id');
 
 		$service = new GuestBookService();
 		$service->getModel()->setTypeId($type_id);
-		$result = $service->create($column01, $column02, $column03, $column04, $column05, $column10);
+		$result = $service->create($column01, $column02, $column03, $column04, $column05, $column06, $column07, $column08, $column09, $column10);
 
 		$message = $result ? $service->getModel() : ($service->getMessage() ?: 'failed');
 		$this->setJsonResult($result ? 1 : 0, $message);

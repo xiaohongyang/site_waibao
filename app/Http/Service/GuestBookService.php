@@ -12,23 +12,21 @@ use App\Models\GuestBookModel;
 
 class GuestBookService extends BaseService {
 
-
-
 	public function __construct() {
 
 		$this->model = new GuestBookModel();
 	}
 
-	public function create( $column01=null, $column02=null, $column03=null, $column04=null, $column05=null, $column10=null) {
+	public function create($column01 = null, $column02 = null, $column03 = null, $column04 = null, $column05 = null, $column06 = null, $column07 = null, $column08 = null, $column09 = null, $column10 = null) {
 
-		$result = $this->model->createParams( $column01, $column02, $column03, $column04, $column05, $column10);
+		$result = $this->model->createParams($column01, $column02, $column03, $column04, $column05, $column06, $column07, $column08, $column09, $column10);
 		return $result;
 	}
 
 	/**
 	 * 编辑
 	 */
-	public function edit($id, $column01=null, $column02=null, $column03=null, $column04=null, $column05=null, $column10=null) {
+	public function edit($id, $column01 = null, $column02 = null, $column03 = null, $column04 = null, $column05 = null, $column10 = null) {
 
 		$this->model = GuestBookModel::find($id);
 		if (!is_null($this->model)) {
@@ -46,6 +44,5 @@ class GuestBookService extends BaseService {
 		$result = $this->model->remove($id);
 		return $result;
 	}
-
 
 }

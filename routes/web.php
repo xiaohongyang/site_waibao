@@ -298,8 +298,10 @@ Route::group([], function () {
 	Route::get('/admin/config/create', 'Admin\ConfigController@create')->name('admin.config.create');
 	Route::get('/admin/config/edit', 'Admin\ConfigController@edit')->name('admin.config.edit');
 
-	//留言s
+	//留言
 	Route::get('/admin/guestbook/index', 'Admin\GuestbookController@index')->name('admin.guestbook.index');
+	//留言
+	Route::get('/admin/survey/index', 'Admin\SurveyController@index')->name('admin.survey.index');
 
 });
 #region

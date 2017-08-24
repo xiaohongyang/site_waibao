@@ -527,6 +527,8 @@ jQuery.fn.extend({
      * }
      */
     freeRadio : function(userConfig){
+
+    	return;
         var
             config = {
                 curName : 'cur',

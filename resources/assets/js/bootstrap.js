@@ -46,10 +46,10 @@ Vue.component('type-tree-manager', require("./components/article-type/type-tree-
 
 Vue.component('article-index', require("./components/articles/article-index.vue"))
 Vue.component('article-create', require("./components/articles/article-create.vue"))
-Vue.component('config-create', require("./components/config/config-create.vue"))
+Vue.component('config-create', require("./components/config/config-create.vue")) 
 Vue.component('config-edit', require("./components/config/config-edit.vue"))
 
-// Vue.component('guestbook-index', require("./components/guestbook/guestbook-index.vue"))
+Vue.component('guestbook-index', require("./components/guestbook/guestbook-index.vue"))
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

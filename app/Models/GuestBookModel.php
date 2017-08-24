@@ -26,6 +26,10 @@ class GuestBookModel extends BaseModel {
 		'column03',
 		'column04',
 		'column05',
+		'column06',
+		'column07',
+		'column08',
+		'column09',
 		'column10',
 		'type_id',
 	];
@@ -39,7 +43,7 @@ class GuestBookModel extends BaseModel {
 		return $this->type_id;
 	}
 
-	public function createParams($column01, $column02, $column03, $column04, $column05, $column10) {
+	public function createParams($column01, $column02, $column03, $column04, $column05, $column06, $column07, $column08, $column09, $column10) {
 
 		$typeId = is_null($this->getTypeId()) ? self::TYPE_GUESTBOOK : $this->getTypeId();
 

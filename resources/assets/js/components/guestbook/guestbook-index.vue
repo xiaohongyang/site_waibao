@@ -53,7 +53,7 @@
 
     export default {
         t : this,
-        props : ['titleValue', 'contentsValue'],
+        props : {typeId : {default:1}},
         data : function(){
             return {
                 data : [],
@@ -64,7 +64,7 @@
                 columnsHeader : [], 
                 contents : this.contentsValue,
                 title : this.titleValue,
-                type_id : 1,
+                type_id : this.typeId,
                 datatable_obj : [],
             }
         },

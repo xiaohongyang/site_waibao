@@ -81,41 +81,41 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
                    <tr>
                      <td width="142" valign="middle"><span>服务态度</span></td>
                      <td width="100" valign="middle"><span>
-                       <input name="column06" id="column06" type="radio" class="radio" value="满意" checked="checked"><label for="attitude">满意</label>
+                       <input name="column06" id="column06" type="radio" class="radio" value="满意" checked="checked"><label for="column06">满意</label>
                  </span></td>
-                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="column06" id="column06" value="一般"><label for="attitude2">一般</label>
+                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="column06" id="column061" value="一般"><label for="column061">一般</label>
                  </span> </td>
-                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="column06" id="column06" value="不满意"><label for="attitude3">不满意</label>
+                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="column06" id="column062" value="不满意"><label for="column062">不满意</label>
                  </span></td>
 
                    </tr>
                    <tr>
                      <td width="142" valign="middle"><span>技术能力</span></td>
-                     <td width="100" valign="middle"><span><input name="ability" id="ability" type="radio" class="radio" value="满意" checked="checked"><label for="ability">满意</label>
+                     <td width="100" valign="middle"><span><input name="column07" id="column07" type="radio" class="radio" value="满意" checked="checked"><label for="column07">满意</label>
                  </span></td>
-                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="ability" id="ability2" value="一般"><label for="ability2">一般</label>
+                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="column07" id="column072" value="一般"><label for="column072">一般</label>
                  </span> </td>
-                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="ability" id="ability3" value="不满意"><label for="ability3">不满意</label>
+                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="column07" id="column073" value="不满意"><label for="column073">不满意</label>
                  </span> </td>
 
                    </tr>
                    <tr>
                      <td width="142" valign="middle"><span>检测工作</span></td>
-                     <td width="100" valign="middle"><span><input name="check" id="check" type="radio" class="radio" value="满意" checked="checked"><label for="check">满意</label>
+                     <td width="100" valign="middle"><span><input name="column08" id="column08" type="radio" class="radio" value="满意" checked="checked"><label for="column08">满意</label>
                  </span></td>
-                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="check" id="check2" value="一般"><label for="check2">一般</label>
+                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="column08" id="column082" value="一般"><label for="column082">一般</label>
                  </span></td>
-                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="check" id="check3" value="不满意"><label for="check3">不满意</label>
+                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="column08" id="column083" value="不满意"><label for="column083">不满意</label>
                  </span> </td>
 
                    </tr>
                    <tr>
                      <td width="142" valign="middle"><span>人员是否廉洁自律</span></td>
-                     <td width="100" valign="middle"><span><input name="honest" id="honest" type="radio" class="radio" value="满意" checked="checked"><label for="honest">满意</label>
+                     <td width="100" valign="middle"><span><input name="column09" id="column09" type="radio" class="radio" value="满意" checked="checked"><label for="column09">满意</label>
                   </span></td>
-                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="honest" id="honest2" value="一般"><label for="honest2">一般</label>
+                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="column09" id="column092" value="一般"><label for="column092">一般</label>
                  </span> </td>
-                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="honest" id="honest3" value="不满意"><label for="honest3">不满意</label>
+                     <td colspan=2 width="100" valign="middle"><span><input type="radio" class="radio" name="column09" id="column093" value="不满意"><label for="column093">不满意</label>
                  </span> </td>
 
                    </tr>
@@ -123,7 +123,7 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
                      <td colspan="6"><span>您对我们的意见和建议</span> </td>
                    </tr>
                    <tr>
-                     <td colspan="6"><span><textarea name="Comments_and_suggestions" rows="8" datatype="*" nullmsg="请填写您对我们的意见和建议"></textarea><span class="Validform_checktip"></span></span></td>
+                     <td colspan="6"><span><textarea name="column10" rows="8" datatype="*" nullmsg="请填写您对我们的意见和建议"></textarea><span class="Validform_checktip"></span></span></td>
                    </tr>
                    <tr style="display:none">
                      <td colspan="6"><span>分析：</span></td>
@@ -174,5 +174,5 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
 
 
 @section('scripts')
-    <script type="text/javascript" src="/ext/js/guest-book.js"> </script>
+    <script type="text/javascript" src="/ext/js/survey.js"> </script>
 @endsection

@@ -7,6 +7,8 @@ $.fn.xhyAlert = {
 }
 
 
+
+
 var slidePic = function(picSrc,opacity) {
 
     var config = {
