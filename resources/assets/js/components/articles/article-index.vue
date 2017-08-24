@@ -32,6 +32,8 @@
 
 <script> 
 
+    import $ from 'jquery'
+
     export default {
         t : this,
         props : ['titleValue', 'contentsValue'],

@@ -8,6 +8,7 @@ window._ = require('lodash');
  */
 
 window.$ = window.jQuery = require('jquery');
+import datatable from './third-plugin/datatables.js'
 
 require('bootstrap-sass');
 
@@ -17,8 +18,13 @@ require('bootstrap-sass');
  * using reactive data binding and reusable components. Vue's API is clean
  * and simple, leaving you to focus on building your next great project.
  */
-
+// 
 window.Vue = require('vue');
+
+window.axios = require('axios');
+
+
+
 import Ueditor from './components/Ueditor.vue'
 // Vue.use(Ueditor)
 
@@ -30,7 +36,7 @@ Vue.use(ConfigPlugin)
 
 Vue.component('Ueditor', require("./components/Ueditor.vue"))
 Vue.component('article-type-create', require("./components/article-type/create.vue"))
-Vue.component('show-list', require("./components/show-list.vue"))
+// Vue.component('show-list', require("./components/show-list.vue"))
 Vue.component('type-tree', require("./components/type-tree.vue"))
 Vue.component('show-type-select', require("./components/show-type-select.vue"))
 
@@ -43,7 +49,7 @@ Vue.component('article-create', require("./components/articles/article-create.vu
 Vue.component('config-create', require("./components/config/config-create.vue"))
 Vue.component('config-edit', require("./components/config/config-edit.vue"))
 
-Vue.component('guestbook-index', require("./components/guestbook/guestbook-index.vue"))
+// Vue.component('guestbook-index', require("./components/guestbook/guestbook-index.vue"))
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -51,7 +57,6 @@ Vue.component('guestbook-index', require("./components/guestbook/guestbook-index
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */ 
 
-window.axios = require('axios');
 
 window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,

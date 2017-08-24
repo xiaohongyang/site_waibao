@@ -12,8 +12,8 @@ const { mix } = require('laravel-mix');
  */
 
  mix.js('resources/assets/js/app.js', 'public/js')
-    .js('resources/assets/js/ajaxFileUpload.js', 'public/js')
-    .js('resources/assets/js/index/index.js', 'public/js/index')
+    // .js('resources/assets/js/ajaxFileUpload.js', 'public/js')
+    // .js('resources/assets/js/index/index.js', 'public/js/index')
     .js('resources/assets/js/site.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/site.scss', 'public/css')

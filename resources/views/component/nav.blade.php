@@ -175,3 +175,12 @@ $types = getTypeList($typeName, 'name');
     </div>-->
     <!--站点跳转 begin-->
 </div>
+
+<script type='text/javascript'>
+    $(function(){
+        $('body').on('click', '.first_level_nav', function(){
+            $('.first_level_nav').removeClass('active')
+            $(this).addClass('active');
+        })
+    })
+</script>

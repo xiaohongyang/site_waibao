@@ -127,11 +127,12 @@
 
     <script src="{{ mix('js/app.js') }}"></script>
 
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
     <script src="{{ mix('js/site.js') }}"></script>
+
+     
     <!--include socket.io.js-->
-    <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+    <!--<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>-->
 
 
 
