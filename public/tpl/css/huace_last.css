@@ -99,7 +99,7 @@ table{border-collapse:collapse;}
 .logo{margin:13px 0 0 0;}
 .header .link{height: 12px;line-height: 12px;margin: 33px 0 0 0;}
 .search{width: 211px;height: 34px;margin: 22px 0 0 43px;}
-.search .text{width: 170px;height: 34px; border:1px solid #D1D1D1;border-right:0;position:absolute;top:0px;left:0px;background:url("../image/search_input_bg.png") repeat-x;font-size:14px;line-height: 14px;}
+.search .text{width: 170px;height: 32px; border:1px solid #D1D1D1;border-right:0;position:absolute;top:0px;left:0px;background:url("../image/search_input_bg.png") repeat-x;font-size:14px;line-height: 14px;}
 .search .button{width: 41px;height: 34px;position: absolute;top: 0px;right: 0px;background-position: 0px -10px;}
 .search .button input{width: 41px;height: 34px;background:url("../image/search.png") 11px 7px no-repeat;cursor: pointer;}
 .header .b{width: inherit;height: 48px;border-top: 1px solid #ccc;border-bottom: 1px solid #CACACA;background:url("../image/sub_nav.png") repeat-x;min-width:980px;}

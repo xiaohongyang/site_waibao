@@ -19,15 +19,17 @@ class ArticleTypeModel extends BaseModel {
 	//
 	protected $table = 'article_type';
 
-	public $fillable = ['name', 'uid', 'pid', 'content', 'thumb', 'sort', 'show_type'];
+	public $fillable = ['name', 'uid', 'pid', 'content', 'thumb', 'sort', 'show_type', 'is_index'];
 
-	public function createParams($name, $uid, $pid = null, $content = null, $thumb = null, $sort = null, $show_type = null) {
+	public function createParams($name, $uid, $pid = null, $content = null, $thumb = null, $sort = null, $show_type = null, $is_index = null) {
 
 		$pid = is_null($pid) ? 0 : $pid;
 		$sort = is_null($sort) ? 0 : $sort;
 		$content = is_null($content) ? 0 : $content;
 		$thumb = is_null($thumb) ? 0 : $thumb;
 		$show_type = is_null($show_type) ? 1 : $show_type;
+		$is_index = is_null($is_index) ? 0 : $is_index;
+
 
 		$data = [
 			'name' => $name,
@@ -51,7 +53,7 @@ class ArticleTypeModel extends BaseModel {
 		return $result;
 	}
 
-	public function edit($id, $name = null, $uid = null, $pid = null, $content = null, $thumb, $sort = null, $show_type = null) {
+	public function edit($id, $name = null, $uid = null, $pid = null, $content = null, $thumb, $sort = null, $show_type = null, $is_index = null) {
 
 		$data = [
 			'id' => $id,
@@ -96,6 +98,9 @@ class ArticleTypeModel extends BaseModel {
 			$rules['pid'][] = 'isParentIdEqualsSelfId:1111,2222';
 			//父id不能为下级类别
 			$rules['pid'][] = 'isParentIdBelongToChild:1111,2222';
+		}
+		if (!is_null($is_index)) {
+			$data['is_index'] = $is_index;
 		}
 
 		$message = ['pid' => '上级id不能为自己'];

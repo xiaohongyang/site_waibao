@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
+use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
@@ -12,10 +12,15 @@ use Illuminate\Validation\Validator;
 
 //class IndexController extends BaseController
 class IndexController extends BaseController {
-
+ 
 	public function index(Request $request) {
 
 	    return view('front.index');
+	}
+
+	public function search(Request $reuqest) {
+
+		return view('front.search');
 	}
 
 	public function route(Request $request) {

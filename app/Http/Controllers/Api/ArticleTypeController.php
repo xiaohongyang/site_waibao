@@ -95,9 +95,10 @@ class ArticleTypeController extends BaseApiController {
 		$thumb = $request->get('thumb', '');
 		$sort = $request->get('sort');
 		$show_type = $request->get('show_type');
+		$is_index = $request->get('is_index');
 		$articleTypeService = new ArticleTypeService();
 
-		$result = $articleTypeService->create($name, \Auth::guard('api')->id(), $pid, $content, $thumb, $sort, $show_type);
+		$result = $articleTypeService->create($name, \Auth::guard('api')->id(), $pid, $content, $thumb, $sort, $show_type, $is_index);
 
 		$message = $result ? $articleTypeService->getModel() : ($articleTypeService->getMessage() ?: 'failed');
 		$this->setJsonResult($result ? 1 : 0, $message);
@@ -152,9 +153,10 @@ class ArticleTypeController extends BaseApiController {
 		$thumb = $request->get('thumb');
 		$sort = $request->get('sort');
 		$show_type = $request->get('show_type');
+		$is_index = $request->get('is_index');
 		$articleTypeService = new ArticleTypeService();
 
-		$result = $articleTypeService->edit($id, $name, \Auth::guard('api')->id(), $pid, $content, $thumb, $sort, $show_type);
+		$result = $articleTypeService->edit($id, $name, \Auth::guard('api')->id(), $pid, $content, $thumb, $sort, $show_type, $is_index);
 
 		$message = $result ? 'ok' : ($articleTypeService->getMessage() ?: 'failed');
 		$resultData = $result ? $articleTypeService->getModel() : [];

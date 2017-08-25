@@ -87,7 +87,6 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
                             <!-- <input class="ef03" type="button" value="隐私承诺" name="reset2" onclick="window.location.href='http://www.jdltop.com/cn.htm'">    --></td>
                             </tr>
                         <tr>
-                          <td></td>
                         </tr>
                         </tbody></table>
                     </form>

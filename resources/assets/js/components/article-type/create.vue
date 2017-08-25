@@ -13,7 +13,7 @@
             <span class="error"> </span> 
         </div>
         <div>
-            <span> 缩略图 </span>
+            <span> 图片 </span>
             <span>
                 <input type="file" id="thumb"  v-on:change="uploadFile()" />
                 <img :src="thumbSrc"   style="width: 80px; height: auto"  />
@@ -46,7 +46,14 @@
             <span> <input type="text" name="sort" v-model="sort" >  </span>
             <span class="error"> </span>
         </div>
-
+        <div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" v-if="is_index==1" checked="checked" @click="updateIsIndex()">
+                    <input type="checkbox" v-else @click="updateIsIndex()" > 推荐到首页
+                </label>
+            </div>
+        </div> 
 
         <div>
             <span>
@@ -74,11 +81,11 @@
                 contents : this.contentsValue,
                 title : this.titleValue,
                 typeListData : [],
-                parentId : 1,
+                parentId : 0,
                 id : this.idProp,
                 sort : 0,
-                show_type : 1
-                
+                show_type : 1,
+                is_index : 0,
             }
         },
         mounted : function(){
@@ -94,6 +101,12 @@
 
         },
         methods : {
+
+            updateIsIndex : function(){
+
+                this.is_index = this.is_index==0 ? 1 : 0;
+            },
+
             //上传图片
             uploadFile : function(){
 
@@ -130,6 +143,7 @@
                                 t.contents = data.content
                                 t.sort = data.sort
                                 t.show_type = data.show_type
+                                t.is_index = data.is_index
                             }
                         })
                 }
@@ -142,7 +156,8 @@
                     thumb : this.thumb,
                     content : this.contents,
                     sort : this.sort,
-                    show_type : this.show_type
+                    show_type : this.show_type,
+                    is_index : this.is_index,
                 }
 
                 if(this.id==0) {

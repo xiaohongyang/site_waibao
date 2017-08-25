@@ -124,7 +124,7 @@ $types = getTypeList($typeName, 'name');
 	?>
                 @if(count($types))
                     <li class="{{$navTitleClass}} nav_title_two">
-                        <a href="#" class="nav_title_a"> {{$types[0]['name']}} </a>
+                        <a href="{{$types[0]['name']=='检测能力' ? route('article_list',['type_id'=>$types[0]['id']]) : '#'}}" class="nav_title_a"> {{$types[0]['name']}} </a>
                         <div class="sub_nav_child nav_title_new">
                             @if(count($types)>1)
                                 <div class="sub_float">
