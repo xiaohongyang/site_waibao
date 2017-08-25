@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use \Illuminate\Http\Request;
+
 
 class GuestbookController extends Controller {
 	//
@@ -11,8 +13,11 @@ class GuestbookController extends Controller {
 		$this->middleware('auth.admin');
 	}
 
-	public function index() {
-		return view('admin.guestbook.index');
+	public function index(Request $request) {
+
+		$typeId = $request->get('type_id', 1);	
+
+		return view('admin.guestbook.index', ['type_id'=>$typeId]);
 	}
 
 }

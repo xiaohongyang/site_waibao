@@ -17,4 +17,5 @@ return [
     'next' => 'Next &raquo;',
     'apples' => 'There is one apple|There are many apples',
     'apples02' => '{0} There are none|[1,19] There are some|[20,*] There are many',
+    'Login' => '登录'
 ];

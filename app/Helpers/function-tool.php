@@ -59,3 +59,20 @@ function getShowContent($content, $type = 'Ueditor') {
     }
     return $content;
 }
+
+function globalConfig($name){
+
+	$result = '';
+
+	$configData = \View::shared('GConfig', []);
+	if(count($configData)) {
+		foreach ($configData as $key => $value) {
+			# code...
+			if($value['name']==$name) {
+				$result = $value['value'];
+			}
+		}
+	}
+	return $result;
+
+}

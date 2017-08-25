@@ -94,9 +94,22 @@ Route::get('passwordToken', function (\Illuminate\Http\Request $request) {
 	if ($validator->fails()) {
 		$result['message'] = $validator->messages()->getMessageBag();
 	} else {
-		$user = \App\User::where('email', $request->get('email'))->first();
+		$user = \App\Models\Admin::where('email', $request->get('email'))->first();
 		// echo $user->email;exit;
-		$http = new GuzzleHttp\Client();
+		
+		if(is_null($user)) {
+			$result['data'] = '';
+			$result['message'] = 'email或者密码错误';
+		} else {
+
+			$token = $user->createToken(env('APP_URL'))->accessToken;
+			$result['data']  = [
+				'token' => $token
+			];
+			$result['status'] = 1;
+		}
+
+		/*$http = new GuzzleHttp\Client();
 
 		$domain = env('APP_URL');
 		$domain = str_replace(':5000', '', $domain);
@@ -117,7 +130,7 @@ Route::get('passwordToken', function (\Illuminate\Http\Request $request) {
 		} catch (Exception $e) {
 			$result['data'] = "";
 			$result['message'] = "email或密码错误";
-		}
+		}*/
 	}
 
 	return $result;

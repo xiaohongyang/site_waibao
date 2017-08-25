@@ -41,7 +41,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ globalConfig('网站名称')}} 
                     </a>
                 </div>
 
@@ -55,8 +55,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('login') }}">后台登录</a></li>
+                            <!-- <li><a href="{{ route('register') }}">Register</a></li> -->
                         @else
 
                             <li><a href="{{ route('home') }}">用户中心</a></li>

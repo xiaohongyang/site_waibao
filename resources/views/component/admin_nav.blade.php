@@ -1,8 +1,11 @@
 <?php
+use Illuminate\Http\Request;
+$currentFullUrl = \Request::getPathInfo() . (\Request::getQueryString() ?  ('?' . \Request::getQueryString() )  : '');
+
 $articleTypeActive = '';
 
-$routeName = Route::currentRouteName();
-$routeValue = route($routeName);
+
+$routeName = Route::currentRouteName(); 
 
 if (in_array($routeName, [
 	'admin.articleType',
@@ -22,7 +25,7 @@ function setActiveNavClass($navArr, $routeValue, $className = 'active') {
 		if (key_exists('children', $lavel_01) && count($lavel_01['children'])) {
 			foreach ($lavel_01['children'] as $key_02 => $lavel_02) {
 				$link_02 = key_exists('link', $lavel_02) ? $lavel_02['link'] : '';
-				if ($link_02 == $routeValue) {
+				if (strpos($link_02, $routeValue) !== false) {
 					$navArr[$key_01]['activeClass'] = $className;
 					$navArr[$key_01]['children'][$key_02]['activeClass'] = $className;
 					break 2;
@@ -46,7 +49,7 @@ $navArr = [
 				'link' => route('admin.articleType'),
 			], [
 				'name' => '类别创建',
-				'link' => route('admin.articleTypeCreate'),
+				'link' => route('admin.articleTypeCreate',['top_id'=>1]),
 			],
 		],
 	], [
@@ -68,10 +71,18 @@ $navArr = [
 				'link' => route('admin.guestbook.index'),
 			],
 		],
+	],[
+		'name' => '满意度调查',
+		'children' => [
+			[
+				'name' => '调查列表',
+				'link' => route('admin.survey.index',['type_id'=>2]),
+			],
+		],
 	],
 ];
 
-$navArr = setActiveNavClass($navArr, $routeValue);
+$navArr = setActiveNavClass($navArr, $currentFullUrl);
 ?>
 
 <nav class="xhy-nav bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">

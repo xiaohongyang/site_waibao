@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 use \App\Http\Service\ArticleTypeService;
+use \App\Http\Service\ConfigService;
 
 class BaseController extends Controller
 {
@@ -23,6 +24,9 @@ class BaseController extends Controller
         $service = new ArticleTypeService();
         $service->shareGlobalTypes();
         $service->shareGlobalTypesTree();
+
+        $configService = new ConfigService();
+        $configService->shareGlobalConfig();
     }
 
 

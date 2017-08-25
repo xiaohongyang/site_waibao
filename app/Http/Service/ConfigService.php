@@ -47,5 +47,15 @@ class ConfigService extends BaseService {
 		return $result;
 	}
 
+	public function shareGlobalConfig() {
+
+	    $result = null;
+
+	    $result = $this->model->where('is_use', 1)->get()->toArray();
+         
+
+        \View::share('GConfig', $result);  
+         
+    }
 
 }

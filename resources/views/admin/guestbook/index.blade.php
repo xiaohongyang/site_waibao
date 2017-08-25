@@ -12,7 +12,7 @@ $breadcrumb = [
 ];
 ?>
 
-	<guestbook-index></guestbook-index>
+	<guestbook-index typeId={{$type_id}}></guestbook-index>
 
 @endsection
 
