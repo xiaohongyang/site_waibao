@@ -196,7 +196,7 @@ $a = "abc";
 
 
         <div class="float index_tree no_marginLeft float1" id="show_ul" style="width:235px; margin-left: 20px">
-            <div class="choose choose1"><a id="service_list" href="javascript:;" class="cur border_radius_left">按行业</a> </div>
+            <div class="choose choose1"><a id="service_list" href="javascript:;" class="cur border_radius_left">按行业111</a> </div>
             <div class="show_ul cur cl">
                 <div class="show_ul_wrap cl">
                     <li><i></i><a href="#" title="电子电气">
@@ -284,4 +284,10 @@ $a = "abc";
 
         <!--右侧内容区 end-->
     </div>
+@endsection
+
+
+@section('scripts')
+    <script type="text/javascript" src="/ext/js/index.js"> </script>
+
 @endsection

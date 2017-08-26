@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use App\Http\Service\ArticleService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
@@ -12,10 +13,24 @@ use Illuminate\Validation\Validator;
 
 //class IndexController extends BaseController
 class IndexController extends BaseController {
- 
+
 	public function index(Request $request) {
 
-	    return view('front.index');
+		$this->renderIndex();
+		return view('front.index');
+	}
+
+	protected function renderIndex() {
+
+		$renderData = [];
+		$articleService = new ArticleService();
+		$data = $articleService->getData(1);
+		$renderData = [
+			[
+				'id' => 1,
+				'name' => 通知公告
+			]
+		] 
 	}
 
 	public function search(Request $reuqest) {

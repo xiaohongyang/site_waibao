@@ -25,13 +25,14 @@ class ArticleController extends BaseApiController {
 			$amount = $request->get('amount', 1000000);
 			$search = $request->get('search');
 			$type_id = $request->get('type_id');
+			$is_index = $request->get('is_index');
 			$type_id = $type_id == 0 ? null : $type_id;
 
 			$orderColumn = $request->get('orderColumn', 'updated_at');
 			$orderMethod = $request->get('orderMethod', 'desc');
 			$params = [
 				'relation' => 'articletype',
-
+				'is_index' => $is_index,
 			];
 			if (!is_null($type_id)) {
 				$params['type_id'] = $type_id;

@@ -45,4 +45,29 @@ class ArticleService extends BaseService {
 		return $result;
 	}
 
+	public function getData($type_id, $amount = 20, $is_index = 0) {
+
+		$result = [];
+
+		$orderColumn = 'updated_at';
+		$orderMethod = 'desc';
+		$params = [
+			'relation' => 'articletype',
+			'is_index' => $is_index,
+		];
+		if (!is_null($type_id)) {
+			$params['type_id'] = $type_id;
+		}
+		$result = $this->getPageList(1, $amount, null, $orderColumn, $orderMethod, $params);
+		$result = $result->toArray();
+		if (is_array($result) && count($result)) {
+			foreach ($result as $k => $value) {
+				$result[$k]['description'] = strip_tags($value['content']);
+				$result[$k]['thumb'] = '/' . $result[$k]['thumb'];
+			}
+		}
+
+		return $result;
+	}
+
 }

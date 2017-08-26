@@ -98,6 +98,9 @@ Abstract Class BaseService {
 				if (key_exists('type_id', $params)) {
 					$query->where('type_id', $params['type_id']);
 				}
+				if (key_exists('is_index', $params) && !is_null($params['is_index'])) {
+					$query->where('is_index', $params['is_index']);
+				}
 			}
 		}
 
