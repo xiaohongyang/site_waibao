@@ -18,7 +18,7 @@ class ArticleModel extends BaseModel {
 	public function createParams($title, $thumb = null, $type_id = null, $content = null, $file, $is_index, $attach_file) {
 
 		$title = is_null($title) ? 0 : $title;
-		$thumb = is_null($thumb) ? 0 : $thumb;
+		$thumb = is_null($thumb) ? '' : $thumb;
 		$type_id = is_null($type_id) ? 0 : $type_id;
 		$content = is_null($content) ? 0 : $content;
 		$file = is_null($file) ? '' : $file;

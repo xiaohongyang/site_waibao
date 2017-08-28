@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Service\ArticleService;
+use App\Http\Service\ArticleTypeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
@@ -23,19 +24,25 @@ class IndexController extends BaseController {
 
 	protected function renderIndex() {
 
-		$renderData = [];
-		$articleService = new ArticleService(); 
- 		$type = getTypeItem('关于我们');
+        $typeService = new ArticleTypeService();
 
-		$renderData = [
-			[
-				'name' => '通知公告',
-				'data' => $articleService->getData($type['id'])
-			],[
-				'name' => '通知公告',
-				'data' => $articleService->getData($type['id'])
-			],
-		] ;
+
+        $types = $typeService->getModel()->where('is_index',1)->get()->toArray();
+		$renderData = [];
+ 		foreach ($types as $key => $item) {
+ 		 	$typeId = $item['id'];
+ 		 	$typeName = $item['name'];
+            $articleService = new ArticleService();
+            $articleList = $articleService->getData($typeId);
+
+            $data = [
+                'id' => $typeId,
+                'name' => $typeName,
+                'article_list' => $articleList
+            ];
+ 		 	$renderData[] = $data;
+ 		} 
+		\view()->share('channels', $renderData);
 	}
 
 	public function search(Request $reuqest) {

@@ -12,10 +12,13 @@
   background: #eee;
 }
 
-
 /*首页*/
 .index_tree li{
   width: 165px !important;
+}
+.i-banner .Ibtn{
+
+  width: 240px !important;
 }
 
 

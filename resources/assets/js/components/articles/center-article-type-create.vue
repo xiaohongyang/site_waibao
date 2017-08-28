@@ -64,7 +64,7 @@
 
         computed : {
             thumbSrc : function(){
-                return this.thumb ? this.$config.host.img_host + '/' + this.thumb : '';
+                return this.thumb && this.thumb!=0 ? this.$config.host.img_host + '/' + this.thumb : '';
             }
         },
         watch : {

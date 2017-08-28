@@ -45,7 +45,7 @@ class ArticleService extends BaseService {
 		return $result;
 	}
 
-	public function getData($type_id, $amount = 20, $is_index = 0) {
+	public function getData($type_id, $amount = 20, $is_index = 1) {
 
 		$result = [];
 

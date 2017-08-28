@@ -94,7 +94,7 @@
 
         computed : {
             thumbSrc : function(){
-                return this.thumb ? this.$config.host.img_host + '/' + this.thumb :  this.$config.img.default_upload_img
+                return this.thumb && this.thumb!=0 ? this.$config.host.img_host + '/' + this.thumb :  this.$config.img.default_upload_img
             }
         },
         watch : {

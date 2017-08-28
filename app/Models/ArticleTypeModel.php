@@ -26,7 +26,7 @@ class ArticleTypeModel extends BaseModel {
 		$pid = is_null($pid) ? 0 : $pid;
 		$sort = is_null($sort) ? 0 : $sort;
 		$content = is_null($content) ? 0 : $content;
-		$thumb = is_null($thumb) ? 0 : $thumb;
+		$thumb = is_null($thumb) ? '' : $thumb;
 		$show_type = is_null($show_type) ? 1 : $show_type;
 		$is_index = is_null($is_index) ? 0 : $is_index;
 

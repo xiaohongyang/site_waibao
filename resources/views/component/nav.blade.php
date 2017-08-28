@@ -119,7 +119,7 @@ $typeArr = ['关于我们', '服务指南', '新闻资讯', '检测能力', '网
 foreach ($typeArr as $typeName) {
 	?>
         <?php
-$types = getTypeList($typeName, 'name');
+    $types = getTypeList($typeName, 'name');
 	$navTitleClass = $typeName == '检测能力' ? '' : 'nav_title';
 	?>
                 @if(count($types))

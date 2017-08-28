@@ -16,7 +16,8 @@ function p($array) {
 function getTypeList($idOrName = 0, $type = 'id') {
 
 	$id = 0;
-	/*$service = new ArticleTypeService();
+	
+	$service = new ArticleTypeService();
 	if ($type != 'id') {
 		$type = $service->getModel()->where('name', $idOrName)->first();
 		if (!is_null($type)) {
@@ -27,22 +28,27 @@ function getTypeList($idOrName = 0, $type = 'id') {
 		$id = $idOrName;
 	}
 
-	$tree = $service->getTree($id);*/
-	$tree = \View::shared('globalTypeListTree');
+	$tree = $service->getTree($id);
 	$list = TreeHelper::getInstance()->conveTreeToArray($tree, 'id', 'children');
-	$result = [];
-	$topType = [];
-	foreach ($list as $key => $row) {
-		# code...
-		if( ($type=='id' && $idOrName == $row['id']) || ($type!='id' && $idOrName==$row['name']) ) {
-			$topType = $row;
-			$result[] = $row;
-		}
+	return $list;
 
-		if($row['pid'] == $idOrName) {
-			$result[] = $row;
-		}
-	}
+
+	// $tree = \View::shared('globalTypeListTree');
+	// 
+	// $list = TreeHelper::getInstance()->conveTreeToArray($tree, 'id', 'children');
+	// $result = [];
+	// $topType = [];
+	// foreach ($list as $key => $row) {
+	// 	# code...
+	// 	if( ($type=='id' && $idOrName == $row['id']) || ($type!='id' && $idOrName==$row['name']) ) {
+	// 		$topType = $row;
+	// 		$result[] = $row;
+	// 	}
+
+	// 	if($row['pid'] == $idOrName) {
+	// 		$result[] = $row;
+	// 	}
+	// }
 
 	return $result;
 }
@@ -51,7 +57,9 @@ function getTypeItem($idOrName = 0, $type = 'id',  $typeList=null) {
 
     $result = null;
 
-    $typeList = getTypeList(0);
+    if($typeList == null) {
+    	$typeList = getTypeList(0);	
+    }
 	if(!is_null($typeList) && is_array($typeList) && count($typeList)) {
 
 	    foreach ($typeList as $row) {
@@ -90,4 +98,15 @@ function globalConfig($name){
 	}
 	return $result;
 
+}
+
+
+function showPic($src) {
+    if(strlen($src)<3) {
+        $src = '/static/img/default.png';
+    } else if(strpos($src,'/') !=0){
+        $src = '/'.$src;
+    }
+    $result = env('APP_IMG_URL'). $src;
+    return $result;
 }
