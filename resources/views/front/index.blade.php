@@ -59,7 +59,7 @@ $a = "abc";
                     foreach ($channels as $key=>$channel){
                         if($key < 3){
                         ?>
-                            <a id="news_list" href="javascript:;" class="cur border_radius_left">{{$channel['name']}}</a>
+                            <a id="news_list" href="javascript:;" class="{{$key==0?'cur':''}} border_radius_left">{{$channel['name']}}</a>
                         <?php
                         }
                     }
