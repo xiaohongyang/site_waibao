@@ -16,6 +16,7 @@ class IndexController extends BaseController {
 
 	public function index(Request $request) {
 
+		
 		$this->renderIndex();
 		return view('front.index');
 	}
@@ -23,14 +24,18 @@ class IndexController extends BaseController {
 	protected function renderIndex() {
 
 		$renderData = [];
-		$articleService = new ArticleService();
-		$data = $articleService->getData(1);
+		$articleService = new ArticleService(); 
+ 		$type = getTypeItem('关于我们');
+
 		$renderData = [
 			[
-				'id' => 1,
-				'name' => 通知公告
-			]
-		] 
+				'name' => '通知公告',
+				'data' => $articleService->getData($type['id'])
+			],[
+				'name' => '通知公告',
+				'data' => $articleService->getData($type['id'])
+			],
+		] ;
 	}
 
 	public function search(Request $reuqest) {

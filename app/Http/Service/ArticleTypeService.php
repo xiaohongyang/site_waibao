@@ -84,11 +84,12 @@ class ArticleTypeService extends BaseService {
     public function shareGlobalTypesTree() {
 
 	    $result = null;
+	    $globalTypeList = \View::shared('globalTypeList',[]);
 	    if(isset($globalTypeList) && is_array($globalTypeList) && count($globalTypeList)) {
 
 	        $result = TreeHelper::getInstance()->generateTree($globalTypeList,'pid');
         }
-
+ 
         \View::share('globalTypeListTree', $result);
     }
 }

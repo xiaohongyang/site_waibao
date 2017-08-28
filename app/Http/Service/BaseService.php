@@ -108,6 +108,10 @@ Abstract Class BaseService {
 		$totalRowNumber = $totalQuery->count();
 		$this->setTotalRows($totalRowNumber);
 
+		if($totalRowNumber>0 && ceil($totalRowNumber/$amount)<$page) {
+			$skip = (ceil($totalRowNumber/$amount)-1) * $amount;
+		}
+
 		$query
 			->offset($skip)
 			->limit($amount);
