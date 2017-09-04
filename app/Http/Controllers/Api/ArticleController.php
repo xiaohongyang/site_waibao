@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Helpers\TreeHelper;
 use App\Http\Service\ArticleService;
 use App\Http\Service\ArticleTypeService;
 use Illuminate\Http\Request;
@@ -37,12 +36,12 @@ class ArticleController extends BaseApiController {
 				'is_index' => $is_index,
 			];
 			if (!is_null($type_id)) {
-                $typeService = new ArticleTypeService();
-                $typeIds = $typeService->getListIds($type_id);
-                if(is_array($typeIds)) {
+				$typeService = new ArticleTypeService();
+				$typeIds = $typeService->getListIds($type_id);
+				if (is_array($typeIds)) {
 
-                    $params['type_id'] = $typeIds;
-                }
+					$params['type_id'] = $typeIds;
+				}
 			}
 
 			$result = $articleService->getPageList($page, $amount, $search, $orderColumn, $orderMethod, $params);
@@ -160,15 +159,26 @@ class ArticleController extends BaseApiController {
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id) {
+	public function destroy($id, Request $request) {
 		//
-
 		$articleService = new ArticleService();
 
-		$result = $articleService->remove($id);
-		$message = $result ? '删除成功' : ($articleService->getMessage() ?: '数据不存在或者已被删除');
-		$this->setJsonResult($result ? 1 : 0, $message);
+		$type = $request->get('type');
+		$ids = $request->get('ids');
 
+		if (!is_null($type) && $type == 'batch_delete') {
+
+			$articleService->getModel()->whereIn('id', explode(',', $ids))->delete();
+			$this->setJsonResult(1, '删除成功');
+
+		} else {
+
+			$result = $articleService->remove($id);
+			$message = $result ? '删除成功' : ($articleService->getMessage() ?: '数据不存在或者已被删除');
+
+			$this->setJsonResult($result ? 1 : 0, $message);
+
+		}
 		return $this->getJsonResult();
 	}
 }

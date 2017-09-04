@@ -226,7 +226,7 @@
                     } else {
                         var data = {ids : ids.join(',')}
                         axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
-                        axios.delete(this.$config.url.api.article_store + '/' + 0 + '&type=batch_delete', data)
+                        axios.delete(this.$config.url.api.article_store + '/' + 0 + '?type=batch_delete&ids=' + ids.join(','), data)
                             .then(function(json) {
                                 var message = t.$msgBag2String(json.data.message)
                                 t.$alert(message)

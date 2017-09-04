@@ -23,7 +23,9 @@ Toast.install = function (Vue, options) {
 
     Vue.prototype.$authToken = function(){
         var token = window.localStorage.getItem('token');
-        if(token){
+        var tokenTime = window.localStorage.getItem('tokenTime')
+
+        if(token && new Date().getTime() - tokenTime < 60*60*1000){
             console.log(token)
             return token;
         }
@@ -31,8 +33,11 @@ Toast.install = function (Vue, options) {
             axios.get('/getToken')
                 .then(function(json){
                     console.log(token)
-                    if(json.data.token)
+                    if(json.data.token){
+
                         window.localStorage.setItem('token', json.data.token)
+                        window.localStorage.setItem('tokenTime', new Date().getTime())
+                    }
                 })
         }
     }
