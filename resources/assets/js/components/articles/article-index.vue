@@ -9,7 +9,7 @@
                     <span class="glyphicon glyphicon-plus"></span>新建
                 </button>
 
-                <button type=button class="btn btn-danger btn-batch-del">
+                <button type=button class="btn btn-danger btn-batch-del" v-on:click="remove(0, true)">
                     删除
                 </button>
             </div>
@@ -178,6 +178,16 @@
                 this.type_id=newValue 
                 this.getListData(true)
             },
+            getCheckedIds : function(){
+                var ids = [];
+                var objList = $('.checkboxes:checked')
+                if(objList.length > 0){
+                    objList.each(function(){
+                        ids.push($(this).val())
+                    })
+                }
+                return ids;
+            },
             submit : function(){
                 var data = {
                     name : this.title,
@@ -192,20 +202,42 @@
                         console.log(json)
                     })
             },
-            remove : function(id) {
-                if(typeof id == 'undefined')
-                    return false;
-                var t = this
-                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
-                axios.delete(this.$config.url.api.article_store + '/' + id)
-                    .then(function(json) {
-                        var message = t.$msgBag2String(json.data.message)
-                        t.$alert(message)
+            remove : function(id,is_batch) {
 
-                        if(json.data.status == 1) {
-                            t.getListData(true)
-                        }
-                    })
+                var t = this
+                if(typeof id == 'undefined' && typeof is_batch== 'undefined')
+                    return false;
+                else if(typeof is_batch == 'undefined' || !is_batch){
+                    axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
+                    axios.delete(this.$config.url.api.article_store + '/' + id)
+                        .then(function(json) {
+                            var message = t.$msgBag2String(json.data.message)
+                            t.$alert(message)
+
+                            if(json.data.status == 1) {
+                                t.getListData(true)
+                            }
+                        })
+                } else {
+
+                    var ids = t.getCheckedIds()
+                    if(ids.length == 0){
+                        t.$alert('请先选择要删除的数据')
+                    } else {
+                        var data = {ids : ids.join(',')}
+                        axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
+                        axios.delete(this.$config.url.api.article_store + '/' + 0 + '&type=batch_delete', data)
+                            .then(function(json) {
+                                var message = t.$msgBag2String(json.data.message)
+                                t.$alert(message)
+
+                                if(json.data.status == 1) {
+                                    t.getListData(true)
+                                }
+                            })
+                    }
+                }
+
             },
             onContentsChange : function(val) {
                 this.contents = val
@@ -233,21 +265,6 @@
             $('body').on('click', '.group-checkable', function(){
                 $(this).closest('table').find('.checkboxes').prop('checked', this.checked)
             })
-
-            $.fn.batchRemove = function(){
-                var ids = [];
-                var objList = $('.checkboxes:checked')
-                if(objList.length <= 0){
-                    t.$alert('请先选择要操作的数据')
-                    return;
-                } else {
-                    objList.each(function(){
-                        ids.push($(this).val())
-                    })
-                    console.log(ids)
-                }
-
-            }
 
         }
     }
