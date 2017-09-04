@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Helpers\TreeHelper;
 use App\Http\Service\ArticleService;
+use App\Http\Service\ArticleTypeService;
 use Illuminate\Http\Request;
 
 class ArticleController extends BaseApiController {
@@ -35,8 +37,14 @@ class ArticleController extends BaseApiController {
 				'is_index' => $is_index,
 			];
 			if (!is_null($type_id)) {
-				$params['type_id'] = $type_id;
+                $typeService = new ArticleTypeService();
+                $typeIds = $typeService->getListIds($type_id);
+                if(is_array($typeIds)) {
+
+                    $params['type_id'] = $typeIds;
+                }
 			}
+
 			$result = $articleService->getPageList($page, $amount, $search, $orderColumn, $orderMethod, $params);
 			$result = $result->toArray();
 			if (is_array($result) && count($result)) {

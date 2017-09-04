@@ -56,7 +56,7 @@ class TreeHelper
     }
 
 
-    public function conveTreeToArray($tree, $idColumnName, $childrenColumnName=null, $level=1){
+    public function conveTreeToArray($tree, $idColumnName='id', $childrenColumnName=null, $level=1){
 
         $childrenColumnName = is_null($childrenColumnName) ? 'children' : $childrenColumnName;
         if(is_array($tree) && count($tree)  && !key_exists($childrenColumnName, $tree) ) {

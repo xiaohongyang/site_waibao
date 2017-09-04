@@ -66,11 +66,43 @@ class ArticleTypeService extends BaseService {
 
 		$result = $result->toArray();
 
-		//$tree = $this->generateTree($result, 'pid', $pid);
 		$tree = TreeHelper::getInstance()->generateTree($result, 'pid', $pid);
 
 		return $tree;
 	}
+
+    /**
+     * 获取类别数组
+     * @param $pid 父id
+     * @param string $orderColumn
+     * @param string $orderMethod
+     * @return array
+     */
+	public function getList($pid, $orderColumn = 'sort', $orderMethod = 'desc') {
+
+	    $tree = $this->getTree($pid, $orderColumn, $orderMethod);
+	    $list = TreeHelper::getInstance()->conveTreeToArray($tree);
+        return $list;
+    }
+
+    /**
+     * 获取id数组
+     * @param $pid
+     * @param string $orderColumn
+     * @param string $orderMethod
+     * @return array
+     */
+    public function getListIds($pid, $orderColumn='sort', $orderMethod='desc') {
+
+	    $result = [];
+	    $list = $this->getList($pid, $orderColumn, $orderMethod);
+	    if(is_array($list)) {
+	        foreach ($list as $item){
+	            $result[] = $item['id'];
+            }
+        }
+        return $result;
+    }
 
     public function shareGlobalTypes($orderColumn='sort', $orderMethod='desc') {
 
