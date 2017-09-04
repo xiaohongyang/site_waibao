@@ -9,7 +9,7 @@
                     <span class="glyphicon glyphicon-plus"></span>新建
                 </button>
 
-                <button type=button class="btn btn-danger hide">
+                <button type=button class="btn btn-danger btn-batch-del">
                     删除
                 </button>
             </div>
@@ -106,31 +106,23 @@
                             var showColumns = ['id', 'title','type','created_at', 'updated_at']
                             if(t.data.length > 0) {
                                 
-                                /*
-                                for(var item in t.data) {
-                                    var itemTmp = []
-                                    for(var k in showColumns) {
-                                        var keyName = showColumns[k]
-                                        if(keyName == 'type' ) {
-                                           // var articleType = t.data[item].articleType;
-                                            itemTmp.push(t.data[item]['articletype'].name)
-                                        } else {
-                                            itemTmp.push(t.data[item][keyName])
-                                        }
-                                    }
-                                    dataSet.push(itemTmp)
-                                }
-                                */
                                 dataSet = t.data
-                                
                             }
                             console.log('dataSet -------------------------------------')
                             console.log(dataSet)
 
+
                             t.datatable_obj = $('#datatable').DataTable({
                                 data: dataSet,
                                 columns: [
-                                    { data : 'id', "title" : "标题"},
+                                    {
+                                        title: '<input type="checkbox" class="group-checkable" data-set="#table_1 .checkboxes"/>',
+                                        orderable: false,
+                                        render: function (data, type, row) {
+                                            return '<input type="checkbox" class="checkboxes" value="'+ row['id'] +'"/></td>';
+                                        }
+                                    },
+//                                    { data : 'id', "title" : "标题"},
                                     { data : 'title', "title" : "标题"},
                                     { data : 'created_at', "title" : "添加日期"},
                                     { data : 'updated_at', "title" : "更新日期"},
@@ -237,7 +229,25 @@
             $.fn.remove = function(id){ 
                 t.remove(id) 
             }
-            
+
+            $('body').on('click', '.group-checkable', function(){
+                $(this).closest('table').find('.checkboxes').prop('checked', this.checked)
+            })
+
+            $.fn.batchRemove = function(){
+                var ids = [];
+                var objList = $('.checkboxes:checked')
+                if(objList.length <= 0){
+                    t.$alert('请先选择要操作的数据')
+                    return;
+                } else {
+                    objList.each(function(){
+                        ids.push($(this).val())
+                    })
+                    console.log(ids)
+                }
+
+            }
 
         }
     }
