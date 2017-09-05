@@ -85,9 +85,9 @@
     <div class="t cl">
         <a href="#">  <img src="/tpl/img/logo.png" id="logoimage" style="width: 178px;height: 48px;" alt="华测检测logo" class="logo f-l"/></a>
         <!--搜索框 begin-->
-        <div class="search f-r pl">
-            <form action="/search" method="post" id="allMessage">
-                <input type="text" value="" name="title" class="text" id="title"/>
+        <div class="search f-r pl">s
+            <form action="/search" method="get" id="allMessage">
+                <input type="text" value="{{$_REQUEST['key']}}" name="key" class="text" id="title"/>
                 <div class="button"><a id="queryAllMessage" href="javascript:;"> <input type="button" value="" name="key"  /></a></div>
             </form>
             <i class="ra ra-lt ra-s-lt"></i>

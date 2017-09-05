@@ -92,17 +92,20 @@ Abstract Class BaseService {
 		$skip = ($page - 1) * $amount;
 
 		$query = $this->getPrevPageListQuery();
+		if (!is_null($search)) {
+			$query->where('title', 'like', "%{$search}%");
+		}
 
 		if (!is_null($params)) {
 			if (is_array($params)) {
 				if (key_exists('type_id', $params)) {
-				    if(is_array($params['type_id'])) {
+					if (is_array($params['type_id'])) {
 
-                        $query->whereIn('type_id', $params['type_id']);
-                    } else {
+						$query->whereIn('type_id', $params['type_id']);
+					} else {
 
-                        $query->where('type_id', $params['type_id']);
-                    }
+						$query->where('type_id', $params['type_id']);
+					}
 				}
 				if (key_exists('is_index', $params) && !is_null($params['is_index'])) {
 					$query->where('is_index', $params['is_index']);
@@ -114,8 +117,8 @@ Abstract Class BaseService {
 		$totalRowNumber = $totalQuery->count();
 		$this->setTotalRows($totalRowNumber);
 
-		if($totalRowNumber>0 && ceil($totalRowNumber/$amount)<$page) {
-			$skip = (ceil($totalRowNumber/$amount)-1) * $amount;
+		if ($totalRowNumber > 0 && ceil($totalRowNumber / $amount) < $page) {
+			$skip = (ceil($totalRowNumber / $amount) - 1) * $amount;
 		}
 
 		$query

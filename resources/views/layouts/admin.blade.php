@@ -55,7 +55,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li><a href="/">网站前台</a></li>
+                        <li><a href="/" target="_blank">网站前台</a></li>
 
                         <!-- Authentication Links -->
                         @if (Auth::guard('admin')->guest())

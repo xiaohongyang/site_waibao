@@ -18,17 +18,19 @@ class ArticleController extends BaseController {
 		$this->article = $article;
 	}
 
-	public function search(Request $request, $id) {
+	public function search(Request $request) {
 
-
-
-        $articleService = new ArticleService();
-        $query = $articleService->getPrevPageListQuery();
-        $query->where('type_id', $id);
-        $articleService->setPrevPageListQuery($query);
-        $pageData = $articleService->getPageList(1, 9999, null, 'updated_at', 'desc');
-        return view('article.survey', ['id' => $id, 'listData' => $pageData]);
-    }
+		$articleService = new ArticleService();
+		$query = $articleService->getPrevPageListQuery();
+		$key = $request->get('key');
+		if (!is_null($key)) {
+			$query->where('title', 'like', "%{$key}%");
+		}
+		$articleService->setPrevPageListQuery($query);
+		$pageData = $articleService->getPageList(1, 9999, null, 'updated_at', 'desc');
+		//sreturn view('article.survey', ['id' => $id, 'listData' => $pageData]);
+		return view('article.search', ['id' => 16, 'listData' => $pageData]);
+	}
 
 	public function list(Request $request, $id) {
 		if (is_null($id)) {
