@@ -225,7 +225,7 @@ $(function(){
                     var updated_at = renderItem['updated_at']
 
 
-                    var itemContent = contentTemplate.replace('[url]', url)
+                    var itemContent = contentTemplate.replace('/\[url\]/g', url)
                     itemContent = itemContent.replace(/\[title\]/g, title)
                     itemContent = itemContent.replace(/\[content\]/g, content)
                     itemContent = itemContent.replace(/\[updated_at\]/g, updated_at)
