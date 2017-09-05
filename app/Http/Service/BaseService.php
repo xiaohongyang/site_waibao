@@ -96,7 +96,7 @@ Abstract Class BaseService {
 		if (!is_null($params)) {
 			if (is_array($params)) {
 				if (key_exists('type_id', $params)) {
-				    if(is_array($params)) {
+				    if(is_array($params['type_id'])) {
 
                         $query->whereIn('type_id', $params['type_id']);
                     } else {

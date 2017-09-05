@@ -18,6 +18,18 @@ class ArticleController extends BaseController {
 		$this->article = $article;
 	}
 
+	public function search(Request $request, $id) {
+
+
+
+        $articleService = new ArticleService();
+        $query = $articleService->getPrevPageListQuery();
+        $query->where('type_id', $id);
+        $articleService->setPrevPageListQuery($query);
+        $pageData = $articleService->getPageList(1, 9999, null, 'updated_at', 'desc');
+        return view('article.survey', ['id' => $id, 'listData' => $pageData]);
+    }
+
 	public function list(Request $request, $id) {
 		if (is_null($id)) {
 			abort(404, '类别参数错误');

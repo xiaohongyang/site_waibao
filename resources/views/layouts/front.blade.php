@@ -86,9 +86,9 @@
         <a href="#">  <img src="/tpl/img/logo.png" id="logoimage" style="width: 178px;height: 48px;" alt="华测检测logo" class="logo f-l"/></a>
         <!--搜索框 begin-->
         <div class="search f-r pl">
-            <form action="queryAllMessage.do" method="post" id="allMessage">
+            <form action="/search" method="post" id="allMessage">
                 <input type="text" value="" name="title" class="text" id="title"/>
-                <div class="button"><a id="queryAllMessage" href="javascript:;"> <input type="button" value="" name="paramMap.title"  /></a></div>
+                <div class="button"><a id="queryAllMessage" href="javascript:;"> <input type="button" value="" name="key"  /></a></div>
             </form>
             <i class="ra ra-lt ra-s-lt"></i>
             <i class="ra ra-lb ra-s-lb"></i>
