@@ -75,7 +75,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <a href="{{ route('admin.logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
@@ -130,7 +130,7 @@
 
     <script src="{{ mix('js/site.js') }}"></script>
 
-     
+
     <!--include socket.io.js-->
     <!--<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>-->
 

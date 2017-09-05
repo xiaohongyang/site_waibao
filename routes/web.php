@@ -96,41 +96,41 @@ Route::get('passwordToken', function (\Illuminate\Http\Request $request) {
 	} else {
 		$user = \App\Models\Admin::where('email', $request->get('email'))->first();
 		// echo $user->email;exit;
-		
-		if(is_null($user)) {
+
+		if (is_null($user)) {
 			$result['data'] = '';
 			$result['message'] = 'email或者密码错误';
 		} else {
 
 			$token = $user->createToken(env('APP_URL'))->accessToken;
-			$result['data']  = [
-				'token' => $token
+			$result['data'] = [
+				'token' => $token,
 			];
 			$result['status'] = 1;
 		}
 
 		/*$http = new GuzzleHttp\Client();
 
-		$domain = env('APP_URL');
-		$domain = str_replace(':5000', '', $domain);
+			$domain = env('APP_URL');
+			$domain = str_replace(':5000', '', $domain);
 
-		try {
-			$response = $http->post($domain . '/oauth/token', [
-				'form_params' => [
-					'grant_type' => 'password',
-					'client_id' => '5',
-					'client_secret' => 'nnAzR3Is4IsQTrSmn6Yk78uKDgiGjWQ0wQ8bGJDG',
-					'username' => $user->email,
-					'password' => $request->get('password'),
-					'scope' => '',
-				],
-			]);
-			$result['status'] = 1;
-			$result['data'] = json_decode((string) $response->getBody(), true);
-		} catch (Exception $e) {
-			$result['data'] = "";
-			$result['message'] = "email或密码错误";
-		}*/
+			try {
+				$response = $http->post($domain . '/oauth/token', [
+					'form_params' => [
+						'grant_type' => 'password',
+						'client_id' => '5',
+						'client_secret' => 'nnAzR3Is4IsQTrSmn6Yk78uKDgiGjWQ0wQ8bGJDG',
+						'username' => $user->email,
+						'password' => $request->get('password'),
+						'scope' => '',
+					],
+				]);
+				$result['status'] = 1;
+				$result['data'] = json_decode((string) $response->getBody(), true);
+			} catch (Exception $e) {
+				$result['data'] = "";
+				$result['message'] = "email或密码错误";
+		*/
 	}
 
 	return $result;
@@ -297,7 +297,7 @@ Route::group([], function () {
 	Route::get('/admin', 'Admin\DashboardController@index')->name('admin.index');
 	Route::get('/admin/login', 'Admin\LoginController@showLoginForm')->name('admin.login');
 	Route::post('/admin/login', 'Admin\LoginController@login');
-	Route::get('/admin/logout', 'Admin\LoginController@logout');
+	Route::get('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
 	Route::post('/admin/logout', 'Admin\LoginController@logout');
 	Route::get('/admin/dashboard', 'Admin\DashboardController@index');
 	Route::get('/admin/test', 'Admin\LoginController@test');

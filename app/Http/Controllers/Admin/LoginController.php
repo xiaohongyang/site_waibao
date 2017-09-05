@@ -2,58 +2,46 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class LoginController extends BaseController
-{
-    //
+class LoginController extends BaseController {
+	//
 
-    use AuthenticatesUsers;
+	use AuthenticatesUsers;
 
-    protected $redirectTo = '/admin/dash';
+	protected $redirectTo = '/admin/dash';
 
-    protected $username;
+	protected $username;
 
+	public function __construct() {
 
-    public function __construct()
-    {
+		parent::__construct();
+		// $this->middleware('auth.admin', ['except' => ['showLoginForm']]);
+		$this->middleware('auth.checkIsAdmin', ['except' => ['logout']]);
+	}
 
-        parent::__construct();
-       // $this->middleware('auth.admin', ['except' => ['showLoginForm']]);
-        $this->middleware('auth.checkIsAdmin', ['except' => ['logout']]);
-    }
+	public function index() {
 
-    public function index(){
+	}
+	public function username() {
+		return 'name';
+	}
 
-    }
-    public function username()
-    {
-        return 'email';
-    }
+	public function test() {
+		echo 'test';
+	}
 
-    public function test(){
-        echo 'test';
-    }
-
-    public function showLoginForm()
-    {
-        return view('admin.login.login');
-    }
+	public function showLoginForm() {
+		return view('admin.login.login');
+	}
 
 //    public function login(Request $request)
-//    {
-//        return pa
-//    }
+	//    {
+	//        return pa
+	//    }
 
-
-    protected function guard()
-    {
-        return auth()->guard('admin');
-    }
-
-
-
+	protected function guard() {
+		return auth()->guard('admin');
+	}
 
 }
