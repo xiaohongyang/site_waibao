@@ -87,7 +87,7 @@
         <!--搜索框 begin-->
         <div class="search f-r pl">s
             <form action="/search" method="get" id="allMessage">
-                <input type="text" value="{{$_REQUEST['key']}}" name="key" class="text" id="title"/>
+                <input type="text" value="{{key_exists('key', $_REQUEST) ? $_REQUEST['key'] : ''}}" name="key" class="text" id="title"/>
                 <div class="button"><a id="queryAllMessage" href="javascript:;"> <input type="button" value="" name="key"  /></a></div>
             </form>
             <i class="ra ra-lt ra-s-lt"></i>
