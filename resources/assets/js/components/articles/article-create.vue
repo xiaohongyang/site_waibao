@@ -49,8 +49,8 @@
         <div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" v-if="is_index==1" checked="checked" @click="updateIsIndex()">
-                    <input type="checkbox" v-else @click="updateIsIndex()" > 推荐到首页
+                     
+                    <input type="checkbox" @change="updateIsIndex" v-model="is_index" v-bind:true-value="1" v-bind:false-value="0"  > 推荐到首页
                 </label>
             </div>
         </div> 
@@ -104,9 +104,8 @@
 
             updateIsIndex : function(){
 
-                var index = this.is_index==0 ? 1 : 0;
-                alert(index)
-                this.is_index = index
+                //var index = this.is_index 
+                //alert(index) 
             },
             //上传图片
             uploadFile : function(){
