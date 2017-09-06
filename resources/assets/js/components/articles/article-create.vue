@@ -104,7 +104,9 @@
 
             updateIsIndex : function(){
 
-                this.is_index = this.is_index==0 ? 1 : 0;
+                var index = this.is_index==0 ? 1 : 0;
+                alert(index)
+                this.is_index = index
             },
             //上传图片
             uploadFile : function(){

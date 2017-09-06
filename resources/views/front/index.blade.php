@@ -13,7 +13,7 @@ $a = "abc";
                 <?php
                     if(is_array($channels) && count($channels)){
                         foreach ($channels as $key=>$channel){
-                            if($key < 3){
+                            if($key < 2){
                 ?>
                                 <a id="service_list" href="javascript:;" class="<?=$key==0?'cur border_radius_left': ($key==2?'border_radius_right' : '')?> ">{{$channel['name']}}</a>
                                 {{--<a id="service_list" href="javascript:;" class="cur border_radius_left">按行业</a>
@@ -28,7 +28,7 @@ $a = "abc";
             <?php
                 if(is_array($channels) && count($channels)){
                     foreach ($channels as $key=>$channel){
-                        if($key < 3){
+                        if($key < 2){
             ?>
                             <div class="show_ul <?=$key==0?'cur':''?> cl">
                                 <div class="show_ul_wrap cl">
@@ -57,7 +57,7 @@ $a = "abc";
                 <?php
                 if(is_array($channels) && count($channels)){
                     foreach ($channels as $key=>$channel){
-                        if($key < 3){
+                        if($key >= 2 && $key < 4){
                         ?>
                             <a id="news_list" href="javascript:;" class="{{$key==0?'cur':''}} border_radius_left">{{$channel['name']}}</a>
                         <?php
@@ -71,7 +71,7 @@ $a = "abc";
             <?php
             if(is_array($channels) && count($channels)){
                 foreach ($channels as $key=>$channel){
-                    if($key < 3){
+                    if($key >=2 && $key < 4){
             ?>
                         <div class="main_pic_all  <?=$key==0?'cur':''?>">
                             <?php
