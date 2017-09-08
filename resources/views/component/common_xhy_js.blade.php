@@ -7,6 +7,25 @@ $.fn.xhyAlert = {
 }
 
 
+//轮播图片初始化
+var initSlideContent = function(){
+
+    this.url = '/api/articles?case=page&type_id='+type_id+'&page='+ page +'&amount=' + amount
+
+    $.ajax({
+        url : this.url,
+        type : 'get',
+        dataType : 'json',
+        success : function(data) {
+            if(data.status == 1) {
+                $.fn.xhyPage.init();
+                var data = {total : data.page.total, data: data.data}
+                $.fn.xhyPage.updateData(data, page)
+            }
+        }
+    })
+}
+
 
 
 var slidePic = function(picSrc,opacity) {
@@ -23,6 +42,8 @@ var slidePic = function(picSrc,opacity) {
         config.borderStyle = {opacity : opacity}
     var obj = $.x_slide_pic(config);
 }
+
+
 
 //x_say插件
 !(function(){

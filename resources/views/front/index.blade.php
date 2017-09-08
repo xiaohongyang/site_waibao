@@ -1,7 +1,4 @@
 @extends('layouts.front')
-<?php
-$a = "abc";
-?>
 
 
 @section('content')
