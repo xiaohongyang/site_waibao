@@ -18,3 +18,4 @@ Homestead.yaml
 /public/js
 /public/fonts
 /*.log
+/.env
