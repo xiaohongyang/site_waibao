@@ -7,10 +7,66 @@ $.fn.xhyAlert = {
 }
 
 
-//轮播图片初始化
-var initSlideContent = function(){
+$(function(){
 
+});
+
+var headBannerAction  = function(){
+    DSG.banner();
+    $(".i-banner").each(function(){
+        DSG.banner({objid:$(this)});
+    })
+    //显示更多
+    var
+        show = $('#show_ul'),
+        wraps = show.find('.show_ul_wrap'),
+        pageNum = 16;
+    wraps.each(function(wrapsIndex){
+        var _this = $(this),
+            items = _this.find('li'),
+            count = items.length,
+            pageCount = Math.ceil(count/pageNum),
+            tapItemHtml = '',
+            tapItem = null,
+            index = null;
+        if(pageCount>1){
+            for(var i=0;i<pageCount;i++){
+                var star = i*pageNum,
+                    end = pageNum*(i+1);
+                if(end >= count){
+                    end = count;
+                }
+                items.slice(star,end).wrapAll('<ul class="cl"></ul>')
+                tapItemHtml +='<span></span>';
+            }
+            _this.width(345*pageCount);
+            _this.after('<div class="showMore">'+tapItemHtml+'</div>');
+            tapItem = $('.showMore').eq(wrapsIndex).find('span');
+            tapItem.eq(0).addClass('active');
+            tapItem.on('mouseover',function(){
+                index = tapItem.index($(this));
+                tapItem.removeClass('active').eq(index).addClass('active');
+                _this.animate({left:-index*345+'px'});
+            });
+        }
+    });
+}
+
+//轮播图片初始化
+var initHeadSlidePic = function(){
+
+    var type_id = 43;
+    var amount = 5;
+    var page = 1;
     this.url = '/api/articles?case=page&type_id='+type_id+'&page='+ page +'&amount=' + amount
+
+    var template = '<li> \
+                        <a href="[link]"><img src="[pic]"><i></i></a> \
+                        <p class="bg"></p> \
+                        <a href="[link]" class="word">[title]</a> \
+                    </li>';
+
+    var wrapperId = '.banner-wrap';
 
     $.ajax({
         url : this.url,
@@ -18,14 +74,29 @@ var initSlideContent = function(){
         dataType : 'json',
         success : function(data) {
             if(data.status == 1) {
-                $.fn.xhyPage.init();
-                var data = {total : data.page.total, data: data.data}
-                $.fn.xhyPage.updateData(data, page)
+
+                if(data.status==1 && data.data.length > 0) {
+                    var list = data.data
+                    for(var i=0; i<list.length; i++) {
+                        var url = list[i]['link'] ? list[i]['link'] : '#'
+                        var itemContent = template.replace(/\[url\]/g, url);
+                        itemContent = itemContent.replace(/\[pic\]/g, list[i]['thumb'])
+                        itemContent = itemContent.replace(/\[pic\]/g, list[i]['title'])
+
+
+                        console.log('itemContent:' + itemContent)
+                        $(wrapperId).append(itemContent)
+                    }
+                }
             }
+
+            headBannerAction()
         }
     })
 }
 
+
+initHeadSlidePic()
 
 
 var slidePic = function(picSrc,opacity) {

@@ -426,46 +426,7 @@
     }
 </script>
 <script>
-    $(function(){
-        DSG.banner();
-        $(".i-banner").each(function(){
-            DSG.banner({objid:$(this)});
-        })
-        //显示更多
-        var
-            show = $('#show_ul'),
-            wraps = show.find('.show_ul_wrap'),
-            pageNum = 16;
-        wraps.each(function(wrapsIndex){
-            var _this = $(this),
-                items = _this.find('li'),
-                count = items.length,
-                pageCount = Math.ceil(count/pageNum),
-                tapItemHtml = '',
-                tapItem = null,
-                index = null;
-            if(pageCount>1){
-                for(var i=0;i<pageCount;i++){
-                    var star = i*pageNum,
-                        end = pageNum*(i+1);
-                    if(end >= count){
-                        end = count;
-                    }
-                    items.slice(star,end).wrapAll('<ul class="cl"></ul>')
-                    tapItemHtml +='<span></span>';
-                }
-                _this.width(345*pageCount);
-                _this.after('<div class="showMore">'+tapItemHtml+'</div>');
-                tapItem = $('.showMore').eq(wrapsIndex).find('span');
-                tapItem.eq(0).addClass('active');
-                tapItem.on('mouseover',function(){
-                    index = tapItem.index($(this));
-                    tapItem.removeClass('active').eq(index).addClass('active');
-                    _this.animate({left:-index*345+'px'});
-                });
-            }
-        });
-    });
+
 </script>
 <script type="text/javascript">
     var thePlayer;  //保存当前播放器以便操作

@@ -1,6 +1,6 @@
 <div class="item-topBox">
     <div class="i-banner">
-        <ul class="banner-lis">
+        <ul class="banner-lis banner-wrap">
             <li>
                 <a href="#"><img src="/tpl/hcPicture/201609070922239057.jpg"><i></i></a>
                 <p class="bg"></p>
