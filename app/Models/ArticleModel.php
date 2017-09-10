@@ -12,18 +12,19 @@ class ArticleModel extends BaseModel {
 	protected $table = 'articles';
 
 	public $fillable = [
-		'title', 'thumb', 'type_id', 'content', 'author', 'user_id', 'from_host', 'file', 'is_index', 'attach_file',
+		'title', 'thumb', 'type_id', 'content', 'author', 'user_id', 'from_host', 'file', 'is_index', 'attach_file', 'link',
 	];
 
-	public function createParams($title, $thumb = null, $type_id = null, $content = null, $file, $is_index, $attach_file) {
+	public function createParams($title, $thumb = null, $type_id = null, $content = null, $file= null, $is_index= null, $attach_file= null, $link=null) {
 
 		$title = is_null($title) ? 0 : $title;
 		$thumb = is_null($thumb) ? '' : $thumb;
 		$type_id = is_null($type_id) ? 0 : $type_id;
-		$content = is_null($content) ? 0 : $content;
+		$content = is_null($content) ? '' : $content;
 		$file = is_null($file) ? '' : $file;
 		$is_index = is_null($is_index) ? 0 : $is_index;
 		$attach_file = is_null($attach_file) ? '' : $attach_file;
+		$link = is_null($link) ? '' : $link;
 
 		$data = [
 			'title' => $title,
@@ -33,6 +34,7 @@ class ArticleModel extends BaseModel {
 			'file' => $file,
 			'is_index' => $is_index,
 			'attach_file' => $attach_file,
+			'link' => $link,
 		];
 
 		$validator = \Validator::make($data, [
@@ -47,8 +49,7 @@ class ArticleModel extends BaseModel {
 		return $result;
 	}
 
-	public function edit($id, $title = null, $thumb = null, $type_id = null, $content = null, $file = null, $is_index = null, $attach_file = null) {
-
+	public function edit($id, $title = null, $thumb = null, $type_id = null, $content = null, $file = null, $is_index = null, $attach_file = null, $link = null) {
 		$data = [
 			'id' => $id,
 		];
@@ -84,6 +85,10 @@ class ArticleModel extends BaseModel {
 		if (!is_null($attach_file)) {
 			$data['attach_file'] = $attach_file;
 			$rules['attach_file'] = ['required'];
+		}
+		if (!is_null($link)) {
+			$data['link'] = $link;
+			$rules['link'] = ['required'];
 		}
 
 		$validator = \Validator::make($data, $rules);

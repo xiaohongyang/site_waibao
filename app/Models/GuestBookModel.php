@@ -53,6 +53,10 @@ class GuestBookModel extends BaseModel {
 			'column03' => $column03,
 			'column04' => $column04,
 			'column05' => $column05,
+			'column06' => $column06,
+			'column07' => $column07,
+			'column08' => $column08,
+			'column09' => $column09,
 			'column10' => $column10,
 			'type_id' => $typeId,
 		];

@@ -82,7 +82,6 @@ Abstract Class BaseService {
 
 		$page = !is_null($page) ? $page : 1;
 		$amount = !is_null($amount) ? $amount : 10;
-		$search = !is_null($search) ? $search : '';
 		$orderColumn = !is_null($orderColumn) ? $orderColumn : 'id';
 		$orderMethod = !is_null($orderMethod) ? $orderMethod : 'desc';
 
@@ -92,6 +91,7 @@ Abstract Class BaseService {
 		$skip = ($page - 1) * $amount;
 
 		$query = $this->getPrevPageListQuery();
+
 		if (!is_null($search)) {
 			$query->where('title', 'like', "%{$search}%");
 		}
@@ -107,9 +107,14 @@ Abstract Class BaseService {
 						$query->where('type_id', $params['type_id']);
 					}
 				}
+				if (key_exists('created_at', $params) && is_array($params['created_at'])) {
+
+					$query->whereBetween('created_at', $params['created_at']);
+				}
 				if (key_exists('is_index', $params) && !is_null($params['is_index'])) {
 					$query->where('is_index', $params['is_index']);
 				}
+
 			}
 		}
 

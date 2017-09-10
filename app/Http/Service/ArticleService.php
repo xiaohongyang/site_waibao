@@ -17,20 +17,20 @@ class ArticleService extends BaseService {
 		$this->model = new ArticleModel();
 	}
 
-	public function create($title, $thumb = null, $typeId = null, $content = null, $file = null, $is_index = null, $attach_file = null) {
+	public function create($title, $thumb = null, $typeId = null, $content = null, $file = null, $is_index = null, $attach_file = null, $link = null) {
 
-		$result = $this->model->createParams($title, $thumb, $typeId, $content, $file, $is_index, $attach_file);
+		$result = $this->model->createParams($title, $thumb, $typeId, $content, $file, $is_index, $attach_file, $link);
 		return $result;
 	}
 
 	/**
 	 * 编辑
 	 */
-	public function edit($id, $title, $thumb = null, $typeId = null, $content = null, $file = null, $is_index = null, $attach_file = null) {
+	public function edit($id, $title, $thumb = null, $typeId = null, $content = null, $file = null, $is_index = null, $attach_file = null, $link = null) {
 
 		$this->model = $this->model::find($id);
 		if (!is_null($this->model)) {
-			$result = $this->model->edit($id, $title, $thumb, $typeId, $content, $file, $is_index, $attach_file);
+			$result = $this->model->edit($id, $title, $thumb, $typeId, $content, $file, $is_index, $attach_file, $link);
 			return $result;
 
 		} else {

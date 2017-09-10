@@ -27,6 +27,8 @@ class ArticleController extends BaseApiController {
 			$search = $request->get('search');
 			$type_id = $request->get('type_id');
 			$is_index = $request->get('is_index');
+			$list_year = $request->get('list_year');
+
 			$type_id = $type_id == 0 ? null : $type_id;
 
 			$orderColumn = $request->get('orderColumn', 'updated_at');
@@ -35,6 +37,14 @@ class ArticleController extends BaseApiController {
 				'relation' => 'articletype',
 				'is_index' => $is_index,
 			];
+
+			if (!is_null($list_year) && preg_match('/[\d]/', $list_year)) {
+				$beginTime = $list_year . '-01-01';
+				$endTime = date('Y-01-01', strtotime('+1 year', strtotime($beginTime)));
+
+				$params['created_at'] = ['between' => [$beginTime, $endTime]];
+			}
+
 			if (!is_null($type_id)) {
 				$typeService = new ArticleTypeService();
 				$typeIds = $typeService->getListIds($type_id);
@@ -42,6 +52,9 @@ class ArticleController extends BaseApiController {
 
 					$params['type_id'] = $typeIds;
 				}
+			} else if (!is_null($search)) {
+				//不限购类别是搜索
+				$params['type_id'] = [25, 26, 36, 29];
 			}
 
 			$result = $articleService->getPageList($page, $amount, $search, $orderColumn, $orderMethod, $params);
@@ -88,9 +101,10 @@ class ArticleController extends BaseApiController {
 		$file = $request->get('file');
 		$is_index = $request->get('is_index');
 		$attach_file = $request->get('attach_file');
+		$link = $request->get('link');
 		$articleService = new ArticleService();
 
-		$result = $articleService->create($title, $thumb, $typeId, $content, $file, $is_index, $attach_file);
+		$result = $articleService->create($title, $thumb, $typeId, $content, $file, $is_index, $attach_file, $link);
 
 		$message = $result ? $articleService->getModel() : ($articleService->getMessage() ?: 'failed');
 		$this->setJsonResult($result ? 1 : 0, $message);
@@ -143,9 +157,10 @@ class ArticleController extends BaseApiController {
 		$file = $request->get('file');
 		$is_index = $request->get('is_index');
 		$attach_file = $request->get('attach_file');
+		$link = $request->get('link');
 		$articleService = new ArticleService();
 
-		$result = $articleService->edit($id, $title, $thumb, $typeId, $content, $file, $is_index, $attach_file);
+		$result = $articleService->edit($id, $title, $thumb, $typeId, $content, $file, $is_index, $attach_file, $link);
 
 		$message = $result ? '更新成功' : ($articleService->getMessage() ?: '更新失败');
 		$resultData = $result ? $articleService->getModel() : [];

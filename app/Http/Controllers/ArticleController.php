@@ -20,14 +20,19 @@ class ArticleController extends BaseController {
 
 	public function search(Request $request) {
 
+		\DB::enableQueryLog();
 		$articleService = new ArticleService();
 		$query = $articleService->getPrevPageListQuery();
 		$key = $request->get('key');
 		if (!is_null($key)) {
 			$query->where('title', 'like', "%{$key}%");
 		}
+
+		$query->where('type_id', 25);
 		$articleService->setPrevPageListQuery($query);
-		$pageData = $articleService->getPageList(1, 9999, null, 'updated_at', 'desc');
+		$pageData = $articleService->getPageList(1, 9999, $key, 'updated_at', 'desc');
+		$queries = \DB::getQueryLog();
+		print_r($queries);
 		//sreturn view('article.survey', ['id' => $id, 'listData' => $pageData]);
 		return view('article.search', ['id' => 16, 'listData' => $pageData]);
 	}
