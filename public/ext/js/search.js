@@ -124,6 +124,8 @@ $(function(){
                         'content' : data.data[i]['description'].substr(0, 70),
                         'thumb' : data.data[i]['thumb'],
                         'updated_at' : data.data[i]['updated_at'],
+                        'attach_file' : data.data[i]['attach_file'],
+                        'type_id' : data.data[i]['type_id'],
                     })
                 }
             }
@@ -221,6 +223,8 @@ $(function(){
                     var thumb = renderItem['thumb']
                     var updated_at = renderItem['updated_at']
 
+                    url = renderItem['type_id'] == 29 ? renderItem['attach_file'] : url;
+                    title = renderItem['type_id'] == 29 ? title + '(下载)' : title;
 
                     var itemContent = contentTemplate.replace('[url]', url)
                     itemContent = itemContent.replace(/\[title\]/g, title)

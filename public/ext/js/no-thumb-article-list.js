@@ -30,7 +30,10 @@ $(function(){
 
             var type_id = $('input[type=hidden][name=type_id]').val()
 
-            this.url = '/api/articles?case=page&type_id='+type_id+'&page='+ page +'&amount=' + amount
+            var list_search = $('input[name=list_search]').val();
+            var list_year = $('input[name=list_year]').val();
+
+            this.url = '/api/articles?case=page&type_id='+type_id+'&page='+ page +'&amount=' + amount + '&search=' + list_search + '&list_year=' + list_year
 
             $.ajax({
                 url : this.url,

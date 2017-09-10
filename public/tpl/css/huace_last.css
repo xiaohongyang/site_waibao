@@ -18,7 +18,9 @@ table{border-collapse:collapse;}
 
 /*全局公用*/
 .icon,.ra,.search .button,.global-websites .tl.cur .i-arrow-b{background-image:url("../image/all-bg.png");background-repeat: no-repeat;}
-.cl{zoom: 1;}
+.cl{zoom: 1; }
+
+
 .cl:after{content:"";display:table;clear:both;line-height:0;height:0;visibility: hidden;}
 .pl{position:relative;}
 .f-l{float:left;}
@@ -131,11 +133,13 @@ table{border-collapse:collapse;}
 .adv a{display: block;height: 100%;position: relative;}
 .adv a:hover i{position:absolute;top: 0;bottom: 0;left: 0;right: 0;background:#fff;filter:alpha(opacity=5);background: rgba(255,255,255,.05);}
 /*底部*/
-.footer{width: 100%;min-width:980px;margin:0 auto;height:335px ;background: #4C4C4C;color: #fff;}
+.footer{width: 100%;min-width:980px;margin:0 auto;height:390px ;background: #4C4C4C;color: #fff;}
+.footer .cl{zoom: 1; height: 258px;}
 .footer a{color: #fff;}
 .footer a:hover{color: #ABCF4D;}
 .footer .w{width:980px;padding:45px 0 0 0;margin: 0 auto;}
-.footer .w dl{float:left;width:140px;height:208px;color: #fff;}
+.footer .w dl{float:left;width:198px;height:208px;color: #fff;}
+.footer .w dl:first-child{ width:118px}
 .footer .w dl dt{height:14px;margin:0 0 36px 0;line-height:14px;font-size: 14px;color: #ABCF4D;font-weight: bolder;}
 .footer .w dl dd{height:12px;margin: 0 0 12px 0;line-height: 12px;}
 .footer .w .last{height: 208px;position: relative;top: -3px;font-size:14px;line-height: 24px;}
@@ -863,6 +867,7 @@ span.cur{display:inline-block;}
 .gupiao i{background:url(../image/gupiao1.png) no-repeat;width:43px;height:33px;display:inline-block;vertical-align:middle;margin-left:36px;font-size:14px;color:#5b5b5b;margin-right:4px;}
 .gupiao em{background:url(../image/gupiao2.png) no-repeat;width:43px;height:30px;display:inline-block;vertical-align:middle;}
 /*右侧固定层*/
+.main_right_bar{display: none;}
 .main_right_bar{width:104px;height:188px;background-color:#abcf4d;position:fixed;right:10px;bottom:150px;padding-top:10px;-webkit-border-radius:8px;-moz-border-radius:8px;z-index:200;}
 .main_right_bar div{margin-left:12px;margin-bottom:5px;}
 .main_right_bar i{display: block;width: 12px;height: 74px;margin-top:-37px;position: absolute;left: -11px;top: 50%;background: url(../image/right_bar_btn.png)  -12px 0 no-repeat;cursor: pointer;}
@@ -967,7 +972,7 @@ span.cur{display:inline-block;}
 .map_icon{background:url(../image/map.png);background-repeat: no-repeat;}
 .nav-w .nav .sub_nav_child{position:absolute;*top:48px;background:url(../image/sub_nav_child1.png) repeat-x;width:980px;height:294px;margin-left:-30px;*margin-left:-115px;zoom:1;}
 .nav_title_two_three .sub_nav_child{*margin-left:-116px;zoom:1;}
-.nav_title .sub_nav_child .sub_float{float:left;width:490px;height:240px;font-size:12px;color:#464646;background:url(../image/have.png) no-repeat 20px 12px;margin-top:20px;}
+.nav_title .sub_nav_child .sub_float{float:left;width:490px;height:240px;font-size:12px;color:#464646;background:url(../image/have.png) no-repeat 20px 12px;margin-top:5px;}
 .sub_nav_child  .sub_float h3{height:30px;margin:-8px 0px 10px 35px;color:#2f375d;font-size:16px;font-weight:100;}
 .sub_nav_child  .sub_float ul{overflow:hidden;margin-right:-10px;}
 .sub_nav_child  .sub_float ul li{float:left;width:160px;line-height:26px;padding-right:0px;}
@@ -983,7 +988,7 @@ span.cur{display:inline-block;}
 .nav_title .sub_nav_child .service1_more{clear:both;margin-left:910px;line-height:20px;}
 .nav_title .sub_nav_child .service1_more a{font-size:12px;color:#303962;}
 /*新闻资讯*/
-.nav-w .nav .nav_title_two .sub_nav_child{padding:0px 30px;width:330px;}
+.nav-w .nav .nav_title_two .sub_nav_child{padding:0px 30px;width:64px;}
 .nav_title_two .sub_nav_child .sub_float{background:none;width:194px;margin-left:-38px;}
 /*.nav_title_two .sub_nav_child .sub_float ul li:hover{background:url(../image/triangle1.png) no-repeat 164px 9px;}*/
 .nav_title_two .sub_nav_child .sub_float_two{padding:0 30px;width:240px;margin-left:0px;position: relative;top: 12px;}
@@ -1186,3 +1191,7 @@ span.cur{display:inline-block;}
 	width: 70px;
 	line-height: 30px;border-radius: 5px;color:#FFF}
 .iread:hover{background:#8a9e49; color:#FFF}
+
+.foooterbnt{
+	left :47px;
+}
