@@ -1,6 +1,9 @@
 var ConfigPlugin = {};
-const host = "http://www.tb-jc.com"
-const webHost = "http://www.tb-jc.com"
+// const host = "http://www.tb-jc.com"
+// const webHost = "http://www.tb-jc.com"
+
+const host = "http://web.local"
+const webHost = "http://web.local"
 ConfigPlugin.install = function (Vue, options) {
     Vue.prototype.$config = {
         directory : {

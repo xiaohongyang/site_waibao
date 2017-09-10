@@ -53,7 +53,19 @@
 
     export default {
         t : this,
-        props : {typeId : {default:1}},
+        props : {typeId : {default:1}, 
+            columnList : {
+            default : [
+                { data : 'id', "title" : "标题"},
+                { data : 'column01', "title" : "主题"},
+                { data : 'column02', "title" : "公司名称"},
+                { data : 'column03', "title" : "姓名"},
+                { data : 'column04', "title" : "电话"},
+                { data : 'column05', "title" : "电邮"},
+                { data : 'column10', "title" : "内容"},
+                { data : 'created_at', "title" : "添加日期"}
+            ]
+        }},
         data : function(){
             return {
                 data : [],
@@ -66,6 +78,7 @@
                 title : this.titleValue,
                 type_id : this.typeId,
                 datatable_obj : [],
+                column_list : this.columnList
             }
         },
         mounted : function(){
@@ -143,18 +156,16 @@
                             console.log('dataSet -------------------------------------')
                             console.log(dataSet)
 
-                            t.datatable_obj = $('#datatable').DataTable({
-                                data: dataSet,
-                                columns: [
-                                    { data : 'id', "title" : "标题"},
-                                    { data : 'column01', "title" : "主题"},
-                                    { data : 'column02', "title" : "公司名称"},
-                                    { data : 'column03', "title" : "姓名"},
-                                    { data : 'column04', "title" : "电话"},
-                                    { data : 'column05', "title" : "电邮"},
-                                    { data : 'column10', "title" : "内容"},
-                                    { data : 'created_at', "title" : "添加日期"},
-                                    {
+                            var columnList
+                            if(typeof t.column_list == 'string') {
+
+                                t.column_list = JSON.parse(t.column_list)
+                            }
+                            columnList = t.column_list
+                            var columns = []
+                            columns = columns.concat(columnList);
+                            columns = columns.concat([
+                                 {
                                         orderable: false, title: '操作', className: 'page-numeric', render: function (data, type, row) {
 
                                             var editStr = '';
@@ -166,7 +177,10 @@
                                             return editStr ;
                                         }
                                     }
-                                ],
+                            ])
+                            t.datatable_obj = $('#datatable').DataTable({
+                                data: dataSet,
+                                columns: columns,
                                 "paginate": true,// 分页按钮,
                                 "language": { 
                                     "sProcessing": "处理中...",

@@ -16,6 +16,27 @@ foreach ($typeArr as $typeName) {
 }
 
 $types = getTypeList($rootId, 'id');
+if (count($types) > 1) {
+	$rootType = getTypeItem($rootId, 'id', $globalTypeList);
+	$currentType = getTypeItem($id, 'id', $globalTypeList);
+} else {
+
+	$rootId = 17;
+	foreach ($typeArr as $typeName) {
+
+		$types = getTypeList($typeName, 'name');
+		if (count($types)) {
+			foreach ($types as $item) {
+				if ($item['id'] == $rootId) {
+					$rootId = $types[0]['id'];
+				}
+
+			}
+		}
+	}
+	$rootType = getTypeItem($rootId, 'id', $globalTypeList);
+	$currentType = getTypeItem($id, 'id', $globalTypeList);
+}
 
 ?>
 @section('content')
@@ -47,9 +68,9 @@ $types = getTypeList($rootId, 'id');
 
             <div class="newsWord news-company ">
                 <?php
-                    $currentType = getTypeItem($id, 'id', $globalTypeList);
-                    echo $currentType['content'];
-                ?>
+$currentType = getTypeItem($id, 'id', $globalTypeList);
+echo $currentType['content'];
+?>
 
             </div>
 

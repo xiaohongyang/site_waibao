@@ -2,7 +2,7 @@
         <ul class="menuContainer">
             <li v-for="item in treeData" class="eachLi"  >
             	 
-                	{{"----".repeat(item['level']-1)}} {{item['name']}}
+                	{{"----".repeat(item['level']-1)}}(id:{{item['id']}}) {{item['name']}}
 
 	                
 		                <button type="button" class="btn   btn-default margin-row edit"

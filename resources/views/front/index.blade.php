@@ -8,74 +8,74 @@
         <div class="float no_marginLeft float1"  id="show_ul">
             <div class="choose choose1">
                 <?php
-                    if(is_array($channels) && count($channels)){
-                        foreach ($channels as $key=>$channel){
-                            if($key < 2){
-                ?>
-                                <a id="service_list" href="javascript:;" class="<?=$key==0?'cur border_radius_left': ($key==2?'border_radius_right' : '')?> ">{{$channel['name']}}</a>
+if (is_array($channels) && count($channels)) {
+	foreach ($channels as $key => $channel) {
+		if ($key < 1) {
+			?>
+                                <a id="service_list" href="javascript:;" class="<?=$key == 0 ? 'cur border_radius_left' : ($key == 2 ? 'border_radius_right' : '')?> ">{{$channel['name']}}</a>
                                 {{--<a id="service_list" href="javascript:;" class="cur border_radius_left">按行业</a>
                                 <a id="profession_list" href="javascript:;">按服务</a>
                                 <a id="plan_list" href="javascript:;" class="border_radius_right">推荐方案</a>--}}
                 <?php
-                            }
-                        }
-                    }
-                ?>
+}
+	}
+}
+?>
             </div>
             <?php
-                if(is_array($channels) && count($channels)){
-                    foreach ($channels as $key=>$channel){
-                        if($key < 2){
-            ?>
-                            <div class="show_ul <?=$key==0?'cur':''?> cl">
+if (is_array($channels) && count($channels)) {
+	foreach ($channels as $key => $channel) {
+		if ($key < 1) {
+			?>
+                            <div class="show_ul <?=$key == 0 ? 'cur' : ''?> cl">
                                 <div class="show_ul_wrap cl">
             <?php
-                                if(count($channel['article_list'])){
-                                    foreach ($channel['article_list'] as $article){
+if (count($channel['article_list'])) {
+				foreach ($channel['article_list'] as $article) {
 
-            ?>
+					?>
                                             <li><i></i><a href="{{route('article_detail', ['id'=>$article['id']])}}" title="{{$article['title']}}">{{mb_substr($article['title'],0,30)}}</a></li>
             <?php
-                                    }
-                                }
-            ?>
+}
+			}
+			?>
                                 </div>
                             </div>
             <?php
-                        }
-                    }
-                }
-            ?>
+}
+	}
+}
+?>
         </div>
 
 
         <div class="float float2">
             <div class="choose choose_news">
                 <?php
-                if(is_array($channels) && count($channels)){
-                    foreach ($channels as $key=>$channel){
-                        if($key >= 2 && $key < 4){
-                        ?>
-                            <a id="news_list" href="javascript:;" class="{{$key==0?'cur':''}} border_radius_left">{{$channel['name']}}</a>
+if (is_array($channels) && count($channels)) {
+	foreach ($channels as $key => $channel) {
+		if (in_array($channel['id'], [36])) {
+			?>
+                            <a id="news_list" href="javascript:;" class="{{$channel['id'] == 36?'cur':''}} border_radius_left">{{$channel['name']}}</a>
                         <?php
-                        }
-                    }
-                }
-                ?>
+}
+	}
+}
+?>
             </div>
 
 
             <?php
-            if(is_array($channels) && count($channels)){
-                foreach ($channels as $key=>$channel){
-                    if($key >=2 && $key < 4){
-            ?>
-                        <div class="main_pic_all  <?=$key==0?'cur':''?>">
+if (is_array($channels) && count($channels)) {
+	foreach ($channels as $key => $channel) {
+		if ($channel['id'] == 36) {
+			?>
+                        <div class="main_pic_all  <?=$channel['id'] == 36 ? 'cur' : ''?>">
                             <?php
-                            if(count($channel['article_list'])){
-                                foreach ($channel['article_list'] as $key_02=> $article){
-                                    if($key_02==0){
-                            ?>
+if (count($channel['article_list'])) {
+				foreach ($channel['article_list'] as $key_02 => $article) {
+					if ($key_02 == 0) {
+						?>
                                         <div class="main_pic">
                                             <img src="{{showPic($article['thumb'])}}" width="150px" height="92px"/>
                                             <div class="fl_right">
@@ -88,24 +88,22 @@
                                         </div>
                                         <ul class="green">
                             <?php
-                                    } else {
+} else {
 
-                            ?>
+						?>
                                         <li><i></i><a href="{{route('article_detail', ['id'=>$article['id']])}}" title="{{$article['title']}}">{{mb_substr($article['title'],0,22)}}...</a></li>
                             <?php
-                                    }
-                                }
-                                echo '</ul>';
-                            }
-                            ?>
-
-
+}
+				}
+				echo '</ul>';
+			}
+			?>
                         </div>
             <?php
-                    }
-                }
-            }
-            ?>
+}
+	}
+}
+?>
 
 
 
@@ -143,59 +141,39 @@
 
         </div>
 
+        <?php
+if (is_array($channels) && count($channels)) {
+	foreach ($channels as $key => $channel) {
+		if ($channel['id'] == 29) {
+			?>
+                    <div class="float index_tree no_marginLeft float1" id="show_ul" style="width:235px; margin-left: 20px">
+                        <div class="choose choose1"><a id="service_list" href="javascript:;" class="cur border_radius_left">{{$channel['name']}}</a>
+                        </div>
+                        <div class="show_ul cur cl">
+                            <div class="show_ul_wrap cl">
+                    <?php
+if (count($channel['article_list'])) {
+				foreach ($channel['article_list'] as $key_02 => $article) {
 
-        <div class="float index_tree no_marginLeft float1" id="show_ul" style="width:235px; margin-left: 20px">
-            <div class="choose choose1"><a id="service_list" href="javascript:;" class="cur border_radius_left">按行业111</a> </div>
-            <div class="show_ul cur cl">
-                <div class="show_ul_wrap cl">
-                    <li><i></i><a href="#" title="电子电气">
-                            电子电气</a></li>
+					?>
+                            <li><i></i><a href="<?=$article['attach_file']?>"
+                                          target = "_blank"
+                                          title="{$article['title']}"><?=$article['title']?></a></li>
+                        <?php
 
-                    <li><i></i><a href="#" title="船舶">
-                            船舶</a></li>
+				}
+				echo '</ul>';
+			}
+			?>
+                            </div>
+                        </div>
+                    </div>
+        <?php
+}
+	}
+}
+?>
 
-                    <li><i></i><a href="#" title="计量校准及尺寸">
-                            计量校准及尺寸</a></li>
-
-                    <li><i></i><a href="#" title="食品药品农产品及保化">
-                            食品药品农产品及保化</a></li>
-
-                    <li><i></i><a href="#" title="轻工及玩具">
-                            轻工及玩具</a></li>
-
-                    <li><i></i><a href="#" title="汽车材料及零部件">
-                            汽车材料及零部件</a></li>
-
-                    <li><i></i><a href="#" title="纺织品、鞋类及皮革">
-                            纺织品、鞋类及皮革</a></li>
-
-                    <li><i></i><a href="#" title="建材与工程">
-                            建材与工程</a></li>
-
-                    <li><i></i><a href="#" title="金属材料及零部件">
-                            金属材料及零部件</a></li>
-
-                    <li><i></i><a href="#" title="新能源风电">
-                            新能源风电</a></li>
-
-                    <li><i></i><a href="#" title="半导体及相关领域">
-                            半导体及相关领域</a></li>
-
-                    <li><i></i><a href="#" title="奢侈品">
-                            奢侈品</a></li>
-
-                    <li><i></i><a href="#" title="电子商务">
-                            电子商务</a></li>
-
-                    <li><i></i><a href="#" title="生物医学">
-                            生物医学</a></li>
-
-                </div>
-            </div>
-
-
-
-        </div>
 
         <div class="float main_three hide">
 

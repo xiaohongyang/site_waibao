@@ -119,19 +119,44 @@ $typeArr = ['关于我们', '服务指南', '新闻资讯', '检测能力', '网
 foreach ($typeArr as $typeName) {
 	?>
         <?php
-    $types = getTypeList($typeName, 'name');
+$types = getTypeList($typeName, 'name');
 	$navTitleClass = $typeName == '检测能力' ? '' : 'nav_title';
 	?>
                 @if(count($types))
+
+                    <?php
+switch ($types[0]['name']) {
+	case '服务指南':
+		$width = '150px';
+		break;
+	case '网上业务':
+		$width = '80px';
+		break;
+	default:
+		$width = '64px';
+		break;
+	}
+
+	switch ($types[0]['name']) {
+	case '关于我们':
+		$height = '190px';
+		break;
+
+	default:
+		$height = '110px';
+		break;
+	}
+
+	?>
                     <li class="{{$navTitleClass}} nav_title_two">
                         <a href="{{$types[0]['name']=='检测能力' ? route('article_list',['type_id'=>$types[0]['id']]) : '#'}}" class="nav_title_a"> {{$types[0]['name']}} </a>
-                        <div class="sub_nav_child nav_title_new">
+                        <div class="sub_nav_child nav_title_new" <?="style='width:{$width}; max-height:{$height}'"?>>
                             @if(count($types)>1)
                                 <div class="sub_float">
                                     <ul>
                                         @foreach($types as $item)
                                             @if($item['level']==2)
-                                                <li class="cur"><a href="{{route('article_list',['type_id'=>$item['id']])}}">{{$item['name']}}</a></li>
+                                                <li class="cur" <?=strlen($item['name']) > 10 ? 'style="width: 180px"' : ''?>><a href="{{route('article_list',['type_id'=>$item['id']])}}">{{$item['name']}}</a></li>
                                             @endif
                                         @endforeach
                                     </ul>
@@ -176,11 +201,41 @@ foreach ($typeArr as $typeName) {
     <!--站点跳转 begin-->
 </div>
 
+
+
 <script type='text/javascript'>
     $(function(){
         $('body').on('click', '.first_level_nav', function(){
             $('.first_level_nav').removeClass('active')
             $(this).addClass('active');
         })
+
+
+
+        $('body').on('click', 'a.ana', function(){
+            var year = $('.select-input').val();
+            var search = $("input[name='paramMap.title']").val()
+            var type_id = $('input[name=type_id]').val()
+            window.location.href = '/list/' + type_id + '?list_search=' + search + '&list_year=' + year
+        })
+
+        var list_search = $('input[name=list_search]').val();
+        var list_year = $('input[name=list_year]').val();
+        if(list_search){
+            $("input[name='paramMap.title']").val(list_search)
+        }
+        if(list_year) {
+            $('li[data-id='+ list_year +']').trigger('click')
+        }
     })
+
+
+
+
+
 </script>
+
+
+
+<input type='hidden' name='list_search' value="<?=key_exists('list_search', $_REQUEST) && $_REQUEST['list_search'] ? $_REQUEST['list_search'] : ''?>" />
+<input type='hidden' name='list_year' value="<?=key_exists('list_search', $_REQUEST) && $_REQUEST['list_year'] ? $_REQUEST['list_year'] : ''?>" />

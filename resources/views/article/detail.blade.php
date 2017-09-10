@@ -1,21 +1,22 @@
 @extends('layouts.front')
+
 <?php
-$typeArr = ['关于我们', '服务指南','新闻资讯','检测能力','网上业务','联系我们'];
-$type_id = $model['type_id'];
+$typeArr = ['关于我们', '服务指南', '新闻资讯', '检测能力', '网上业务', '联系我们'];
+$type_id = $model->type_id;
 $rootId = $type_id;
 foreach ($typeArr as $typeName) {
 
-    $types = getTypeList($typeName, 'name');
-    if(count($types)) {
-        foreach ($types as $item) {
-            if($item['id'] == $type_id){
+	$types = getTypeList($typeName, 'name');
+	if (count($types)) {
+		foreach ($types as $item) {
+			if ($item['id'] == $type_id) {
 
-                $rootId =  $types[0]['id'];
-                break;
-            }
+				$rootId = $types[0]['id'];
+				break;
+			}
 
-        }
-    }
+		}
+	}
 }
 
 $types = getTypeList($rootId, 'id');
@@ -31,7 +32,7 @@ $types = getTypeList($rootId, 'id');
                 @if(count($types))
                     @foreach($types as $type)
                         @if($type['level']==2)
-                        <li class="<?=$type['id']==$type_id ? 'cur' :  ''?>">
+                        <li class="<?=$type['id'] == $type_id ? 'cur' : ''?>">
                            <a href="{{route('article_list',['type_id'=>$type['id']])}}">{{$type['name']}}</a><i class="icon i-sub-arrow"></i>
                         </li>
                         @endif
@@ -54,10 +55,10 @@ $types = getTypeList($rootId, 'id');
 
                     <p></p>
                     <?php
-                        echo "<pre>$model->content</pre>";
-                    ?>
+echo "<pre>$model->content</pre>";
+?>
 
-                    <div class="newLeft-other">
+                    <div class="newLeft-other hide">
 
                         <p style="text-align:right;"><a class="print" href="javascript:;" onclick="printPage()">我要打印</a></p>
                         <p class="margin"></p>
@@ -86,8 +87,8 @@ $types = getTypeList($rootId, 'id');
                 <img src="/tpl/hcPicture/AboutCTI/20150403135800339.jpg">
                 <div>
                     <p class="p_one"><i></i>深圳总部</p>
-                    <p class="p_two"><i></i>400-6788-333</p>
-                    <p class="p_three"><a href="mailto:info@cti-cert.com"><i></i>info@cti-cert.com</a></p>
+                    <p class="p_two"><i></i><?=globalConfig('联系电话')?></p>
+                    <p class="p_three"><a href="mailto:<?=globalConfig('联系邮箱')?>"><i></i><?=globalConfig('联系邮箱')?></a></p>
                 </div>
                 <a href="#top" class="zhiding"></a>
             </div>

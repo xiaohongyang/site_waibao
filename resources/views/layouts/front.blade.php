@@ -213,7 +213,7 @@
         position:absolute;top:0px; left:100px;
         width:9px; height:132px;}
     .foooterbnt{
-        position:absolute;top:0px; left:0px;
+        position:absolute;top:0px; left: 47px;
         background:#424242;width:9px;
     }
     .footerid:hover .foooterbnt{ background:#adaaaa;}
@@ -222,76 +222,61 @@
     <div class="w">
         <div class="cl">
             <!--外链 begin-->
+
             <dl>
-                <dt>按访问者</dt>
-                <dd><a href="#">客户</a></dd>
-                <dd><a href="#">新闻媒体</a></dd>
-                <dd><a href="#">投资者</a></dd>
-                <dd><a href="#">求职者</a></dd>
-            </dl>
-            <dl>
-                <dt>关于华测</dt>
-                <dd><a href="#">公司简介</a></dd>
-                <dd><a href="#">资质荣誉</a></dd>
-                <dd><a href="#">发展历程</a></dd>
-                <dd><a href="#">联系我们</a></dd>
+                <dt>关于天博</dt>
+                <dd><a target="_blank" href="/list/17">公司简介</a></dd>
+                <dd><a target="_blank" href="/list/18">资质荣誉</a></dd>
+                <dd><a target="_blank" href="/list/47">发展历程</a></dd>
+                <dd><a target="_blank" href="/list/33">联系我们</a></dd>
             </dl>
             <dl>
                 <dt>友情链接</dt>
-                <dd><a href="#" target="blank">国家质检总局</a></dd>
-                <dd><a href="#" target="blank">中国固废化学品管理网</a></dd>
+                <dd><a target="_blank" href="http://www.gdcic.gov.cn/" target="blank">广东省住房和城乡建设厅</a></dd>
+                <dd><a target="_blank" href="http://szjz.gdcic.net/" target="blank">广东工程监督检测网</a></dd>
+                <dd><a target="_blank" href="http://www.szjs.gov.cn/" target="blank">深圳市住房和建设局</a></dd>
             </dl>
+
+
             <dl>
                 <dt>常用链接</dt>
-                <dd><a href="#">证书查询</a></dd>
-                <dd><a href="#">测试申请表</a></dd>
-            </dl>
-            <dl>
-                <dt>CTI成员网站</dt>
                 <div class="footerid">
-                    <div class="footermain">
-                        <dd><a href="#" target="blank">华测认证</a></dd>
-                        <dd><a href="#" target="blank">实验室解决方案</a></dd>
-                        <dd><a href="#" target="blank">华测生物</a></dd>
-                        <dd><a href="#" target="blank">华测艾普</a></dd>
-                        <dd><a href="#" target="blank">华测奢侈品</a></dd>
-                        <dd><a href="#" target="blank">华测电子认证</a></dd>
-                        <dd><a href="#">大连华信</a></dd>
-                        <dd><a href="#" target="blank">CTI-Ship</a></dd>
-                        <dd><a href="#" target="blank">CTI-CEM</a></dd>
+                    <div class="footermain"  style='border-right: 6px solid #666; padding-right: 10px; '>
+                        <dd><a target="_blank" href="http://www.szmqs.gov.cn/" target="blank">深圳市市场和质量监督管理委员会</a></dd>
+                        <dd><a target="_blank" href="http://www.sz.gov.cn/cn/" target="blank">深圳政府在线</a></dd>
+                        <br/>
+                        <br/>
                     </div>
-                    <div class="footerscorll">
+                    <div class="footerscorll" >
                         <div class="foooterbnt">
                         </div>
                     </div>
                 </div>
             </dl>
             <!--外链 end-->
-            <div class="last f-l">
-                <h4 class="pl"><i class="icon i-phone"></i>400-6788-333</h4>
-                地址   中国深圳市宝安区70区鸿威工业园C栋<br/>
-                电话   +86-755-33683666<br/>
-                传真   +86-755-33683668<p>
-                    <a href="#"><i class="icon i-wechat"></i><img width="120px" height="120px" src="/tpl/upload/image/admin/2015/20150314/201503140926426499.jpg" alt="" class="qrcode"/></a>
-                    <a href="#"><i class="icon i-weibo"></i></a>
-                    <a href="#"><i class="icon i-email"></i></a>
-                </p>
+            <div class="last f-l" style="margin-left: 10px;">
+                <h4 class="pl"><i class="icon i-phone"></i>0755-28134880</h4>
+                公司地址   深圳市龙华新区大浪街道龙观西路39号龙城工业区综合楼<br/>
+                公司名称   深圳市天博检测技术有限公司<br/>
+                公司电话   0755-28134880<br/>
+                    <a href="#"><i class="icon i-wechat"></i><img width="120px" height="120px" src="/tpl/img/wechat.jpg" alt="" class="qrcode"/></a>
+                    <a href="#" class='hide'><i class="icon i-weibo"></i></a>
+                    <a href="#" class='hide'><i class="icon i-email"></i></a>
+
             </div>
         </div>
         <div class="t1">
-            <a href="#">全球服务网络</a>&nbsp;|&nbsp;
-            <a href="#">FAQ</a>&nbsp;|&nbsp;
-            <a href="#">网站地图</a>&nbsp;|&nbsp;
-            <a href="#">法律声明</a>&nbsp;|&nbsp;
-            <a href="#">检测服务通用条款</a>
+            <a href="/list/46">网站地图</a>&nbsp;|&nbsp;
+            <a href="/list/44">法律声明</a>&nbsp;|&nbsp;
+            <a href="/list/45">检测服务通用条款</a>
         </div>
         <div class="t2">
-            Copyright Centre Testing International All rights reserved <a href="#" target="blank">粤ICP备10021358号</a>
+            Copyright Centre Testing International All rights reserved 粤ICP备17088703号-1
         </div>
         <div style="width:215px;margin:0 auto; padding:10px 0;">
-            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030602000441"
+            <a target="_blank" href="http://www.beianbeian.com/gaoji/xiangxi/4C3D33E47AA0A0DCB83A6231F645B760"
                style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
-                <img src="/tpl/img/police.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#fff;">粤公网安备 44030602000441号</p></a>
+                <img src="/tpl/img/police.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#fff;">粤ICP备17088703号-1</p></a>
         </div>
     </div>
 </div>

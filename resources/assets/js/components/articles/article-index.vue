@@ -130,7 +130,7 @@
                                         orderable: false, title: '操作', className: 'page-numeric', render: function (data, type, row) {
 
                                             var editUrl = t.$config.url.web.article_create
-                                            var editStr = '<a class="btn btn-sm btn-default" href="' + editUrl + '?id='+ row['id'] + '" title="编辑"><span class="glyphicon glyphicon-pencil"></span></a>';
+                                            var editStr = '<a class="btn btn-sm btn-default" target="_blank" href="' + editUrl + '?id='+ row['id'] + '" title="编辑"><span class="glyphicon glyphicon-pencil"></span></a>';
  
                                             editStr = editStr +
                                                 '<button class="btn btn-sm btn-default"  onclick="$.fn.remove(' + row['id'] + ')" title="删除"><span class="glyphicon glyphicon-remove"></span></button> ';

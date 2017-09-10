@@ -78,10 +78,10 @@ var initHeadSlidePic = function(){
                 if(data.status==1 && data.data.length > 0) {
                     var list = data.data
                     for(var i=0; i<list.length; i++) {
-                        var url = list[i]['link'] ? list[i]['link'] : '#'
-                        var itemContent = template.replace(/\[url\]/g, url);
+                        var link = list[i]['link'] ? list[i]['link'] : '#'
+                        var itemContent = template.replace(/\[link\]/g, link);
                         itemContent = itemContent.replace(/\[pic\]/g, list[i]['thumb'])
-                        itemContent = itemContent.replace(/\[pic\]/g, list[i]['title'])
+                        itemContent = itemContent.replace(/\[title\]/g, list[i]['title'])
 
 
                         console.log('itemContent:' + itemContent)

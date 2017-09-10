@@ -47,6 +47,12 @@
         </div>
 
         <div>
+            <span> 跳转地址： </span>
+            <span> <input type="text" id="link" v-model="link"   name="link"> </span>
+            <span class="error"> </span>
+        </div>
+
+        <div>
             <div class="checkbox">
                 <label>
                      
@@ -86,6 +92,7 @@
                 type_id : 1,
                 id : this.idProp,
                 is_index : 0,
+                link : '',
             }
         },
         mounted : function(){
@@ -162,6 +169,7 @@
                                 t.contents = data.content
                                 t.is_index = data.is_index
                                 t.attach_file = data.attach_file
+                                t.link = data.link
                             }
                         })
                 }
@@ -175,6 +183,7 @@
                     content : this.contents,
                     is_index : this.is_index,
                     attach_file : this.attach_file,
+                    link : this.link,
                 }
 
                 if(this.id==0) {
