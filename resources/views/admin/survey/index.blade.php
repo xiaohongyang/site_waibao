@@ -22,7 +22,7 @@ $columnList = [
 	['data' => 'column07', "title" => "检测工作"],
 	['data' => 'column08', "title" => "人员是否廉洁自律"],
 	['data' => 'column10', "title" => "意见和建议"],
-	['data' => 'created_at', "title" => "检测工作"],
+	['data' => 'created_at', "title" => "添加时间"],
 ];
 
 ?>
