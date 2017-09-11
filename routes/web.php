@@ -305,7 +305,7 @@ Route::group([], function () {
 	//文章
 	Route::get('/admin/articleType', 'Admin\ArticleTypeController@index')->name('admin.articleType');
 	Route::get('/admin/article-type-create', 'Admin\ArticleTypeController@create')->name('admin.articleTypeCreate');
-	Route::get('/admin/article', 'Admin\ArticleController@index')->name('admin.article');
+	Route::get('/admin/article/index', 'Admin\ArticleController@index')->name('admin.article');
 	Route::get('/admin/article/create', 'Admin\ArticleController@create')->name('admin.article.create');
 
 	//配置
