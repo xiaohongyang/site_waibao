@@ -81,7 +81,7 @@ if (count($types) > 1) {
                                             height="92px"></a></div>
                             <div class="go_left">
                                 <a href="{{route('article_detail', ['id'=>$row['id']])}}" target="blank"
-                                   title="华测检测成为CCC认证玩具指定实验室">{{$row['title']}}</a>
+                                   title="天博检测成为CCC认证玩具指定实验室">{{$row['title']}}</a>
                                 <p class="time">{{$row['updated_at']}}}</p>
                                 <p title="{{$row['content']}}">
                                     {{mb_substr(strip_tags($row['content']), 0, 70)}}...

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>CTI 华测检测认证集团</title>
+    <title>TB天博检测认证集团</title>
     <link rel="stylesheet" href="/tpl/css/huace_last.css"/>
     <script type="text/javascript" src="/tpl/js/jquery.min.js"></script>
     <script type="text/javascript" src="/tpl/jwplayer/jwplayer.js"></script>
@@ -80,9 +80,9 @@
     </SCRIPT>
 </head>
 <body><div class="header" id="header">
-    <a href="#" class="hidden"><img src="/tpl/image/hidden-logo.png"  id="logoimg" alt="华测检测logo" class="logo    f-l"/></a>
+    <a href="#" class="hidden"><img src="/tpl/image/hidden-logo.png"  id="logoimg" alt="天博检测logo" class="logo    f-l"/></a>
     <div class="t cl">
-        <a href="#">  <img src="/tpl/img/logo.png" id="logoimage" style="width: 178px;height: 48px;" alt="华测检测logo" class="logo f-l"/></a>
+        <a href="#">  <img src="/tpl/img/logo.png" id="logoimage" style="width: 178px;height: 48px;" alt="天博检测logo" class="logo f-l"/></a>
         <!--搜索框 begin-->
         <div class="search f-r pl">
             <form action="queryAllMessage.do" method="post" id="allMessage">
@@ -639,9 +639,9 @@
             <div class="main_pic">
                 <img src="/tpl/hcPicture/201707311645411177.jpg" width="150px" height="92px"/>
                 <div class="fl_right">
-                    <em title="华测检测成为CCC认证玩具指定实验室">华测检测成为CCC...
+                    <em title="天博检测成为CCC认证玩具指定实验室">天博检测成为CCC...
                     </em>
-                    <p title="2017年7月25日，国家认监委2017年第19号公告发布，华测检测认证集团股份有限公司入围CCC强制性产品玩具类认证指定实验室。至此，华测检测已经获得电玩具类、塑胶玩具类、金属玩具类、弹射玩具类、娃娃玩具类共5类玩具产品CCC认证实验室全资质。"> 2017年7月25日，国家认监委2017年第19...
+                    <p title="2017年7月25日，国家认监委2017年第19号公告发布，天博检测认证集团股份有限公司入围CCC强制性产品玩具类认证指定实验室。至此，天博检测已经获得电玩具类、塑胶玩具类、金属玩具类、弹射玩具类、娃娃玩具类共5类玩具产品CCC认证实验室全资质。"> 2017年7月25日，国家认监委2017年第19...
                     </p>
                     <a href="#">[详细]</a>
                 </div>
@@ -651,10 +651,10 @@
                         关于开展2017年度苏浙赣沪三省一市《土壤中重金属（铅、铜、锌、砷）含量的测定》项目能力验证的通知</a></li>
                 <li><i></i><a href="#" title="台湾华测将参展2017 Computex Taipei">
                         台湾华测将参展2017 Computex Taipei</a></li>
-                <li><i></i><a href="#" title="华测检测“国家电子电器有毒有害物质质量检测中心”被列入深圳市十大生产性服务业公共服务平台">
-                        华测检测“国家电子电器有毒有害物质质量检测中心”被列入深圳市十大生产性服务业公共服务平台</a></li>
-                <li><i></i><a href="#" title="华测检测入选“我要测2016年度最具影响力十大民营检测机构”">
-                        华测检测入选“我要测2016年度最具影响力十大民营检测机构”</a></li>
+                <li><i></i><a href="#" title="天博检测“国家电子电器有毒有害物质质量检测中心”被列入深圳市十大生产性服务业公共服务平台">
+                        天博检测“国家电子电器有毒有害物质质量检测中心”被列入深圳市十大生产性服务业公共服务平台</a></li>
+                <li><i></i><a href="#" title="天博检测入选“我要测2016年度最具影响力十大民营检测机构”">
+                        天博检测入选“我要测2016年度最具影响力十大民营检测机构”</a></li>
                 <li><i></i><a href="#" title="CTI报告编号编码规则变更通知">
                         CTI报告编号编码规则变更通知</a></li>
                 <li><i></i><a href="#" title="关于我集团官网及微信暂停报告查询及下载服务的通知">

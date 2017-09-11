@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>CTI 华测检测认证集团</title>
+    <title>TB天博检测</title>
     <link rel="stylesheet" href="/tpl/css/huace_last.css"/>
     <!-- <link rel="stylesheet" href="/tpl/css/common_xhy.css"/> -->
     <link rel="stylesheet" href="/ext/css/common_xhy.css"/>
@@ -81,9 +81,9 @@
     </SCRIPT>
 </head>
 <body><div class="header" id="header">
-    <a href="#" class="hidden"><img src="/tpl/image/hidden-logo.png"  id="logoimg" alt="华测检测logo" class="logo    f-l"/></a>
+    <a href="#" class="hidden"><img src="/tpl/image/hidden-logo.png"  id="logoimg" alt="天博检测logo" class="logo    f-l"/></a>
     <div class="t cl">
-        <a href="#">  <img src="/tpl/img/logo.png" id="logoimage" style="width: 178px;height: 48px;" alt="华测检测logo" class="logo f-l"/></a>
+        <a href="#">  <img src="/tpl/img/logo.png" id="logoimage" style="width: 178px;height: 48px;" alt="天博检测logo" class="logo f-l"/></a>
         <!--搜索框 begin-->
         <div class="search f-r pl">s
             <form action="/search" method="get" id="allMessage">
