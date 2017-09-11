@@ -32,8 +32,16 @@
                 console.log(parent.value)
             },
             value : function(newValue) {
+
+
+                var t = this
                 this.myValue = newValue
-                this.ue.setContent(newValue)
+
+                this.ue.addListener("ready", function () {  
+                        // editor准备好之后才可以使用  
+                    t.ue.setContent(newValue)
+                });  
+                
             }
         }
     }
