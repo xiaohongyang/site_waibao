@@ -23,7 +23,7 @@ $types = getTypeList($rootId, 'id');
     <div class="main cl">
         <!--左侧导航 begin-->
         <div class="sub-nav pl">
-            <h2>新闻资讯<p>News</p></h2>
+            <h2>{{$rootType['name']}}</h2>
             <ul>
                 @if(count($types))
                     @foreach($types as $type)
