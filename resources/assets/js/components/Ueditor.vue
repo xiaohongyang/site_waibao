@@ -41,6 +41,9 @@
                         // editor准备好之后才可以使用  
                     t.ue.setContent(newValue)
                 });  
+                if (t.ue) {
+                    t.ue.setContent(newValue)
+                }
                 
             }
         }
