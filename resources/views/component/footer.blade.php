@@ -1,7 +1,18 @@
-<div class="footer">
+ 
+<?php
+ 
+    //print_r($globalTypeListTree);exit;
+    //
+    //
+    echo  globalConfig('页面底部');
+?> 
+
+
+
+<!-- <div class="footer">
     <div class="w">
         <div class="cl">
-            <!--外链 begin-->
+             
 
             <dl>
                 <dt>关于天博</dt>
@@ -33,7 +44,7 @@
                     </div>
                 </div>
             </dl>
-            <!--外链 end-->
+             
             <div class="last f-l" style="margin-left: 10px;">
                 <h4 class="pl"><i class="icon i-phone"></i>0755-28134880</h4>
                 公司地址   深圳市龙华新区大浪街道龙观西路39号龙城工业区综合楼<br/>
@@ -59,4 +70,4 @@
                 <img src="/tpl/img/police.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#fff;">粤ICP备17088703号-1</p></a>
         </div>
     </div>
-</div>
+</div> -->
