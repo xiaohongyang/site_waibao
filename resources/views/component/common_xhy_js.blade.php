@@ -180,7 +180,12 @@ var slidePic = function(picSrc,opacity) {
                 var imageWidth = img.width
                 var imageHeight = img.height
 
-                if(imageWidth > imageHeight){
+                if(showWrapWidth>imageWidth && showWrapHeight > imageHeight){
+
+                    resultWidth = imageWidth
+                    resultHeight = imageHeight
+
+                } else if(imageWidth > imageHeight){
                     resultWidth = showWrapWidth
                     resultHeight = 'auto'
                 } else {
