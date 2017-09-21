@@ -212,7 +212,7 @@ $(function(){
                                         </div> \
                                     <div class="go_left"> \
                                         <a href="[url]" target="blank" \
-                                           title="[title]">[title]</a> \
+                                           title="[title]" style="display:inline-block; height: 25px; line-height: 25px; width:400px; margin:0; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;  ">[title]</a> \
                                         <p class="time">[updated_at]</p> \
                                         <p title="[content]"> \
                                             [content] \
