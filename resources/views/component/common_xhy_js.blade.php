@@ -1182,5 +1182,4 @@ MultiRegionPicker.prototype = {
     }
 
 };
-
 </script>
