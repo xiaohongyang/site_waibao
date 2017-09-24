@@ -2,6 +2,7 @@
 
 <?php
 $typeArr = ['关于我们', '服务指南', '新闻资讯', '检测能力', '网上业务', '联系我们'];
+
 $type_id = $model->type_id;
 $rootId = $type_id;
 foreach ($typeArr as $typeName) {
@@ -12,6 +13,7 @@ foreach ($typeArr as $typeName) {
 			if ($item['id'] == $type_id) {
 
 				$rootId = $types[0]['id'];
+                $rootType = $item;
 				break;
 			}
 
