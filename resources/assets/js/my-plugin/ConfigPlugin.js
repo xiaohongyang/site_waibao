@@ -1,6 +1,6 @@
 var ConfigPlugin = {};
-const host = "http://www.tb-jc.com"
-const webHost = "http://www.tb-jc.com"
+const host = "http://web.local/"
+const webHost = "http://web.local/"
 //
 // const host = "http://web.local"
 // const webHost = "http://web.local"

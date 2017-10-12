@@ -37,10 +37,10 @@ function setActiveNavClass($navArr, $routeValue, $className = 'active') {
 }
 
 $navArr = [
-	[
+	/*[
 		'name' => '网站配置',
 		'link' => route('admin.config.edit'),
-	],
+	],*/
 	[
 		'name' => '类别管理',
 		'children' => [
@@ -64,14 +64,14 @@ $navArr = [
 			],
 		],
 	], [
-		'name' => '留言管理',
+		'name' => '网友留言',
 		'children' => [
 			[
 				'name' => '留言列表',
 				'link' => route('admin.guestbook.index'),
 			],
 		],
-	],[
+	],/*[
 		'name' => '满意度调查',
 		'children' => [
 			[
@@ -79,7 +79,7 @@ $navArr = [
 				'link' => route('admin.survey.index',['type_id'=>2]),
 			],
 		],
-	],
+	],*/
 ];
 
 $navArr = setActiveNavClass($navArr, $currentFullUrl);

@@ -17,31 +17,29 @@ class IndexController extends BaseController {
 
 	public function index(Request $request) {
 
-		
 		$this->renderIndex();
-		return view('front.index');
+		return view('home');
 	}
 
 	protected function renderIndex() {
 
-        $typeService = new ArticleTypeService();
+		$typeService = new ArticleTypeService();
 
-
-        $types = $typeService->getModel()->where('is_index',1)->get()->toArray();
+		$types = $typeService->getModel()->where('is_index', 1)->get()->toArray();
 		$renderData = [];
- 		foreach ($types as $key => $item) {
- 		 	$typeId = $item['id'];
- 		 	$typeName = $item['name'];
-            $articleService = new ArticleService();
-            $articleList = $articleService->getData($typeId);
+		foreach ($types as $key => $item) {
+			$typeId = $item['id'];
+			$typeName = $item['name'];
+			$articleService = new ArticleService();
+			$articleList = $articleService->getData($typeId);
 
-            $data = [
-                'id' => $typeId,
-                'name' => $typeName,
-                'article_list' => $articleList
-            ];
- 		 	$renderData[] = $data;
- 		} 
+			$data = [
+				'id' => $typeId,
+				'name' => $typeName,
+				'article_list' => $articleList,
+			];
+			$renderData[] = $data;
+		}
 		\view()->share('channels', $renderData);
 	}
 

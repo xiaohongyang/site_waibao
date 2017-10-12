@@ -98,7 +98,8 @@ class ArticleTypeService extends BaseService {
 	    $list = $this->getList($pid, $orderColumn, $orderMethod);
 	    if(is_array($list)) {
 	        foreach ($list as $item){
-	            $result[] = $item['id'];
+	            if(key_exists('id', $item))
+	                $result[] = $item['id'];
             }
         }
         return $result;
