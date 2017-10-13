@@ -8,3 +8,8 @@ $(function(){
         $(this).addClass('active');
     })
 })
+
+
+//tb_slide
+//
+TB.widget.SimpleSlide.decoration('SlidePlayer', {eventType:'mouse', effect:'scroll'});

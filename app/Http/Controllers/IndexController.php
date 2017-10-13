@@ -17,7 +17,6 @@ class IndexController extends BaseController {
 
 	public function index(Request $request) {
 
-		$this->renderIndex();
 		return view('home');
 	}
 

@@ -1,22 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="content">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading ">
+                    33
+                </div>
                 <div class="panel-body">
-                    <?php
-                    use Carbon\Carbon;if(!cache('uid4Hee')){
-                            dump("uid4Hee not exist!");
-                            cache(['uid4Hee'=>11], Carbon::now()->addSeconds(3));
-                        } else {
-                            dump("uid exist!");
-                        }
-                    ?>
-                    You are logged in!
+                    32323
                 </div>
             </div>
         </div>

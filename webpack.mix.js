@@ -13,8 +13,10 @@ const { mix } = require('laravel-mix');
 
  mix.js('resources/assets/js/app.js', 'public/js')
     // .js('resources/assets/js/ajaxFileUpload.js', 'public/js')
-    // .js('resources/assets/js/index/index.js', 'public/js/index')
+    // .js('resources/assets/js/index/index.js', 'public/js/index') 
+    .js('resources/assets/plugin/tb_slide/js/tb_slide.js', 'public/js/tb_slide')
     .js('resources/assets/js/site.js', 'public/js')
+    .sass('resources/assets/plugin/tb_slide/css/tb_slide.scss', 'public/css/tb_slide')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/site.scss', 'public/css')
      .version();
