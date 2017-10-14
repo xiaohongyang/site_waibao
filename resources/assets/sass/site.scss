@@ -1,3 +1,9 @@
+$bgColor : green;
+
+.clear-padding{
+  padding:0 !important;
+}
+
 body{
   background: #000;
 }
@@ -21,9 +27,118 @@ body .container >.row{
 .margin-top-0{
   margin-top: 0 !important;
 }
+
+
+//header
+
+.header
+{
+  height: 133px;
+  overflow: hidden;
+  background-color: White;
+}
+.header01
+{
+  height: 91px;
+  overflow: hidden;
+  background:url(/images/head_left.jpg) right no-repeat;
+}
+
+.hr01
+{
+  width: 407px;
+  height: 28px;
+  background-image: url(/images/img_09.gif);
+  background-repeat: no-repeat;
+}
+.hr01 div
+{
+  float: left;
+  line-height: 30px;
+  font-size: 11px;
+}
+.hr01 a:link, .hr01 a:visited
+{
+  color: white;
+  text-decoration: none;
+}
+.hr01 a:hover, .hr01 a:active
+{
+  color: white;
+  text-decoration: underline;
+}
+.hr0101
+{
+  padding-left: 52px;
+}
+.hr0102
+{
+  padding-left: 130px;
+}
+.hr02
+{
+  text-align: right;
+  line-height:22px;
+  padding-top: 22px;
+  padding-right: 22px;
+}
+
+//end header
+
+
+//menu nav
+#app-navbar-collapse{
+  background: green;
+  a{
+    color: #fff;
+    &:hover{
+      color: green;
+    }
+  }
+}
+//end menu nav
  
 
 
+//footer start
+.container > footer{
+  background: $bgColor !important;
+  color: #fff;
+  height: 100px;
+
+  vertical-align: middle;
+  .nav{
+    height: 20px;
+    line-height: 20px;
+    margin-top:auto;;
+    margin-bottom: auto;
+    display: inline-block;
+    ul{
+      padding-left: 0;
+    }
+    li{
+      float: left;
+      list-style-type: none;
+
+      &.line{
+        width: 1px;
+        background: #fff;
+        display: block;
+        height: 12px;
+        margin-top: 5px;
+        margin-left: 12px;
+        margin-right: 12px;
+      }
+      a{
+        color: #fff;
+        &:hover{
+          color: darken(#fff, 10%)
+        }
+      }
+    }
+  }
+}
+//end footer
 
 
 input[type=file] {
@@ -52,7 +167,7 @@ img.ajax_upload_img {
   padding-right:  10px;
 }
 .margin-top-10{
-	margin-top: 10;
+	margin-top: 10px;
 }
 .margin-column{
 	margin-top: 10px;
