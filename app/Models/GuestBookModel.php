@@ -31,7 +31,9 @@ class GuestBookModel extends BaseModel {
 		'column08',
 		'column09',
 		'column10',
+		'column12',
 		'type_id',
+        'verified'
 	];
 
 	private $type_id;
@@ -59,6 +61,7 @@ class GuestBookModel extends BaseModel {
 			'column09' => $column09,
 			'column10' => $column10,
 			'type_id' => $typeId,
+            'column12' => $_SERVER['REMOTE_ADDR']
 		];
 
 		$rule = [

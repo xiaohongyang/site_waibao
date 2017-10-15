@@ -1,4 +1,4 @@
-@extends('layouts.front')
+@extends('layouts.app')
 <?php
 $typeArr = ['关于我们', '服务指南', '新闻资讯', '检测能力', '网上业务', '联系我们'];
 $rootId = $id;
@@ -41,36 +41,18 @@ if (count($types) > 1) {
 ?>
 @section('content')
 
-    <div class="main cl">
-        <!--左侧导航 begin-->
-        <div class="sub-nav pl">
-            <h2>{{$rootType['name']}}</h2>
-            <ul>
-                @if(count($types))
-                    @foreach($types as $type)
-                        @if($type['level']==2)
-                        <li class="<?=$type['id'] == $id ? 'cur' : ''?>">
-                           <a href="{{route('article_list',['type_id'=>$type['id']])}}">{{$type['name']}}</a><i class="icon i-sub-arrow"></i>
-                        </li>
-                        @endif
-                    @endforeach
-                @endif
+    <div class="row cl">
 
-            </ul>
-            <i class="ra ra-lt ra-sub-lt"></i>
-            <i class="ra ra-rt ra-sub-rt"></i>
-        </div>
-        <!--左侧导航 end-->
         <!--右侧内容区 begin-->
-        <div class="main-l">
+        <div class="main-l col-sm-12">
             @component('component.breadcrumbs', ['type_id'=>$id])
             @endcomponent
 
             <div class="newsWord news-company ">
                 <?php
-$currentType = getTypeItem($id, 'id', $globalTypeList);
-echo $currentType['content'];
-?>
+				$currentType = getTypeItem($id, 'id', $globalTypeList);
+				echo $currentType['content'];
+				?>
 
             </div>
 

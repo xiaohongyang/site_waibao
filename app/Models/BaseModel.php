@@ -31,6 +31,18 @@ class BaseModel extends Model {
 		return $result;
 	}
 
+	public function updateParam($data) {
+
+		$result = false;
+		$validator = $this->getCreateValidator();
+		if ($validator->fails()) {
+			$this->message = $validator->messages()->getMessageBag();
+		} else {
+			$result = $this->update($data) ? true : false;
+		}
+		return $result;
+	}
+
 	/*public function edit($data){
 
 		        $result = false;

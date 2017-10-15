@@ -37,14 +37,14 @@
                 var t = this
                 this.myValue = newValue
 
-                this.ue.addListener("ready", function () {  
-                        // editor准备好之后才可以使用  
+                this.ue.addListener("ready", function () {
+                        // editor准备好之后才可以使用
                     t.ue.setContent(newValue)
-                });  
+                });
                 if (t.ue) {
                     t.ue.setContent(newValue)
                 }
-                
+
             }
         }
     }

@@ -1,6 +1,10 @@
 var ajaxListUrl = '/api/articles?case=page' 
-
 $(function(){
+
+    var codeImage = getRandomImage();
+    alert(codeImage)
+    $('.check-code img').src(codeImage)
+
     $.fn.guestGookStore = function(){
         var data = {
             column01 : $('#column01').val(),
@@ -40,3 +44,37 @@ $(function(){
         $.fn.guestGookStore()
     })
 })
+
+
+
+$.fn.randomCode= ""
+var getRandomImage = function(){
+
+    var arr = [
+        0196,
+        0317,
+        0533,
+        1075,
+        1146,
+        1524,
+        1814,
+        1945,
+        2118,
+        3259,
+        4863,
+        5064,
+        5935,
+        6005,
+        6219,
+        6312,
+        7843,
+        9382,
+        9528
+    ];
+
+    var end = arr.length
+    var i = Math.random() * end;
+    i = parseInt(i, 10)
+    $.fn.randomCode = arr[i];
+    return '/images/random/' + arr[$.fn.randomCode] + '.bmp';
+}

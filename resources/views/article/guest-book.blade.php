@@ -1,4 +1,4 @@
-@extends('layouts.front')
+@extends('layouts.app')
 <?php
 $typeArr = ['关于我们', '服务指南', '新闻资讯', '检测能力', '网上业务', '联系我们'];
 $rootId = $id;
@@ -22,28 +22,10 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
 ?>
 @section('content')
 
-    <div class="main cl">
-        <!--左侧导航 begin-->
-        <div class="sub-nav pl">
-            <h2>{{$rootType['name']}}</h2>
-            <ul>
-                @if(count($types))
-                    @foreach($types as $type)
-                        @if($type['level']==2)
-                        <li class="<?=$type['id'] == $id ? 'cur' : ''?>">
-                           <a href="{{route('article_list',['type_id'=>$type['id']])}}">{{$type['name']}}</a><i class="icon i-sub-arrow"></i>
-                        </li>
-                        @endif
-                    @endforeach
-                @endif
+    <div class="row guest-book">
 
-            </ul>
-            <i class="ra ra-lt ra-sub-lt"></i>
-            <i class="ra ra-rt ra-sub-rt"></i>
-        </div>
-        <!--左侧导航 end-->
         <!--右侧内容区 begin-->
-        <div class="main-l">
+        <div class="main-l col-sm-12">
             @component('component.breadcrumbs', ['type_id'=>$id])
             @endcomponent
 
@@ -52,29 +34,29 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
                 <!--搜索部分开始-->
                 <form onsubmit="return false;">
                     <table width="100%" align="center" class='bordered' cellpadding="2" cellspacing="0">
-                            <tbody><tr>
-                              <td width="281" height="25" align="right" class="conts"><font color="#cc0000">*</font>主题：</td>
+                            <tbody>
+                            <tr>
+                              <td width="281" height="25" align="right" class="conts"><font color="#cc0000">*</font>如何称呼：</td>
                               <td width="687"><input class="TextBox" id="column01" maxlength="100" size="40" name="column01"></td>
                             </tr>
-                            <tr>
+
+                            <tr class="margin-top-10" style="margin-top: 10px; height: 40px;">
+                                <td height="25" align="right" class="conts"><font color="#cc0000">*</font>&nbsp;联系方式：</td>
+                                <td><input class="TextBox" id="column02" maxlength="100" size="40" name="Company"></td>
+                            </tr>
+                            <tr class="margin-top-10" style="margin-bottom: 10px; height: 60px;">
                               <td height="25" align="right" class="conts"><font color="#cc0000">*</font>&nbsp;内容：</td>
-                              <td><textarea class="TextBox" name="MesContent" id="column10" rows="8" cols="60"></textarea></td>
+                              <td><textarea class="TextBox" name="MesContent" id="column10" rows="8" cols="40" style="width: 330px;"></textarea></td>
                             </tr>
-                            <tr>
-                              <td height="25" align="right" class="conts"><font color="#cc0000">*</font>&nbsp;公司名称：</td>
-                              <td><input class="TextBox" id="column02" maxlength="100" size="40" name="Company"></td>
-                            </tr>
-                            <tr>
-                              <td height="25" align="right" class="conts"><font color="#cc0000">*</font>&nbsp;姓名：</td>
-                              <td><input class="TextBox" id="column03" maxlength="100" size="40" name="LinkName"></td>
-                            </tr>
-                            <tr>
-                              <td height="25" align="right" class="conts"><font color="#cc0000">*</font>&nbsp;电话：</td>
-                              <td><input class="TextBox" id="column04" maxlength="100" size="40" name="Telephone"></td>
-                            </tr>
-                            <tr>
-                              <td height="25" align="right" class="conts"><font color="#cc0000">*</font>&nbsp;电邮：</td>
-                              <td><input class="TextBox" id="column05" maxlength="100" size="40" name="Email"></td>
+
+
+                            <tr class="check-code margin-top-10" style="height: 40px;">
+                                <td height="25" align="right" class="conts"><font color="#cc0000">*</font>&nbsp; 验证码：</td>
+
+                                <td>
+                                    <img src=""  style="cursor: pointer"   />
+                                    <input type="text" id="code">
+                                </td>
                             </tr>
                             <tr>
                               <td height="40">&nbsp;</td>
@@ -99,10 +81,43 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
         <!--右侧内容区 end-->
     </div>
 
+
+    <div class="row list">
+        <div class="col-sm-12">
+
+
+            @foreach($listData as $item)
+                    <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0" style="font-size:12px">
+                        <tbody><tr>
+                            <td width="67%" height="24" valign="middle" bgcolor="#E5F6CA"><font color="green"> <b>&nbsp;作者：
+                                        {{$item['column01']}}</b></font></td>
+                            <td width="33%" align="right" valign="middle" bgcolor="#E5F6CA">时间：<font class="green">{{$item['created_at']}}</font>  <font color="green">IP地址已记录</font></td>
+                        </tr>
+                        <tr>
+                            <td height="3"></td>
+                            <td align="right"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <table width="100%" border="0" cellspacing="4" cellpadding="0">
+                                    <tbody><tr>
+                                        <td width="100%" valign="top" style="font-size:12px">
+                                            <div><b class="spiffy"><b class="spiffy1"><b></b></b><b class="spiffy2"><b></b></b>   <b class="spiffy3"></b><b class="spiffy4"></b><b class="spiffy5"></b></b><div class="spiffyfg">   {{$item['column10']}}</div> <b class="spiffy"><b class="spiffy5"></b> <b class="spiffy4"></b>    <b class="spiffy3"></b><b class="spiffy2"><b></b></b><b class="spiffy1"><b></b></b></b></div>
+                                        </td>
+                                    </tr>
+                                    </tbody></table>
+                            </td>
+                        </tr>
+
+                        </tbody></table>
+            @endforeach
+        </div>
+    </div>
+
     <input type="hidden" name="type_id" value="{{$id}}" />
 @endsection
 
 
 @section('scripts')
-    <script type="text/javascript" src="/ext/js/guest-book.js"> </script>
+    <script src="{{ mix('js/guestbook.js') }}"></script>
 @endsection

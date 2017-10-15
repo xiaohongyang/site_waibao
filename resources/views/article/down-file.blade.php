@@ -1,4 +1,4 @@
-@extends('layouts.front')
+@extends('layouts.app')
 <?php
 $typeArr = ['关于我们', '服务指南', '新闻资讯', '检测能力', '网上业务', '联系我们'];
 $rootId = $id;
@@ -7,7 +7,7 @@ foreach ($typeArr as $typeName) {
 	$types = getTypeList($typeName, 'name');
 	if (count($types)) {
 		foreach ($types as $item) {
-			if ($item['id'] == $id) {
+			if ($item['id'] == $rootId) {
 				$rootId = $types[0]['id'];
 			}
 
@@ -16,8 +16,27 @@ foreach ($typeArr as $typeName) {
 }
 
 $types = getTypeList($rootId, 'id');
-$rootType = getTypeItem($rootId, 'id', $globalTypeList);
-$currentType = getTypeItem($id, 'id', $globalTypeList);
+if (count($types) > 1) {
+	$rootType = getTypeItem($rootId, 'id', $globalTypeList);
+	$currentType = getTypeItem($id, 'id', $globalTypeList);
+} else {
+
+	$rootId = 17;
+	foreach ($typeArr as $typeName) {
+
+		$types = getTypeList($typeName, 'name');
+		if (count($types)) {
+			foreach ($types as $item) {
+				if ($item['id'] == $rootId) {
+					$rootId = $types[0]['id'];
+				}
+
+			}
+		}
+	}
+	$rootType = getTypeItem($rootId, 'id', $globalTypeList);
+	$currentType = getTypeItem($id, 'id', $globalTypeList);
+}
 
 ?>
 @section('content')
@@ -50,37 +69,24 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
             <div class="newsWord news-company">
                 <p class="title">{{$currentType['name']}}</p>
                 <!--搜索部分开始-->
-                <div class="researchSearch pl">
-                    <!--文本框 begin-->
-                    <span class="free-input anInput ">
-			           <label for="input-1" style="display: inline;">关键字</label>
-			           <input type="text" value="" name="paramMap.title" class="icon3" id="input-1">
-			      </span>
-                    <!--文本框 end-->
-                    <a href="javascript:initList(1)" class="ana icon3">确认</a>
 
-                    <!--下拉框 begin-->
-                    <div class="select select-two" id="free-select3" style="z-index: 9; width: 187px;">
-                        <div class="selected">
-                            <input type="hidden" value="" name="paramMap.time" id="time">
-                            <p id="time1" style="width: 140px; color: rgb(102, 102, 102);">2017</p>
-                            <input type="text" class="select-input" value="请选择年份" data-search-input="dateDataList.do" style="width: 140px; color: rgb(102, 102, 102);">
-                            <i class="icon i-selected-arrow arrow"></i>
-                            <i class="ra ra-lt ra-sl-lt"></i>
-                            <i class="ra ra-lb ra-sl-lb"></i>
-                        </div>
-                        <div class="option" style="width: 187px; background-color: rgb(245, 245, 245); display: none;">
-                            <ul id="1502890398015" style="width: 187px;">
-                                <li data-id="2017" style="width: 187px; color: rgb(102, 102, 102);">2017</li><li data-id="2016" style="width: 187px; color: rgb(102, 102, 102);">2016</li><li data-id="2015" style="width: 187px; color: rgb(102, 102, 102);">2015</li><li data-id="2014" style="width: 187px; color: rgb(102, 102, 102);">2014</li><li data-id="2013" style="width: 187px; color: rgb(102, 102, 102);">2013</li><li data-id="2012" style="width: 187px; color: rgb(102, 102, 102);">2012</li><li data-id="2011" style="width: 187px; color: rgb(102, 102, 102);">2011</li><li data-id="2010" style="width: 187px; color: rgb(102, 102, 102);">2010</li><li data-id="2009" style="width: 187px; color: rgb(102, 102, 102);">2009</li><li data-id="2008" style="width: 187px; color: rgb(102, 102, 102);">2008</li><li data-id="2007" style="width: 187px; color: rgb(102, 102, 102);">2007</li><li data-id="2006" style="width: 187px; color: rgb(102, 102, 102);">2006</li><li data-id="2005" style="width: 187px; color: rgb(102, 102, 102);">2005</li><li data-id="2004" style="width: 187px; color: rgb(102, 102, 102);">2004</li><li data-id="2003" style="width: 187px; color: rgb(102, 102, 102);">2003</li><li data-id="2002" style="width: 187px; color: rgb(102, 102, 102);">2002</li><li data-id="2001" style="width: 187px; color: rgb(102, 102, 102);">2001</li></ul>
-                        </div>
-                    </div>
-                    <!--下拉框 end-->
-                </div>
+                @component('component.search')
+                @endcomponent
                 <div id="dataInfo">
                     @if(count($listData))
                         @foreach($listData as $row)
                         <div class="newsFloat">
-
+                            <div id="div_hidden"><a href="{{route('article_detail', ['id'=>$row['id']])}}" target="blank"><img
+                                            class="news_img" src="/{{$row['thumb']}}" width="150px"
+                                            height="92px"></a></div>
+                            <div class="go_left">
+                                <a href="{{route('article_detail', ['id'=>$row['id']])}}" target="blank"
+                                   title="天博检测成为CCC认证玩具指定实验室">{{$row['title']}}</a>
+                                <p class="time">{{$row['updated_at']}}}</p>
+                                <p title="{{$row['content']}}">
+                                    {{mb_substr(strip_tags($row['content']), 0, 70)}}...
+                                </p>
+                            </div>
                         </div>
                         @endforeach
                     @endif
@@ -170,6 +176,6 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
 
 
 @section('scripts')
-    <script type="text/javascript" src="/ext/js/down-file.js"> </script>
+    <script type="text/javascript" src="/ext/js/down-list.js"> </script>
 
 @endsection

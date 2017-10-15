@@ -60,6 +60,11 @@ class ArticleTypeController extends BaseApiController {
 			];
 			$this->setJsonResult(1, 'ok', $data);
 			break;
+
+		case 'header_nav':
+			$result = $this->getService()->getHeaderNav();
+			$this->setJsonResult(1, null, $result);
+			break;
 		default:
 			$result = ArticleTypeModel::all();
 			$this->setJsonResult(1, null, $result);
@@ -67,6 +72,11 @@ class ArticleTypeController extends BaseApiController {
 		}
 
 		return $this->getJsonResult();
+	}
+
+	protected function getService() {
+		$articleTypeService = new ArticleTypeService();
+		return $articleTypeService;
 	}
 
 	/**

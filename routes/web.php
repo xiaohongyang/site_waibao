@@ -210,6 +210,7 @@ Route::get('md5', function (\Illuminate\Http\Request $request) {
 
 #region 前端文章展示
 Route::get('search', 'ArticleController@search');
+Route::get('down/{id}', 'ArticleController@down');
 Route::get('articles', 'ArticleController@index');
 Route::get('article/{id}', 'ArticleController@item');
 

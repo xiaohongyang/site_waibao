@@ -117,4 +117,18 @@ class ArticleModel extends BaseModel {
 	public function articleType() {
 		return $this->belongsTo(ArticleTypeModel::class, 'type_id', 'id');
 	}
+
+    public function allVisitCount() {
+        return $this->hasMany(VisitCounterModel::class, 'article_id', 'id')
+            ->where('type', VisitCounterModel::TYPE_ARTICLE_VISIT);
+    }
+    public function todayDownCount() {
+        return $this->hasMany(VisitCounterModel::class, 'article_id', 'id')
+            ->where('created_at', 'like', date('Y-m-d ').'%')
+            ->where('type', VisitCounterModel::TYPE_ARTICLE_DOWN);
+    }
+    public function allDownCount() {
+        return $this->hasMany(VisitCounterModel::class, 'article_id', 'id')
+            ->where('type', VisitCounterModel::TYPE_ARTICLE_DOWN);
+    }
 }

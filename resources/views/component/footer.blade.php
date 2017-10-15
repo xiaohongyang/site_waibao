@@ -11,11 +11,11 @@
         <div class="col-sm-12 margin-top-10"  >
             <div class="nav">
                 <ul>
-                    <li><a href="">首页</a></li>
+                    <li><a href="/">首页</a></li>
                     <li class="line"></li>
-                    <li><a href="">ABOUT US</a></li>
+                    <li><a href="/list/<?=env('ABOUT_US_ID')?>">ABOUT US</a></li>
                     <li class="line"></li>
-                    <li><a href="">联系我们</a></li>
+                    <li><a href="/list/<?=env('CONTACT_ID')?>">联系我们</a></li>
 
                 </ul>
             </div>

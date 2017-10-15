@@ -34,7 +34,7 @@ class ArticleController extends BaseApiController {
 			$orderColumn = $request->get('orderColumn', 'updated_at');
 			$orderMethod = $request->get('orderMethod', 'desc');
 			$params = [
-				'relation' => 'articletype',
+				'relation' => ['articletype', 'allVisitCount', 'todayDownCount', 'allDownCount'],
 				'is_index' => $is_index,
 			];
 
@@ -53,7 +53,7 @@ class ArticleController extends BaseApiController {
 					$params['type_id'] = $typeIds;
 				}
 			} else if (!is_null($search)) {
-				//不限购类别是搜索
+				//不限类别是搜索
 				$params['type_id'] = [25, 26, 36, 29];
 			}
 
@@ -62,7 +62,12 @@ class ArticleController extends BaseApiController {
 			if (is_array($result) && count($result)) {
 				foreach ($result as $k => $value) {
 					$result[$k]['description'] = strip_tags($value['content']);
-					$result[$k]['thumb'] = '/' . $result[$k]['thumb'];
+
+					$result[$k]['thumb'] = $result[$k]['thumb'] ?  '/' . $result[$k]['thumb'] : '/static/img/icon_upload.png';
+					$result[$k]['attach_file'] = $result[$k]['attach_file'] ?  '/' . $result[$k]['attach_file'] : '';
+					$result[$k]['today_count'] = $result[$k]['today_down_count'] ? count($result[$k]['today_down_count']) : 0;
+					$result[$k]['all_count'] = $result[$k]['all_down_count'] ? count($result[$k]['all_down_count']) : 0;
+
 				}
 			}
 			$totalRows = $articleService->getTotalRows();

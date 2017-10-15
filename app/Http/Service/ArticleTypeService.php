@@ -71,58 +71,68 @@ class ArticleTypeService extends BaseService {
 		return $tree;
 	}
 
-    /**
-     * 获取类别数组
-     * @param $pid 父id
-     * @param string $orderColumn
-     * @param string $orderMethod
-     * @return array
-     */
+	/**
+	 * 获取类别数组
+	 * @param $pid 父id
+	 * @param string $orderColumn
+	 * @param string $orderMethod
+	 * @return array
+	 */
 	public function getList($pid, $orderColumn = 'sort', $orderMethod = 'desc') {
 
-	    $tree = $this->getTree($pid, $orderColumn, $orderMethod);
-	    $list = TreeHelper::getInstance()->conveTreeToArray($tree);
-        return $list;
-    }
+		$tree = $this->getTree($pid, $orderColumn, $orderMethod);
+		$list = TreeHelper::getInstance()->conveTreeToArray($tree);
+		return $list;
+	}
 
-    /**
-     * 获取id数组
-     * @param $pid
-     * @param string $orderColumn
-     * @param string $orderMethod
-     * @return array
-     */
-    public function getListIds($pid, $orderColumn='sort', $orderMethod='desc') {
+	/**
+	 * 获取id数组
+	 * @param $pid
+	 * @param string $orderColumn
+	 * @param string $orderMethod
+	 * @return array
+	 */
+	public function getListIds($pid, $orderColumn = 'sort', $orderMethod = 'desc') {
 
-	    $result = [];
-	    $list = $this->getList($pid, $orderColumn, $orderMethod);
-	    if(is_array($list)) {
-	        foreach ($list as $item){
-	            if(key_exists('id', $item))
-	                $result[] = $item['id'];
-            }
-        }
-        return $result;
-    }
+		$result = [];
+		$list = $this->getList($pid, $orderColumn, $orderMethod);
+		if (is_array($list)) {
+			foreach ($list as $item) {
+				if (key_exists('id', $item)) {
+					$result[] = $item['id'];
+				}
 
-    public function shareGlobalTypes($orderColumn='sort', $orderMethod='desc') {
+			}
+		}
+		return $result;
+	}
 
-        $query = $this->model->orderBy($orderColumn, $orderMethod)->get();
-        $result = $query->where('id', '>', 0);
-        $result = $result->toArray();
+	public function shareGlobalTypes($orderColumn = 'sort', $orderMethod = 'desc') {
 
-        \View::share('globalTypeList', $result);
-    }
+		$query = $this->model->orderBy($orderColumn, $orderMethod)->get();
+		$result = $query->where('id', '>', 0);
+		$result = $result->toArray();
 
-    public function shareGlobalTypesTree() {
+		\View::share('globalTypeList', $result);
+	}
 
-	    $result = null;
-	    $globalTypeList = \View::shared('globalTypeList',[]);
-	    if(isset($globalTypeList) && is_array($globalTypeList) && count($globalTypeList)) {
+	public function shareGlobalTypesTree() {
 
-	        $result = TreeHelper::getInstance()->generateTree($globalTypeList,'pid');
-        }
- 
-        \View::share('globalTypeListTree', $result);
-    }
+		$result = null;
+		$globalTypeList = \View::shared('globalTypeList', []);
+		if (isset($globalTypeList) && is_array($globalTypeList) && count($globalTypeList)) {
+
+			$result = TreeHelper::getInstance()->generateTree($globalTypeList, 'pid');
+		}
+
+		\View::share('globalTypeListTree', $result);
+	}
+
+	public function getHeaderNav() {
+
+		$ids = env('HEADER_ID');
+
+		$data = $this->getModel()->whereIn('id', explode(',', $ids))->get()->sortByDesc('sort');
+		return $data ?: $data->toArray();
+	}
 }

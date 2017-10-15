@@ -174,7 +174,7 @@ $(function(){
                             <a href="javascript:;" id="pageSubmit" style="width: 50px;">确定</a> \
                             '
             showTotalContent = showTotalPageTemplate.replace(/\[totalPage\]/g, this.pageData.endPage)
-            wrapper.append($(showTotalContent))
+            //wrapper.append($(showTotalContent))
         },
 
         hideSomeRangeBtn : function(){

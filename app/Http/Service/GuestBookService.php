@@ -45,4 +45,29 @@ class GuestBookService extends BaseService {
 		return $result;
 	}
 
+	public function  verified($id) {
+
+
+	    $this->model = GuestBookModel::find($id);
+	    if(!is_null($this->model)) {
+	        $result = $this->model->update(['verified' => 1]);
+	        return $result;
+        } else {
+            $this->message = '该数据不存在';
+	        return false;
+        }
+    }
+    public function  unVerified($id) {
+
+
+	    $this->model = GuestBookModel::find($id);
+	    if(!is_null($this->model)) {
+	        $result = $this->model->update(['verified' => 0]);
+	        return $result;
+        } else {
+            $this->message = '该数据不存在';
+	        return false;
+        }
+    }
+
 }

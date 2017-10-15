@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Service\ArticleService;
 use App\Http\Service\ArticleTypeService;
+use App\Http\Service\GuestBookService;
+use App\Http\Service\VisitCounterService;
 use App\Models\ArticleModel;
 use App\Models\ArticleTypeModel;
+use App\Models\VisitCounterModel;
 use Illuminate\Http\Request;
 
 class ArticleController extends BaseController {
@@ -45,10 +48,15 @@ class ArticleController extends BaseController {
 
 		$typeService = new ArticleTypeService();
 		$type = $typeService->getById($id);
+
+		\View::share('current_type', $type);
+
 		if (is_null($type)) {
 			abort(404, '类别不存在');
 			return;
 		}
+		VisitCounterService::articleOrTypeCounter($id, VisitCounterModel::TYPE_ARTICLE_TYPE_VISIT);
+
 		switch ($type->show_type) {
 		case ArticleTypeModel::SHOW_TYPE_ARTICLE:
 			return $this->renderArticles($id);
@@ -64,7 +72,7 @@ class ArticleController extends BaseController {
 			break;
 
 		case ArticleTypeModel::SHOW_TYPE_UPLOAD:
-			return $this->renderDownFile($id);
+			return $this->renderArticles($id);
 			break;
 
 		case ArticleTypeModel::SHOW_TYPE_GUEST_BOOK:
@@ -137,7 +145,10 @@ class ArticleController extends BaseController {
 		$query->where('type_id', $id);
 		$articleService->setPrevPageListQuery($query);
 		$pageData = $articleService->getPageList(1, 9999, null, 'updated_at', 'desc');
-		return view('article.guest-book', ['id' => $id, 'listData' => $pageData]);
+
+		$modelService = new GuestBookService();
+		$list = $modelService->getModel()->where('verified', true)->orderByDesc('updated_at')->get();
+		return view('article.guest-book', ['id' => $id, 'listData' => $list]);
 	}
 
 	//调查表
@@ -156,10 +167,37 @@ class ArticleController extends BaseController {
 		if (is_null($id) || !is_numeric($id)) {
 			abort(404, 'id参数错误');
 		}
+
+		$articleService = new ArticleService();
+		$model = $articleService->getById($id);
+		if(!is_null($model))
+            VisitCounterService::articleOrTypeCounter($id, VisitCounterModel::TYPE_ARTICLE_VISIT);
+
+        return view('article.detail', ['id' => $id, 'model' => $model]);
+	}
+
+	//文件下载
+	public function down($id) {
+
+		if (is_null($id) || !is_numeric($id) || !ArticleModel::where('id', $id)->first()) {
+			abort(404, 'id参数错误');
+		}
+
+		VisitCounterService::articleOrTypeCounter($id, VisitCounterModel::TYPE_ARTICLE_DOWN);
+
 		$articleService = new ArticleService();
 		$model = $articleService->getById($id);
 
-		return view('article.detail', ['id' => $id, 'model' => $model]);
+		$downFile = $model->attach_file;
+		$downFile = public_path($downFile);
+		$fileName = basename($downFile);
+        $file=fopen($downFile,"r");
+        header("Content-Type: application/octet-stream");
+        header("Accept-Ranges: bytes");
+        header("Accept-Length: ".filesize($downFile));
+        header("Content-Disposition: attachment; filename=$fileName");
+        echo fread($file,filesize($downFile));
+        fclose($file);
 	}
 
 }

@@ -1,4 +1,4 @@
-@extends('layouts.front')
+@extends('layouts.app')
 <?php
 $typeArr = ['关于我们', '服务指南', '新闻资讯', '检测能力', '网上业务', '联系我们'];
 $rootId = $id;

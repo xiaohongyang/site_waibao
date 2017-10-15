@@ -1,0 +1,221 @@
+$bgColor : green;
+
+.clear-padding{
+  padding:0 !important;
+}
+
+
+body > app {
+}
+
+body .container {
+  background: #fff;
+}
+
+body #layout-app {
+  min-height: 500px;
+}
+
+body .container >.row{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.margin-top-0{
+  margin-top: 0 !important;
+}
+
+
+
+input[type=file] {
+  background: none;
+  border : none;
+}
+
+input[type="file"].ajax_upload {
+  display: none;
+}
+img.ajax_upload_img {
+  width: 60px;
+  height: 60px;
+}
+
+.list-style-none{
+  list-style : none;
+}
+.display-inline-block{
+  display: inline-block;
+}
+.border-right-1px{
+  border-right: 1px solid #000;
+}
+.p-right-10{
+  padding-right:  10px;
+}
+.margin-top-10{
+	margin-top: 10px;
+}
+.margin-column{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.margin-row{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+//面包屑
+.breadcrumb a.active{
+    color: #777;
+}
+ 
+ 
+
+/*dataTable  start  */
+.page-numeric {
+  background: none!important;
+}
+/*dataTime*/
+.page-data-times {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.page-data-times .page-times-style {
+  background: #fe7023;
+  cursor: pointer;
+  padding: 10px 10px;
+  border: 1px solid #fe7023;
+  width: 100%; 
+  color: #fff;
+  border-radius: 5px!important;
+}
+.mar-le15 {
+  margin-left: 15px!important;
+}
+.mar-le10 {
+  margin-left: 10px!important;
+}
+.calendar-time {
+  display: none;
+}
+.page-hidden {
+  visibility: hidden;
+}
+.page-mar {
+  margin-top: 19px;
+}
+.icon-data {
+  display: inline-block;
+  width: 14px;
+  margin-right: 3px;
+}
+
+
+//新增样式xhy
+.dataTables_length{
+  display: inline-block;
+  float:right;
+}
+.dataTables_filter{
+  display: inline-block;
+  float: left;
+}
+.paging_simple_numbers {
+    a {
+      margin-left:5px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+}
+.type_filter {
+  margin-right: 20px;
+}
+
+/*dataTable  end  */
+
+
+.f-left{
+  float:left;
+}
+.f-right{
+  float: right;
+}
+
+//xhy布局
+@mixin p-margin{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+@mixin f-left{
+  float:left;
+}
+@mixin f-right{
+  float: right;
+}
+.xhy-nav{
+  border-top: 1px solid red;
+  ul:first-child{
+    margin-left:0;
+  }
+  ul{
+    margin-left: 20px;
+    a{
+      padding-top: 7px;
+      padding-bottom: 7px;
+    }
+    ul{
+      display: none;
+    }
+    li.active{
+      a{
+        background-color: #eeeeee;
+      }
+      ul{
+        display: block;
+        li{
+          a{
+            background: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+//xhy控件
+.SelectContainer {
+  padding-top: 5px;
+  padding-bottom: 5px; 
+}
+
+//breadcrumbs
+
+.active{
+  .active{
+    a{
+      color: #bf5329;
+    }
+  }
+}
+
+.create-vue-wrap{
+
+  >div{
+
+    @include p-margin
+
+    span:first-child{
+      min-width: 50px;
+      display: inline-block;
+    }
+
+    @at-root  textarea{
+      width:500px;
+      height: 50px;
+    }
+  }
+}

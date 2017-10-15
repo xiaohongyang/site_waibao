@@ -30,6 +30,19 @@ class GuestBookController extends BaseApiController {
 			$this->setJsonResult(1, null, $result);
 			break;
 
+        case 'verified' :
+
+            $id = $request->get('id');
+            $rs = $service->verified($id);
+            $this->setJsonResult($rs ?1:0, "审核成功", $rs);
+			break;
+
+        case 'cancelVerified' :
+
+            $id = $request->get('id');
+            $rs = $service->unVerified($id);
+            $this->setJsonResult($rs ?1:0, "取消审核成功", $rs);
+			break;
 		default:
 			break;
 		}

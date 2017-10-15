@@ -3,6 +3,9 @@ $bgColor : green;
 .clear-padding{
   padding:0 !important;
 }
+.c-red{
+  color: red;
+}
 
 body{
   background: #000;
@@ -97,42 +100,158 @@ body .container >.row{
   }
 }
 //end menu nav
- 
-
 
 //footer start
-.container > footer{
-  background: $bgColor !important;
-  color: #fff;
-  height: 100px;
+.container{
+  > .side-wrapper {
 
-  vertical-align: middle;
-  .nav{
-    height: 20px;
-    line-height: 20px;
-    margin-top:auto;;
-    margin-bottom: auto;
-    display: inline-block;
-    ul{
-      padding-left: 0;
-    }
-    li{
-      float: left;
-      list-style-type: none;
-
-      &.line{
-        width: 1px;
-        background: #fff;
-        display: block;
-        height: 12px;
-        margin-top: 5px;
-        margin-left: 12px;
-        margin-right: 12px;
+    .sidebar{
+      .panel-body{
+        background-color: #f5f5f5;
       }
-      a{
-        color: #fff;
-        &:hover{
-          color: darken(#fff, 10%)
+    }
+  }
+  .content-wrapper{
+    background: #fff;
+    pre{
+      background: #fff;
+    }
+
+    .main-nav{
+      margin-bottom: 20px;
+    }
+
+    .list-wrapper{
+      clear: left;
+      margin-top: 20px;
+      padding-left: 15px;
+      list-style-type: none;
+      background-position: left;
+      list-style-position: outside;
+      background: url(/images/news_list_style.gif) no-repeat 0px;
+
+      .title{fonr-size: 1.25em; font-weight: bold;}
+    }
+
+    .guest-book .list tr{
+        height: auto;
+        min-height: 30px;
+    }
+
+    .main-list-1{
+      //文章
+      .list-wrapper{
+
+        .thumb{
+          display: none;
+        }
+        .content{
+          display: none;
+        }
+
+        .down-counter{
+          display: none;
+        }
+        .counter{ margin-left: 50px; margin-right: 15px;}
+
+        .down{display: none;}
+      }
+    }
+    .main-list-3{
+      //下载
+      .list-wrapper{
+        height: 120px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background: none;
+        padding-left: 0;
+        .thumb{
+          float: left;
+          width: 150px;
+        }
+        .info{
+          margin-left: 15px;
+          display: inline-block;
+          width: 660px;
+
+          .title{
+            display:inline; height: 25px; line-height: 25px; width:400px; margin:0; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+
+          }
+          .content{
+            display: block; width:480px; margin:0; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+          }
+        }
+        .time{
+          display: block;
+          color: red;
+        }
+        .counter{
+          display: none;
+        }
+
+      }
+    }
+    .main-list-3{
+      //下载
+
+    }
+
+    #xhyPage{
+      nav{
+        display: inline-block;
+      }
+      .page-actions{
+        height: 50px;
+        line-height: 50px;
+        display: inline-block;
+        width: 285px;
+        vertical-align: 34px;
+
+        #page{
+          height:25px;
+          line-height:25px;
+          text-align: center;
+        }
+        ul li{
+          list-style: none;
+        }
+      }
+    }
+  }
+  > footer{
+    background: $bgColor !important;
+    color: #fff;
+    height: 100px;
+
+    vertical-align: middle;
+    .nav{
+      height: 20px;
+      line-height: 20px;
+      margin-top:auto;;
+      margin-bottom: auto;
+      display: inline-block;
+      ul{
+        padding-left: 0;
+      }
+      li{
+        float: left;
+        list-style-type: none;
+
+        &.line{
+          width: 1px;
+          background: #fff;
+          display: block;
+          height: 12px;
+          margin-top: 5px;
+          margin-left: 12px;
+          margin-right: 12px;
+        }
+        a{
+          color: #fff;
+          &:hover{
+            color: darken(#fff, 10%)
+          }
         }
       }
     }

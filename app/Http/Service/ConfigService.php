@@ -12,23 +12,21 @@ use App\Models\ConfigModel;
 
 class ConfigService extends BaseService {
 
-
-
 	public function __construct() {
 
 		$this->model = new ConfigModel();
 	}
 
-	public function create( $name=null, $value=null, $is_use=null) {
+	public function create($name = null, $value = null, $is_use = null) {
 
-		$result = $this->model->createParams( $name, $value, $is_use);
+		$result = $this->model->createParams($name, $value, $is_use);
 		return $result;
 	}
 
 	/**
 	 * 编辑
 	 */
-	public function edit($id, $name=null, $value=null, $is_use=null) {
+	public function edit($id, $name = null, $value = null, $is_use = null) {
 
 		$this->model = ConfigModel::find($id);
 		if (!is_null($this->model)) {
@@ -49,13 +47,12 @@ class ConfigService extends BaseService {
 
 	public function shareGlobalConfig() {
 
-	    $result = null;
+		$result = null;
 
-	    $result = $this->model->where('is_use', 1)->get()->toArray();
-         
+		$result = $this->model->where('is_use', 1)->get()->toArray();
 
-        \View::share('GConfig', $result);  
-         
-    }
+		\View::share('GConfig', $result);
+
+	}
 
 }

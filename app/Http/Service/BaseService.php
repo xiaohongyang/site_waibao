@@ -133,7 +133,14 @@ Abstract Class BaseService {
 		if (!is_null($params)) {
 			if (is_array($params)) {
 				if (key_exists('relation', $params)) {
-					$query->with($params['relation']);
+
+				    if(is_array($params['relation'])){
+				        foreach ( $params['relation'] as $relation) {
+                            $query->with($relation);
+                        }
+                    } else {
+                        $query->with($params['relation']);
+                    }
 				}
 			}
 		}
@@ -141,5 +148,11 @@ Abstract Class BaseService {
 		return $result;
 
 	}
+
+
+    public function remove($id) {
+        $result = $this->model->remove($id);
+        return $result;
+    }
 
 }

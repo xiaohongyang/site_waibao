@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="{{mix('/css/app.css')}}" rel="stylesheet">
-    <link href="{{mix('/css/site.css')}}" rel="stylesheet">
+    <link href="{{mix('/css/admin.css')}}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -128,7 +128,7 @@
     <script src="{{ mix('js/app.js') }}"></script>
 
 
-    <script src="{{ mix('js/site.js') }}"></script>
+    <script src="{{ mix('js/admin.js') }}"></script>
 
 
     <!--include socket.io.js-->

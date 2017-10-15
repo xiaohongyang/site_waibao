@@ -56,12 +56,9 @@
         props : {typeId : {default:1}, 
             columnList : {
             default : [
-                { data : 'id', "title" : "标题"},
-                { data : 'column01', "title" : "主题"},
-                { data : 'column02', "title" : "公司名称"},
-                { data : 'column03', "title" : "姓名"},
-                { data : 'column04', "title" : "电话"},
-                { data : 'column05', "title" : "电邮"},
+                { data : 'id', "title" : "id"},
+                { data : 'column01', "title" : "称呼"},
+                { data : 'column02', "title" : "联系方式"},
                 { data : 'column10', "title" : "内容"},
                 { data : 'created_at', "title" : "添加日期"}
             ]
@@ -172,8 +169,20 @@
  
                                             editStr = editStr +
                                                 '<button class="btn btn-sm btn-default"  onclick="$.fn.remove(' + row['id'] + ')" title="删除"><span class="glyphicon glyphicon-remove"></span></button> ';
- 
-                                            editStr += "<example></example>"
+
+                                            if(row['verified'] == 1) {
+                                                editStr = editStr
+                                                    + '<button class="btn btn-xs btn-default"  onclick="$.fn.verified(' + row['id'] + ', 0)" title="取消审核"><span class="">取消</span></button> ';
+                                            } else {
+                                                editStr = editStr
+                                                    + '<button class="btn btn-xs btn-default"  onclick="$.fn.verified(' + row['id'] + ', 1)" title="审核"><span class="">审核</span></button> ';
+                                            }
+
+
+
+
+
+                                            editStr  += "<example></example>"
                                             return editStr ;
                                         }
                                     }
@@ -234,6 +243,21 @@
                         }
                     })
             },
+            verified : function(id, isOk) {
+                if(typeof id == 'undefined')
+                    return false;
+                var t = this
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
+                axios.get(this.$config.url.api.guestbook + '?id=' + id + '&case='+(isOk ? 'verified' : 'cancelVerified'))
+                    .then(function(json) {
+                        var message = t.$msgBag2String(json.data.message)
+                        alert(message)
+
+                        if(json.data.status == 1) {
+                            t.getListData(true)
+                        }
+                    })
+            },
             onContentsChange : function(val) {
                 this.contents = val
                 console.log(val)
@@ -256,7 +280,10 @@
             $.fn.remove = function(id){ 
                 t.remove(id) 
             }
-            
+
+            $.fn.verified = function(id, isOk){
+                t.verified(id, isOk)
+            }
 
         }
     }
