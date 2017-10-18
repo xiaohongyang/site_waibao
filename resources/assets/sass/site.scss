@@ -92,10 +92,20 @@ body .container >.row{
 //menu nav
 #app-navbar-collapse{
   background: green;
+  text-align: center;
   a{
     color: #fff;
     &:hover{
       color: green;
+    }
+  }
+
+  ul.navbar-nav{
+    float: none;
+    li{
+      display: inline-block;
+      float: none;
+      width: 125px;
     }
   }
 }
@@ -136,6 +146,7 @@ body .container >.row{
     .guest-book .list tr{
         height: auto;
         min-height: 30px;
+
     }
 
     .main-list-1{
@@ -225,6 +236,10 @@ body .container >.row{
     height: 100px;
 
     vertical-align: middle;
+
+    .margin-top-10{
+      margin-top: 30px;
+    }
     .nav{
       height: 20px;
       line-height: 20px;

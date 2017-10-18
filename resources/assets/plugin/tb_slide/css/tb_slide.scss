@@ -15,10 +15,13 @@ DIV#MainPromotionBanner {
 }
 #MainPromotionBanner .SlideTriggers {
 	Z-INDEX: 10; POSITION: absolute; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px;
-	PADDING-LEFT: 0px; WIDTH: 200px; PADDING-RIGHT: 0px; HEIGHT: 25px; TOP: 122px; RIGHT: 10px; LIST-STYLE-IMAGE: none; PADDING-TOP: 0px
+	PADDING-LEFT: 0px; WIDTH:  auto; PADDING-RIGHT: 0px; HEIGHT: 25px; TOP: 122px; RIGHT: 10px; LIST-STYLE-IMAGE: none; PADDING-TOP: 0px
 }
 #MainPromotionBanner .SlideTriggers LI {
-	TEXT-ALIGN: center; LINE-HEIGHT: 16px; MARGIN: 0px 3px; WIDTH: 16px; DISPLAY: inline; FONT-FAMILY: Arial; BACKGROUND: url(/images/slide_trigger.gif) no-repeat center center; FLOAT: left; HEIGHT: 16px; COLOR: #333; FONT-SIZE: 0.9em; OVERFLOW: hidden; CURSOR: pointer
+	TEXT-ALIGN: center; LINE-HEIGHT: 16px; MARGIN: 0px 3px; WIDTH: 16px; DISPLAY: inline; FONT-FAMILY: Arial;
+	BACKGROUND: url(/images/slide_trigger.gif) no-repeat center center; FLOAT: left; HEIGHT: 16px; COLOR: #333; FONT-SIZE: 0.9em; OVERFLOW: hidden; CURSOR: pointer;
+	//float:right;
+	display: inline-block;
 }
 #MainPromotionBanner .SlideTriggers LI.Current {
 	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; LINE-HEIGHT: 16px; MARGIN: 0px 3px; WIDTH: 16px; BACKGROUND: url(/images/slide_trigger_c.gif) no-repeat center center; HEIGHT: 16px; COLOR: #c80506; FONT-SIZE: 1.1em; BORDER-TOP: 0px; FONT-WEIGHT: bold; BORDER-RIGHT: 0px

@@ -36,12 +36,18 @@ $types = getTypeList($rootId, 'id');
                 <div class="newLeft">
                     <h3 class="newLeft-title">{{$model->title}}</h3>
                     <h3 class="newLeft-title">{{$model->updated_at}}</h3>
+                    <?php
+                        if($model->articleType->show_type == \App\Models\ArticleTypeModel::SHOW_TYPE_UPLOAD)  {
+                    ?>
                     <div class="row">
                         <div class="col-sm-12">
                             今日下载：{{$model->todayDownCount ? count($model->todayDownCount) : 0}} &nbsp;&nbsp;&nbsp;
                             总下载：{{$model->allDownCount ? count($model->allDownCount) : 0}}
                         </div>
                     </div>
+                    <?php
+                        }
+                    ?>
                     <p></p>
                     <?php
                     echo "$model->content";

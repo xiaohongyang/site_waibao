@@ -20,5 +20,9 @@
                     <img class='img-responsive' border="0" alt="" src="http://www.ysgxf.com/image/img_75.jpg"></a>
             </li>--}}
         </ul>
-        <ul class="SlideTriggers"><li class="">1</li><li class="Current">2</li><li class="">3</li></ul></div>
+
+        <ul class="SlideTriggers">
+            {{--<li class="Current">2</li><li class="">3</li>--}}
+
+        </ul></div>
 </div>

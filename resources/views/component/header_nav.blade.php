@@ -3,9 +3,9 @@
                 <div class="col-sm-12">
 
 
-                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <div class="collapse navbar-collapse text-center" id="app-navbar-collapse">
                         <!-- Left Side Of Navbar -->
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav center-block">
                             &nbsp;
                             <li><a href="/">首页</a></li>
 

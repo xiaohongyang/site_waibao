@@ -173,6 +173,7 @@ class ArticleController extends BaseController {
 		if(!is_null($model))
             VisitCounterService::articleOrTypeCounter($id, VisitCounterModel::TYPE_ARTICLE_VISIT);
 
+		 
         return view('article.detail', ['id' => $id, 'model' => $model]);
 	}
 
