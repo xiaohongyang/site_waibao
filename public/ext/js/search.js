@@ -30,7 +30,7 @@ $(function(){
 
             var key = $('input[type=text][name=key]').val()
 
-            this.url = '/api/articles?case=page&search='+key+'&page='+ page +'&amount=' + amount
+            this.url = '/api/articles?case=page&search='+key+'&page='+ page +'&amount=' + amount + "&type_id=24"
 
             $.ajax({
                 url : this.url,
@@ -39,9 +39,18 @@ $(function(){
                 success : function(data) {
                     if(data.status == 1) {
                         $.fn.xhyPage.init();
+
                         var data = {total : data.page.total, data: data.data}
                         $.fn.xhyPage.updateData(data, page)
+
+                        if(data.data.length < 1) {
+                            $('.news-company').html('要搜索的数据不存在')
+                        }
+
+                    } else {
+                        $('.news-company').html('搜索数据失败')
                     }
+
                 }
             })
         }

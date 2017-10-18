@@ -28,11 +28,10 @@ class ArticleController extends BaseController {
 			$query->where('title', 'like', "%{$key}%");
 		}
 
-		$query->where('type_id', 25);
+		$query->whereIn('type_id', [24,25,26,36]);
 		$articleService->setPrevPageListQuery($query);
 		$pageData = $articleService->getPageList(1, 9999, $key, 'updated_at', 'desc');
 		$queries = \DB::getQueryLog();
-		print_r($queries);
 		//sreturn view('article.survey', ['id' => $id, 'listData' => $pageData]);
 		return view('article.search', ['id' => 16, 'listData' => $pageData]);
 	}
