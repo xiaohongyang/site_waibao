@@ -10,7 +10,7 @@
 		                	<span class="glyphicon glyphicon-pencil"></span>
 		                </button>
 
-		                <button type="button" class="btn  btn-default remove "
+		                <button type="button" class="btn hide  btn-default remove "
 								v-on:click="remove(item.id)">
 		                	<span class="glyphicon glyphicon-remove"></span>
 		                </button>
