@@ -41,7 +41,7 @@
         <div>
             <span> 详情 </span>
             <span>
-                <Ueditor :value="contents" v-on:changed="onContentsChange"></Ueditor>
+                <Ueditor :value="initContents" v-on:changed="onContentsChange"></Ueditor>
             </span>
             <span class="error"> </span>
         </div>
@@ -93,6 +93,7 @@
                 id : this.idProp,
                 is_index : 0,
                 link : '',
+                initContents : this.contentsValue
             }
         },
         mounted : function(){
@@ -170,6 +171,7 @@
                                 t.is_index = data.is_index
                                 t.attach_file = data.attach_file
                                 t.link = data.link
+                                t.initContents = t.contents
                             }
                         })
                 }

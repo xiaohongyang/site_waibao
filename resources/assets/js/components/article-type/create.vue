@@ -29,7 +29,7 @@
         <div>
             <span> 详情 </span>
             <span>
-                <Ueditor :value="contents" v-on:changed="onContentsChange"></Ueditor>
+                <Ueditor :value="initContents" v-on:changed="onContentsChange"></Ueditor>
             </span>
             <span class="error"> </span>
         </div>
@@ -78,6 +78,7 @@
                 tag : '',
                 ue : {},
                 contents : this.contentsValue,
+                initContents : this.contentsValue,
                 title : this.titleValue,
                 typeListData : [],
                 parentId : 0,
@@ -140,6 +141,7 @@
                                 t.parentId = data.pid
                                 t.thumb = data.thumb
                                 t.contents = data.content
+                                t.initContents = t.contents
                                 t.sort = data.sort
                                 t.show_type = data.show_type
                                 t.is_index = data.is_index

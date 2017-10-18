@@ -181,11 +181,10 @@ var slidePic = function(picSrc,opacity) {
                 var imageHeight = img.height
 
                 if(showWrapWidth>imageWidth && showWrapHeight > imageHeight){
-
                     resultWidth = imageWidth
                     resultHeight = imageHeight
 
-                } else if(imageWidth > imageHeight){
+                } if(imageWidth > imageHeight){
                     resultWidth = showWrapWidth
                     resultHeight = 'auto'
                 } else {
@@ -1187,4 +1186,5 @@ MultiRegionPicker.prototype = {
     }
 
 };
+
 </script>

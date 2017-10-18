@@ -350,10 +350,7 @@
             $("#out_alert").hide()
         })
     }
-</script>
-<script>
-
-</script>
+</script> 
 <script type="text/javascript">
     var thePlayer;  //保存当前播放器以便操作
     $(function(){
@@ -406,8 +403,6 @@
         });
     });
 </script>
-
-
 @yield('scripts')
 @component('component.common_xhy_js')
 @endcomponent
