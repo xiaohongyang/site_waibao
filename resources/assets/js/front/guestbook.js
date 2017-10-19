@@ -5,6 +5,16 @@ $(function(){
         getRandomImage()
     })
 
+    $.fn.guestbook ={
+        addError : function(message, element){
+            element.siblings('.error').remove();
+            messageObj = $("<span class='error'>"+ message +"</span>")
+            element.after(messageObj)
+        },
+        removeError : function(element){
+            element.siblings('.error').remove();
+        }
+    }
     $.fn.guestGookStore = function(){
         var data = {
             column01 : $('#column01').val(),
@@ -14,11 +24,36 @@ $(function(){
 
         var code = $('#code').val();
 
-        if($.trim(data.column01)=='') {alert('如何称呼不能为空'); return false;}
-        if($.trim(data.column02)=='') {alert('联系方式为空'); return false;}
-        if($.trim(data.column10)=='') {alert('内容不能为空'); return false;}
-        if($.trim(code)=='') {alert('验证码不能为空'); return false;}
-        if($.trim(code) != $.fn.randomCode) {alert('验证码不正确'); return false;}
+        if ($.trim(data.column01) == '') {
+            $.fn.guestbook.addError('如何称呼不能为空', $('#column01'));
+            return false;
+        } else {
+            $.fn.guestbook.removeError($('#column01'))
+        }
+        if ($.trim(data.column02) == '') {
+            $.fn.guestbook.addError('联系方式为空', $('#column02'));
+            return false;
+        } else {
+            $.fn.guestbook.removeError($('#column02'))
+        }
+        if ($.trim(data.column10) == '') {
+            $.fn.guestbook.addError('内容不能为空', $('#column10'));
+            return false;
+        } else {
+            $.fn.guestbook.removeError($('#column10'))
+        }
+        if ($.trim(code) == '') {
+            $.fn.guestbook.addError('验证码不能为空', $('#code'));
+            return false;
+        } else {
+            $.fn.guestbook.removeError($('#code'))
+        }
+        if ($.trim(code) != $.fn.randomCode) {
+            $.fn.guestbook.addError('验证码不正确', $('#code'));
+            return false;
+        } else {
+            $.fn.guestbook.removeError($('#code'))
+        }
 
         var url = '/api/guestbook'
         $.ajax({

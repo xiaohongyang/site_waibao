@@ -1,3 +1,13 @@
+<?php
+    $url = Route::getCurrentRequest()->url();
+
+
+    $typeId = isset($current_type_id) &&  $current_type_id ? $current_type_id : null;
+
+
+    $is_home = isset($is_home) ? true :false;
+
+?>
             <!--nav start-->
             <div class="row margin-top-0" >
                 <div class="col-sm-12">
@@ -7,10 +17,10 @@
                         <!-- Left Side Of Navbar -->
                         <ul class="nav navbar-nav center-block">
                             &nbsp;
-                            <li><a href="/">首页</a></li>
+                            <li {{$is_home ? 'class=active' : ''}} ><a href="/" >首页</a></li>
 
                             @foreach($header_nav as $nav)
-                                <li><a href="{{route('article_list', $nav['id'])}}">{{$nav['name']}}</a></li>
+                                <li {{$nav['id']==$typeId ? 'class=active' : ''}}><a href="{{route('article_list', $nav['id'])}}" >{{$nav['name']}}</a></li>
                             @endforeach
                         </ul>
 

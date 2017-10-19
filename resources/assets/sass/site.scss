@@ -44,7 +44,7 @@ body .container >.row{
 {
   height: 91px;
   overflow: hidden;
-  background:url(/images/head_left.jpg) right no-repeat;
+  background: url(/images/head_bg.jpg) right no-repeat
 }
 
 .hr01
@@ -103,9 +103,25 @@ body .container >.row{
   ul.navbar-nav{
     float: none;
     li{
+
+      &.active{
+        background-color: #3097D1;
+        a{
+          color: #fff;
+        }
+      }
+
+
+      a:hover{
+        background-color: #3097D1;
+        color: #fff;
+      }
+
       display: inline-block;
       float: none;
-      width: 125px;
+      //width: 125px;
+      width: 13.33%;
+      font-size: 16px;
     }
   }
 }
@@ -113,6 +129,11 @@ body .container >.row{
 
 //footer start
 .container{
+
+  .panel {
+    margin-bottom: 10px;
+  }
+
   > .side-wrapper {
 
     .sidebar{
@@ -142,11 +163,30 @@ body .container >.row{
 
       .title{fonr-size: 1.25em; font-weight: bold;}
     }
+    .home-page{
+      .col-md-12 > pre{
+        border: none;
+      }
+    }
+    .guest-book {
 
-    .guest-book .list tr{
+      form{
+        tr{
+          td{
+            .error{
+              color: #f00; margin-left: 20px;
+            }
+          }
+        }
+      }
+
+      .list tr{
         height: auto;
         min-height: 30px;
-
+        .not-valid{
+          color: #f00;
+        }
+      }
     }
 
     .main-list-1{
@@ -159,7 +199,12 @@ body .container >.row{
         .content{
           display: none;
         }
-
+        .info{
+          text-align: right;
+          .title {
+            float: left;
+          }
+        }
         .down-counter{
           display: none;
         }
@@ -184,6 +229,7 @@ body .container >.row{
           margin-left: 15px;
           display: inline-block;
           width: 660px;
+
 
           .title{
             display:inline; height: 25px; line-height: 25px; width:400px; margin:0; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
@@ -231,7 +277,7 @@ body .container >.row{
     }
   }
   > footer{
-    background: $bgColor !important;
+    background: #666 !important;
     color: #fff;
     height: 100px;
 

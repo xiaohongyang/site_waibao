@@ -37,15 +37,13 @@
 
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h4 class="panel-title">网站统计</h4>
+            <h4 class="panel-title">访问统计</h4>
         </div>
         <div class="panel-body">
             <ul class="nav">
-                <li>
-                    总访问: <?=\App\Http\Service\VisitCounterService::getWebVisitCount()?>
-                </li>
-                <li>总下载: <?=\App\Http\Service\VisitCounterService::getWebDownCount()?></li>
                 <li>今日访问: <?=\App\Http\Service\VisitCounterService::getTodayWebVisitCount()?></li>
+                <li> 总访问: <?=\App\Http\Service\VisitCounterService::getWebVisitCount()?> </li>
+                <li class="hide">总下载: <?=\App\Http\Service\VisitCounterService::getWebDownCount()?></li>
             </ul>
         </div>
     </div>

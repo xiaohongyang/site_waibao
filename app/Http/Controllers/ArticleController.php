@@ -35,7 +35,6 @@ class ArticleController extends BaseController {
 		$articleService->setPrevPageListQuery($query);
 		$pageData = $articleService->getPageList(1, 9999, $key, 'updated_at', 'desc');
 		$queries = \DB::getQueryLog();
-		print_r($queries);
 		//sreturn view('article.survey', ['id' => $id, 'listData' => $pageData]);
 		return view('article.search', ['id' => 16, 'listData' => $pageData]);
 	}
@@ -50,6 +49,7 @@ class ArticleController extends BaseController {
 		$type = $typeService->getById($id);
 
 		\View::share('current_type', $type);
+		\View::share('current_type_id', $type->id);
 
 		if (is_null($type)) {
 			abort(404, '类别不存在');
@@ -147,7 +147,7 @@ class ArticleController extends BaseController {
 		$pageData = $articleService->getPageList(1, 9999, null, 'updated_at', 'desc');
 
 		$modelService = new GuestBookService();
-		$list = $modelService->getModel()->where('verified', true)->orderByDesc('updated_at')->get();
+		$list = $modelService->getModel()->orderByDesc('updated_at')->get();
 		return view('article.guest-book', ['id' => $id, 'listData' => $list]);
 	}
 
@@ -173,7 +173,8 @@ class ArticleController extends BaseController {
 		if(!is_null($model))
             VisitCounterService::articleOrTypeCounter($id, VisitCounterModel::TYPE_ARTICLE_VISIT);
 
-		 
+
+		\View::share('current_type_id', $model->type_id);
         return view('article.detail', ['id' => $id, 'model' => $model]);
 	}
 

@@ -56,14 +56,14 @@
 
                 <div class="row side-wrapper">
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
 
                         @component('component.side-wrapper')
                         @endcomponent
 
                     </div>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-10">
                         <div id="layout-app" class="content-wrapper">
                             @yield('content')
                         </div>
