@@ -18,8 +18,12 @@ Abstract Class BaseService {
 
 	protected $prevPageListQuery = null;
 
+
 	protected $totalRows = 0;
-	public function getTotalRows() {
+    public function setOrderColumn($column){
+        $this->orderColumn = $column;
+    }
+    public function getTotalRows() {
 		return $this->totalRows;
 	}
 

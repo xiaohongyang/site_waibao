@@ -26,7 +26,9 @@ class GuestBookController extends BaseApiController {
 			$amount = $request->get('amount');
 			$type_id = $request->get('type_id');
 			//$amount = null, $search = null, $orderColumn = null, $orderMethod = null, $params = null
-			$result = $service->getPageList($page, $amount, null, null, null, ['type_id' => $type_id]);
+            $service->setOrderColumn('created_at');
+            $result = $service->getPageList($page, $amount, null, null, null, []);
+			$this->setTotalRows($service->getTotalRows());
 			$this->setJsonResult(1, null, $result);
 			break;
 

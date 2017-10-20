@@ -91,6 +91,7 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
         <div class="col-sm-12">
 
             @foreach($listData as $item)
+                <!--
                     <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0" style="font-size:12px">
                         <tbody><tr>
                             <td width="60%" height="24" valign="middle" bgcolor="#E5F6CA"><font color="green"> <b>&nbsp;作者：
@@ -133,7 +134,15 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
                         </tr>
 
                         </tbody></table>
+                    -->
             @endforeach
+
+            <div id="dataInfo">
+
+            </div>
+            <div id="xhyPage">
+
+            </div>
         </div>
     </div>
     </div>

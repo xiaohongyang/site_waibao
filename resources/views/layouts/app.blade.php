@@ -42,6 +42,8 @@
 
             @component('component.header_nav')
             @endcomponent
+
+            @if(isset($is_home))
             <!--advertiser-->
                 <div class="row">
                     <div class="col-sm-12" style=' '>
@@ -50,6 +52,7 @@
 
                 </div>
             </div>
+            @endif
             <!--end advertisser-->
 
 
