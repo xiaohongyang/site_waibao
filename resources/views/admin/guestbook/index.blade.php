@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 
+
 @section('content')
 
     <?php
@@ -17,5 +18,8 @@ $breadcrumb = [
 @endsection
 
 
+
+
 @section('scripts')
+
 @endsection

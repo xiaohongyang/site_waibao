@@ -5,6 +5,8 @@
             <span> 文章标题： </span>
             <span> <input type="text" id="title" v-model="title"   name="title"> </span>
             <span class="error"> </span>
+
+            <button v-on:click="submit()">保存</button>
         </div>
         <div>
             <span> 文章类别： </span>
@@ -195,6 +197,7 @@
                         .then(function(json) {
                             if(json.data.status == 1) {
                                 t.$alert("新建成功");
+                                window.location.href='/admin/article/index'
                             } else { 
                                 t.$alert("新建失败")
                             }
@@ -207,6 +210,8 @@
                         .then(function(json) {
                             if(json.data.status == 1) {
                                 t.$alert("更新成功");
+                                window.location.href='/admin/article/index'
+
                             } else {
                                 var message = t.$msgBag2String( json.data.message )
 

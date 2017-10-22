@@ -59,14 +59,14 @@
 
                 <div class="row side-wrapper">
 
-                    <div class="col-sm-2">
+                    <div class="col-sm-2" style="width: 226px; !important;">
 
                         @component('component.side-wrapper')
                         @endcomponent
 
                     </div>
 
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" style="padding-left:0; width: auto;">
                         <div id="layout-app" class="content-wrapper">
                             @yield('content')
                         </div>

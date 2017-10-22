@@ -22,12 +22,17 @@ class GuestBookController extends BaseApiController {
 		switch ($case) {
 
 		case 'page':
+
 			$page = $request->get('page');
-			$amount = $request->get('amount');
+			$amount = $request->get('amount', 1000000000000);
 			$type_id = $request->get('type_id');
+			$parent_id = $request->get('parent_id', 0);
 			//$amount = null, $search = null, $orderColumn = null, $orderMethod = null, $params = null
             $service->setOrderColumn('created_at');
-            $result = $service->getPageList($page, $amount, null, null, null, []);
+            $query = $service->getPrevPageListQuery();
+            $query->where('parent_id', $parent_id);
+            $service->setPrevPageListQuery($query);
+            $result = $service->getPageList($page, $amount, null, null, null, [ 'relation' => ['reply'] ]);
 			$this->setTotalRows($service->getTotalRows());
 			$this->setJsonResult(1, null, $result);
 			break;
@@ -45,6 +50,17 @@ class GuestBookController extends BaseApiController {
             $rs = $service->unVerified($id);
             $this->setJsonResult($rs ?1:0, "取消审核成功", $rs);
 			break;
+
+
+        case 'reply' :
+
+            $id = $request->get('id');
+            $content = $request->get('content');
+
+            \Log::info("content=>{$content}");
+            $rs = $service->reply($id, $content);
+            $this->setJsonResult($rs ?1:0, "回复成功", $rs);
+            break;
 		default:
 			break;
 		}
@@ -83,16 +99,29 @@ class GuestBookController extends BaseApiController {
 		$column08 = $request->get('column08');
 		$column09 = $request->get('column09');
 		$column10 = $request->get('column10');
+		$parent_id = $request->get('parent_id');
 
 		$type_id = $request->get('type_id');
-
 		$service = new GuestBookService();
 		$service->getModel()->setTypeId($type_id);
-		$result = $service->create($column01, $column02, $column03, $column04, $column05, $column06, $column07, $column08, $column09, $column10);
+		$service->getModel()->setParentId($parent_id);
 
-		$message = $result ? $service->getModel() : ($service->getMessage() ?: 'failed');
-		$this->setJsonResult($result ? 1 : 0, $message);
-		return $this->getJsonResult();
+		if(is_null($parent_id)) {
+
+            $result = $service->create($column01, $column02, $column03, $column04, $column05, $column06, $column07, $column08, $column09, $column10);
+            $message = $result ? $service->getModel() : ($service->getMessage() ?: 'failed');
+            $this->setJsonResult($result ? 1 : 0, $message);
+            return $this->getJsonResult();
+        } else {
+
+            $result = $service->reply($parent_id, $column10);
+            $message = $result ? "回复成功" : ($service->getMessage() ?: 'failed');
+            $this->setJsonResult($result ? 1 : 0, $message);
+            return $this->getJsonResult();
+        }
+
+
+
 	}
 
 	/**

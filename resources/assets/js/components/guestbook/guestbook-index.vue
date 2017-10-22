@@ -1,4 +1,5 @@
 <template>
+
     <div id="show-list" class="">
 
         <div class="row">
@@ -53,16 +54,23 @@
 
     export default {
         t : this,
-        props : {typeId : {default:1}, 
+        props : {
+            typeId : {
+                default:1
+            },
             columnList : {
-            default : [
-                { data : 'id', "title" : "id"},
-                { data : 'column01', "title" : "称呼"},
-                { data : 'column02', "title" : "联系方式"},
-                { data : 'column10', "title" : "内容"},
-                { data : 'created_at', "title" : "添加日期"}
-            ]
-        }},
+                default : function(){
+
+                    return [
+                        { data : 'id', "title" : "id"},
+                        { data : 'column01', "title" : "称呼"},
+                        { data : 'column02', "title" : "联系方式"},
+                        { data : 'column10', "title" : "内容"},
+                        { data : 'created_at', "title" : "添加日期"}
+                    ];
+                }
+            }
+        },
         data : function(){
             return {
                 data : [],
@@ -132,21 +140,6 @@
                             var showColumns = ['id', 'columne01','column02','column03','column04','column05','column10','created_at', 'updated_at']
                             if(t.data.length > 0) {
                                 
-                                /*
-                                for(var item in t.data) {
-                                    var itemTmp = []
-                                    for(var k in showColumns) {
-                                        var keyName = showColumns[k]
-                                        if(keyName == 'type' ) {
-                                           // var articleType = t.data[item].articleType;
-                                            itemTmp.push(t.data[item]['articletype'].name)
-                                        } else {
-                                            itemTmp.push(t.data[item][keyName])
-                                        }
-                                    }
-                                    dataSet.push(itemTmp)
-                                }
-                                */
                                 dataSet = t.data
                                 
                             }
@@ -166,21 +159,30 @@
                                         orderable: false, title: '操作', className: 'page-numeric', render: function (data, type, row) {
 
                                             var editStr = '';
- 
-                                            editStr = editStr +
-                                                '<button class="btn btn-sm btn-default"  onclick="$.fn.remove(' + row['id'] + ')" title="删除"><span class="glyphicon glyphicon-remove"></span></button> ';
 
                                             if(row['verified'] == 1) {
                                                 editStr = editStr
-                                                    + '<button class="btn btn-xs btn-default"  onclick="$.fn.verified(' + row['id'] + ', 0)" title="取消审核"><span class="">取消</span></button> ';
+                                                    + '<button class="btn btn-xs btn-warning"  onclick="$.fn.verified(' + row['id'] + ', 0)" title="取消审核"><span class=""><span class="glyphicon glyphicon-off"></span></button> ';
                                             } else {
                                                 editStr = editStr
-                                                    + '<button class="btn btn-xs btn-default"  onclick="$.fn.verified(' + row['id'] + ', 1)" title="审核"><span class="">审核</span></button> ';
+                                                    + '<button class="btn btn-xs btn-success"  onclick="$.fn.verified(' + row['id'] + ', 1)" title="审核通过"><span class=""><span class="glyphicon glyphicon-ok"></span></span></button> ';
                                             }
 
 
+                                            var replyStr = '<button class="btn btn-xs btn-primary"  onclick="$.fn.reply(' + row['id'] + ', 1)" title="回复留言"><span class=""><span class="glyphicon glyphicon-transfer"></span></span></button> ';
+
+                                            var displayReply = '<button class="btn btn-xs btn-info"  onclick="$.fn.displayReply(' + row['id'] + ', 1)" title="查看回复"><span class=""><span class="glyphicon glyphicon-eye-open"></span></span></button> ';
 
 
+                                            editStr += replyStr;
+
+                                            if(row['reply'] && row['reply'].length) {
+
+                                                editStr += displayReply;
+                                            }
+
+                                     editStr = editStr +
+                                         '<button class="btn btn-xs btn-danger"  onclick="$.fn.remove(' + row['id'] + ')" title="删除留言"><span class="glyphicon glyphicon-remove"></span></button> ';
 
                                             editStr  += "<example></example>"
                                             return editStr ;
@@ -217,7 +219,8 @@
                                         "sSortAscending": ": 以升序排列此列",
                                         "sSortDescending": ": 以降序排列此列"
                                     }
-                                }
+                                },
+                                "order": [[4, "desc"]],
                             })
                         }
                     })
@@ -258,6 +261,124 @@
                         }
                     })
             },
+            reply : function(id, content) {
+              //回复留言
+                console.log('=====================content=====================================')
+                console.log(content)
+
+                if(typeof id == 'undefined' )
+                    return false;
+                if(typeof  content == 'undefined'){
+                    alert('内容不能为空')
+                    return false;
+                }
+                var t = this
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
+
+                axios.post(this.$config.url.api.guestbook + '?id=' + id +'&case=reply' ,{column10 :content, parent_id : id})
+                    .then(function(json) {
+                        var message = t.$msgBag2String(json.data.message)
+                        alert(message)
+
+                        $('.x_say_wrapper').html('');
+
+                        if(json.data.status == 1) {
+                            t.getListData(true)
+                        }
+                    })
+            },
+            removeEle : function(obj){
+                $(obj).remove();
+            },
+            delReplay : function(id) {
+              //回复留言
+                if(typeof id == 'undefined')
+                    return false;
+                var t = this
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
+                axios.delete(this.$config.url.api.guestbook + '/' + id)
+                    .then(function(json) {
+                        var message = t.$msgBag2String(json.data.message)
+                        t.$alert(message)
+
+                        document.getElementById('reply_' + id).remove()
+                    })
+            },
+            displayReply : function(id) {
+              //显示回复记录
+
+
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
+
+                var data = new FormData();
+                var t = this
+                var url = t.$config.url.api.guestbook
+                url = url + '?case=page&parent_id=' + id
+                axios.get( url, data )
+                    .then(function(json) {
+
+
+                        var showReplay = function(listData) {
+
+
+                            //内容
+                            var headerHtml = '<div class="newsFloat list-wrapper" style="height: 80%; overflow:auto;"><table class="table table-striped"> \
+                                                            <thead> \
+                                                                <tr> \
+                                                                    <th>#</th> \
+                                                                    <th>回复内容</th> \
+                                                                    <th>回复时间</th> \
+                                                                    <th>操作</th> \
+                                                                </tr> \
+                                                            </thead> \
+                                                            <tbody> \
+                                                           ';
+                            var footerHtml = '</tbody> \
+                                                    </table>';
+                            var contentTemplate = '<tr id="reply_[guestbook_id]"> \
+                                                        <th scope="row">[id]</th> \
+                                                        <td>[content]</td> \
+                                                        <td>[time]</td> \
+                                                        <td>[operation]</td> \
+                                                    </tr> \
+                                ';
+                            var cont = ""
+                            if(listData.length > 0) {
+                                for(var i=0; i<listData.length; i++) {
+                                    var renderItem = listData[i]
+
+                                    var id = i+1
+                                    var content = renderItem['column10']
+                                    var time = renderItem['updated_at']
+
+                                    var guestbook_id = renderItem['id']
+                                    var operation = "<span class='btn btn-xs btn-primary' onclick='$.fn.delReplay("+guestbook_id+")'>删除</span>"
+
+                                    var itemContent = contentTemplate.replace(/\[id\]/g, id)
+                                    itemContent = itemContent.replace(/\[guestbook_id\]/g, guestbook_id)
+                                    itemContent = itemContent.replace(/\[content\]/g, content)
+                                    itemContent = itemContent.replace(/\[time\]/g, time)
+                                    itemContent = itemContent.replace(/\[operation\]/g, operation)
+
+                                    cont += itemContent
+                                }
+                            }
+
+                            cont = headerHtml + cont + footerHtml
+                            $.x_say_m({cont : cont, time : 100000000, size : ['780', '550'], btn : [], closeBtnCont:'x'})
+
+                        }
+
+                        if (json.status == 200 && json.data.status == 1) {
+
+                            data = json.data.data
+                            showReplay(data)
+                        }
+                    })
+
+            },
+
+
             onContentsChange : function(val) {
                 this.contents = val
                 console.log(val)
@@ -283,6 +404,39 @@
 
             $.fn.verified = function(id, isOk){
                 t.verified(id, isOk)
+            }
+
+            $.fn.doReplay = function() {
+                var id = $('#parent_id').val()
+                var content = $('#reply_content').val();
+                if(content.length < 1) {
+                    alert('内容不能为空');
+                    return false;
+                }
+                t.reply(id, content)
+            }
+            $.fn.reply = function(id){
+
+                var cont = ' \
+                        <form consubmit="return false;" class="text-left"> \
+                            <input type="hidden" class="form-control" id="parent_id" value="'+id+'"> \
+                            <div class="form-group"> \
+                                <label for="exampleInputPassword1">回复内容</label> \
+                                <textarea id="reply_content" style="height: 90px;"></textarea> \
+                            </div> \
+                            <span type="submit" class="btn btn-primary" onclick="$.fn.doReplay()">提交</span> \
+                        </form>\
+                    ';
+                $.x_say_m({cont : cont, time : 100000000, size : ['780', '250'], btn : [], closeBtnCont:'x'})
+
+            }
+
+            $.fn.displayReply = function(id, isOk){
+                t.displayReply(id, isOk)
+            }
+
+            $.fn.delReplay = function(id) {
+                t.delReplay(id)
             }
 
         }

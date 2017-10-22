@@ -116,10 +116,10 @@
                                 data: dataSet,
                                 columns: [
                                     {
-                                        title: '<input type="checkbox" class="group-checkable" data-set="#table_1 .checkboxes"/>',
+                                        title: '<input type="checkbox" class="group-checkable" data-set="#table_1 .checkboxes" />',
                                         orderable: false,
                                         render: function (data, type, row) {
-                                            return '<input type="checkbox" class="checkboxes" value="'+ row['id'] +'"/></td>';
+                                            return '<input type="checkbox" class="checkboxes" style="margin-left: 8px;" value="'+ row['id'] +'"/></td>';
                                         }
                                     },
 //                                    { data : 'id', "title" : "标题"},
@@ -130,10 +130,16 @@
                                         orderable: false, title: '操作', className: 'page-numeric', render: function (data, type, row) {
 
                                             var editUrl = t.$config.url.web.article_create
-                                            var editStr = '<a class="btn btn-sm btn-default" target="_blank" href="' + editUrl + '?id='+ row['id'] + '" title="编辑"><span class="glyphicon glyphicon-pencil"></span></a>';
+                                            var editStr = '<a class="btn btn-xs btn-primary" target="_blank" href="' + editUrl + '?id='+ row['id'] + '" title="编辑"><span class="glyphicon glyphicon-pencil"></span></a>';
  
                                             editStr = editStr +
-                                                '<button class="btn btn-sm btn-default"  onclick="$.fn.remove(' + row['id'] + ')" title="删除"><span class="glyphicon glyphicon-remove"></span></button> ';
+                                                ' <button class="btn btn-xs btn-danger"  onclick="$.fn.remove(' + row['id'] + ')" title="删除"><span class="glyphicon glyphicon-remove"></span></button> ';
+
+                                            if ('12,16,24,'.indexOf(row['type_id']+',') != -1){
+                                                editStr = editStr +
+                                                    ' <button class="btn btn-xs btn-info"  onclick="window.open(\'/detail/' +row['id'] +'\')" title="查看"><span class="glyphicon glyphicon-eye-open"></span></button> '
+                                            }
+;
  
                                             editStr += "<example></example>"
                                             return editStr ;
@@ -166,8 +172,10 @@
                                     "oAria": {
                                         "sSortAscending": ": 以升序排列此列",
                                         "sSortDescending": ": 以降序排列此列"
-                                    }
-                                }
+                                    },
+                                },
+                                "order": [[3, "desc"]],
+
                             })
                         }
                     })

@@ -17,7 +17,7 @@ class IndexController extends BaseController {
 
 	public function index(Request $request) {
 
-	    \View::share('is_home', 1);
+
 		return view('home');
 	}
 

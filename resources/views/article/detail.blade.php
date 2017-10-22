@@ -36,9 +36,27 @@ $types = getTypeList($rootId, 'id');
                 <div class="newLeft">
                     <h3 class="newLeft-title">{{$model->title}}</h3>
                     <h3 class="newLeft-title">{{$model->updated_at}}</h3>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!-- JiaThis Button BEGIN -->
+                            <div class="jiathis_style_24x24">
+                                <a class="jiathis_button_qzone"></a>
+                                <a class="jiathis_button_tsina"></a>
+                                <a class="jiathis_button_tqq"></a>
+                                <a class="jiathis_button_weixin"></a>
+                                <a class="jiathis_button_renren"></a>
+                                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                                <a class="jiathis_counter_style"></a>
+                            </div>
+                            <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+                            <!-- JiaThis Button END -->
+                        </div>
+                    </div>
                     <?php
                         if($model->articleType->show_type == \App\Models\ArticleTypeModel::SHOW_TYPE_UPLOAD)  {
                     ?>
+
                     <div class="row">
                         <div class="col-sm-12">
                             今日下载：{{$model->todayDownCount ? count($model->todayDownCount) : 0}} &nbsp;&nbsp;&nbsp;
@@ -61,9 +79,16 @@ $types = getTypeList($rootId, 'id');
     </div>
 
 
+
+
 @endsection
 
 
 @section('scripts')
     <script type="text/javascript" src="/ext/js/article-list.js"> </script>
+    <script type="text/javascript">
+        $(function(){
+            $('.jiathis_bubble_style').css('width', '165px !important')
+        })
+    </script>
 @endsection

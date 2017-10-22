@@ -33,7 +33,8 @@ class GuestBookModel extends BaseModel {
 		'column10',
 		'column12',
 		'type_id',
-        'verified'
+        'verified',
+        'parent_id'
 	];
 
 	private $type_id;
@@ -45,10 +46,23 @@ class GuestBookModel extends BaseModel {
 		return $this->type_id;
 	}
 
+	private $parent_id = 0;
+	public function setParentId($parentId) {
+		$parentId = is_null($parentId) ? 0 : $parentId;
+		$this->parent_id = $parentId;
+	}
+	public function getParentId() {
+		return $this->parent_id;
+	}
+
+	public function reply(){
+	    return $this->hasMany(GuestBookModel::class, 'parent_id', 'id');
+    }
+
 	public function createParams($column01, $column02, $column03, $column04, $column05, $column06, $column07, $column08, $column09, $column10) {
 
 		$typeId = is_null($this->getTypeId()) ? self::TYPE_GUESTBOOK : $this->getTypeId();
-
+		$parentId = is_null($this->getParentId()) ? 0 : $this->getParentId();
 		$data = [
 			'column01' => $column01,
 			'column02' => $column02,
@@ -61,12 +75,12 @@ class GuestBookModel extends BaseModel {
 			'column09' => $column09,
 			'column10' => $column10,
 			'type_id' => $typeId,
-            'column12' => $_SERVER['REMOTE_ADDR']
+            'column12' => $_SERVER['REMOTE_ADDR'],
+            'parent_id' => $parentId
 		];
 
 		$rule = [
-			'column01' => ['required'],
-			'column02' => ['required'],
+			'column10' => ['required'],
 		];
 		$validator = \Validator::make($data, $rule);
 

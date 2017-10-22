@@ -168,7 +168,6 @@
                         .then(function(json) {
                             if(json.data.status == 1) {
                                 t.$alert("新建成功");
-                                window.location.href=window.location.href
                             } else { 
                                 var message = t.$msgBag2String( json.data.message )
 

@@ -33,6 +33,7 @@ Vue.use(Auth2Plugin)
 import ConfigPlugin from './my-plugin/ConfigPlugin'
 Vue.use(ConfigPlugin)
 
+Vue.component('x_alert', require("./components/XhyAlert.vue"))
 
 Vue.component('Ueditor', require("./components/Ueditor.vue"))
 Vue.component('article-type-create', require("./components/article-type/create.vue"))

@@ -57,6 +57,20 @@ class GuestBookService extends BaseService {
 	        return false;
         }
     }
+
+    public function  reply($id, $content) {
+
+
+	    $model = GuestBookModel::find($id);
+	    if(!is_null($model)) {
+	        $this->model->setParentId($id);
+	        $result = $this->create(null,null,null,null,null,null,null,null,null, $content);
+	        return $result;
+        } else {
+            $this->message = '该要回复的数据不存在';
+	        return false;
+        }
+    }
     public function  unVerified($id) {
 
 

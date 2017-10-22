@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{mix('/css/app.css')}}" rel="stylesheet">
     <link href="{{mix('/css/admin.css')}}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 
     <!-- Scripts -->
     <script>

@@ -145,6 +145,7 @@ $(function(){
                         'attach_file' : '/down/' + data.data[i]['id'],
                         'today_count' : data.data[i]['today_count'],
                         'all_count' : data.data[i]['all_count'],
+                        'all_visit_count' : data.data[i]['all_visit_count'].length,
                     })
                 }
             }
@@ -247,7 +248,7 @@ $(function(){
                                                title="[title]" class="title" style="">[title]\
                                                    \
                                            </a> <span class="down-counter"> 今日下载:[today_count] 总下载:[all_count] </span> \
-                                            <span class="c-red counter" >4095</span>   \   \
+                                            <span class="c-red counter" >[all_visit_count]</span>   \   \
                                             <span class="time">[updated_at]</span> \
                                             <span title="[content]" class="content"> \
                                                 [content] \
@@ -267,6 +268,7 @@ $(function(){
                     var down = renderItem['attach_file']
                     var today_count = renderItem['today_count']
                     var all_count = renderItem['all_count']
+                    var all_visit_count = renderItem['all_visit_count']
 
 
                     var itemContent = contentTemplate.replace(/\[url\]/g, url)
@@ -277,6 +279,7 @@ $(function(){
                     itemContent = itemContent.replace(/\[down\]/g, down)
                     itemContent = itemContent.replace(/\[today_count\]/g, today_count)
                     itemContent = itemContent.replace(/\[all_count\]/g, all_count)
+                    itemContent = itemContent.replace(/\[all_visit_count\]/g, all_visit_count)
 
                     $(this.dataWrapId).append($(itemContent))
                 }

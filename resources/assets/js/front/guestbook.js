@@ -246,6 +246,7 @@ $(function(){
                         'created_at' : data.data[i]['created_at'],
                         'created_at' : data.data[i]['created_at'],
                         'verified' : data.data[i]['verified'],
+                        'reply' : data.data[i]['reply'],
                     })
                 }
             }
@@ -362,6 +363,29 @@ $(function(){
                                                                 <div><b class="spiffy"><b class="spiffy1"><b></b></b><b class="spiffy2"><b></b></b> <b class="spiffy3"></b><b class="spiffy4"></b><b class="spiffy5"></b></b> \
                                                                 <div class="spiffyfg [verified]">   [column10]</div> <b class="spiffy"><b class="spiffy5"></b> <b class="spiffy4"></b> <b class="spiffy3"></b><b class="spiffy2"><b></b></b><b class="spiffy1"><b></b></b></b></div></td></tr></tbody></table></td></tr> <tr><td height="10px"></td> <td align="right"></td></tr></tbody></table>'
 
+            var replyTemplate = '<table width="100%" border="0" align="center" cellpadding="2" cellspacing="0" style="font-size: 12px;">\
+                                        <tbody style="text-indent: 2em;">\
+                                            <tr>\
+                                                <td width="60%" height="24" valign="middle" bgcolor="#ccc">\
+                                                    <font color="green"><b>&nbsp;管理员回复：\
+                                               </td> \
+                                               <td width="40%" align="right" valign="middle" bgcolor="#ccc">时间：\
+                                                <font class="green">[created_at]</font> \
+                                                </td>\
+                                            </tr> \
+                                            <tr>\
+                                                <td height="10px"></td> \
+                                                <td align="right"></td>\
+                                            </tr> \
+                                            <tr>\
+                                                <td colspan="2">\
+                                                    <table width="100%" border="0" cellspacing="4" cellpadding="0">\
+                                                    <tbody>\
+                                                        <tr>\
+                                                            <td width="100%" valign="top" style="font-size: 12px; padding-left: 0px;">\
+                                                                <div><b class="spiffy"><b class="spiffy1"><b></b></b><b class="spiffy2"><b></b></b> <b class="spiffy3"></b><b class="spiffy4"></b><b class="spiffy5"></b></b> \
+                                                                <div class="spiffyfg reply">   [column10]</div> <b class="spiffy"><b class="spiffy5"></b> <b class="spiffy4"></b> <b class="spiffy3"></b><b class="spiffy2"><b></b></b><b class="spiffy1"><b></b></b></b></div></td></tr></tbody></table></td></tr> <tr><td height="10px"></td> <td align="right"></td></tr></tbody></table>'
+
             if(this.renderData.length > 0) {
                 for(var i=0; i<this.renderData.length; i++) {
                     var renderItem = this.renderData[i]
@@ -381,7 +405,24 @@ $(function(){
                     itemContent = itemContent.replace(/\[verified\]/g, verified)
 
 
+                    //回复内容
+                    if(renderItem['reply'] && renderItem['reply'].length && renderItem['verified']) {
+                        var replyContent = '';
+                        var replyList = renderItem['reply']
+                        for(j=0; j<replyList.length; j++){
+
+                            var created_at = replyList[j]['updated_at']
+                            var column10 = replyList[j]['column10']
+                            var tmpCont = ''
+                            tmpCont = replyTemplate.replace(/\[created_at\]/g, created_at)
+                            tmpCont = tmpCont.replace(/\[column10\]/g, column10)
+
+                            replyContent += tmpCont
+                        }
+                    }
+
                     $(this.dataWrapId).append($(itemContent))
+                    $(this.dataWrapId).append($(replyContent))
                 }
             }
 

@@ -143,6 +143,7 @@ body .container >.row{
     }
   }
   .content-wrapper{
+    width: 925px;
     background: #fff;
     pre{
       background: #fff;
@@ -209,7 +210,10 @@ body .container >.row{
           display: none;
         }
         .counter{ margin-left: 50px; margin-right: 15px;}
-
+        .time{
+          width: 126px;
+          display: inline-block;
+        }
         .down{display: none;}
       }
     }
@@ -228,7 +232,7 @@ body .container >.row{
         .info{
           margin-left: 15px;
           display: inline-block;
-          width: 660px;
+          width: 30%;
 
 
           .title{
@@ -240,7 +244,7 @@ body .container >.row{
           }
         }
         .time{
-          display: block;
+          display: none;
           color: red;
         }
         .counter{
@@ -486,6 +490,8 @@ img.ajax_upload_img {
   padding-bottom: 5px; 
 }
 
+
+
 //breadcrumbs
 
 .active{
@@ -512,4 +518,10 @@ img.ajax_upload_img {
       height: 50px;
     }
   }
+}
+
+
+//分享插件css
+.jiathis_style_24x24 .jiathis_counter.jiathis_bubble_style {
+  min-width: 65px !important;
 }
