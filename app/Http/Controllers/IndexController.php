@@ -17,7 +17,9 @@ class IndexController extends BaseController {
 
 	public function index(Request $request) {
 
-		
+
+	    \View::share('is_index', true);
+
 		$this->renderIndex();
 		return view('front.index');
 	}

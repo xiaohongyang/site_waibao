@@ -22,9 +22,39 @@ foreach ($typeArr as $typeName) {
 }
 
 $types = getTypeList($rootId, 'id');
+if (count($types) > 1) {
+    $rootType = getTypeItem($rootId, 'id', $globalTypeList);
+    $currentType = getTypeItem($id, 'id', $globalTypeList);
+} else {
+
+    $rootId = 17;
+    foreach ($typeArr as $typeName) {
+
+        $types = getTypeList($typeName, 'name');
+        if (count($types)) {
+            foreach ($types as $item) {
+                if ($item['id'] == $rootId) {
+                    $rootId = $types[0]['id'];
+                }
+
+            }
+        }
+    }
+    $rootType = getTypeItem($rootId, 'id', $globalTypeList);
+    $currentType = getTypeItem($id, 'id', $globalTypeList);
+}
 
 ?>
 @section('content')
+
+    <style>
+        .type_22 table{
+            border-collapse: collapse;
+        }
+        .type_22 table tr td{
+            border: 1px solid #000 !important;
+        }
+    </style>
 
     <div class="main cl">
         <!--左侧导航 begin-->
@@ -47,18 +77,23 @@ $types = getTypeList($rootId, 'id');
         </div>
         <!--左侧导航 end-->
         <!--右侧内容区 begin-->
-        <div class="main-l recourceApply newsDetailWord newsDetail_ding" name="top">
+        <div class="main-l recourceApply newsDetailWord newsDetail_ding type_<?=$model->type_id?>" name="top">
             @component('component.breadcrumbs', ['type_id'=>$model->type_id, 'id'=>$model->id])
             @endcomponent
             <div id="doctitle">
-                <div class="newLeft">
+                <div class="newLeft" style="width: auto;">
                     <h3 class="newLeft-title">{{$model->updated_at}}</h3>
                     <h3 class="newLeft-title">{{$model->title}}</h3>
 
                     <p></p>
                     <?php
-echo "<pre>$model->content</pre>";
-?>
+                        if($model->type_id==22) {
+
+                            echo $model->content;
+                        } else {
+                            echo "<pre>$model->content</pre>";
+                        }
+                    ?>
 
                     <div class="newLeft-other hide">
 
@@ -85,7 +120,7 @@ echo "<pre>$model->content</pre>";
                     </div>
                 </div>
             </div>
-            <div class="img so_app_right" id="bannerOne">
+            <div class="img so_app_right hide" id="bannerOne">
                 <img src="/tpl/hcPicture/AboutCTI/20150403135800339.jpg">
                 <div>
                     <p class="p_one"><i></i>深圳总部</p>

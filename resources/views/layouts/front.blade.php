@@ -79,6 +79,27 @@
             mobile_device_detect("/");
         });
     </SCRIPT>
+
+    <style type="text/css">
+        .nav li.active{
+            background:  #a9ca5c !important;
+
+        }
+        .nav li.active > a{
+            color: #fff;
+        }
+
+        .item-topBox .i-banner ul li .word{
+            display: none;
+        }
+
+        .header .hidden{
+            display: none;
+        }
+        .header.cur1 .hidden{
+            display: none;
+        }
+    </style>
 </head>
 <body><div class="header" id="header">
     <a href="#" class="hidden"><img src="/tpl/image/hidden-logo.png"  id="logoimg" alt="天博检测logo" class="logo    f-l"/></a>

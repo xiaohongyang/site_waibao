@@ -48,6 +48,10 @@ class ArticleController extends BaseController {
 			abort(404, '类别不存在');
 			return;
 		}
+
+		\View::share('current_type', $type);
+		\View::share('root_type_id', $this->getRootId($id));
+
 		switch ($type->show_type) {
 		case ArticleTypeModel::SHOW_TYPE_ARTICLE:
 			return $this->renderArticles($id);
@@ -158,7 +162,34 @@ class ArticleController extends BaseController {
 		$articleService = new ArticleService();
 		$model = $articleService->getById($id);
 
+		if($model && $model->articleType) {
+		    \View::share('current_type', $model->articleType);
+            \View::share('root_type_id', $this->getRootId($model->articleType->id));
+        }
+
+
 		return view('article.detail', ['id' => $id, 'model' => $model]);
 	}
+
+
+
+	public function getRootId($id){
+        $typeArr = ['关于我们', '服务指南', '新闻资讯', '检测能力', '网上业务', '联系我们'];
+        $rootId = $id;
+        foreach ($typeArr as $typeName) {
+
+            $types = getTypeList($typeName, 'name');
+            if (count($types)) {
+                foreach ($types as $item) {
+                    if ($item['id'] == $rootId) {
+                        $rootId = $types[0]['id'];
+                    }
+
+                }
+            }
+        }
+
+        return $rootId;
+    }
 
 }

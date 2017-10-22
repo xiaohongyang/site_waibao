@@ -1,8 +1,9 @@
+
 <div class="nav-w pl">
     <!--导航 begin-->
     <ul class="nav cl">
-        <li class="  nav_title_two_three">
-            <a href="/" class="nav_title_a">网站首页</a>
+        <li class="  nav_title_two_three <?=isset($is_index) && $is_index ? 'active' : ''?>">
+            <a href="/" class="nav_title_a ">网站首页</a>
             <!--
             <div class="sub_nav_child ">
                 <div class="sub_float">
@@ -148,9 +149,9 @@ switch ($types[0]['name']) {
 	}
 
 	?>
-                    <li class="{{$navTitleClass}} nav_title_two">
+                    <li class="{{$navTitleClass}} nav_title_two <?=isset($root_type_id) && $root_type_id==$types[0]['id'] ? 'active' : ''?>">
                         <a href="{{$types[0]['name']=='检测能力' ? route('article_list',['type_id'=>$types[0]['id']]) : '#'}}" class="nav_title_a"> {{$types[0]['name']}} </a>
-                        <div class="sub_nav_child nav_title_new" <?="style='width:{$width}; max-height:{$height}'"?>>
+                        <div class="sub_nav_child nav_title_new  " <?="style='width:{$width}; max-height:{$height}'"?>>
                             @if(count($types)>1)
                                 <div class="sub_float">
                                     <ul>

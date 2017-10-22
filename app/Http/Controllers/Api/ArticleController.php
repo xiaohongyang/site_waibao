@@ -62,7 +62,14 @@ class ArticleController extends BaseApiController {
 			if (is_array($result) && count($result)) {
 				foreach ($result as $k => $value) {
 					$result[$k]['description'] = strip_tags($value['content']);
-					$result[$k]['thumb'] = '/' . $result[$k]['thumb'];
+
+					if($result[$k]['thumb'] && strlen($result[$k]['thumb']) > 3) {
+
+                        $result[$k]['thumb'] = '/' . $result[$k]['thumb'];
+                    } else {
+                        $result[$k]['thumb'] = '/static/img/default.png';
+                    }
+
 				}
 			}
 			$totalRows = $articleService->getTotalRows();
