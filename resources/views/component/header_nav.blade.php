@@ -18,10 +18,11 @@
                         <ul class="nav navbar-nav center-block">
                             &nbsp;
                             <li {{$is_home ? 'class=active' : ''}} ><a href="/" >首页</a></li>
-
+                            @if( isset($header_nav) && count($header_nav))
                             @foreach($header_nav as $nav)
                                 <li {{$nav['id']==$typeId ? 'class=active' : ''}}><a href="{{route('article_list', $nav['id'])}}" >{{$nav['name']}}</a></li>
                             @endforeach
+                            @endif
                         </ul>
 
                     </div>

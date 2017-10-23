@@ -11,9 +11,11 @@
             <ul class="nav">
                 <li><a href="/">首页</a></li>
 
+                @if(isset($header_nav) && count($header_nav))
                 @foreach($header_nav as $nav)
                     <li><a href="{{route('article_list', $nav['id'])}}">{{$nav['name']}}</a></li>
                 @endforeach
+                @endif
             </ul>
         </div>
     </div>
@@ -26,9 +28,11 @@
         <div class="panel-body">
             <ul class="nav">
                 <li>
+                    @if(isset($friend_list) && count($friend_list))
                     @foreach( $friend_list as $link )
                         <a href="{{$link['link']}}" target="_blank">{{$link['title']}}</a>
                     @endforeach
+                    @endif
 
                 </li>
             </ul>
