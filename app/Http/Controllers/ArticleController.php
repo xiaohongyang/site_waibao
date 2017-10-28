@@ -44,6 +44,21 @@ class ArticleController extends BaseController {
 
 		$typeService = new ArticleTypeService();
 		$type = $typeService->getById($id);
+
+		$typeName = $type->name;
+		if( in_array($typeName, ['送检指南', '检测能力'])) {
+            $service = new ArticleService();
+
+            $articleList = $service->getPageList(1, 1000000,null,'updated_at','desc', ['type_id' => $type['id']]);
+            $articleList = $articleList->toArray();
+            if (is_array($articleList) && count($articleList)) {
+                $article = $articleList[0];
+
+                $url = 'detail/' . $article['id'];
+                return redirect($url);
+            }
+        }
+
 		if (is_null($type)) {
 			abort(404, '类别不存在');
 			return;
