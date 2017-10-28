@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Helpers\TreeHelper;
 use App\Http\Service\ArticleTypeService;
-use App\Models\ArticleTypeModel;
+use App\Models\ArticleTypeDao;
 use Illuminate\Http\Request;
 
 class ArticleTypeController extends BaseApiController {
@@ -66,7 +66,7 @@ class ArticleTypeController extends BaseApiController {
 			$this->setJsonResult(1, null, $result);
 			break;
 		default:
-			$result = ArticleTypeModel::all();
+			$result = ArticleTypeDao::all();
 			$this->setJsonResult(1, null, $result);
 			break;
 		}
@@ -128,7 +128,7 @@ class ArticleTypeController extends BaseApiController {
 			'data' => [],
 			'message' => [],
 		];
-		$model = ArticleTypeModel::find($id);
+		$model = ArticleTypeDao::find($id);
 		if ($model) {
 			$result['status'] = 1;
 			$result['data'] = $model;

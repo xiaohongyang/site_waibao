@@ -39,7 +39,7 @@ $types = getTypeList($rootId, 'id');
 
 
                     <?php
-                        if($model->articleType->show_type == \App\Models\ArticleTypeModel::SHOW_TYPE_UPLOAD)  {
+                        if($model->articleType->show_type == \App\Models\ArticleTypeDao::SHOW_TYPE_UPLOAD)  {
                     ?>
 
                             <div class="row">

@@ -9,7 +9,7 @@
 namespace App\Http\Service;
 
 use App\Http\Helpers\TreeHelper;
-use App\Models\ArticleTypeModel;
+use App\Models\ArticleTypeDao;
 
 class ArticleTypeService extends BaseService {
 
@@ -22,7 +22,7 @@ class ArticleTypeService extends BaseService {
 
 	public function __construct() {
 
-		$this->model = new ArticleTypeModel();
+		$this->model = new ArticleTypeDao();
 	}
 
 	public function create($name, $uid, $pid = null, $content = null, $thumb = null, $sort = null, $show_type = null, $is_index = null) {
@@ -36,13 +36,13 @@ class ArticleTypeService extends BaseService {
 	 */
 	public function edit($id, $name, $uid, $pid = null, $content = null, $thumb = null, $sort = null, $show_type = null, $is_index = null) {
 
-		$this->model = ArticleTypeModel::find($id);
+		$this->model = ArticleTypeDao::find($id);
 		if (!is_null($this->model)) {
 			$result = $this->model->edit($id, $name, $uid, $pid, $content, $thumb, $sort, $show_type, $is_index);
 			return $result;
 
 		} else {
-			$this->model = new ArticleTypeModel();
+			$this->model = new ArticleTypeDao();
 			$this->message = '该类别数据不存在';
 			return false;
 		}

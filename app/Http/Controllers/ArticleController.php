@@ -7,7 +7,7 @@ use App\Http\Service\ArticleTypeService;
 use App\Http\Service\GuestBookService;
 use App\Http\Service\VisitCounterService;
 use App\Models\ArticleModel;
-use App\Models\ArticleTypeModel;
+use App\Models\ArticleTypeDao;
 use App\Models\VisitCounterModel;
 use Illuminate\Http\Request;
 
@@ -58,28 +58,28 @@ class ArticleController extends BaseController {
 		VisitCounterService::articleOrTypeCounter($id, VisitCounterModel::TYPE_ARTICLE_TYPE_VISIT);
 
 		switch ($type->show_type) {
-		case ArticleTypeModel::SHOW_TYPE_ARTICLE:
+		case ArticleTypeDao::SHOW_TYPE_ARTICLE:
 			return $this->renderArticles($id);
 			break;
-		case ArticleTypeModel::SHOW_TYPE_NO_THUMB_ARTICLE:
+		case ArticleTypeDao::SHOW_TYPE_NO_THUMB_ARTICLE:
 			return $this->renderNoThumbArticles($id);
 			break;
-		case ArticleTypeModel::SHOW_TYPE_IMAGE:
+		case ArticleTypeDao::SHOW_TYPE_IMAGE:
 			return $this->renderImages($id);
 			break;
-		case ArticleTypeModel::SHOW_TYPE_SINGLE_PAGE:
+		case ArticleTypeDao::SHOW_TYPE_SINGLE_PAGE:
 			return $this->renderSinglePage($id);
 			break;
 
-		case ArticleTypeModel::SHOW_TYPE_UPLOAD:
+		case ArticleTypeDao::SHOW_TYPE_UPLOAD:
 			return $this->renderArticles($id);
 			break;
 
-		case ArticleTypeModel::SHOW_TYPE_GUEST_BOOK:
+		case ArticleTypeDao::SHOW_TYPE_GUEST_BOOK:
 			return $this->renderGuestBook($id);
 			break;
 
-		case ArticleTypeModel::SHOW_TYPE_SURVEY:
+		case ArticleTypeDao::SHOW_TYPE_SURVEY:
 			return $this->renderSurvey($id);
 			break;
 		}

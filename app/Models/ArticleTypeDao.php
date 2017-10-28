@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ArticleTypeModel extends BaseModel {
+class ArticleTypeDao extends BaseModel {
 
 	use SoftDeletes;
 
@@ -115,7 +115,7 @@ class ArticleTypeModel extends BaseModel {
 
 		//1.有子类存在不能删除
 		\Validator::extend('isHasChild', function ($attribute, $value, $parameters, $validator) {
-			$obj = \App\Models\ArticleTypeModel::where('pid', $value)->first();
+			$obj = \App\Models\ArticleTypeDao::where('pid', $value)->first();
 			return is_null($obj);
 		});
 		$rule = [

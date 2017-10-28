@@ -1,6 +1,6 @@
 var ConfigPlugin = {};
-const host = "http://web.local/"
-const webHost = "http://web.local/"
+const host = "http://39.106.0.139/"
+const webHost = "http://39.106.0.139/"
 //
 // const host = "http://web.local"
 // const webHost = "http://web.local"

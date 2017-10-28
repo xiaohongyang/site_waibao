@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Service\GuestBookService;
-use App\Models\ArticleTypeModel;
+use App\Models\ArticleTypeDao;
 use Illuminate\Http\Request;
 
 class GuestBookController extends BaseApiController {
@@ -137,7 +137,7 @@ class GuestBookController extends BaseApiController {
 			'data' => [],
 			'message' => [],
 		];
-		$model = ArticleTypeModel::find($id);
+		$model = ArticleTypeDao::find($id);
 		if ($model) {
 			$result['status'] = 1;
 			$result['data'] = $model;

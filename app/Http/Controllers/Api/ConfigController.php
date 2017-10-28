@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Helpers\TreeHelper;
 use App\Http\Service\ConfigService;
-use App\Models\ArticleTypeModel;
+use App\Models\ArticleTypeDao;
 use App\Models\ConfigModel;
 use Illuminate\Http\Request;
 
@@ -32,7 +32,7 @@ class ConfigController extends BaseApiController {
 			break;
 
 		default:
-			$result = ArticleTypeModel::all();
+			$result = ArticleTypeDao::all();
 			$this->setJsonResult(1, null, $result);
 			break;
 		}
@@ -85,7 +85,7 @@ class ConfigController extends BaseApiController {
 			'data' => [],
 			'message' => [],
 		];
-		$model = ArticleTypeModel::find($id);
+		$model = ArticleTypeDao::find($id);
 		if ($model) {
 			$result['status'] = 1;
 			$result['data'] = $model;

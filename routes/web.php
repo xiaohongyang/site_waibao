@@ -245,9 +245,9 @@ Route::get('/create', function (\Illuminate\Http\Request $request) {
 	$article = new \App\Models\ArticleModel();
 
 	$typeName = $request->get('type_name');
-	$typeItem = \App\Models\ArticleTypeModel::where(['name' => $typeName])->first();
+	$typeItem = \App\Models\ArticleTypeDao::where(['name' => $typeName])->first();
 	if (is_null($typeItem)) {
-		$typeItem = new \App\Models\ArticleTypeModel();
+		$typeItem = new \App\Models\ArticleTypeDao();
 		$typeItem->create($typeName);
 	}
 
@@ -269,9 +269,9 @@ Route::post('/create', function (\Illuminate\Http\Request $request) {
 
 	$typeName = $request->get('type_name');
 
-	$typeItem = \App\Models\ArticleTypeModel::where(['name' => $typeName])->first();
+	$typeItem = \App\Models\ArticleTypeDao::where(['name' => $typeName])->first();
 	if (is_null($typeItem)) {
-		$typeItem = new \App\Models\ArticleTypeModel();
+		$typeItem = new \App\Models\ArticleTypeDao();
 		$typeItem->create($typeName);
 	}
 	$request->merge(['type_id' => $typeItem->id]);

@@ -115,7 +115,7 @@ class ArticleModel extends BaseModel {
 	}
 
 	public function articleType() {
-		return $this->belongsTo(ArticleTypeModel::class, 'type_id', 'id');
+		return $this->belongsTo(ArticleTypeDao::class, 'type_id', 'id');
 	}
 
     public function allVisitCount() {
