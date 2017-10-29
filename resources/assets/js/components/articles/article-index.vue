@@ -40,8 +40,8 @@
         data : function(){
             return {
                 data : [],
-                columns : ['id', 'title','type','created_at', 'updated_at'],
-                showColumns : ['id', 'title','type','created_at', 'updated_at'],
+                columns : ['id', 'title','type','sort','created_at', 'updated_at'],
+                showColumns : ['id', 'title','type', '排序','created_at', 'updated_at'],
                 tag : '',
                 ue : {}, 
                 columnsHeader : [], 
@@ -103,7 +103,7 @@
   
                             t.data = json.data.data
                             var dataSet = [];
-                            var showColumns = ['id', 'title','type','created_at', 'updated_at']
+                            var showColumns = ['id', 'title','type','sort','created_at', 'updated_at']
                             if(t.data.length > 0) {
                                 
                                 dataSet = t.data
@@ -124,6 +124,14 @@
                                     },
 //                                    { data : 'id', "title" : "标题"},
                                     { data : 'title', "title" : "标题"},
+                                    {
+                                        orderable: false, title: '排序', className: 'page-numeric', render: function (data, type, row) {
+
+                                        var editStr =  '<input type="text" value="'+ row['sort'] +'" id="sort-' + row['id'] + '" onchange="$.fn.updateColumn(' + row['id'] + ', \'sort\')" title="删除" /> ';
+
+                                        return editStr ;
+                                    }
+                                    },
                                     { data : 'created_at', "title" : "添加日期"},
                                     { data : 'updated_at', "title" : "更新日期"},
                                     {
@@ -239,6 +247,38 @@
                 }
 
             },
+
+            updateColumn : function(id, column){
+
+                var articleId = id
+                var obj = $('#sort-'+articleId)
+                var sort = obj.val()
+
+
+                var data = {
+                    id : articleId
+                }
+                switch (column) {
+                    case 'sort':
+                        data.sort = sort
+                        break;
+                    default:
+                        break;
+                }
+
+
+
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
+                axios.put(this.$config.url.api.article_store + '/' + articleId, data)
+                    .then(function(json) {
+                        if(json.data.status == 1) {
+                            //this.$alert("更新成功");
+                        } else {
+                            //var message = this.$msgBag2String( json.data.message )
+                        }
+                    })
+
+            },
             onContentsChange : function(val) {
                 this.contents = val
                 console.log(val)
@@ -260,6 +300,10 @@
             var t = this
             $.fn.remove = function(id){ 
                 t.remove(id) 
+            }
+
+            $.fn.updateColumn = function(id, column) {
+                t.updateColumn(id, column)
             }
 
             $('body').on('click', '.group-checkable', function(){

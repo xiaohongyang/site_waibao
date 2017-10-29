@@ -103,7 +103,8 @@ if (count($types) > 1) {
             ?>
             <?php
                 if(in_array($rootType['name'], ['送检指南', '检测能力'])){
-                $articleList = $service->getPageList(1, 1000000,null,'updated_at','desc', ['type_id' => $rootType['id']]);
+                $articleList = $service->getPageList(1, 1000000,null,'sort','desc', ['type_id' => $rootType['id']]);
+
                 $articleList = $articleList->toArray();
                 if (is_array($articleList) && count($articleList)) {
             ?>
@@ -133,7 +134,7 @@ if (count($types) > 1) {
 
                                     <?php
                                     if(in_array($type['name'], ['送检指南', '检测能力'])){
-                                    $articleList = $service->getPageList(1, 1000000,null,'updated_at','desc', ['type_id' => $type['id']]);
+                                    $articleList = $service->getPageList(1, 1000000,null,'sort','desc', ['type_id' => $type['id']]);
                                     $articleList = $articleList->toArray();
                                     if (is_array($articleList) && count($articleList)) {
                                     ?>
