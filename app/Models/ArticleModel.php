@@ -12,10 +12,10 @@ class ArticleModel extends BaseModel {
 	protected $table = 'articles';
 
 	public $fillable = [
-		'title', 'thumb', 'type_id', 'content', 'author', 'user_id', 'from_host', 'file', 'is_index', 'attach_file', 'link',
+		'title', 'thumb', 'type_id', 'content', 'author', 'user_id', 'from_host', 'file', 'is_index', 'attach_file', 'link', 'sort'
 	];
 
-	public function createParams($title, $thumb = null, $type_id = null, $content = null, $file= null, $is_index= null, $attach_file= null, $link=null) {
+	public function createParams($title, $thumb = null, $type_id = null, $content = null, $file= null, $is_index= null, $attach_file= null, $link=null, $sort=null) {
 
 		$title = is_null($title) ? 0 : $title;
 		$thumb = is_null($thumb) ? '' : $thumb;
@@ -25,6 +25,7 @@ class ArticleModel extends BaseModel {
 		$is_index = is_null($is_index) ? 0 : $is_index;
 		$attach_file = is_null($attach_file) ? '' : $attach_file;
 		$link = is_null($link) ? '' : $link;
+        $sort = is_null($sort) ? 0 : $sort;
 
 		$data = [
 			'title' => $title,
@@ -35,6 +36,7 @@ class ArticleModel extends BaseModel {
 			'is_index' => $is_index,
 			'attach_file' => $attach_file,
 			'link' => $link,
+            'sort' => $sort,
 		];
 
 		$validator = \Validator::make($data, [
@@ -49,7 +51,7 @@ class ArticleModel extends BaseModel {
 		return $result;
 	}
 
-	public function edit($id, $title = null, $thumb = null, $type_id = null, $content = null, $file = null, $is_index = null, $attach_file = null, $link = null) {
+	public function edit($id, $title = null, $thumb = null, $type_id = null, $content = null, $file = null, $is_index = null, $attach_file = null, $link = null, $sort = null) {
 		$data = [
 			'id' => $id,
 		];
@@ -91,6 +93,10 @@ class ArticleModel extends BaseModel {
 			$rules['link'] = ['required'];
 		}
 
+        if (!is_null($sort)) {
+            $data['sort'] = $sort;
+            $rules['sort'] = ['required'];
+        }
 		$validator = \Validator::make($data, $rules);
 
 		$this->setCreateValidator($validator);

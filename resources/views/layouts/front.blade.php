@@ -17,6 +17,16 @@
     <meta name="description" content="招聘"></meta>
     <meta name="keywords" content="招聘"></meta>
     <meta http-equiv="cache-control" content="no-transform">
+
+    <style type="text/css">
+        .sub-nav ul li a{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 150px;
+            display: inline-block;
+        }
+    </style>
     <!-- 获取浏览器版本语言 -->
     <!-- 检测手机用户 -->
     <SCRIPT LANGUAGE="JavaScript">

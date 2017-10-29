@@ -27,6 +27,14 @@ Abstract Class BaseService {
 		$this->totalRows = $number;
 	}
 
+	public function setOrderColumn($column) {
+	    $this->orderColumn = $column;
+    }
+
+    public function setOrderMethod($method) {
+	    $this->orderMethod = $method;
+    }
+
 	/**
 	 * @return mixed
 	 */
@@ -40,6 +48,7 @@ Abstract Class BaseService {
 		}
 		return $this->prevPageListQuery;
 	}
+
 
 	/**
 	 * @param mixed $prevPageListQuery

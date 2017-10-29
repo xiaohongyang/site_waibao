@@ -50,7 +50,7 @@ if (count($types) > 1) {
                     @foreach($types as $type)
                         @if($type['level']==2)
                         <li class="<?=$type['id'] == $id ? 'cur' : ''?>">
-                           <a href="{{route('article_list',['type_id'=>$type['id']])}}">{{$type['name']}}</a><i class="icon i-sub-arrow"></i>
+                           <a href="{{route('article_list',['type_id'=>$type['id']])}}" title="{{$type['name']}}">{{$type['name']}}</a><i class="icon i-sub-arrow"></i>
                         </li>
                         @endif
                     @endforeach

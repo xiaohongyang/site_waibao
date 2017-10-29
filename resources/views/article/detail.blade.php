@@ -72,11 +72,17 @@ if (count($types) > 1) {
             padding: 0;
             text-indent: 12px;
         }
+
+
+
         .sub-nav ul li ul{
             border: 0;
         }
         .sub-nav ul li ul li{
             background: #eee;
+        }
+        .sub-nav ul li ul li.active{
+            background: #ccc;
         }
         .sub-nav ul li ul li.active a{
             color: #000;
@@ -105,7 +111,7 @@ if (count($types) > 1) {
                         <?php
                         foreach ($articleList as $article) {
                         ?>
-                        <li <?=$model->id == $article['id'] ? 'class="active"' : ''?>><a href="{{route('article_detail',['id'=> $article['id']])}}" >{{$article['title']}}</a></li>
+                        <li <?=$model->id == $article['id'] ? 'class="active"' : ''?>><a href="{{route('article_detail',['id'=> $article['id']])}}" title="{{$article['title']}}">{{$article['title']}}</a></li>
                         <?php
                         }
                         ?>
@@ -123,7 +129,7 @@ if (count($types) > 1) {
                         @foreach($types as $type)
                             @if(key_exists('level', $type) && $type['level']==2)
                                 <li class="<?=$type['id'] == $type_id ? 'cur' : ''?>">
-                                    <a href="{{route('article_list',['type_id'=>$type['id']])}}">{{$type['name']}}</a><i class="icon i-sub-arrow"></i>
+                                    <a href="{{route('article_list',['type_id'=>$type['id']])}}" title="{{$type['name']}}">{{$type['name']}}</a><i class="icon i-sub-arrow"></i>
 
                                     <?php
                                     if(in_array($type['name'], ['送检指南', '检测能力'])){
@@ -135,7 +141,7 @@ if (count($types) > 1) {
                                         <?php
                                         foreach ($articleList as $article) {
                                         ?>
-                                        <li <?=$model->id == $article['id'] ? 'class="active"' : ''?>><a href="{{route('article_detail',['id'=> $article['id']])}}" >{{$article['title']}}</a></li>
+                                        <li <?=$model->id == $article['id'] ? 'class="active"' : ''?>><a href="{{route('article_detail',['id'=> $article['id']])}}" title="{{$article['title']}}" >{{$article['title']}}</a></li>
                                         <?php
                                         }
                                         ?>

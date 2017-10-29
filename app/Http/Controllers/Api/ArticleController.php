@@ -57,6 +57,11 @@ class ArticleController extends BaseApiController {
 				$params['type_id'] = [25, 26, 36, 29];
 			}
 
+			$articleService->setOrderColumn('sort');
+			$articleService->setOrderMethod('desc');
+            $query = $articleService->getPrevPageListQuery();
+			$query->orderByDesc('updated_at');
+			$articleService->setPrevPageListQuery($query);
 			$result = $articleService->getPageList($page, $amount, $search, $orderColumn, $orderMethod, $params);
 			$result = $result->toArray();
 			if (is_array($result) && count($result)) {
@@ -109,9 +114,10 @@ class ArticleController extends BaseApiController {
 		$is_index = $request->get('is_index');
 		$attach_file = $request->get('attach_file');
 		$link = $request->get('link');
+		$sort = $request->get('sort');
 		$articleService = new ArticleService();
 
-		$result = $articleService->create($title, $thumb, $typeId, $content, $file, $is_index, $attach_file, $link);
+		$result = $articleService->create($title, $thumb, $typeId, $content, $file, $is_index, $attach_file, $link, $sort);
 
 		$message = $result ? $articleService->getModel() : ($articleService->getMessage() ?: 'failed');
 		$this->setJsonResult($result ? 1 : 0, $message);
@@ -165,9 +171,10 @@ class ArticleController extends BaseApiController {
 		$is_index = $request->get('is_index');
 		$attach_file = $request->get('attach_file');
 		$link = $request->get('link');
+        $sort = $request->get('sort');
 		$articleService = new ArticleService();
 
-		$result = $articleService->edit($id, $title, $thumb, $typeId, $content, $file, $is_index, $attach_file, $link);
+		$result = $articleService->edit($id, $title, $thumb, $typeId, $content, $file, $is_index, $attach_file, $link, $sort);
 
 		$message = $result ? '更新成功' : ($articleService->getMessage() ?: '更新失败');
 		$resultData = $result ? $articleService->getModel() : [];
