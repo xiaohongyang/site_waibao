@@ -14,14 +14,14 @@
                 </button>
             </div>
 
-             
-            <div id="datatable_filter" class="dataTables_filter type_filter"  > 
+
+            <div id="datatable_filter" class="dataTables_filter type_filter"  >
                 <label>选择类别:</label>
                 <type-tree-select   :selected="type_id"    v-on:changed="setTypeId"></type-tree-select>
             </div>
 
 
-            <table class="table table-bordered" id='datatable'> 
+            <table class="table table-bordered" id='datatable'>
             </table>
         </div>
 
@@ -30,7 +30,7 @@
 </template>
 
 
-<script> 
+<script>
 
     import $ from 'jquery'
 
@@ -43,8 +43,8 @@
                 columns : ['id', 'title','type','sort','created_at', 'updated_at'],
                 showColumns : ['id', 'title','type', '排序','created_at', 'updated_at'],
                 tag : '',
-                ue : {}, 
-                columnsHeader : [], 
+                ue : {},
+                columnsHeader : [],
                 contents : this.contentsValue,
                 title : this.titleValue,
                 type_id : 0,
@@ -52,9 +52,9 @@
             }
         },
         mounted : function(){
-            
+
             this.columnsHeader = [
-               
+
                 '标题',
                 '类别 ',
                 '创建日期',
@@ -65,7 +65,7 @@
         computed : {
         },
         watch : {
-            
+
         },
         methods : {
 
@@ -75,10 +75,10 @@
             },
             freshPage : function(totalPage, amountPerPage, currentPage) {
                 if(totalPage) {
-                    this.totalPage = parseInt(totalPage / amountPerPage) + 1; 
+                    this.totalPage = parseInt(totalPage / amountPerPage) + 1;
                 }
             },
-           
+
             //刷新数据
             getListData : function(isFresh){
 
@@ -87,7 +87,7 @@
                     $('#datatable').html('')
                     this.datatable_obj.destroy()
                 }
-                
+
 
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$authToken()
 
@@ -100,12 +100,12 @@
 
 
                         if(json.status==200 && json.data.status==1) {
-  
+
                             t.data = json.data.data
                             var dataSet = [];
                             var showColumns = ['id', 'title','type','sort','created_at', 'updated_at']
                             if(t.data.length > 0) {
-                                
+
                                 dataSet = t.data
                             }
                             console.log('dataSet -------------------------------------')
@@ -125,9 +125,9 @@
 //                                    { data : 'id', "title" : "标题"},
                                     { data : 'title', "title" : "标题"},
                                     {
-                                        orderable: false, title: '排序', className: 'page-numeric', render: function (data, type, row) {
+                                        data:'sort', title: '排序', orderable: true,  render: function (data, type, row) {
 
-                                        var editStr =  '<input type="text" value="'+ row['sort'] +'" id="sort-' + row['id'] + '" onchange="$.fn.updateColumn(' + row['id'] + ', \'sort\')" title="删除" /> ';
+                                        var editStr = '<span style="display: block; height: 0px; width:0px; overflow: hidden;">  ' + row['sort'] + '</span>' + '<input type="text" value="'+ row['sort'] +'" style="width: 60px;" id="sort-' + row['id'] + '" onchange="$.fn.updateColumn(' + row['id'] + ', \'sort\')" title="删除" /> ';
 
                                         return editStr ;
                                     }
@@ -139,17 +139,17 @@
 
                                             var editUrl = t.$config.url.web.article_create
                                             var editStr = '<a class="btn btn-sm btn-default" target="_blank" href="' + editUrl + '?id='+ row['id'] + '" title="编辑"><span class="glyphicon glyphicon-pencil"></span></a>';
- 
+
                                             editStr = editStr +
                                                 '<button class="btn btn-sm btn-default"  onclick="$.fn.remove(' + row['id'] + ')" title="删除"><span class="glyphicon glyphicon-remove"></span></button> ';
- 
+
                                             editStr += "<example></example>"
                                             return editStr ;
                                         }
                                     }
                                 ],
                                 "paginate": true,// 分页按钮,
-                                "language": { 
+                                "language": {
                                     "sProcessing": "处理中...",
                                     "sLengthMenu": "每页 _MENU_ 项",
                                     "sZeroRecords": "没有匹配结果",
@@ -160,7 +160,7 @@
                                     "sSearch": "搜索:",
                                     "sUrl": "",
                                     "sEmptyTable": "表中数据为空",
-                                    "sLoadingRecords": "载入中...", 
+                                    "sLoadingRecords": "载入中...",
                                     "sInfoThousands": ",",
                                     "oPaginate": {
                                         "page": "页数",
@@ -174,16 +174,18 @@
                                     "oAria": {
                                         "sSortAscending": ": 以升序排列此列",
                                         "sSortDescending": ": 以降序排列此列"
-                                    }
-                                }
+                                    },
+                                },
+                                "order": [[4, "desc"]]
+
                             })
                         }
                     })
 
-                
+
             },
             setTypeId :function(newValue) {
-                this.type_id=newValue 
+                this.type_id=newValue
                 this.getListData(true)
             },
             getCheckedIds : function(){
@@ -285,7 +287,7 @@
             }
         },
         complete : function(){
-            
+
         },
         beforeMount : function(){
             this.$authToken()
@@ -298,8 +300,8 @@
 
 
             var t = this
-            $.fn.remove = function(id){ 
-                t.remove(id) 
+            $.fn.remove = function(id){
+                t.remove(id)
             }
 
             $.fn.updateColumn = function(id, column) {
