@@ -5,6 +5,8 @@ Auth::routes();
 Route::resource('photos', 'PhotoController');
 Route::resource('article-types', 'ArticleTypeController');
 
+Route::get('/map', 'ArticleController@map');
+
 #region oAuth2.0 token
 Route::get('redirect', function () {
 	$query = http_build_query([

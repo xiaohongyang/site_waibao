@@ -53,7 +53,7 @@ $currentType = getTypeItem($id, 'id', $globalTypeList);
                 <div class="researchSearch pl">
                     <!--文本框 begin-->
                     <span class="free-input anInput ">
-			           <label for="input-1" style="display: inline;">关键字</label>
+			           <label for="input-1" style="display: inline;"> </label>
 			           <input type="text" value="" name="paramMap.title" class="icon3" id="input-1">
 			      </span>
                     <!--文本框 end-->

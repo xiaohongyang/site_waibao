@@ -44,10 +44,29 @@ class ArticleController extends BaseController {
 
 		$typeService = new ArticleTypeService();
 		$type = $typeService->getById($id);
+
+		$typeName = $type->name;
+		if( in_array($typeName, ['送检指南', '检测能力'])) {
+            $service = new ArticleService();
+
+            $articleList = $service->getPageList(1, 1000000,null,'updated_at','desc', ['type_id' => $type['id']]);
+            $articleList = $articleList->toArray();
+            if (is_array($articleList) && count($articleList)) {
+                $article = $articleList[0];
+
+                $url = 'detail/' . $article['id'];
+                return redirect($url);
+            }
+        }
+
 		if (is_null($type)) {
 			abort(404, '类别不存在');
 			return;
 		}
+
+		\View::share('current_type', $type);
+		\View::share('root_type_id', $this->getRootId($id));
+
 		switch ($type->show_type) {
 		case ArticleTypeModel::SHOW_TYPE_ARTICLE:
 			return $this->renderArticles($id);
@@ -158,7 +177,37 @@ class ArticleController extends BaseController {
 		$articleService = new ArticleService();
 		$model = $articleService->getById($id);
 
+		if($model && $model->articleType) {
+		    \View::share('current_type', $model->articleType);
+            \View::share('root_type_id', $this->getRootId($model->articleType->id));
+        }
+
+
 		return view('article.detail', ['id' => $id, 'model' => $model]);
 	}
 
+
+
+	public function getRootId($id){
+        $typeArr = ['关于我们', '服务指南', '新闻资讯', '检测能力', '网上业务', '联系我们'];
+        $rootId = $id;
+        foreach ($typeArr as $typeName) {
+
+            $types = getTypeList($typeName, 'name');
+            if (count($types)) {
+                foreach ($types as $item) {
+                    if ($item['id'] == $rootId) {
+                        $rootId = $types[0]['id'];
+                    }
+
+                }
+            }
+        }
+
+        return $rootId;
+    }
+
+    public function map(){
+        return \View::make('article.map');
+    }
 }

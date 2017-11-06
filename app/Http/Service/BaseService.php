@@ -13,7 +13,7 @@ Abstract Class BaseService {
 	protected $message;
 	protected $model;
 
-	protected $orderColumn = 'id';
+	protected $orderColumn = 'sort';
 	protected $orderMethod = 'desc';
 
 	protected $prevPageListQuery = null;
@@ -27,6 +27,14 @@ Abstract Class BaseService {
 		$this->totalRows = $number;
 	}
 
+	public function setOrderColumn($column) {
+	    $this->orderColumn = $column;
+    }
+
+    public function setOrderMethod($method) {
+	    $this->orderMethod = $method;
+    }
+
 	/**
 	 * @return mixed
 	 */
@@ -36,10 +44,11 @@ Abstract Class BaseService {
 			$model = $this->model;
 			$this->orderColumn = is_null($this->orderColumn) ? 'id' : $this->orderColumn;
 			$this->orderMethod = is_null($this->orderMethod) ? 'desc' : $this->orderMethod;
-			$this->prevPageListQuery = $model->orderBy($this->orderColumn, $this->orderMethod);
+			$this->prevPageListQuery = $model->orderBy($this->orderColumn, $this->orderMethod)->orderBy('updated_at', 'desc');
 		}
 		return $this->prevPageListQuery;
 	}
+
 
 	/**
 	 * @param mixed $prevPageListQuery
