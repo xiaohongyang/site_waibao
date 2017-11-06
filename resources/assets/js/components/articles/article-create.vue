@@ -51,7 +51,11 @@
             <span> <input type="text" id="link" v-model="link"   name="link"> </span>
             <span class="error"> </span>
         </div>
-
+        <div>
+            <span> 排序  </span>
+            <span> <input type="text" name="sort" v-model="sort" >  </span>
+            <span class="error"> </span>
+        </div>
         <div>
             <div class="checkbox">
                 <label>
@@ -93,6 +97,7 @@
                 id : this.idProp,
                 is_index : 0,
                 link : '',
+                sort : 0,
                 initContents : this.contentsValue
             }
         },
@@ -171,6 +176,7 @@
                                 t.is_index = data.is_index
                                 t.attach_file = data.attach_file
                                 t.link = data.link
+                                t.sort = data.sort
                                 t.initContents = t.contents
                             }
                         })
@@ -185,6 +191,7 @@
                     content : this.contents,
                     is_index : this.is_index,
                     attach_file : this.attach_file,
+                    sort : this.sort,
                     link : this.link,
                 }
 

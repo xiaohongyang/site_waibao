@@ -1,4 +1,4 @@
-﻿.newsDetailWord .newLeft .newsApply.pass{background: url(../image/tu2.png) no-repeat;}
+.newsDetailWord .newLeft .newsApply.pass{background: url(../image/tu2.png) no-repeat;}
 .newsDetailWord .newLeft .newsApply.pass:hover{background: url(../image/tu2.png) no-repeat;}
 .newsDetailWord .newLeft .newsApply.pass a{color: #A69F9F;}
 .researchWord table .three a.pass{color: #B2B1B1;}
@@ -160,7 +160,7 @@ table{border-collapse:collapse;}
 .sub-nav h2{width:165px;height:61px;padding:8px 0 5px 19px;border: 1px solid #B5B5B5;border-bottom:0;background: #2F375D;color: #fff;font-size: 24px;font-weight:100;}
 .sub-nav h2 p{height:14px;line-height:14px;font-size: 14px;margin:5px 0 0 0;font-weight:bold;}
 .sub-nav ul{width:184px;border:1px #ccc solid;}
-.sub-nav ul li{padding:0 0 0 20px;position:relative;border-top:1px solid #E5E5E5;background:#fff;vertical-align:middle;line-height: 46px;font-size: 16px;}
+.sub-nav ul li{padding:0 0 0 0px; text-indent: 20px; position:relative;border-top:1px solid #E5E5E5;background:#fff;vertical-align:middle;line-height: 46px;font-size: 16px;}
 .sub-nav ul li a{display:block;color: #5B5B5B;width:198px}
 .sub-nav ul li .i-sub-arrow{position: absolute;top: 20px;right: 20px;}
 .sub-nav ul li:hover,.sub-nav ul li.cur{background:url(../image/sub_nav1.png) repeat-x;border-bottom-color: #DEDEDE;}

@@ -41,7 +41,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ globalConfig('网站名称')}} 
+                        {{ globalConfig('网站名称')}}
                     </a>
                 </div>
 
@@ -102,7 +102,7 @@
 
 
     <script src="{{ mix('js/app.js') }}"></script>
-    
+
 
     <script src="{{ mix('js/site.js') }}"></script>
     <!--include socket.io.js-->

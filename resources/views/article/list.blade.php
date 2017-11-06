@@ -50,7 +50,7 @@ if (count($types) > 1) {
                     @foreach($types as $type)
                         @if($type['level']==2)
                         <li class="<?=$type['id'] == $id ? 'cur' : ''?>">
-                           <a href="{{route('article_list',['type_id'=>$type['id']])}}">{{$type['name']}}</a><i class="icon i-sub-arrow"></i>
+                           <a href="{{route('article_list',['type_id'=>$type['id']])}}" title="{{$type['name']}}">{{$type['name']}}</a><i class="icon i-sub-arrow"></i>
                         </li>
                         @endif
                     @endforeach
@@ -75,9 +75,16 @@ if (count($types) > 1) {
                 <div id="dataInfo">
                     @if(count($listData))
                         @foreach($listData as $row)
+                            <?php
+                                if(!$row['thumb'] || strlen($row['thumb'])<3)
+                                    $row['thumb'] = '/static/img/default.png';
+                                else {
+                                    $row['thumb'] = '/' . $row['thumb'];
+                                }
+                            ?>
                         <div class="newsFloat">
                             <div id="div_hidden"><a href="{{route('article_detail', ['id'=>$row['id']])}}" target="blank"><img
-                                            class="news_img" src="/{{$row['thumb']}}" width="150px"
+                                            class="news_img" src="{{$row['thumb']}}" width="150px"
                                             height="92px"></a></div>
                             <div class="go_left">
                                 <a href="{{route('article_detail', ['id'=>$row['id']])}}" target="blank"

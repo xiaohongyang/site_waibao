@@ -207,7 +207,10 @@ class ArticleController extends BaseController {
         return $rootId;
     }
 
+<<<<<<< HEAD
     public function map(){
         return \View::make('article.map');
     }
+=======
+>>>>>>> 37a1ddbaab5c3ef424a746d120dd74a8916330c1
 }

@@ -11,6 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <link href="{{mix('/css/app.css')}}" rel="stylesheet">
     <link href="{{mix('/css/site.css')}}" rel="stylesheet">
 
@@ -20,6 +21,13 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
+
+    <style type="text/css">
+        table.dataTable.no-footer{
+            border-bottom: none;
+        }
+    </style>
 
     @include('UEditor::head')
 </head>

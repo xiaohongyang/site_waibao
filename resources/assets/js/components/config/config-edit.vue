@@ -13,7 +13,7 @@
             <tbody>
                 <tr v-for="data in listData"    >
                     <td class="col-md-4">  {{data['name']}} </td>
-                    <td class="col-md-4"> <input type="text"  v-model="data['value']"/></td>
+                    <td class="col-md-4"> <textarea type="text"  v-model="data['value']"></textarea></td>
                     <td>
                         <select v-model="data['is_use']">
                             <option value="1">启用</option>
