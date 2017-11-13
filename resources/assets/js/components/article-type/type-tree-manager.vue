@@ -51,7 +51,6 @@
             //this.$freshToken()
         },
         created : function(){
-            console.log('3344----------')
 			this.createlink = this.$config.url.web.article_type_create
         }
     }

@@ -393,7 +393,6 @@
         },
         created : function(){
 
-            console.log('3344----------')
             this.getListData();
 
 

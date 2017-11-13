@@ -18,7 +18,7 @@ class IndexController extends BaseController {
 	public function index(Request $request) {
 
 
-		return view('home');
+		return view('home', ['is_home' => true]);
 	}
 
 	protected function renderIndex() {

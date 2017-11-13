@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -11,11 +11,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{mix('/css/app.css')}}" rel="stylesheet">
+    <link href="{{mix('/css/app.css')}}" rel="stylesheet" />
 
-    <link href="{{mix('/css/tb_slide/tb_slide.css')}}" rel="stylesheet">
+    <link href="{{mix('/css/tb_slide/tb_slide.css')}}" rel="stylesheet" />
 
-    <link href="{{mix('/css/site.css')}}" rel="stylesheet">
+    <link href="{{mix('/css/site.css')}}" rel="stylesheet" />
+    <link href="/ext/css/swiper.min.css" rel="stylesheet" />
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -43,15 +44,17 @@
             @component('component.header_nav')
             @endcomponent
 
-            @if(isset($is_home))
             <!--advertiser-->
+            @if(isset($is_home))
                 <div class="row">
                     <div class="col-sm-12" style=' '>
                         @component('component.header_slide')
                         @endcomponent
 
+                    </div>
                 </div>
-            </div>
+
+
             @endif
             <!--end advertisser-->
 
@@ -91,16 +94,37 @@
     <script src="{{ mix('js/app.js') }}"></script>
 
 
-    <script src="{{ mix('js/tb_slide/tb_slide.js') }}"></script>
+    <script type="text/javascript" src="/ext/js/swiper.min.js"></script>
 
     <script src="{{ mix('js/site.js') }}"></script>
 
     <!--include socket.io.js-->
     <!--<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>-->
 
+    <script type="text/javascript">
 
+    </script>
+
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            autoHeight: true, //enable auto height
+            spaceBetween: 20,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
 
     @yield('scripts')
+
+
+
 
 </body>
 </html>

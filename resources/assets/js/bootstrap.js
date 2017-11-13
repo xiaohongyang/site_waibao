@@ -23,7 +23,7 @@ window.Vue = require('vue');
 
 window.axios = require('axios');
 
-
+require("babel-polyfill");
 
 import Ueditor from './components/Ueditor.vue'
 // Vue.use(Ueditor)

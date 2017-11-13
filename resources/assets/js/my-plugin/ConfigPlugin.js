@@ -38,3 +38,5 @@ ConfigPlugin.install = function (Vue, options) {
 }
 
 module.exports = ConfigPlugin;
+
+

@@ -14,7 +14,7 @@ const { mix } = require('laravel-mix');
  mix.js('resources/assets/js/app.js', 'public/js')
     // .js('resources/assets/js/ajaxFileUpload.js', 'public/js')
     // .js('resources/assets/js/index/index.js', 'public/js/index') 
-    .js('resources/assets/plugin/tb_slide/js/tb_slide.js', 'public/js/tb_slide')
+    //.js('resources/assets/plugin/tb_slide/js/tb_slide.js', 'public/js/tb_slide')
 
     //front start
     .js('resources/assets/js/front/article-list.js', 'public/js')
@@ -35,6 +35,8 @@ const { mix } = require('laravel-mix');
 if(mix.config.inProduction) {
     mix.version()
 }
+
+
 
 
 //mix.disableNotifications();
