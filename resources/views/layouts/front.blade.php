@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>TB天博检测</title>
+    <title>深圳市天博检测技术有限公司</title>
     <link rel="stylesheet" href="/tpl/css/huace_last.css"/>
     <!-- <link rel="stylesheet" href="/tpl/css/common_xhy.css"/> -->
     <link rel="stylesheet" href="/ext/css/common_xhy.css"/>
