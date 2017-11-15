@@ -350,8 +350,8 @@ $(function(){
                                                 <font color="green">IP地址已记录</font>\
                                                 </td>\
                                             </tr> \
-                                            <tr>\
-                                                <td height="10px"></td> \
+                                            <tr style="height:10px; min-height:5px;max-height:10px;overflow:hidden;margin:0;padding:0;">\
+                                                <td height="5px"></td> \
                                                 <td align="right"></td>\
                                             </tr> \
                                             <tr>\
@@ -360,17 +360,17 @@ $(function(){
                                                     <tbody>\
                                                         <tr>\
                                                             <td width="100%" valign="top" style="font-size: 12px; padding-left: 0px;">\
-                                                                <div><b class="spiffy"><b class="spiffy1"><b></b></b><b class="spiffy2"><b></b></b> <b class="spiffy3"></b><b class="spiffy4"></b><b class="spiffy5"></b></b> \
-                                                                <div class="spiffyfg [verified]">   [column10]</div> <b class="spiffy"><b class="spiffy5"></b> <b class="spiffy4"></b> <b class="spiffy3"></b><b class="spiffy2"><b></b></b><b class="spiffy1"><b></b></b></b></div></td></tr></tbody></table></td></tr> <tr><td height="10px"></td> <td align="right"></td></tr></tbody></table>'
+                                                                <div style=""><b class="spiffy"><b class="spiffy1"><b></b></b><b class="spiffy2"><b></b></b> <b class="spiffy3"></b><b class="spiffy4"></b><b class="spiffy5"></b></b> \
+                                                                <div class="spiffyfg [verified]" style="">   [column10]</div> <b class="spiffy"><b class="spiffy5"></b> <b class="spiffy4"></b> <b class="spiffy3"></b><b class="spiffy2"><b></b></b><b class="spiffy1"><b></b></b></b></div></td></tr></tbody></table></td></tr> <tr style="height:10px; min-height:5px;max-height:10px;overflow:hidden;margin:0;padding:0;"><td height="10px"></td> <td align="right"></td></tr></tbody></table>'
 
             var replyTemplate = '<table width="100%" border="0" align="center" cellpadding="2" cellspacing="0" style="font-size: 12px;">\
                                         <tbody style="text-indent: 2em;">\
                                             <tr>\
-                                                <td width="100%" height="24" valign="middle" bgcolor="#ccc">\
+                                                <td width="100%" height="24" valign="middle" bgcolor="#ccc" style="background:#ccc;">\
                                                     <font color="green"><b>&nbsp;管理员回复：[column10]\
                                                </td> \
                                             </tr> \
-                                             <tr><td height="10px"></td> <td align="right"></td></tr></tbody></table>'
+                                             <tr style="height:10px; min-height:5px;max-height:10px;overflow:hidden;margin:0;padding:0;"><td height="10px"></td> <td align="right"></td></tr></tbody></table>'
 
             if(this.renderData.length > 0) {
                 for(var i=0; i<this.renderData.length; i++) {
@@ -391,9 +391,10 @@ $(function(){
                     itemContent = itemContent.replace(/\[verified\]/g, verified)
 
 
+                    var replyContent = '';
                     //回复内容
-                    if(renderItem['reply'] && renderItem['reply'].length && renderItem['verified']) {
-                        var replyContent = '';
+                    if(renderItem['reply'] && renderItem['reply'].length && renderItem['verified'] && renderItem['reply'][0]['parent_id']==renderItem['id']) {
+                        
                         var replyList = renderItem['reply']
                         for(j=0; j<replyList.length; j++){
 

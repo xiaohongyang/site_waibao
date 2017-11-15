@@ -91,7 +91,6 @@
     <!-- end app -->
 
 
-    <script src="{{ mix('js/app.js') }}"></script>
 
 
     <script type="text/javascript" src="/ext/js/swiper.min.js"></script>
