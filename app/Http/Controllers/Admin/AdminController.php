@@ -10,7 +10,7 @@ class AdminController extends Controller {
 	//
 
 	public function __construct() {
-
+        $this->middleware('auth.admin');
 	}
 
 	public function edit(Request $request) {
@@ -24,7 +24,7 @@ class AdminController extends Controller {
         if (!is_null($request->get('name'))) {
 
             if(is_null($password) || is_null($repeat_password)) {
-                $msg = '密码或确认密码不能为空';
+                $msg = '密码和确认密码不能为空';
             } else if($password !== $repeat_password) {
                 $msg = '两次输入的密码不一致';
             } else {
