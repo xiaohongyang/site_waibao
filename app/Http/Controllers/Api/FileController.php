@@ -22,7 +22,7 @@ class FileController extends BaseApiController {
 		$directoryArray = [$directoryHeadPic, $articleThumbFilePath, env('ATTACH_FILE_PATH')];
 		$directory = implode(',', $directoryArray);
 
-		$rules = ['attach_file' => 'required|max:10240', 'directory' => 'required|in:' . $directory];
+		$rules = ['attach_file' => 'required|max:202400', 'directory' => 'required|in:' . $directory];
 		$validate = \Validator::make($request->all(), $rules);
 		$file = Input::file('attach_file');
 

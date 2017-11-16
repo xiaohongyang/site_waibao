@@ -24,7 +24,7 @@ class ImageController extends BaseApiController
         $directoryArray = [$directoryHeadPic, $articleThumbFilePath];
         $directory = implode(',', $directoryArray);
 
-        $rules = ['thumb' => 'required|max:2000','directory' => 'required|in:' . $directory];
+        $rules = ['thumb' => 'required|max:200000','directory' => 'required|in:' . $directory];
         $validate = \Validator::make($request->all(), $rules);
         $file = Input::file('thumb');
 
