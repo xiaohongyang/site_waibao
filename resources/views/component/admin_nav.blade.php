@@ -42,6 +42,11 @@ $navArr = [
 		'link' => route('admin.config.edit'),
 	],*/
 	[
+		'name' => '登录密码修改',
+
+		'link' => route('admin.edit'),
+
+	],  [
 		'name' => '类别管理',
 		'children' => [
 			[

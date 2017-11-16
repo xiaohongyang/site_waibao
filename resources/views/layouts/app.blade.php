@@ -92,10 +92,10 @@
 
 
 
-
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/site.js') }}"></script>
     <script type="text/javascript" src="/ext/js/swiper.min.js"></script>
 
-    <script src="{{ mix('js/site.js') }}"></script>
 
     <!--include socket.io.js-->
     <!--<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>-->
