@@ -35,7 +35,7 @@
 
                             <div style="float:left; padding-top:30px; padding-left:20px; margin-left: 202px;">
                                 <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=106424196&amp;site=qq&amp;menu=yes">
-                                    <img border="0" src="http://wpa.qq.com/pa?p=2:106424196:41 &amp;r=0.5010354385080462" alt="在线咨询" title="在线咨询">
+                                    <img border="0" src="/images/qq.png" alt="在线咨询" title="在线咨询">
                                 </a>
                             </div>
 

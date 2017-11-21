@@ -243,17 +243,17 @@ $(function(){
                                                 <img class="news_img" src="[thumb]" width="150px" height="92px"> \
                                             </a> \
                                         </div> \
-                                        <div class="info"> \
+                                        <div class="info" style="line-height: 30px; width:auto;"> \
                                             <a href="[url]" target="_blank" \
                                                title="[title]" class="title" style="">[title]\
                                                    \
-                                           </a> <span class="down-counter"> 今日下载:[today_count] 总下载:[all_count] </span> \
+                                           </a> <span class="down-counter" style="margin-left: 2em;"> 今日下载：[today_count] 总下载：[all_count] </span> \
                                             <span class="c-red counter" >[all_visit_count]</span>   \   \
                                             <span class="time">[updated_at]</span> \
                                             <span title="[content]" class="content"> \
                                                 [content] \
                                             </span> \
-                                            <span class="down">点此下载: <a href="[down]" target="_blank">下载</a> </span> \
+                                            <span class="down"><a href="[down]" target="_blank">点此下载</a> </span> \
                                         </div> \
                                     </div>'
 

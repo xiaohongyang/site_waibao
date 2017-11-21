@@ -20,6 +20,10 @@ $rootType = getTypeItem($rootId, 'id', $globalTypeList);
 $currentType = getTypeItem($id, 'id', $globalTypeList);
 
 ?>
+
+@section('title') [易算土方官网]_{{$currentType['name']}} @endsection
+
+
 @section('content')
 
     <div class="guest-book">

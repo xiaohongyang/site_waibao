@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Styles -->
     <link href="{{mix('/css/app.css')}}" rel="stylesheet" />
@@ -25,6 +25,14 @@
     </script>
 
 
+    <style type="text/css">
+        body{
+            font-family: '微软雅黑';
+        }
+        #app-navbar-collapse a{
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <div id="app">

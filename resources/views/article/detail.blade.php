@@ -35,19 +35,26 @@ $types = getTypeList($rootId, 'id');
             <div id="doctitle">
                 <div class="newLeft">
                     <h3 class="newLeft-title">{{$model->title}}</h3>
+                    <?php
+                    if($model->articleType->show_type != \App\Models\ArticleTypeModel::SHOW_TYPE_UPLOAD)  {
+                    ?>
                     <h3 class="newLeft-title">{{$model->updated_at}}</h3>
-
+                    <?php
+                        }
+                    ?>
 
                     <?php
                         if($model->articleType->show_type == \App\Models\ArticleTypeModel::SHOW_TYPE_UPLOAD)  {
                     ?>
 
-                            <div class="row">
+                            <div class="row" style="display: none;">
                                 <div class="col-sm-12">
                                     今日下载：{{$model->todayDownCount ? count($model->todayDownCount) : 0}} &nbsp;&nbsp;&nbsp;
                                     总下载：{{$model->allDownCount ? count($model->allDownCount) : 0}}
                                 </div>
                             </div>
+
+
                     <?php
                         } else {
 
@@ -74,6 +81,15 @@ $types = getTypeList($rootId, 'id');
                     <p></p>
                     <?php
                     echo "$model->content";
+                    ?>
+
+
+                    <?php
+                    if($model->articleType->show_type == \App\Models\ArticleTypeModel::SHOW_TYPE_UPLOAD)  {
+                    ?>
+                        <a href="/down/{{$model->id}}" target="_blank">点击下载</a>
+                    <?php
+                    }
                     ?>
 
                 </div>

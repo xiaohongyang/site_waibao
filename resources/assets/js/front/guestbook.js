@@ -366,8 +366,8 @@ $(function(){
             var replyTemplate = '<table width="100%" border="0" align="center" cellpadding="2" cellspacing="0" style="font-size: 12px;">\
                                         <tbody style="text-indent: 2em;">\
                                             <tr>\
-                                                <td width="100%" height="24" valign="middle" bgcolor="#ccc" style="background:#ccc;">\
-                                                    <font color="green"><b>&nbsp;管理员回复：[column10]\
+                                                <td width="100%" height="24" valign="middle" bgcolor="#ccc" style="text-indent: 0; background:#ccc;">\
+                                                    <font color="green"><b>[管理员回复]：[column10]\
                                                </td> \
                                             </tr> \
                                              <tr style="height:10px; min-height:5px;max-height:10px;overflow:hidden;margin:0;padding:0;"><td height="10px"></td> <td align="right"></td></tr></tbody></table>'
