@@ -38,7 +38,7 @@ $types = getTypeList($rootId, 'id');
                     <?php
                     if($model->articleType->show_type != \App\Models\ArticleTypeModel::SHOW_TYPE_UPLOAD)  {
                     ?>
-                    <h3 class="newLeft-title">{{$model->updated_at}}</h3>
+                    <h3 class="newLeft-title" style="display: none;">{{$model->updated_at}}</h3>
                     <?php
                         }
                     ?>
@@ -87,7 +87,7 @@ $types = getTypeList($rootId, 'id');
                     <?php
                     if($model->articleType->show_type == \App\Models\ArticleTypeModel::SHOW_TYPE_UPLOAD)  {
                     ?>
-                        <a href="/down/{{$model->id}}" target="_blank">点击下载</a>
+                        <a href="/down/{{$model->id}}" target="_blank">本站下载</a>
                     <?php
                     }
                     ?>

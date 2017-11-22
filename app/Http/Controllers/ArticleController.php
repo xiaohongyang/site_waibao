@@ -192,11 +192,21 @@ class ArticleController extends BaseController {
 
 		$downFile = $model->attach_file;
 		$downFile = public_path($downFile);
-		$fileName = basename($downFile);
+		$nameArray = explode('/', $downFile);
+		$fileName = end($nameArray);
         $file=fopen($downFile,"r");
+
+
+        $userBrowser = $_SERVER['HTTP_USER_AGENT'];
+        if ( preg_match( '/MSIE/i', $userBrowser ) ) {
+            $fileName = urlencode($fileName);
+        }
+        $fileName = iconv('UTF-8', 'GBK//IGNORE', $fileName);
+
         header("Content-Type: application/octet-stream");
         header("Accept-Ranges: bytes");
         header("Accept-Length: ".filesize($downFile));
+        header("Content-Length: ".filesize($downFile));
         header("Content-Disposition: attachment; filename=$fileName");
         echo fread($file,filesize($downFile));
         fclose($file);

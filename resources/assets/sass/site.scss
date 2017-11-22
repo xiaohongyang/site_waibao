@@ -42,9 +42,10 @@ body .container >.row{
 }
 .header01
 {
-  height: 91px;
+  height: 115px;
   overflow: hidden;
-  background: url(/images/head_bg.jpg) right no-repeat
+  background: url(/images/head_bg.jpg) right no-repeat;
+  background-size: 100% 100%;
 }
 
 .hr01

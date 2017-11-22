@@ -253,7 +253,7 @@ $(function(){
                                             <span title="[content]" class="content"> \
                                                 [content] \
                                             </span> \
-                                            <span class="down"><a href="[down]" target="_blank">点此下载</a> </span> \
+                                            <span class="down"><a href="[down]" target="_blank">点击下载</a> </span> \
                                         </div> \
                                     </div>'
 

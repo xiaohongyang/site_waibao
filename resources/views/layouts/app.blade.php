@@ -54,7 +54,7 @@
 
             <!--advertiser-->
             @if(isset($is_home))
-                <div class="row">
+                <div class="row" style="display: none;">
                     <div class="col-sm-12" style=' '>
                         @component('component.header_slide')
                         @endcomponent

@@ -33,9 +33,13 @@ class FileController extends BaseApiController {
 			//保存文件
 			$extension = $file->getClientOriginalExtension();
 			$filePath = public_path() . DIRECTORY_SEPARATOR . $request->get('directory') . DIRECTORY_SEPARATOR;
-			$fileName = date('YmdHis', time());
-			$fileName .= '.' . $extension;
+			//$fileName = date('YmdHis', time());
+            //$fileName .= '.' . $extension;
+
+			$fileName = $request->get('original_name');
+
 			$file->move($filePath, $fileName);
+
 			$result['result'] = true;
 			$result['file'] = $request->get('directory') . DIRECTORY_SEPARATOR . $fileName;
 		} else {

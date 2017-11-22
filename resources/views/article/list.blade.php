@@ -46,6 +46,8 @@ if (count($types) > 1) {
 
 @section('content')
 
+
+
     <div class="row">
 
         <!--右侧内容区 begin-->
@@ -108,5 +110,12 @@ if (count($types) > 1) {
 
 @section('scripts')
     <script src="{{ mix('js/article-list.js') }}"></script>
-
+    <style type="text/css">
+        .container .content-wrapper .main-list-1 .list-wrapper .time{
+            width: 170px !important;
+        }
+        .container .content-wrapper .main-list-1 .list-wrapper .info {
+            line-height: 5px !important;
+        }
+    </style>
 @endsection
