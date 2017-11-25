@@ -77,7 +77,7 @@ function getTypeItem($idOrName = 0, $type = 'id', $typeList = null) {
 
 function getShowContent($content, $type = 'Ueditor') {
 	if ($type == 'Ueditor') {
-		$content = "<pre>{$content}</pre>";
+		$content = "{$content}";
 	}
 	return $content;
 }
